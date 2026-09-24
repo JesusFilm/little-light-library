@@ -678,6 +678,9 @@ async function boot() {
           await scene.setShelfToys(currentToys);
         },
         suspendPage: async () => {
+          readerNeedsReload ||= Boolean(
+            session.snapshot.loading || session.snapshot.failure,
+          );
           narration?.pause();
           state.hide();
           scene.browseShelf();

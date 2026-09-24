@@ -247,6 +247,32 @@ const ease = (x: number) => {
   const t = THREE.MathUtils.clamp(x, 0, 1);
   return t * t * (3 - 2 * t);
 };
+type PreparedLegacyStage = {
+  root: THREE.Group;
+  popups: THREE.Group[];
+  actors: PaperActor[];
+  actorMoods: PaperActorMood[];
+  motions: {
+    target: THREE.Object3D;
+    motion: LegacyStageMotion;
+    baseY: number;
+    baseRotationZ: number;
+  }[];
+  actorButtons: HTMLButtonElement[];
+  actorNames: string[];
+  propNames: string[];
+  creatures: {
+    creature: PaperCreature;
+    kind: PaperCreatureKind;
+    label: string;
+    button: HTMLButtonElement;
+  }[];
+  maps: THREE.Texture[];
+  texture: THREE.Texture;
+  wideEnsemble: boolean;
+  actorMood: PaperActorMood;
+};
+
 export class LibraryScene {
   private renderer: THREE.WebGLRenderer;
   private scene = new THREE.Scene();
@@ -351,32 +377,6 @@ export class LibraryScene {
     this.creatures.forEach(({ button }) => button.remove());
     this.touchedCreature = this.hoveredCreature = -1;
     this.creatureTouchUntil = 0;
-  }
-  private addCreature(
-    kind: PaperCreatureKind,
-    texture: THREE.Texture,
-    width: number,
-    label: string,
-  ) {
-    const creature = createPaperCreature(kind, texture, width);
-    const index = this.creatures.length;
-    const button = document.createElement("button");
-    button.className = "creature-target";
-    button.type = "button";
-    button.hidden = true;
-    button.setAttribute("aria-label", label);
-    button.dataset.creature = kind;
-    button.onfocus = () => {
-      this.hoveredCreature = index;
-      this.hoveredActor = -1;
-    };
-    button.onblur = () => {
-      if (this.hoveredCreature === index) this.hoveredCreature = -1;
-    };
-    button.onclick = () => this.activateCreature(index);
-    this.container.append(button);
-    this.creatures.push({ creature, kind, label, button });
-    return creature.mesh;
   }
   private activateCreature(index: number) {
     if (!this.creatureUsable() || !this.creatures[index]) return;
@@ -1575,12 +1575,406 @@ export class LibraryScene {
     this.loadGeneration++;
     this.foldingOut = 0;
   }
+  private async prepareLegacyStage(
+    page: Page,
+    locale: LocaleData,
+    stillCurrent: () => boolean,
+  ): Promise<PreparedLegacyStage> {
+    const draft = {
+      root: new THREE.Group(),
+      popups: [] as THREE.Group[],
+      actors: [] as PaperActor[],
+      actorMoods: [] as PaperActorMood[],
+      motions: [] as PreparedLegacyStage["motions"],
+      actorButtons: [] as HTMLButtonElement[],
+      actorNames: [] as string[],
+      propNames: [] as string[],
+      creatures: [] as PreparedLegacyStage["creatures"],
+      maps: [] as THREE.Texture[],
+      wideEnsemble: false,
+      actorMood: "listen" as PaperActorMood,
+    };
+    const loader = new THREE.TextureLoader();
+    const assertCurrent = () => {
+      if (!stillCurrent()) throw Error("legacy-stage-superseded");
+    };
+    let texture!: THREE.Texture;
+    try {
+      const popup = (x: number, y: number) => {
+        const g = new THREE.Group();
+        g.userData.foldStart = Math.PI;
+        g.position.set(x, y, 0.075);
+        draft.root.add(g);
+        draft.popups.push(g);
+        return g;
+      };
+      const addCreature = (
+        kind: PaperCreatureKind,
+        tex: THREE.Texture,
+        width: number,
+        label: string,
+      ) => {
+        const creature = createPaperCreature(kind, tex, width);
+        const index = draft.creatures.length;
+        const button = document.createElement("button");
+        button.className = "creature-target";
+        button.type = "button";
+        button.hidden = true;
+        button.setAttribute("aria-label", label);
+        button.dataset.creature = kind;
+        button.onfocus = () => {
+          this.hoveredCreature = index;
+          this.hoveredActor = -1;
+        };
+        button.onblur = () => {
+          if (this.hoveredCreature === index) this.hoveredCreature = -1;
+        };
+        button.onclick = () => this.activateCreature(index);
+        draft.creatures.push({ creature, kind, label, button });
+        return creature.mesh;
+      };
+      const addStageProp = async (
+        prop: StageProp,
+        options: { name?: string; optional?: boolean } = {},
+      ) => {
+        const request = loader.loadAsync(stageAssetUrl(prop.file));
+        const tex = options.optional
+          ? await request.catch(() => undefined)
+          : await request;
+        if (!tex) return undefined;
+        if (!stillCurrent()) {
+          tex.dispose();
+          throw Error("legacy-stage-superseded");
+        }
+        tex.colorSpace = THREE.SRGBColorSpace;
+        fitCutout(tex);
+        draft.maps.push(tex);
+        const width = prop.width * (prop.scale ?? 1);
+        const aspect =
+          Number(tex.userData.aspect) || tex.image.width / tex.image.height;
+        const { height } = visibleCutoutSize(width, aspect);
+        const stand = popup(prop.x, prop.depth);
+        stand.name = options.name || `stage-prop:${prop.file}`;
+        stand.position.z += prop.elevation ?? 0;
+        const cutout = prop.creature
+          ? addCreature(prop.creature, tex, width, locale.ui[prop.creature])
+          : new THREE.Mesh(
+              new THREE.PlaneGeometry(width, height),
+              new THREE.MeshStandardMaterial({
+                map: tex,
+                alphaTest: 0.3,
+                side: THREE.DoubleSide,
+                roughness: 1,
+              }),
+            );
+        cutout.position.y = visibleBottomAnchorY(height, prop.lift);
+        cutout.scale.x = mirroredScaleX(cutout.scale.x || 1, prop.flipX);
+        cutout.userData.visibleWidth = width;
+        cutout.userData.visibleHeight = height;
+        cutout.castShadow = true;
+        cutout.receiveShadow = true;
+        stand.add(cutout);
+        if (prop.motion)
+          draft.motions.push({
+            target: cutout,
+            motion: prop.motion,
+            baseY: cutout.position.y,
+            baseRotationZ: cutout.rotation.z,
+          });
+        draft.propNames.push(prop.file);
+        return cutout;
+      };
+      const direction = stageDirections[page.id];
+      draft.wideEnsemble = Boolean(direction.family);
+      const backdrop = direction.background;
+      draft.actorMood = direction.actors[0]?.mood || "listen";
+      texture = await loader
+        .loadAsync(stageAssetUrl(backdrop))
+        .catch(() =>
+          loader.loadAsync(
+            page.image.startsWith("/") ? `.${page.image}` : `./${page.image}`,
+          ),
+        );
+      if (!stillCurrent()) {
+        texture.dispose();
+        throw Error("legacy-stage-superseded");
+      }
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.anisotropy = 4;
+      draft.maps.push(texture);
+
+      // An upright painted backcloth hinges from the rear of real horizontal pages.
+      const back = popup(0, 1.22);
+      back.userData.foldStart = Math.PI;
+      const backArt = new THREE.Mesh(
+        new THREE.PlaneGeometry(5.8, 2.7),
+        new THREE.MeshStandardMaterial({
+          map: texture,
+          color: direction.tint || 0xffffff,
+          side: THREE.DoubleSide,
+          roughness: 1,
+        }),
+      );
+      backArt.position.y = 1.35;
+      backArt.castShadow = true;
+      backArt.receiveShadow = true;
+      back.add(backArt);
+      // Paper support triangles remain visible from the reading camera.
+      for (const x of [-2.55, 2.55]) {
+        const shape = new THREE.Shape();
+        shape.moveTo(0, 0);
+        shape.lineTo(0.55, 0);
+        shape.lineTo(0, 0.6);
+        shape.closePath();
+        const support = new THREE.Mesh(new THREE.ShapeGeometry(shape), paper);
+        support.userData.foldSupport = true;
+        support.rotation.y = Math.PI / 2;
+        support.position.set(x, 0.05, -0.02);
+        back.add(support);
+      }
+      for (const actorDirection of direction.actors) {
+        const kind = actorDirection.kind;
+        const imageActor = Boolean(actorDirection.image);
+        const tex = imageActor
+          ? await loader.loadAsync(stageAssetUrl(actorDirection.image!))
+          : await loader
+              .loadAsync(`./assets/art/theatre/${kind}-poses.webp`)
+              .catch(() =>
+                loader.loadAsync(`./assets/art/${kind}-figurine.webp`),
+              );
+        if (!stillCurrent()) {
+          tex.dispose();
+          throw Error("legacy-stage-superseded");
+        }
+        tex.colorSpace = THREE.SRGBColorSpace;
+        const atlas = imageActor
+          ? false
+          : tex.image.width / tex.image.height > 1;
+        if (imageActor) fitCutout(tex);
+        else fitCutout(tex, atlas ? actorDirection.pose : 0, atlas ? 3 : 1);
+        tex.userData.poseAtlas = atlas;
+        if (!imageActor) tex.userData.pose = actorDirection.pose;
+        draft.maps.push(tex);
+        const actor = imageActor
+          ? createRigidPaperActor(tex, kind, actorDirection.width!)
+          : createPaperActor(tex, kind, 1.95);
+        actor.root.scale.x = mirroredScaleX(
+          actor.root.scale.x || 1,
+          actorDirection.flipX,
+        );
+        const g = popup(actorDirection.x, actorDirection.depth);
+        g.add(actor.root);
+        if (actorDirection.motion)
+          draft.motions.push({
+            target: actor.root,
+            motion: actorDirection.motion,
+            baseY: actor.root.position.y,
+            baseRotationZ: actor.root.rotation.z,
+          });
+        const index = draft.actors.length;
+        const button = document.createElement("button");
+        button.className = "paper-target";
+        button.hidden = true;
+        button.type = "button";
+        button.setAttribute("aria-label", locale.characters[kind]);
+        button.onfocus = () => {
+          this.hoveredCreature = -1;
+          this.hoveredActor = index;
+        };
+        button.onblur = () => {
+          if (this.hoveredActor === index) this.hoveredActor = -1;
+        };
+        button.onclick = () => this.activateActor(index);
+
+        draft.actorButtons.push(button);
+        draft.actorNames.push(locale.characters[kind]);
+        draft.actors.push(actor);
+        draft.actorMoods.push(actorDirection.mood);
+      }
+      if (direction.family) {
+        const family =
+          typeof direction.family === "object"
+            ? direction.family
+            : {
+                file: "family-seven.webp",
+                width: 3.25,
+                x: 0.75,
+                depth: -0.05,
+              };
+        await addStageProp(family, {
+          name: "family-ensemble",
+          optional: true,
+        });
+        assertCurrent();
+      }
+      if (direction.ark) {
+        const ark =
+          typeof direction.ark === "object"
+            ? direction.ark
+            : {
+                file: "ark.webp",
+                width: 4.4,
+                x: 0.15,
+                depth: 0.35,
+                lift: 0.5,
+                motion: {
+                  kind: "float" as const,
+                  strength: 0.07,
+                  periodSeconds: 5.3,
+                  phaseRadians: 0.4,
+                },
+              };
+        await addStageProp(ark, { name: "floating-ark" });
+        assertCurrent();
+      }
+      for (const prop of direction.props || []) {
+        await addStageProp(prop);
+        if (!stillCurrent()) {
+          throw Error("legacy-stage-superseded");
+        }
+      }
+      if (direction.interior) {
+        // A small side opening behind the actor, with a sill and surrounding planks.
+        const cabin = popup(1.45, 0.7);
+        const oak = new THREE.MeshStandardMaterial({
+          map: wood.map,
+          color: 0x73513b,
+          roughness: 0.9,
+        });
+        for (const x of [-0.68, 0.68])
+          box(cabin, 0.18, 1.65, 0.1, oak, x, 0.825, 0);
+        for (const y of [0.35, 1.6]) box(cabin, 1.5, 0.15, 0.14, oak, 0, y, 0);
+        for (const y of [0.07, 0.19]) box(cabin, 1.5, 0.11, 0.08, oak, 0, y, 0);
+      }
+      if (direction.rainbow) {
+        // Seven separate matte paper arcs stand in front of the distant clouds.
+        const bow = popup(0, 0.98);
+        const colours = [
+          0xc95c50, 0xe69552, 0xe6c76e, 0x86a477, 0x6a9bb2, 0x7685aa, 0x9b80aa,
+        ];
+        colours.forEach((colour, i) => {
+          const radius = 2.55 - i * 0.105;
+          const arc = new THREE.Mesh(
+            new THREE.RingGeometry(radius - 0.1, radius, 64, 1, 0, Math.PI),
+            new THREE.MeshStandardMaterial({
+              color: colour,
+              roughness: 1,
+              side: THREE.DoubleSide,
+            }),
+          );
+          arc.position.set(0, 0.15, 0.025);
+          arc.castShadow = true;
+          bow.add(arc);
+        });
+      }
+      if (direction.dove) {
+        const dove =
+          typeof direction.dove === "object"
+            ? direction.dove
+            : {
+                file: "dove-olive.webp",
+                width: 1.15,
+                x: 1.45,
+                depth: 0.55,
+                lift: 1.15,
+                creature: "dove" as const,
+              };
+        await addStageProp(dove, { name: "dove-cutout" });
+        assertCurrent();
+      }
+      if (direction.tree !== undefined) {
+        await addStageProp(
+          {
+            file: "assets/art/eden-tree.webp",
+            width: 1.5,
+            x: direction.tree,
+            depth: 0.3,
+          },
+          { name: "eden-tree" },
+        );
+        assertCurrent();
+      }
+      if (direction.waves) {
+        if (Array.isArray(direction.waves)) {
+          for (const [index, wave] of direction.waves.entries()) {
+            const configured = {
+              ...wave,
+              motion: wave.motion ?? {
+                kind: "sway" as const,
+                strength: 1.2,
+                periodSeconds: 4.2,
+                phaseRadians: (index * Math.PI * 2) / direction.waves.length,
+              },
+            };
+            const mesh = await addStageProp(configured, {
+              name: `water-wave-layer-${index + 1}`,
+            });
+            assertCurrent();
+            mesh?.parent &&
+              (mesh.parent.userData.motionPhase =
+                configured.motion.phaseRadians);
+          }
+        } else {
+          const layerCount =
+            typeof direction.waves === "number" ? direction.waves : 2;
+          for (const [index, layer] of waveLayerLayout(layerCount).entries()) {
+            const mesh = await addStageProp(
+              {
+                file: "assets/books/jonah-and-the-whale/art/storm-wave-layer.webp",
+                width: 5.45 * layer.widthScale,
+                x: 0,
+                depth: layer.depth,
+                motion: {
+                  kind: "sway",
+                  strength: 1.2,
+                  periodSeconds: 4.2,
+                  phaseRadians: layer.phaseRadians,
+                },
+              },
+              { name: `water-wave-layer-${index + 1}` },
+            );
+            assertCurrent();
+            mesh?.parent &&
+              (mesh.parent.userData.motionPhase = layer.phaseRadians);
+          }
+        }
+      }
+      {
+        // Complete the explicitly paired page print before releasing the stage.
+        const groundPath = direction.ground;
+        const floorTexture = await loader.loadAsync(stageAssetUrl(groundPath));
+        if (!stillCurrent()) {
+          floorTexture?.dispose();
+          throw Error("legacy-stage-superseded");
+        }
+        if (floorTexture) {
+          floorTexture.colorSpace = THREE.SRGBColorSpace;
+          floorTexture.anisotropy = 4;
+          draft.maps.push(floorTexture);
+          draft.root.add(createPageGround(floorTexture, groundPath));
+        }
+      }
+      assertCurrent();
+      return { ...draft, texture };
+    } catch (error) {
+      this.disposePageContents(draft.root, draft.actors, draft.maps);
+      throw error;
+    }
+  }
+
+  private disposePreparedLegacy(stage: PreparedLegacyStage) {
+    this.disposePageContents(stage.root, stage.actors, stage.maps);
+    stage.actorButtons.forEach((button) => button.remove());
+    stage.creatures.forEach(({ button }) => button.remove());
+  }
+
   async spread(story: Story, page: Page, locale: LocaleData) {
     const generation = ++this.loadGeneration;
     const authored = page.authored;
     // Build authored artwork off scene. The previous completed spread stays visible
     // until every asset is ready and this request still owns the commit.
     let preparedAuthored: AuthoredStage | undefined;
+    let preparedLegacy: PreparedLegacyStage | undefined;
     if (authored) {
       try {
         preparedAuthored = await AuthoredStage.create(
@@ -1595,6 +1989,21 @@ export class LibraryScene {
       }
       if (generation !== this.loadGeneration || this.disposed) {
         preparedAuthored.dispose();
+        return;
+      }
+    } else {
+      try {
+        preparedLegacy = await this.prepareLegacyStage(
+          page,
+          locale,
+          () => !this.disposed && generation === this.loadGeneration,
+        );
+      } catch (error) {
+        if (generation !== this.loadGeneration || this.disposed) return;
+        throw error;
+      }
+      if (generation !== this.loadGeneration || this.disposed) {
+        this.disposePreparedLegacy(preparedLegacy);
         return;
       }
     }
@@ -1676,6 +2085,7 @@ export class LibraryScene {
       await new Promise((resolve) => setTimeout(resolve, 260));
       if (generation !== this.loadGeneration) {
         preparedAuthored?.dispose();
+        if (preparedLegacy) this.disposePreparedLegacy(preparedLegacy);
         return;
       }
     }
@@ -1719,67 +2129,7 @@ export class LibraryScene {
     this.authoredStage = undefined;
     this.authoredPosition = 0;
     this.authoredPlaying = false;
-    const loader = new THREE.TextureLoader();
     let texture: THREE.Texture;
-    const popup = (x: number, y: number) => {
-      const g = new THREE.Group();
-      g.userData.foldStart = Math.PI;
-      g.position.set(x, y, 0.075);
-      this.pageRoot.add(g);
-      this.popups.push(g);
-      return g;
-    };
-    const addStageProp = async (
-      prop: StageProp,
-      options: { name?: string; optional?: boolean } = {},
-    ) => {
-      const request = loader.loadAsync(stageAssetUrl(prop.file));
-      const tex = options.optional
-        ? await request.catch(() => undefined)
-        : await request;
-      if (!tex) return undefined;
-      if (this.disposed || generation !== this.loadGeneration) {
-        tex.dispose();
-        return undefined;
-      }
-      tex.colorSpace = THREE.SRGBColorSpace;
-      fitCutout(tex);
-      this.pageMaps.push(tex);
-      const width = prop.width * (prop.scale ?? 1);
-      const aspect =
-        Number(tex.userData.aspect) || tex.image.width / tex.image.height;
-      const { height } = visibleCutoutSize(width, aspect);
-      const stand = popup(prop.x, prop.depth);
-      stand.name = options.name || `stage-prop:${prop.file}`;
-      stand.position.z += prop.elevation ?? 0;
-      const cutout = prop.creature
-        ? this.addCreature(prop.creature, tex, width, locale.ui[prop.creature])
-        : new THREE.Mesh(
-            new THREE.PlaneGeometry(width, height),
-            new THREE.MeshStandardMaterial({
-              map: tex,
-              alphaTest: 0.3,
-              side: THREE.DoubleSide,
-              roughness: 1,
-            }),
-          );
-      cutout.position.y = visibleBottomAnchorY(height, prop.lift);
-      cutout.scale.x = mirroredScaleX(cutout.scale.x || 1, prop.flipX);
-      cutout.userData.visibleWidth = width;
-      cutout.userData.visibleHeight = height;
-      cutout.castShadow = true;
-      cutout.receiveShadow = true;
-      stand.add(cutout);
-      if (prop.motion)
-        this.stageMotions.push({
-          target: cutout,
-          motion: prop.motion,
-          baseY: cutout.position.y,
-          baseRotationZ: cutout.rotation.z,
-        });
-      this.propNames.push(prop.file);
-      return cutout;
-    };
     if (authored) {
       const stage = preparedAuthored!;
       this.pageRoot.add(stage.root);
@@ -1792,276 +2142,23 @@ export class LibraryScene {
       texture = stage.backdropTexture;
       this.currentTexture = texture;
     } else {
-      const direction = stageDirections[page.id];
-      this.readingWideEnsemble = Boolean(direction.family);
-      const backdrop = direction.background;
-      this.actorMood = direction.actors[0]?.mood || "listen";
-      texture = await loader
-        .loadAsync(stageAssetUrl(backdrop))
-        .catch(() =>
-          loader.loadAsync(
-            page.image.startsWith("/") ? `.${page.image}` : `./${page.image}`,
-          ),
-        );
-      if (this.disposed || generation !== this.loadGeneration) {
-        texture.dispose();
-        return;
-      }
-      texture.colorSpace = THREE.SRGBColorSpace;
-      texture.anisotropy = 4;
-      this.pageMaps.push(texture);
+      const stage = preparedLegacy!;
+      this.pageRoot.add(stage.root);
+      this.popups = stage.popups;
+      this.actors = stage.actors;
+      this.actorMoods = stage.actorMoods;
+      this.stageMotions = stage.motions;
+      this.actorButtons = stage.actorButtons;
+      this.actorNames = stage.actorNames;
+      this.propNames = stage.propNames;
+      this.creatures = stage.creatures;
+      this.pageMaps = stage.maps;
+      this.readingWideEnsemble = stage.wideEnsemble;
+      this.actorMood = stage.actorMood;
+      this.actorButtons.forEach((button) => this.container.append(button));
+      this.creatures.forEach(({ button }) => this.container.append(button));
+      texture = stage.texture;
       this.currentTexture = texture;
-      // An upright painted backcloth hinges from the rear of real horizontal pages.
-      const back = popup(0, 1.22);
-      back.userData.foldStart = Math.PI;
-      const backArt = new THREE.Mesh(
-        new THREE.PlaneGeometry(5.8, 2.7),
-        new THREE.MeshStandardMaterial({
-          map: texture,
-          color: direction.tint || 0xffffff,
-          side: THREE.DoubleSide,
-          roughness: 1,
-        }),
-      );
-      backArt.position.y = 1.35;
-      backArt.castShadow = true;
-      backArt.receiveShadow = true;
-      back.add(backArt);
-      // Paper support triangles remain visible from the reading camera.
-      for (const x of [-2.55, 2.55]) {
-        const shape = new THREE.Shape();
-        shape.moveTo(0, 0);
-        shape.lineTo(0.55, 0);
-        shape.lineTo(0, 0.6);
-        shape.closePath();
-        const support = new THREE.Mesh(new THREE.ShapeGeometry(shape), paper);
-        support.userData.foldSupport = true;
-        support.rotation.y = Math.PI / 2;
-        support.position.set(x, 0.05, -0.02);
-        back.add(support);
-      }
-      for (const actorDirection of direction.actors) {
-        const kind = actorDirection.kind;
-        const imageActor = Boolean(actorDirection.image);
-        const tex = imageActor
-          ? await loader.loadAsync(stageAssetUrl(actorDirection.image!))
-          : await loader
-              .loadAsync(`./assets/art/theatre/${kind}-poses.webp`)
-              .catch(() =>
-                loader.loadAsync(`./assets/art/${kind}-figurine.webp`),
-              );
-        if (this.disposed || generation !== this.loadGeneration) {
-          tex.dispose();
-          return;
-        }
-        tex.colorSpace = THREE.SRGBColorSpace;
-        const atlas = imageActor
-          ? false
-          : tex.image.width / tex.image.height > 1;
-        if (imageActor) fitCutout(tex);
-        else fitCutout(tex, atlas ? actorDirection.pose : 0, atlas ? 3 : 1);
-        tex.userData.poseAtlas = atlas;
-        if (!imageActor) tex.userData.pose = actorDirection.pose;
-        this.pageMaps.push(tex);
-        const actor = imageActor
-          ? createRigidPaperActor(tex, kind, actorDirection.width!)
-          : createPaperActor(tex, kind, 1.95);
-        actor.root.scale.x = mirroredScaleX(
-          actor.root.scale.x || 1,
-          actorDirection.flipX,
-        );
-        const g = popup(actorDirection.x, actorDirection.depth);
-        g.add(actor.root);
-        if (actorDirection.motion)
-          this.stageMotions.push({
-            target: actor.root,
-            motion: actorDirection.motion,
-            baseY: actor.root.position.y,
-            baseRotationZ: actor.root.rotation.z,
-          });
-        const index = this.actors.length;
-        const button = document.createElement("button");
-        button.className = "paper-target";
-        button.hidden = true;
-        button.type = "button";
-        button.setAttribute("aria-label", locale.characters[kind]);
-        button.onfocus = () => {
-          this.hoveredCreature = -1;
-          this.hoveredActor = index;
-        };
-        button.onblur = () => {
-          if (this.hoveredActor === index) this.hoveredActor = -1;
-        };
-        button.onclick = () => this.activateActor(index);
-        this.container.append(button);
-        this.actorButtons.push(button);
-        this.actorNames.push(locale.characters[kind]);
-        this.actors.push(actor);
-        this.actorMoods.push(actorDirection.mood);
-      }
-      if (direction.family) {
-        const family =
-          typeof direction.family === "object"
-            ? direction.family
-            : {
-                file: "family-seven.webp",
-                width: 3.25,
-                x: 0.75,
-                depth: -0.05,
-              };
-        await addStageProp(family, {
-          name: "family-ensemble",
-          optional: true,
-        });
-        if (generation !== this.loadGeneration || this.disposed) return;
-      }
-      if (direction.ark) {
-        const ark =
-          typeof direction.ark === "object"
-            ? direction.ark
-            : {
-                file: "ark.webp",
-                width: 4.4,
-                x: 0.15,
-                depth: 0.35,
-                lift: 0.5,
-                motion: {
-                  kind: "float" as const,
-                  strength: 0.07,
-                  periodSeconds: 5.3,
-                  phaseRadians: 0.4,
-                },
-              };
-        await addStageProp(ark, { name: "floating-ark" });
-        if (generation !== this.loadGeneration || this.disposed) return;
-      }
-      for (const prop of direction.props || []) {
-        await addStageProp(prop);
-        if (generation !== this.loadGeneration || this.disposed) {
-          return;
-        }
-      }
-      if (direction.interior) {
-        // A small side opening behind the actor, with a sill and surrounding planks.
-        const cabin = popup(1.45, 0.7);
-        const oak = new THREE.MeshStandardMaterial({
-          map: wood.map,
-          color: 0x73513b,
-          roughness: 0.9,
-        });
-        for (const x of [-0.68, 0.68])
-          box(cabin, 0.18, 1.65, 0.1, oak, x, 0.825, 0);
-        for (const y of [0.35, 1.6]) box(cabin, 1.5, 0.15, 0.14, oak, 0, y, 0);
-        for (const y of [0.07, 0.19]) box(cabin, 1.5, 0.11, 0.08, oak, 0, y, 0);
-      }
-      if (direction.rainbow) {
-        // Seven separate matte paper arcs stand in front of the distant clouds.
-        const bow = popup(0, 0.98);
-        const colours = [
-          0xc95c50, 0xe69552, 0xe6c76e, 0x86a477, 0x6a9bb2, 0x7685aa, 0x9b80aa,
-        ];
-        colours.forEach((colour, i) => {
-          const radius = 2.55 - i * 0.105;
-          const arc = new THREE.Mesh(
-            new THREE.RingGeometry(radius - 0.1, radius, 64, 1, 0, Math.PI),
-            new THREE.MeshStandardMaterial({
-              color: colour,
-              roughness: 1,
-              side: THREE.DoubleSide,
-            }),
-          );
-          arc.position.set(0, 0.15, 0.025);
-          arc.castShadow = true;
-          bow.add(arc);
-        });
-      }
-      if (direction.dove) {
-        const dove =
-          typeof direction.dove === "object"
-            ? direction.dove
-            : {
-                file: "dove-olive.webp",
-                width: 1.15,
-                x: 1.45,
-                depth: 0.55,
-                lift: 1.15,
-                creature: "dove" as const,
-              };
-        await addStageProp(dove, { name: "dove-cutout" });
-        if (generation !== this.loadGeneration || this.disposed) return;
-      }
-      if (direction.tree !== undefined) {
-        await addStageProp(
-          {
-            file: "assets/art/eden-tree.webp",
-            width: 1.5,
-            x: direction.tree,
-            depth: 0.3,
-          },
-          { name: "eden-tree" },
-        );
-        if (generation !== this.loadGeneration || this.disposed) return;
-      }
-      if (direction.waves) {
-        if (Array.isArray(direction.waves)) {
-          for (const [index, wave] of direction.waves.entries()) {
-            const configured = {
-              ...wave,
-              motion: wave.motion ?? {
-                kind: "sway" as const,
-                strength: 1.2,
-                periodSeconds: 4.2,
-                phaseRadians: (index * Math.PI * 2) / direction.waves.length,
-              },
-            };
-            const mesh = await addStageProp(configured, {
-              name: `water-wave-layer-${index + 1}`,
-            });
-            if (generation !== this.loadGeneration || this.disposed) return;
-            mesh?.parent &&
-              (mesh.parent.userData.motionPhase =
-                configured.motion.phaseRadians);
-          }
-        } else {
-          const layerCount =
-            typeof direction.waves === "number" ? direction.waves : 2;
-          for (const [index, layer] of waveLayerLayout(layerCount).entries()) {
-            const mesh = await addStageProp(
-              {
-                file: "assets/books/jonah-and-the-whale/art/storm-wave-layer.webp",
-                width: 5.45 * layer.widthScale,
-                x: 0,
-                depth: layer.depth,
-                motion: {
-                  kind: "sway",
-                  strength: 1.2,
-                  periodSeconds: 4.2,
-                  phaseRadians: layer.phaseRadians,
-                },
-              },
-              { name: `water-wave-layer-${index + 1}` },
-            );
-            if (generation !== this.loadGeneration || this.disposed) return;
-            mesh?.parent &&
-              (mesh.parent.userData.motionPhase = layer.phaseRadians);
-          }
-        }
-      }
-      {
-        // Complete the explicitly paired page print before releasing the stage.
-        const groundPath = direction.ground;
-        const floorTexture = await loader.loadAsync(stageAssetUrl(groundPath));
-        if (this.disposed || generation !== this.loadGeneration) {
-          floorTexture?.dispose();
-          return;
-        }
-        if (floorTexture) {
-          floorTexture.colorSpace = THREE.SRGBColorSpace;
-          floorTexture.anisotropy = 4;
-          this.pageMaps.push(floorTexture);
-          this.pageRoot.add(createPageGround(floorTexture, groundPath));
-        }
-      }
     }
     if (generation !== this.loadGeneration) return;
     if (!this.reduced) {

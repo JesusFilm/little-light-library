@@ -436,11 +436,145 @@ try {
       };
     },
   );
+  for (const { story, asset } of [
+    {
+      story: "eden",
+      asset: "assets/art/theatre/eden-eve-behind-garden-bush.webp",
+    },
+    { story: "noah", asset: "assets/art/theatre/timber-bench.webp" },
+  ]) {
+    await check(
+      `Pending and failed legacy ${story} artwork keep the completed spread until Retry`,
+      async (page) => {
+        await enter(page);
+        const key = `builtin:${story}`;
+        await page.locator(`[data-shelf-key="${key}"]`).click();
+        await page.waitForFunction(
+          (selected) =>
+            window.libraryDebug().shelf.inspected === selected &&
+            !window.libraryDebug().shelf.busy,
+          key,
+        );
+        await page.locator("#shelf-read").click();
+        await page.waitForFunction(
+          (selected) =>
+            window.libraryDebug().shelf.table === selected &&
+            window.libraryDebug().scene.loadedPage?.index === 0 &&
+            !window.libraryDebug().shelf.busy,
+          key,
+        );
+        const route = url + asset;
+        let reached;
+        let release;
+        const requested = new Promise((resolve) => (reached = resolve));
+        const pending = new Promise((resolve) => (release = resolve));
+        await page.route(route, async (request) => {
+          reached();
+          await pending;
+          await request.fulfill({
+            status: 503,
+            body: "Injected legacy art failure",
+          });
+        });
+        await page.locator("#next").click();
+        await Promise.race([
+          requested,
+          new Promise((_, reject) =>
+            setTimeout(
+              () => reject(Error(`${story} asset was not requested`)),
+              12000,
+            ),
+          ),
+        ]);
+        const during = await page.evaluate(() => window.libraryDebug().scene);
+        assert.equal(during.loadedPage?.index, 0);
+        assert.equal(during.stageVisible, true);
+        release();
+        await page.locator("#notice button").waitFor({ state: "visible" });
+        const failed = await page.evaluate(() => window.libraryDebug().scene);
+        assert.equal(failed.loadedPage?.index, 0);
+        assert.equal(failed.stageVisible, true);
+        assert.match(await page.locator(".reader-meta").innerText(), /2/);
+        await page.unroute(route);
+        await page.locator("#notice button").click();
+        await page.waitForFunction(
+          () => window.libraryDebug().scene.loadedPage?.index === 1,
+        );
+        assert.equal(
+          await page.evaluate(() => window.libraryDebug().playing),
+          false,
+        );
+        return {
+          previousArtVisibleDuringLoad: true,
+          previousArtVisibleAfterFailure: true,
+          retryPaused: true,
+        };
+      },
+    );
+  }
+  await check(
+    "Leaving during a legacy load cannot commit stale actors or artwork",
+    async (page) => {
+      await enter(page);
+      await page.locator('[data-shelf-key="builtin:eden"]').click();
+      await page.waitForFunction(
+        () =>
+          window.libraryDebug().shelf.inspected === "builtin:eden" &&
+          !window.libraryDebug().shelf.busy,
+      );
+      await page.locator("#shelf-read").click();
+      await page.waitForFunction(
+        () =>
+          window.libraryDebug().scene.loadedPage?.index === 0 &&
+          !window.libraryDebug().shelf.busy,
+      );
+      const route = url + "assets/art/theatre/eden-eve-behind-garden-bush.webp";
+      let reached;
+      let release;
+      const requested = new Promise((resolve) => (reached = resolve));
+      const pending = new Promise((resolve) => (release = resolve));
+      await page.route(route, async (request) => {
+        reached();
+        await pending;
+        await request.continue();
+      });
+      await page.locator("#next").click();
+      await Promise.race([
+        requested,
+        new Promise((_, reject) =>
+          setTimeout(
+            () => reject(Error("Eden second-page art was not requested")),
+            12000,
+          ),
+        ),
+      ]);
+      await page.locator("#shelf").click();
+      release();
+      await page.waitForFunction(
+        () =>
+          window.libraryDebug().shelf.browsing &&
+          !window.libraryDebug().shelf.busy,
+      );
+      const onShelf = await page.evaluate(() => window.libraryDebug());
+      assert.equal(onShelf.scene.mode, "room");
+      assert.equal(onShelf.scene.loadedPage?.index, 0);
+      assert.equal(onShelf.session.failure, null);
+      await page.unroute(route);
+      await page.locator("#shelf").click();
+      await page.waitForFunction(
+        () =>
+          !window.libraryDebug().shelf.browsing &&
+          window.libraryDebug().scene.loadedPage?.index === 1 &&
+          !window.libraryDebug().shelf.busy,
+      );
+      return { staleResultDiscarded: true, continueLoadedRequestedPage: true };
+    },
+  );
 } finally {
   await browser?.close();
   await new Promise((resolve) => server.close(resolve));
   results.passed =
-    results.checks.length === 6 &&
+    results.checks.length === 9 &&
     results.checks.every(({ passed }) => passed) &&
     !results.pageErrors.length &&
     !results.unexpectedRequests.length;
