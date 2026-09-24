@@ -245,67 +245,7 @@ function languageDialog(startup: boolean) {
     (b) =>
       (b.onclick = async () => {
         const id = b.dataset.locale as LocaleId;
-        const applyLanguage = async () => {
-          await session.waitForPage();
-          const selection = session.invalidatePage();
-          narration?.stop();
-          toyAudio?.stop();
-          readerNeedsReload = Boolean(state.book);
-          state.hide();
-          session.setReady(false);
-          notice();
-          try {
-            const fetched = await fetchLocale(id);
-            if (selection !== session.revision) return;
-            locale = fetched;
-            state.changeLanguage(id);
-            if (
-              activeBook &&
-              productionLanguages(activeBook).includes(id) &&
-              !translationIssues(activeBook, id).length
-            )
-              bookLocale = id;
-            prefs.language = id;
-            persist();
-            localizeLoader();
-            header();
-            languageDialog(startup);
-            if (entered) {
-              if (state.book && !session.snapshot.browsing) {
-                await session.loadPage(false);
-                currentToys = shelfToys(
-                  activeBook,
-                  state.book,
-                  locale,
-                  manifest,
-                );
-                await scene.setShelfToys(currentToys);
-              } else {
-                await scene.returnShelfPreview();
-                session.clearInspection();
-                await refreshRoomBooks();
-                if (state.book) {
-                  currentToys = shelfToys(
-                    activeBook,
-                    state.book,
-                    locale,
-                    manifest,
-                  );
-                  await scene.setShelfToys(currentToys);
-                }
-                scene.browseShelf();
-                if (!state.book) session.setReady(true);
-                renderShelf();
-              }
-            }
-          } catch {
-            if (selection !== session.revision) return;
-            if (entered && state.book) await session.loadPage(false);
-            notice(t("error"));
-          }
-        };
-        if (entered) await shelfAction(applyLanguage);
-        else await applyLanguage();
+        await session.changeLanguage(id);
       }),
   );
   $("#enter").onclick = async () => {
@@ -826,6 +766,63 @@ async function boot() {
           narration?.pause();
           state.hide();
         },
+      },
+      {
+        current: () => state.language,
+        fetch: fetchLocale,
+        pause: () => {
+          narration?.stop();
+          toyAudio?.stop();
+          readerNeedsReload = Boolean(state.book);
+          state.hide();
+          notice();
+        },
+        commit: (id, data) => {
+          locale = data;
+          state.changeLanguage(id);
+          if (
+            activeBook &&
+            productionLanguages(activeBook).includes(id) &&
+            !translationIssues(activeBook, id).length
+          )
+            bookLocale = id;
+          prefs.language = id;
+          persist();
+          localizeLoader();
+          header();
+          languageDialog(!entered);
+        },
+        refresh: async (reading, current) => {
+          if (!entered || !current()) return;
+          if (reading) {
+            await session.loadPage(false);
+            if (!current()) return;
+            currentToys = shelfToys(activeBook, state.book!, locale, manifest);
+            await scene.setShelfToys(currentToys);
+          } else {
+            await scene.returnShelfPreview();
+            if (!current()) return;
+            session.clearInspection();
+            await refreshRoomBooks();
+            if (!current()) return;
+            if (state.book) {
+              currentToys = shelfToys(activeBook, state.book, locale, manifest);
+              await scene.setShelfToys(currentToys);
+            }
+            scene.browseShelf();
+            if (!state.book) session.setReady(true);
+            renderShelf();
+          }
+        },
+        recover: async () => {
+          if (!entered) return;
+          if (session.snapshot.browsing) {
+            await refreshRoomBooks();
+            scene.browseShelf();
+            renderShelf();
+          } else if (state.book) await session.loadPage(false);
+        },
+        error: () => notice(t("error")),
       },
     );
     header();

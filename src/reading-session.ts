@@ -3,6 +3,7 @@ export interface ShelfEntry {
 }
 
 export interface ShelfSnapshot<T extends ShelfEntry> {
+  language: string;
   browsing: boolean;
   busy: boolean;
   inspected: T | null;
@@ -67,6 +68,16 @@ export interface MediaPort {
   visibility(hidden: boolean): void;
 }
 
+export interface LanguagePort {
+  current(): LocaleId;
+  fetch(id: LocaleId): Promise<LocaleData>;
+  pause(): void;
+  commit(id: LocaleId, data: LocaleData): void;
+  refresh(reading: boolean, current: () => boolean): Promise<void>;
+  recover(): Promise<void>;
+  error(): void;
+}
+
 export class ReadingSession<T extends ShelfEntry> {
   private current = {
     browsing: true,
@@ -79,6 +90,8 @@ export class ReadingSession<T extends ShelfEntry> {
   private pendingPage?: Promise<void>;
   private mediaReady = false;
   private mediaFailure: ShelfSnapshot<T>["failure"] = null;
+  private languageGeneration = 0;
+  private changingLanguage = false;
 
   constructor(
     private readonly scene: ShelfScene,
@@ -88,11 +101,13 @@ export class ReadingSession<T extends ShelfEntry> {
     private readonly transfer?: ReadingTransfer<T>,
     private readonly pages?: PagePort,
     private readonly media?: MediaPort,
+    private readonly language?: LanguagePort,
   ) {}
 
   get snapshot(): ShelfSnapshot<T> {
     return {
       ...this.current,
+      language: this.language?.current() ?? "",
       table: this.table,
       loading: Boolean(this.pendingPage),
       failure: this.mediaFailure,
@@ -182,6 +197,46 @@ export class ReadingSession<T extends ShelfEntry> {
   visibilityChanged(hidden: boolean) {
     this.media?.visibility(hidden);
     this.changed();
+  }
+
+  async changeLanguage(id: LocaleId): Promise<boolean> {
+    const port = this.language;
+    if (!port || (this.current.busy && !this.changingLanguage)) return false;
+    const generation = ++this.languageGeneration;
+    const current = () => generation === this.languageGeneration;
+    this.changingLanguage = true;
+    this.current.busy = true;
+    this.changed();
+    let committed = false;
+    try {
+      const data = await port.fetch(id);
+      if (!current()) return false;
+      await this.waitForPage();
+      if (!current()) return false;
+      this.invalidatePage();
+      port.pause();
+      this.mediaReady = false;
+      this.mediaFailure = null;
+      port.commit(id, data);
+      committed = true;
+      this.changed();
+      await port.refresh(
+        Boolean(this.snapshot.reading.book && !this.current.browsing),
+        current,
+      );
+      return current();
+    } catch {
+      if (!current()) return false;
+      if (committed) await port.recover();
+      port.error();
+      return false;
+    } finally {
+      if (current()) {
+        this.changingLanguage = false;
+        this.current.busy = false;
+        this.changed();
+      }
+    }
   }
 
   invalidatePage() {
@@ -349,3 +404,4 @@ export class ReadingSession<T extends ShelfEntry> {
     });
   }
 }
+import type { LocaleData, LocaleId } from "./contracts";

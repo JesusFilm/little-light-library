@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { ReadingSession } from "../src/reading-session";
+import type { LocaleData, LocaleId } from "../src/contracts";
 
 function deferred() {
   let resolve!: () => void;
@@ -240,4 +241,91 @@ test("opening, switching, Library and Continue keep the session place and toys t
     },
   );
   assert.equal(tableScene, "builtin:noah");
+});
+
+test("language changes keep the reading place and only apply the latest fetched choice", async () => {
+  let language: LocaleId = "en-US";
+  let book: string | null = "eden";
+  const page = 3;
+  const first = deferred();
+  const calls: string[] = [];
+  let failRefresh = false;
+  const session = new ReadingSession(
+    {
+      async inspectShelfBook() {},
+      async returnShelfPreview() {},
+    },
+    () => {},
+    () => {},
+    () => {},
+    {
+      reading: () => ({ book, page, pageCount: 8, toys: [] }),
+      validate() {},
+      stop() {},
+      async clearToys() {},
+      async closeBook() {
+        book = null;
+      },
+      async landBook() {},
+      activateBook() {},
+      async showFirstPage() {},
+      async loadToys() {},
+      async suspendPage() {},
+      async prepareLibrary() {},
+      async resumePage() {},
+    },
+    undefined,
+    undefined,
+    {
+      current: () => language,
+      async fetch(id) {
+        if (id === "es") await first.promise;
+        return {
+          id,
+          name: id,
+          voice: "",
+          ui: {},
+          characters: { adam: "", eve: "", noah: "" },
+          stories: [],
+        } satisfies LocaleData;
+      },
+      pause: () => calls.push("pause"),
+      commit(id) {
+        language = id;
+        calls.push(`commit:${id}`);
+      },
+      async refresh(reading) {
+        calls.push(reading ? "reading" : "shelf");
+        if (failRefresh) throw Error("shelf art failed");
+      },
+      async recover() {
+        calls.push("recover:shelf");
+      },
+      error() {
+        calls.push("error");
+      },
+    },
+  );
+  session.setBrowsing(false);
+  const stale = session.changeLanguage("es");
+  assert.equal(session.snapshot.busy, true);
+  assert.equal(await session.changeLanguage("fr"), true);
+  first.resolve();
+  assert.equal(await stale, false);
+  assert.equal(session.snapshot.language, "fr");
+  assert.equal(session.snapshot.reading.page, 3);
+  assert.equal(session.snapshot.busy, false);
+  assert.deepEqual(calls, ["pause", "commit:fr", "reading"]);
+  session.setBrowsing(true);
+  assert.equal(await session.changeLanguage("ja"), true);
+  assert.deepEqual(calls.slice(-3), ["pause", "commit:ja", "shelf"]);
+  failRefresh = true;
+  assert.equal(await session.changeLanguage("hi"), false);
+  assert.equal(session.snapshot.browsing, true);
+  assert.deepEqual(calls.slice(-4), [
+    "commit:hi",
+    "shelf",
+    "recover:shelf",
+    "error",
+  ]);
 });
