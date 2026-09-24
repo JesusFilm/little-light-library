@@ -86,7 +86,6 @@ function localizedBook() {
 const roomLibrary = new RoomLibrary();
 type RoomBook = Awaited<ReturnType<RoomLibrary["resolve"]>>[number];
 let roomBooks: RoomBook[] = [];
-let tableKey: string | undefined;
 let pendingPage: Promise<void> | undefined;
 let readerNeedsReload = false;
 let session: ReadingSession<RoomBook>;
@@ -96,12 +95,13 @@ async function shelfAction(action: () => Promise<void>) {
 }
 async function refreshRoomBooks() {
   const books = await roomLibrary.resolve(locale);
-  if (tableKey && !books.some((book) => book.key === tableKey)) {
+  const table = session.snapshot.table;
+  if (table && !books.some((book) => book.key === table)) {
     toyAudio?.stop();
     currentToys = [];
     await scene.setShelfToys([]);
     await scene.close();
-    tableKey = undefined;
+    session.clearTable();
     state.close();
   }
   roomBooks = books;
@@ -126,7 +126,7 @@ function renderShelf() {
 }
 async function inspectShelfBook(key: string) {
   if (session.snapshot.busy || !entered) return;
-  if (key === tableKey) {
+  if (key === session.snapshot.table) {
     await resumeReading();
     return;
   }
@@ -153,67 +153,10 @@ document.addEventListener("keydown", (event) => {
   }
 });
 async function readShelfBook() {
-  const entry = session.snapshot.inspected;
-  if (!entry) return;
-  await shelfAction(async () => {
-    if (entry.book) {
-      const validation = validateBook(entry.book);
-      if (!validation.book)
-        throw Error(
-          validation.errors
-            .map(({ path, message }) => `${path}: ${message}`)
-            .join("; "),
-        );
-    }
-    ++operation;
-    narration.stop();
-    state.hide();
-    session.setStatus(
-      state.book
-        ? "Returning the open book to the shelf…"
-        : "Moving your book to the table…",
-    );
-    toyAudio?.stop();
-    currentToys = [];
-    await scene.setShelfToys([]);
-    await scene.close();
-    tableKey = undefined;
-    state.close();
-    session.setStatus("Moving your book to the table…");
-    await scene.landShelfBook(entry.key);
-    activeBook = entry.book ? structuredClone(entry.book) : undefined;
-    bookLocale =
-      activeBook &&
-      productionLanguages(activeBook).includes(locale.id) &&
-      !translationIssues(activeBook, locale.id).length
-        ? locale.id
-        : activeBook?.locale || "";
-    tableKey = entry.key;
-    session.clearInspection();
-    session.setBrowsing(false);
-    const id = activeBook?.id || entry.storyId!;
-    state.open(
-      id,
-      activeBook?.spreads.length ||
-        locale.stories.find((story) => story.id === id)!.pages.length,
-    );
-    soundscape?.cue("open");
-    await showPage(true);
-    currentToys = shelfToys(activeBook, id, locale, manifest);
-    await scene.setShelfToys(currentToys);
-  });
+  await session.openInspected();
 }
 async function resumeReading() {
-  if (!state.book) return;
-  await shelfAction(async () => {
-    await scene.returnShelfPreview();
-    session.clearInspection();
-    session.setBrowsing(false);
-    scene.resumeTable();
-    document.body.classList.add("reading");
-    await showPage(false, !readerNeedsReload);
-    soundscape?.pause(document.hidden);
-  });
+  await session.continueReading();
 }
 
 function currentStory(): Story {
@@ -427,22 +370,7 @@ function settingsDialog() {
   d.showModal();
 }
 async function room() {
-  await shelfAction(async () => {
-    ++operation;
-    narration?.pause();
-    state.hide();
-    await pendingPage;
-    session.setBrowsing(true);
-    soundscape?.ambience(true);
-    soundscape?.scene("room");
-    soundscape?.pause(false);
-    notice();
-    document.body.classList.remove("reading");
-    await refreshRoomBooks();
-    scene.browseShelf();
-    if (!state.book) ready = true;
-    window.storyLoading.ready();
-  });
+  await session.browseLibrary();
 }
 function failure(error?: unknown) {
   notice(
@@ -750,13 +678,15 @@ window.libraryRoomReview = (selection, age) =>
   scene?.reviewRoom(selection, age);
 window.libraryDebug = () => ({
   scene: scene?.debug(),
+  session: session?.snapshot,
   state: { ...state },
+  pagePending: Boolean(pendingPage),
   ready,
   shelf: {
     browsing: session?.snapshot.browsing ?? true,
     busy: session?.snapshot.busy ?? false,
     inspected: session?.snapshot.inspected?.key ?? null,
-    table: tableKey ?? null,
+    table: session?.snapshot.table ?? null,
     books: roomBooks.map((book) => ({ key: book.key, title: book.title })),
     toys: currentToys.map(({ id, label }) => ({ id, label })),
     toyAudioPlaying: toyAudio?.playing ?? false,
@@ -804,6 +734,82 @@ async function boot() {
         notice(
           `The book could not be moved: ${String(error)}. Please try again.`,
         ),
+      {
+        reading: () => ({
+          book: state.book,
+          page: state.page,
+          toys: currentToys.map(({ id }) => id),
+        }),
+        validate: (entry) => {
+          if (!entry.book) return;
+          const validation = validateBook(entry.book);
+          if (!validation.book)
+            throw Error(
+              validation.errors
+                .map(({ path, message }) => `${path}: ${message}`)
+                .join("; "),
+            );
+        },
+        stop: () => {
+          ++operation;
+          narration.stop();
+          state.hide();
+          toyAudio?.stop();
+        },
+        clearToys: async () => {
+          currentToys = [];
+          await scene.setShelfToys([]);
+        },
+        closeBook: async () => {
+          await scene.close();
+          state.close();
+        },
+        landBook: (entry) => scene.landShelfBook(entry.key),
+        activateBook: (entry) => {
+          activeBook = entry.book ? structuredClone(entry.book) : undefined;
+          bookLocale =
+            activeBook &&
+            productionLanguages(activeBook).includes(locale.id) &&
+            !translationIssues(activeBook, locale.id).length
+              ? locale.id
+              : activeBook?.locale || "";
+          const id = activeBook?.id || entry.storyId!;
+          state.open(
+            id,
+            activeBook?.spreads.length ||
+              locale.stories.find((story) => story.id === id)!.pages.length,
+          );
+          soundscape?.cue("open");
+        },
+        showFirstPage: () => showPage(true),
+        loadToys: async () => {
+          currentToys = shelfToys(activeBook, state.book!, locale, manifest);
+          await scene.setShelfToys(currentToys);
+        },
+        suspendPage: async () => {
+          ++operation;
+          narration?.pause();
+          state.hide();
+          await pendingPage;
+        },
+        prepareLibrary: async () => {
+          soundscape?.ambience(true);
+          soundscape?.scene("room");
+          soundscape?.pause(false);
+          notice();
+          document.body.classList.remove("reading");
+          await refreshRoomBooks();
+          scene.browseShelf();
+          if (!state.book) ready = true;
+          window.storyLoading.ready();
+        },
+        resumePage: async () => {
+          scene.resumeTable();
+          document.body.classList.add("reading");
+          await showPage(false, !readerNeedsReload);
+          soundscape?.pause(document.hidden);
+        },
+      },
     );
     header();
     roomBooks = await roomLibrary.resolve(locale);

@@ -332,6 +332,17 @@ const assertTablePose = (state) => {
   );
   close(state.scene.hinge, 0, "open table-book hinge");
 };
+const assertSessionAgreement = (state) => {
+  assert.equal(state.session.table, state.scene.tableShelfKey);
+  assert.equal(state.session.table, state.shelf.table);
+  assert.equal(state.session.browsing, state.shelf.browsing);
+  assert.equal(state.session.reading.book, state.state.book);
+  assert.equal(state.session.reading.page, state.state.page);
+  assert.deepEqual(
+    state.session.reading.toys,
+    state.shelf.toys.map(({ id }) => id),
+  );
+};
 const assertCoverContinuity = (state, key) => {
   const shelfBook = state.scene.shelf.books.find((book) => book.key === key);
   assert.ok(shelfBook, `${key} remains represented by its shelf copy`);
@@ -512,6 +523,7 @@ await check(
     await selectBook("builtin:eden");
     await readSelected("builtin:eden");
     state = await debug();
+    assertSessionAgreement(state);
     assert.equal(state.state.book, "eden");
     assertCoverContinuity(state, "builtin:eden");
     assertCanonicalShelfPose(state, "builtin:eden");
@@ -526,6 +538,8 @@ await check(
 
     await page.evaluate(() => {
       document.querySelector("#next")?.click();
+      if (!window.libraryDebug?.().pagePending)
+        throw Error("The page load must still be pending before Library");
       document.querySelector("#shelf")?.click();
     });
     await waitShelf(
@@ -536,6 +550,7 @@ await check(
     );
     await waitForClosedBrowsingTable();
     state = await debug();
+    assertSessionAgreement(state);
     assert.equal(state.state.book, "eden");
     assert.equal(state.state.page, 1);
     assert.equal(state.shelf.table, "builtin:eden");
@@ -557,6 +572,7 @@ await check(
     );
     await waitForOpenTablePose();
     state = await debug();
+    assertSessionAgreement(state);
     assert.equal(state.state.page, 1);
     assert.equal(state.playing, false);
     assertCoverContinuity(state, "builtin:eden");
@@ -622,6 +638,7 @@ await check(
     await readSelected("builtin:noah", true);
     await waitForOpenTablePose();
     state = await debug();
+    assertSessionAgreement(state);
     assertTablePose(state);
     assert.equal(state.state.book, "noah");
     assertCoverContinuity(state, "builtin:noah");
@@ -659,6 +676,7 @@ await check(
     await readSelected("builtin:eden");
     await waitForOpenTablePose();
     state = await debug();
+    assertSessionAgreement(state);
     assertTablePose(state);
     assert.equal(state.state.book, "eden");
     assert.equal(state.scene.shelf.tableKey, "builtin:eden");

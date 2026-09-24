@@ -70,3 +70,96 @@ test("failed shelf inspection restores the shelf and releases the busy state", a
   assert.equal(session.snapshot.busy, false);
   assert.match(String(failures[0]), /missing cover/);
 });
+
+test("opening, switching, Library and Continue keep the session place and toys together", async () => {
+  const pending = deferred();
+  let book: string | null = null;
+  let page = 0;
+  let toys: string[] = [];
+  let paused = false;
+  let tableScene: string | null = null;
+  let roomView = true;
+  const entries = [
+    { key: "builtin:eden", id: "eden" },
+    { key: "builtin:noah", id: "noah" },
+  ];
+  const session = new ReadingSession<{ key: string; id: string }>(
+    {
+      async inspectShelfBook() {},
+      async returnShelfPreview() {},
+    },
+    () => {},
+    () => {},
+    (error) => {
+      throw error;
+    },
+    {
+      reading: () => ({ book, page, toys }),
+      validate: () => {},
+      stop: () => {
+        paused = true;
+      },
+      async clearToys() {
+        toys = [];
+      },
+      async closeBook() {
+        tableScene = null;
+        book = null;
+      },
+      async landBook(entry) {
+        tableScene = entry.key;
+      },
+      activateBook(entry) {
+        book = entry.id;
+        page = 0;
+      },
+      async showFirstPage() {
+        roomView = false;
+      },
+      async loadToys() {
+        toys = book === "eden" ? ["adam", "eve"] : ["ark", "dove"];
+      },
+      async suspendPage() {
+        paused = true;
+        await pending.promise;
+      },
+      async prepareLibrary() {
+        roomView = true;
+      },
+      async resumePage() {
+        roomView = false;
+      },
+    },
+  );
+
+  await session.inspect(entries[0]);
+  assert.equal(await session.openInspected(), true);
+  assert.deepEqual(
+    { ...session.snapshot.reading, table: session.snapshot.table },
+    { book: "eden", page: 0, toys: ["adam", "eve"], table: "builtin:eden" },
+  );
+  assert.equal(roomView, false);
+  page = 3;
+  const library = session.browseLibrary();
+  assert.equal(session.snapshot.busy, true);
+  assert.equal(await session.continueReading(), false);
+  pending.resolve();
+  assert.equal(await library, true);
+  assert.equal(session.snapshot.browsing, true);
+  assert.equal(session.snapshot.reading.page, 3);
+  assert.equal(paused, true);
+  assert.equal(roomView, true);
+  assert.equal(await session.continueReading(), true);
+  assert.equal(session.snapshot.browsing, false);
+  assert.equal(session.snapshot.reading.page, 3);
+  assert.equal(roomView, false);
+
+  await session.browseLibrary();
+  await session.inspect(entries[1]);
+  assert.equal(await session.openInspected(), true);
+  assert.deepEqual(
+    { ...session.snapshot.reading, table: session.snapshot.table },
+    { book: "noah", page: 0, toys: ["ark", "dove"], table: "builtin:noah" },
+  );
+  assert.equal(tableScene, "builtin:noah");
+});
