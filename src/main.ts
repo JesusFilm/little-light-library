@@ -20,6 +20,7 @@ import {
 } from "./contracts";
 import { readPreferences, savePreferences } from "./preferences";
 import { ReaderState } from "./state";
+import { ReadingSession } from "./reading-session";
 import { Narration } from "./playback";
 import { LibraryScene, type Selection } from "./scene";
 import { Soundscape } from "./soundscape";
@@ -85,31 +86,13 @@ function localizedBook() {
 const roomLibrary = new RoomLibrary();
 type RoomBook = Awaited<ReturnType<RoomLibrary["resolve"]>>[number];
 let roomBooks: RoomBook[] = [];
-let browsingShelf = true;
-let shelfBusy = false;
-let inspectedBook: RoomBook | undefined;
 let tableKey: string | undefined;
-let shelfStatus = "";
 let pendingPage: Promise<void> | undefined;
 let readerNeedsReload = false;
+let session: ReadingSession<RoomBook>;
 
 async function shelfAction(action: () => Promise<void>) {
-  if (shelfBusy) return;
-  shelfBusy = true;
-  header();
-  document
-    .querySelectorAll<HTMLButtonElement>(".shelf-preview button")
-    .forEach((b) => (b.disabled = true));
-  try {
-    await action();
-  } catch (error) {
-    notice(`The book could not be moved: ${String(error)}. Please try again.`);
-  } finally {
-    shelfBusy = false;
-    shelfStatus = "";
-    header();
-    if (browsingShelf) renderShelf();
-  }
+  return session.run(action);
 }
 async function refreshRoomBooks() {
   const books = await roomLibrary.resolve(locale);
@@ -125,50 +108,35 @@ async function refreshRoomBooks() {
   await scene.setShelfBooks(books);
 }
 function renderShelf() {
+  const { inspected, busy, status } = session.snapshot;
   $("#panel").replaceChildren();
-  if (inspectedBook) {
-    const entry = inspectedBook;
+  if (inspected) {
+    const entry = inspected;
     $("#panel").innerHTML =
-      `<section class="shelf-preview" aria-label="Selected book"><p class="eyebrow">${entry.book ? escaped(entry.book.locale) : escaped(locale.name)}</p><h1>${escaped(entry.title)}</h1><div><button id="shelf-read" class="primary" ${shelfBusy ? "disabled" : ""}>Read</button><button id="shelf-return" ${shelfBusy ? "disabled" : ""}>Return</button></div><p role="status">${escaped(shelfStatus)}</p></section>`;
+      `<section class="shelf-preview" aria-label="Selected book"><p class="eyebrow">${entry.book ? escaped(entry.book.locale) : escaped(locale.name)}</p><h1>${escaped(entry.title)}</h1><div><button id="shelf-read" class="primary" ${busy ? "disabled" : ""}>Read</button><button id="shelf-return" ${busy ? "disabled" : ""}>Return</button></div><p role="status">${escaped(status)}</p></section>`;
     $("#shelf-read").onclick = () => void readShelfBook();
     $("#shelf-return").onclick = () => void returnShelfBook();
-  } else if (shelfStatus) {
-    const status = document.createElement("p");
-    status.className = "shelf-status";
-    status.role = "status";
-    status.textContent = shelfStatus;
-    $("#panel").append(status);
+  } else if (status) {
+    const message = document.createElement("p");
+    message.className = "shelf-status";
+    message.role = "status";
+    message.textContent = status;
+    $("#panel").append(message);
   }
 }
 async function inspectShelfBook(key: string) {
-  if (shelfBusy || !entered) return;
+  if (session.snapshot.busy || !entered) return;
   if (key === tableKey) {
     await resumeReading();
     return;
   }
   const entry = roomBooks.find((book) => book.key === key);
-  if (!entry || inspectedBook?.key === key) return;
-  await shelfAction(async () => {
-    narration?.pause();
-    state.hide();
-    soundscape?.pause(true);
-    await scene.returnShelfPreview();
-    inspectedBook = entry;
-    shelfStatus = "Taking the book from the shelf…";
-    renderShelf();
-    await scene.inspectShelfBook(key);
-  });
-  $("#shelf-read")?.focus();
+  if (!entry) return;
+  if (await session.inspect(entry)) $("#shelf-read")?.focus();
 }
 async function returnShelfBook() {
-  const key = inspectedBook?.key;
-  await shelfAction(async () => {
-    shelfStatus = "Returning the book to its place…";
-    renderShelf();
-    await scene.returnShelfPreview();
-    inspectedBook = undefined;
-  });
-  if (key)
+  const key = session.snapshot.inspected?.key;
+  if (key && (await session.returnInspected()))
     document
       .querySelector<HTMLButtonElement>(`[data-shelf-key="${CSS.escape(key)}"]`)
       ?.focus();
@@ -176,8 +144,8 @@ async function returnShelfBook() {
 document.addEventListener("keydown", (event) => {
   if (
     event.key === "Escape" &&
-    inspectedBook &&
-    !shelfBusy &&
+    session?.snapshot.inspected &&
+    !session.snapshot.busy &&
     !document.querySelector("dialog[open]")
   ) {
     event.preventDefault();
@@ -185,7 +153,7 @@ document.addEventListener("keydown", (event) => {
   }
 });
 async function readShelfBook() {
-  const entry = inspectedBook;
+  const entry = session.snapshot.inspected;
   if (!entry) return;
   await shelfAction(async () => {
     if (entry.book) {
@@ -200,18 +168,18 @@ async function readShelfBook() {
     ++operation;
     narration.stop();
     state.hide();
-    shelfStatus = state.book
-      ? "Returning the open book to the shelf…"
-      : "Moving your book to the table…";
-    renderShelf();
+    session.setStatus(
+      state.book
+        ? "Returning the open book to the shelf…"
+        : "Moving your book to the table…",
+    );
     toyAudio?.stop();
     currentToys = [];
     await scene.setShelfToys([]);
     await scene.close();
     tableKey = undefined;
     state.close();
-    shelfStatus = "Moving your book to the table…";
-    renderShelf();
+    session.setStatus("Moving your book to the table…");
     await scene.landShelfBook(entry.key);
     activeBook = entry.book ? structuredClone(entry.book) : undefined;
     bookLocale =
@@ -221,8 +189,8 @@ async function readShelfBook() {
         ? locale.id
         : activeBook?.locale || "";
     tableKey = entry.key;
-    inspectedBook = undefined;
-    browsingShelf = false;
+    session.clearInspection();
+    session.setBrowsing(false);
     const id = activeBook?.id || entry.storyId!;
     state.open(
       id,
@@ -239,8 +207,8 @@ async function resumeReading() {
   if (!state.book) return;
   await shelfAction(async () => {
     await scene.returnShelfPreview();
-    inspectedBook = undefined;
-    browsingShelf = false;
+    session.clearInspection();
+    session.setBrowsing(false);
     scene.resumeTable();
     document.body.classList.add("reading");
     await showPage(false, !readerNeedsReload);
@@ -305,16 +273,17 @@ async function fetchLocale(id: LocaleId) {
 }
 function header() {
   $("#header").innerHTML =
-    `<a class="brand" href="./" aria-label="${escaped(t("back"))}"><span class="brand-star">✦</span><span>${escaped(t("appTitle"))}</span></a><nav>${state.book ? button("shelf", browsingShelf ? "↪ Continue reading" : "↩ " + escaped(t("library"))) : ""}${button("language", "🌐", "icon")}${button("settings", "⚙", "icon")}</nav>`;
+    `<a class="brand" href="./" aria-label="${escaped(t("back"))}"><span class="brand-star">✦</span><span>${escaped(t("appTitle"))}</span></a><nav>${state.book ? button("shelf", session.snapshot.browsing ? "↪ Continue reading" : "↩ " + escaped(t("library"))) : ""}${button("language", "🌐", "icon")}${button("settings", "⚙", "icon")}</nav>`;
   $("#language").setAttribute("aria-label", t("language"));
   $("#settings").setAttribute("aria-label", t("settings"));
   $("#language").onclick = () => languageDialog(false);
   $("#settings").onclick = settingsDialog;
   if (state.book)
-    $("#shelf").onclick = () => void (browsingShelf ? resumeReading() : room());
+    $("#shelf").onclick = () =>
+      void (session.snapshot.browsing ? resumeReading() : room());
   $("#header")
     .querySelectorAll<HTMLButtonElement>("button")
-    .forEach((b) => (b.disabled = shelfBusy));
+    .forEach((b) => (b.disabled = session.snapshot.busy));
 }
 function localizeLoader() {
   document.documentElement.lang = locale.id;
@@ -361,7 +330,7 @@ function languageDialog(startup: boolean) {
             header();
             languageDialog(startup);
             if (entered) {
-              if (state.book && !browsingShelf) {
+              if (state.book && !session.snapshot.browsing) {
                 await showPage(false);
                 currentToys = shelfToys(
                   activeBook,
@@ -372,7 +341,7 @@ function languageDialog(startup: boolean) {
                 await scene.setShelfToys(currentToys);
               } else {
                 await scene.returnShelfPreview();
-                inspectedBook = undefined;
+                session.clearInspection();
                 await refreshRoomBooks();
                 if (state.book) {
                   currentToys = shelfToys(
@@ -463,7 +432,7 @@ async function room() {
     narration?.pause();
     state.hide();
     await pendingPage;
-    browsingShelf = true;
+    session.setBrowsing(true);
     soundscape?.ambience(true);
     soundscape?.scene("room");
     soundscape?.pause(false);
@@ -569,20 +538,20 @@ async function renderPage(autoplay: boolean, resume = false, pageTurn = false) {
   $("#next").setAttribute("aria-label", t("next"));
   $<HTMLButtonElement>("#previous").disabled = state.page === 0;
   $("#previous").onclick = () => {
-    if (shelfBusy || pendingPage) return;
+    if (session.snapshot.busy || pendingPage) return;
     soundscape?.cue("page");
     state.turn(state.page - 1);
     void showPage(true, false, true);
   };
   $("#next").onclick = () => {
-    if (shelfBusy || pendingPage) return;
+    if (session.snapshot.busy || pendingPage) return;
     if (state.page >= story.pages.length - 1) return;
     soundscape?.cue("page");
     state.turn(state.page + 1);
     void showPage(true, false, true);
   };
   $("#play").onclick = async () => {
-    if (shelfBusy || pendingPage) return;
+    if (session.snapshot.busy || pendingPage) return;
     if (!ready) {
       await showPage(true);
       return;
@@ -691,7 +660,7 @@ async function renderPage(autoplay: boolean, resume = false, pageTurn = false) {
   updatePlayback();
 }
 async function playToy(id: string) {
-  if (shelfBusy || !entered || document.hidden) return;
+  if (session.snapshot.busy || !entered || document.hidden) return;
   const toy = currentToys.find((item) => item.id === id);
   if (!toy?.sound) return;
   try {
@@ -784,9 +753,9 @@ window.libraryDebug = () => ({
   state: { ...state },
   ready,
   shelf: {
-    browsing: browsingShelf,
-    busy: shelfBusy,
-    inspected: inspectedBook?.key ?? null,
+    browsing: session?.snapshot.browsing ?? true,
+    busy: session?.snapshot.busy ?? false,
+    inspected: session?.snapshot.inspected?.key ?? null,
     table: tableKey ?? null,
     books: roomBooks.map((book) => ({ key: book.key, title: book.title })),
     toys: currentToys.map(({ id, label }) => ({ id, label })),
@@ -804,7 +773,6 @@ async function boot() {
   try {
     locale = await fetchLocale(prefs.language);
     localizeLoader();
-    header();
     try {
       const r = await fetch("./audio-manifest.json");
       if (r.ok) manifest = await r.json();
@@ -814,13 +782,30 @@ async function boot() {
     scene = new LibraryScene(
       $("#scene"),
       (id) => {
-        if (!entered || shelfBusy) return;
+        if (!entered || session.snapshot.busy) return;
         if (id === "table-book") void resumeReading();
         else if (id.startsWith("shelf:")) void inspectShelfBook(id.slice(6));
         else if (id.startsWith("toy:")) void playToy(id.slice(4));
       },
       () => soundscape?.cue("tap"),
     );
+    session = new ReadingSession<RoomBook>(
+      scene,
+      () => {
+        narration?.pause();
+        state.hide();
+        soundscape?.pause(true);
+      },
+      () => {
+        header();
+        if (session.snapshot.browsing) renderShelf();
+      },
+      (error) =>
+        notice(
+          `The book could not be moved: ${String(error)}. Please try again.`,
+        ),
+    );
+    header();
     roomBooks = await roomLibrary.resolve(locale);
     await scene.room(locale, roomBooks);
     window.storyLoading.ready();
