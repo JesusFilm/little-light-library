@@ -7,3 +7,17 @@ Read [README.md](README.md), [creator guide](docs/creator-guide.md), [book contr
 Keep book, spread, segment, and element IDs stable. Distinguish biblical source references, authored retelling, and invented staging. Runtime media must be local to this repository. Preserve useful source art, prompts, and attribution in `assets/`. Never commit credentials, temporary renders, or provider job state.
 
 For runtime changes, verify all three books, language selection, nested static paths, failure/retry, desktop and phone, keyboard/touch, mute/volume, and reduced motion as relevant. Inspect rendered book placement and repeated transfers. Report automated checks, visual inspection, audible playback, and creator approval separately; tests do not establish editorial or listening approval.
+
+## Agent skills
+
+### Issue tracker
+
+Specs and tickets live in local Markdown files under `.scratch/`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Use the five default triage roles. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+This is a single-context repo with a root `CONTEXT.md` and lazy `docs/adr/`. See `docs/agents/domain.md`.
