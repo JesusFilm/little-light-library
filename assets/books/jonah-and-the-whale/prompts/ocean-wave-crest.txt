@@ -1,0 +1,8 @@
+Use case: illustration-story
+Asset type: transparent paper-theatre prop cutout
+Primary request: one broad, gently curling ocean wave crest with a little pale foam, isolated for a children’s Jonah picture-book stage.
+Input images: Jonah character cutout is a style reference for painted paper texture only.
+Style/medium: soft gouache and watercolor on visible paper grain, layered blue-green paint with hand-painted edges.
+Composition/framing: very wide low horizontal crest, readable silhouette, small white foam marks, generous transparent margins.
+Lighting/mood: lively but calm enough for a young audience.
+Constraints: true transparent background; no horizon, sky, boat, people, whale, fish, text, border, shadow, or watermark. Keep the shape simple so slight whole-card motion reads as a moving wave.

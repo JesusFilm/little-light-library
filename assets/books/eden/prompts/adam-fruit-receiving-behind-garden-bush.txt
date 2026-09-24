@@ -1,0 +1,8 @@
+Use case: illustration-story
+Asset type: transparent paper-theatre actor card for Genesis page 3
+Input images: Adam pose atlas as identity and painted-style reference only
+Primary request: Show adult Adam standing behind a tall, dense Eden bush as Eve offers him a small red-gold fruit from the right. He reaches right with one bare forearm and open hand to receive it. His face is serious and hesitant, not smiling. The opaque foliage rises from the bottom edge to about shoulder height, concealing his entire torso, hips, legs and any clothing; only his head, neck, bare shoulders, forearms and hands above the leaves are visible.
+Style/medium: Match the established adult Adam identity, Middle Eastern complexion, curly dark hair, beard, and warm gouache-and-watercolor children's-book paper texture.
+Composition/framing: Portrait 2:3 full-height standing composition, from bush base to top of hair, with the adult's head/shoulders at the same natural scale as the later standing pose cards. The bush must be tall and dense, not a low hedge or crouching portrait; its top hides the entire chest. Keep his reaching hand and the whole fruit-offering gesture inside the canvas.
+Constraints: Preserve true transparent alpha outside the combined Adam-and-bush silhouette; the bush itself must be fully opaque enough to guarantee concealment during gentle whole-card motion. No background, ground plane, text, border, frame or shadow card.
+Avoid: visible chest or torso, clothes, robe, sash, low bushes, crouching, clipped hair/hand/leaves, extra characters, watermark.

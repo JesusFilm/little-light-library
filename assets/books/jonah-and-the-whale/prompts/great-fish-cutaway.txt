@@ -1,0 +1,6 @@
+Use case: story illustration for the underwater pages `jonah-rescued` and `jonah-prays`.
+Asset type: wide transparent paper-theatre cutout, used over the separate underwater backdrop.
+Art brief (recorded after generation; this is not an exact provider prompt transcript): one large, gentle deep-blue great fish in side view, with a soft oval cutaway window in its belly. Inside the lit window, show a small bearded Jonah seated safely and praying. The fish and Jonah should read as one coherent symbolic illustration; do not add a second Jonah outside the fish.
+Style: hand-painted watercolor and gouache storybook illustration, subtle paper grain, warm faces and soft edges, matching the existing Jonah cutout.
+Composition: broad horizontal fish silhouette, whole tail and mouth inside the canvas, transparent margin around it, calm empty water around the body for separately animated small fish.
+Avoid: gore, distress, realistic anatomy, lettering, symbols, water or scenery baked behind the cutout, border, watermark, or hard CGI rendering.

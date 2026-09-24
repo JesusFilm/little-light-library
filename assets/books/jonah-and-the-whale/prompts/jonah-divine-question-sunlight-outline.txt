@@ -1,0 +1,12 @@
+Use case: illustration-story.
+Asset type: transparent thought-bubble cutout of sunlit Nineveh.
+Scene/backdrop: Jonah's p13 visualizes God's unanswered question by showing Nineveh as a peaceful possibility in a thought bubble.
+Subject: a cloud-shaped bubble containing sunlit Nineveh city walls and gate, bright sunlight and rays; three smaller thought dots trail toward Jonah.
+Style/medium: watercolor and gouache with subtle paper grain, warm golden light and painterly architecture, consistent with the Little Light Library Jonah art.
+Composition/framing: preserve the existing wide cloud silhouette, city placement, and three separate dots; keep transparent alpha outside the shape.
+Lighting/mood: hopeful and warm.
+Materials/textures: matte painted paper texture.
+Constraints: no people or text; keep clear at phone scale; preserve existing vision artwork and dimensions.
+Avoid: altered city, added figures, letters, symbols, opaque full-frame background, black fill, extra dots, frame, watermark, UI.
+
+Image edit prompt: Edit only the outline treatment of the exact transparent thought-bubble asset `jonah-divine-question-sunlight.png`. Preserve its existing cloud-shaped bubble, all three separate thought dots, glowing sun and rays, bright Nineveh city and walls, watercolor-and-gouache paper-grain style, colors, layout, and dimensions. Make the outer contour of the cloud bubble and each of the three thought dots clearly visible at small phone scale by replacing their current very pale thin contour with a neat, continuous medium-dark warm sepia/umber outline. It should be strong enough to read against the bright sky and sunlight, but softly painted and not black, heavy, or cartoonish; keep a consistent moderate line weight. Do not outline the city or alter the interior image, sun glow, cloud silhouette, dot placement, or composition. Keep all pixels outside the existing bubble and thought dots truly transparent. No extra shadow, halo, text, letters, symbols, people, or new objects.

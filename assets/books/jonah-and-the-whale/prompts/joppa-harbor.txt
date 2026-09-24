@@ -1,0 +1,8 @@
+Use case: illustration-story
+Asset type: empty full-page backdrop for a children’s picture-book paper theatre
+Primary request: an ancient Joppa harbor at sunrise, seen from the shore. Show a quiet stone quay, a few small moored merchant boats in the distant middle ground, pale Mediterranean water and low coastal buildings.
+Input images: Jonah character cutout is a style reference for warm painted paper texture only.
+Style/medium: hand-painted gouache and watercolor scenery with visible paper grain and soft natural colors.
+Composition/framing: landscape 1536×1024; keep the lower foreground simple and open for separate actors, leave clear space in the left half; boats in the background are small.
+Lighting/mood: calm early morning, reflective, child-friendly.
+Constraints: no people, Jonah, foreground ship, whale, text, frame, or watermark; no photorealism or hard CGI.

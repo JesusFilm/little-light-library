@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#243c39" />
+    <title>Little Light Library</title>
+    <link rel="stylesheet" href="./loading-theatre.css" />
+  </head>
+  <body>
+    <div
+      id="loading"
+      class="loading-theatre"
+      data-loading-option="2"
+      aria-label="Loading"
+    >
+      <canvas aria-hidden="true"></canvas>
+      <h2>Little Light Library</h2>
+      <p id="loading-text" role="status" aria-live="polite">
+        Preparing your library…
+      </p>
+      <p class="loading-note"></p>
+      <span class="loading-elapsed" aria-hidden="true"></span>
+      <div class="loading-actions">
+        <button type="button" class="loading-pause">Ⅱ</button
+        ><button type="button" class="loading-retry" hidden>↻</button>
+      </div>
+    </div>
+    <script src="./loading-locales.js"></script>
+    <script src="./loading-theatre.js"></script>
+    <main id="app">
+      <div id="scene"></div>
+      <header id="header"></header>
+      <section id="panel"></section>
+      <div id="notice" role="status"></div>
+    </main>
+    <dialog id="language-dialog"></dialog>
+    <dialog id="settings-dialog"></dialog>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

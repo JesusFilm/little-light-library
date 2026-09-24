@@ -1,0 +1,8 @@
+Use case: illustration-story
+Asset type: transparent plant cutout for a children’s picture-book stage
+Primary request: the same kind of leafy shade plant, now wilted and damaged by a small harmless worm. Its leaves droop and have faded to yellow-brown; the worm is visible on one leaf.
+Input images: Jonah character cutout is a style reference for painted paper texture only.
+Style/medium: detailed gouache and watercolor storybook art with visible paper grain and hand-painted edges, consistent with the style reference.
+Composition/framing: upright plant silhouette, full stem visible to its base, leaves spread across the top and sides, centered with generous transparent margin.
+Lighting/mood: hot dry midday, subdued and sad without being frightening.
+Constraints: true transparent background; no pot, ground, person, Jonah, gore, text, frame, hard CGI, or watermark.

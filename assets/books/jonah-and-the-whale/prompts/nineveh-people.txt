@@ -1,0 +1,6 @@
+Use case: small background group for the Nineveh street and final page scenes.
+Asset type: transparent full-body group cutout of three ancient Near Eastern residents, with no background scenery.
+Art brief (recorded after generation; this is not an exact provider prompt transcript): show a woman, a man, and an older resident standing together in simple ancient linen clothing, listening with thoughtful, peaceful expressions. Keep their gestures quiet and distinct so a small group still reads at stage size. Use natural warm skin tones and a restrained blue, olive, cream, and rust palette.
+Style: hand-painted watercolor and gouache storybook illustration with subtle paper grain, matching the Jonah cutout and city art.
+Composition: portrait group, complete feet and garments visible, people separated enough to read as three figures, transparent margins.
+Avoid: modern clothing, signs, weapons, animals, lettering, border, watermark, or hard CGI rendering.

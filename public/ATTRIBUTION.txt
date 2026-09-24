@@ -1,0 +1,8 @@
+Little Light Library
+Original story adaptations and original generated artwork prepared for Story Lab.
+Stories adapt Genesis 2–3 and 6–9; no modern Bible translation is reproduced.
+ImageGen artwork prompts and source files are retained in the repository asset library.
+Simple shelf-book geometry authored in Blender; no external model geometry used.
+Runtime renderer: Three.js 0.169.0, MIT license (THREE-LICENSE.txt).
+Pre-generated narration: Kokoro-82M model (Apache-2.0) using kokoro-mlx (MIT).
+No speech synthesis library or model weights are distributed with this static application.

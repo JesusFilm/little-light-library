@@ -1,0 +1,8 @@
+Use case: illustration-story
+Asset type: transparent cutout for a children’s picture-book paper-theatre stage
+Primary request: a small ancient Levantine wooden sailing boat with three sailors, isolated as one group cutout. The vessel is a practical cedar merchant boat with a single cream sail partly lowered, full hull and mast visible. Three small sailors in simple linen tunics steady themselves and tend a rope; keep faces and gestures readable at book size. Show the boat in a side three-quarter view, facing right.
+Input images: Jonah character cutout is a style reference for warm painted texture and character proportions only; do not include or copy Jonah.
+Style/medium: detailed gouache and watercolor storybook illustration on visible paper grain, soft natural faces and hand-painted edges, consistent with the Jonah cutout.
+Composition/framing: centered, broad horizontal silhouette, entire sail and hull inside frame, enough transparent margin around every edge.
+Lighting/mood: gentle natural daylight, adventurous but calm.
+Constraints: true transparent background; no sea, waves, horizon, dock, scenery, Jonah, fish, whale, lettering, border, watermark, or hard CGI look.

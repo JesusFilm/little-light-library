@@ -1,0 +1,126 @@
+{
+  "id": "fr",
+  "name": "Français",
+  "voice": "ff_siwis",
+  "ui": {
+    "appTitle": "La Bibliothèque de la Petite Lumière",
+    "welcome": "Bienvenue dans la Bibliothèque de la Petite Lumière",
+    "chooseLanguage": "Choisissez une langue",
+    "enter": "Entrer dans la bibliothèque",
+    "library": "Bibliothèque",
+    "chooseBook": "Choisissez une histoire",
+    "settings": "Réglages",
+    "language": "Langue",
+    "speed": "Vitesse de lecture",
+    "audio": "Narration",
+    "volume": "Volume",
+    "close": "Fermer",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "play": "Lire",
+    "pause": "Pause",
+    "replay": "Relire",
+    "back": "Retour à la bibliothèque",
+    "loading": "Préparation de l'histoire…",
+    "retry": "Réessayer",
+    "error": "Un problème est survenu.",
+    "audioError": "La narration est indisponible, mais vous pouvez quand même lire l'histoire.",
+    "imageError": "Cette image n'a pas pu être chargée. Réessayez.",
+    "page": "Page",
+    "of": "sur",
+    "help": "Aide",
+    "helpText": "Lisez, écoutez et tournez les pages ensemble. Vous pouvez mettre une page en pause ou la relire.",
+    "characters": "Personnages",
+    "finished": "Page terminée",
+    "source": "Passage biblique",
+    "loadingPause": "Mettre l'animation de chargement en pause",
+    "loadingResume": "Reprendre l'animation de chargement",
+    "lookAround": "Regarde autour de toi",
+    "lookLeft": "Regarde à gauche",
+    "centerView": "Recentre la vue",
+    "lookRight": "Regarde à droite",
+    "serpent": "Serpent",
+    "dove": "Colombe"
+  },
+  "characters": { "adam": "Adam", "eve": "Ève", "noah": "Noé" },
+  "stories": [
+    {
+      "id": "eden",
+      "title": "Adam, Ève et le jardin",
+      "subtitle": "Une histoire de la Genèse 2–3",
+      "pages": [
+        { "id": "eden-01", "title": "Un jardin appelé Éden", "segments": [
+          { "id": "s1", "text": "Dieu créa les cieux et la terre, puis planta un magnifique jardin appelé Éden. Il y plaça Adam pour le cultiver et profiter de ses arbres." },
+          { "id": "s2", "text": "Dieu souffla la vie dans Adam. Chaque créature avait sa place, mais Adam avait besoin d'une compagne." }
+        ], "image": "assets/art/eden-01.webp", "passage": "Genèse 2:4–20" },
+        { "id": "eden-02", "title": "Une compagne et un commandement", "segments": [
+          { "id": "s1", "text": "Dieu fit Ève à partir du côté d'Adam et la conduisit vers lui. Ils étaient faits pour vivre ensemble, sans honte et en paix." },
+          { "id": "s2", "text": "Dieu leur donna les fruits du jardin, mais un arbre était interdit : l'arbre de la connaissance du bien et du mal. Il leur ordonna de ne pas en manger." }
+        ], "image": "assets/art/eden-02.webp", "passage": "Genèse 2:16–25" },
+        { "id": "eden-03", "title": "La question du serpent", "segments": [
+          { "id": "s1", "text": "Un serpent parla à Ève et mit en doute la parole de Dieu. Il promit que le fruit interdit les rendrait comme Dieu, connaissant le bien et le mal." },
+          { "id": "s2", "text": "Ève vit que le fruit semblait bon, le prit et en mangea. Elle en donna à Adam, et il en mangea aussi." }
+        ], "image": "assets/art/eden-03.webp", "passage": "Genèse 3:1–6" },
+        { "id": "eden-04", "title": "La honte et la fuite", "segments": [
+          { "id": "s1", "text": "Aussitôt, ils surent qu'ils étaient nus, et la honte les poussa à se cacher. Ils cousirent des feuilles pour se couvrir." },
+          { "id": "s2", "text": "Quand Dieu les appela, Adam accusa Ève, et Ève accusa le serpent. Leur confiance était brisée, et leur choix avait introduit le péché dans le jardin." }
+        ], "image": "assets/art/eden-04.webp", "passage": "Genèse 3:7–13" },
+        { "id": "eden-05", "title": "Les conséquences", "segments": [
+          { "id": "s1", "text": "Dieu déclara que le serpent serait maudit. La descendance de la femme lui écraserait la tête, même si le serpent lui blesserait le talon." },
+          { "id": "s2", "text": "Dieu dit à Ève que les enfants viendraient avec la douleur, et à Adam que le sol résisterait à son travail. Leurs vies porteraient désormais la peine et la fatigue." }
+        ], "image": "assets/art/eden-05.webp", "passage": "Genèse 3:14–19" },
+        { "id": "eden-06", "title": "Hors du jardin", "segments": [
+          { "id": "s1", "text": "Dieu fit des vêtements pour Adam et Ève et les en revêtit. Puis il les chassa d'Éden, afin qu'ils ne prennent pas du fruit de l'arbre de vie." },
+          { "id": "s2", "text": "Des chérubins et une épée flamboyante gardaient le chemin de l'arbre de vie. Adam et Ève ne pouvaient pas revenir." }
+        ], "image": "assets/art/eden-06.webp", "passage": "Genèse 3:20–24" },
+        { "id": "eden-07", "title": "La vie après l'Éden", "segments": [
+          { "id": "s1", "text": "Hors de l'Éden, Adam et Ève travaillèrent dur pour se nourrir parmi les épines. Ils vieilliraient et retourneraient à la poussière dont Adam avait été formé." },
+          { "id": "s2", "text": "La perte était réelle, mais Dieu ne cessa pas de les voir. Leur histoire montre combien la désobéissance blesse et pourquoi les humains ont besoin du secours de Dieu." }
+        ], "image": "assets/art/eden-07.webp", "passage": "Genèse 3:17–24" },
+        { "id": "eden-08", "title": "Une promesse qui continue", "segments": [
+          { "id": "s1", "text": "L'Éden était derrière eux, mais la parole de Dieu sur le serpent portait une promesse de victoire. La Bible garde cette espérance tandis que son histoire continue." },
+          { "id": "s2", "text": "Adam et Ève ne pouvaient pas réparer seuls ce qu'ils avaient brisé. Leur premier choix nous rappelle de faire confiance aux bons chemins de Dieu et de chercher sa miséricorde." }
+        ], "image": "assets/art/eden-08.webp", "passage": "Genèse 3:14–24" }
+      ]
+    },
+    {
+      "id": "noah",
+      "title": "Noé et le grand déluge",
+      "subtitle": "Une histoire de la Genèse 6–9",
+      "pages": [
+        { "id": "noah-01", "title": "Un monde devenu mauvais", "segments": [
+          { "id": "s1", "text": "Dieu vit que la violence et la méchanceté s'étaient répandues sur toute la terre. Le monde qu'il avait créé bon était rempli de terribles blessures." },
+          { "id": "s2", "text": "Noé marchait avec Dieu. Dieu lui annonça un grand déluge et lui donna un moyen de protéger sa famille et les animaux." }
+        ], "image": "assets/art/noah-01.webp", "passage": "Genèse 6:5–22" },
+        { "id": "noah-02", "title": "Construire une grande arche", "segments": [
+          { "id": "s1", "text": "Dieu dit à Noé de construire une arche immense, avec des pièces à l'intérieur, assez solide pour flotter sur les eaux montantes. Noé suivit les instructions de Dieu." },
+          { "id": "s2", "text": "Il recouvrit l'arche pour empêcher l'eau d'entrer. Ce n'était pas un petit bateau-jouet, mais un refuge pour une famille et de nombreuses créatures." }
+        ], "image": "assets/art/noah-02.webp", "passage": "Genèse 6:14–22" },
+        { "id": "noah-03", "title": "Dans l'arche", "segments": [
+          { "id": "s1", "text": "Les animaux vinrent vers Noé, par paires de chaque espèce, et Noé les fit entrer. Sa femme, ses fils et les femmes de ses fils entrèrent aussi." },
+          { "id": "s2", "text": "Alors Dieu ferma la porte. La pluie commença à tomber, et l'arche attendit tandis que le monde extérieur changeait." }
+        ], "image": "assets/art/noah-03.webp", "passage": "Genèse 7:1–16" },
+        { "id": "noah-04", "title": "Les eaux sur la terre", "segments": [
+          { "id": "s1", "text": "La pluie tomba pendant quarante jours et quarante nuits, et les eaux montèrent toujours plus haut. L'arche se souleva du sol et se mit à flotter." },
+          { "id": "s2", "text": "Le déluge couvrit la terre et même les plus hautes montagnes. Dans la grande arche, la famille de Noé et les animaux attendaient dans l'obscurité." }
+        ], "image": "assets/art/noah-04.webp", "passage": "Genèse 7:17–24" },
+        { "id": "noah-05", "title": "Une feuille d'espérance", "segments": [
+          { "id": "s1", "text": "Enfin, Dieu fit souffler un vent, et les eaux commencèrent à baisser. L'arche s'arrêta sur les montagnes d'Ararat." },
+          { "id": "s2", "text": "Noé envoya un corbeau, puis une colombe. Quand la colombe revint avec une feuille d'olivier fraîche, Noé sut que la terre réapparaissait." }
+        ], "image": "assets/art/noah-05.webp", "passage": "Genèse 8:1–12" },
+        { "id": "noah-06", "title": "Un monde changé", "segments": [
+          { "id": "s1", "text": "Quand le sol fut sec, Dieu dit à Noé de sortir de l'arche. Sa famille sortit, et chaque animal retrouva la terre ouverte." },
+          { "id": "s2", "text": "Les personnes restées hors de l'arche furent emportées par l'eau et se noyèrent. Le déluge était un jugement, et la famille sauvée entra dans un monde grave et changé." }
+        ], "image": "assets/art/noah-06.webp", "passage": "Genèse 7:21–23; 8:13–19" },
+        { "id": "noah-07", "title": "L'alliance de Dieu", "segments": [
+          { "id": "s1", "text": "Noé bâtit un autel et adora Dieu. Dieu fit une alliance avec Noé, sa famille et tous les êtres vivants." },
+          { "id": "s2", "text": "Dieu promit qu'un déluge ne détruirait plus jamais toute vie sur la terre. Il plaça un arc-en-ciel dans les nuages comme signe de sa promesse." }
+        ], "image": "assets/art/noah-07.webp", "passage": "Genèse 8:20–22; 9:1–17" },
+        { "id": "noah-08", "title": "Se souvenir de l'arc-en-ciel", "segments": [
+          { "id": "s1", "text": "L'arc-en-ciel devint un rappel éclatant de l'alliance de Dieu. Quand ses couleurs apparaissaient, Dieu se souvenait de sa promesse, et son peuple pouvait s'en souvenir aussi." },
+          { "id": "s2", "text": "L'histoire du déluge tient ensemble la peine, le salut et un nouveau départ. La famille de Noé porta la miséricorde de Dieu dans le monde après la disparition des eaux." }
+        ], "image": "assets/art/noah-08.webp", "passage": "Genèse 9:8–17" }
+      ]
+    }
+  ]
+}

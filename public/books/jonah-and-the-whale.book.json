@@ -1,0 +1,5093 @@
+{
+  "format": "little-light-book",
+  "version": 1,
+  "id": "jonah-and-the-whale",
+  "title": "Jonah and the Whale",
+  "subtitle": "A story of listening, mercy and a great deep breath",
+  "locale": "en-US",
+  "status": "draft",
+  "source": "Jonah 1–4",
+  "retellingNote": "A gentle authored retelling of Jonah 1–4. The story text is not a Bible quotation; the scene choices and paper-theatre actions are invented staging. The ending leaves God's question to Jonah about compassion unanswered.",
+  "cover": "jonah-shore",
+  "appearance": {
+    "coverColor": "#315E78",
+    "spineColor": "#21445A",
+    "accentColor": "#D9A94E"
+  },
+  "assets": {
+    "jonah-shore": {
+      "kind": "image",
+      "src": "assets/art/jonah/jonah-shore.png",
+      "attribution": "Creator-supplied image generated for Story Lab; retained as the cover scene."
+    },
+    "sandy-ground": {
+      "kind": "image",
+      "src": "assets/art/jonah/sandy-ground.png",
+      "attribution": "Creator-supplied image generated for Story Lab."
+    },
+    "jonah-cutout": {
+      "kind": "image",
+      "src": "assets/art/jonah/jonah-cutout.png",
+      "attribution": "Creator-supplied character cutout generated for Story Lab."
+    },
+    "whale-cutout": {
+      "kind": "image",
+      "src": "assets/art/jonah/whale-cutout.png",
+      "attribution": "Creator-supplied great-fish cutout generated for Story Lab."
+    },
+    "underwater-backdrop": {
+      "kind": "image",
+      "src": "assets/art/jonah/underwater-backdrop.png",
+      "attribution": "Creator-supplied underwater scene generated for Story Lab."
+    },
+    "joppa-harbor": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/joppa-harbor.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/joppa-harbor.txt."
+    },
+    "storm-sea": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/storm-at-sea.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/storm-at-sea.txt."
+    },
+    "ship-and-sailors": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/ship-and-sailors.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/ship-and-sailors.txt."
+    },
+    "ocean-wave-crest": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/ocean-wave-crest.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/ocean-wave-crest.txt."
+    },
+    "small-fish-school": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/small-fish-school.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/small-fish-school.txt."
+    },
+    "nineveh-city": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/nineveh-gate.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/nineveh-gate.txt."
+    },
+    "shade-plant": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/shade-plant.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/shade-plant.txt."
+    },
+    "withered-plant": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/withered-plant.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/withered-plant.txt."
+    },
+    "narration-225beca98c9fc7ff8476": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-US/jonah-called-segment-1-225beca98c9fc7ff8476.wav",
+      "attribution": "Generated locally with Kokoro af_heart · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-b494e2e3af9633691742": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-US/jonah-boards-ship-segment-1-b494e2e3af9633691742.wav",
+      "attribution": "Generated locally with Kokoro af_heart · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-4f381c811ae9c37e7cb7": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-US/storm-at-sea-segment-1-4f381c811ae9c37e7cb7.wav",
+      "attribution": "Generated locally with Kokoro af_heart · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-2dc4e6178d593052bb06": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-US/jonah-overboard-segment-1-2dc4e6178d593052bb06.wav",
+      "attribution": "Generated locally with Kokoro af_heart · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-8a93037c407dba6b44b0": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-US/jonah-rescued-segment-1-8a93037c407dba6b44b0.wav",
+      "attribution": "Generated locally with Kokoro af_heart · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-926506debc00fcf644b9": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-US/jonah-prays-segment-1-926506debc00fcf644b9.wav",
+      "attribution": "Generated locally with Kokoro af_heart · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-c5242829716eb551f12a": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-US/jonah-ashore-segment-1-c5242829716eb551f12a.wav",
+      "attribution": "Generated locally with Kokoro af_heart · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-2be626de96bde0f3a0af": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-US/nineveh-warning-segment-1-2be626de96bde0f3a0af.wav",
+      "attribution": "Generated locally with Kokoro af_heart · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-9f671e98b4df62edb954": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-US/nineveh-turns-segment-1-9f671e98b4df62edb954.wav",
+      "attribution": "Generated locally with Kokoro af_heart · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-4182bec23ace78dc0799": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-US/jonah-angry-segment-1-4182bec23ace78dc0799.wav",
+      "attribution": "Generated locally with Kokoro af_heart · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-f47d50fd3decce0f9f45": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-US/shade-for-jonah-segment-1-f47d50fd3decce0f9f45.wav",
+      "attribution": "Generated locally with Kokoro af_heart · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-77e62b1298c30d6e1e70": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-US/plant-withers-segment-1-77e62b1298c30d6e1e70.wav",
+      "attribution": "Generated locally with Kokoro af_heart · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-46fbbcf4a9288eb45c54": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-US/jonah-mercy-segment-1-46fbbcf4a9288eb45c54.wav",
+      "attribution": "Generated locally with Kokoro af_heart · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-49fc9ec3f1f5e704ef9f": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/es/jonah-called-segment-1-49fc9ec3f1f5e704ef9f.wav",
+      "attribution": "Generated locally with Kokoro ef_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-9cdeb1e968d843319f14": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/es/jonah-boards-ship-segment-1-9cdeb1e968d843319f14.wav",
+      "attribution": "Generated locally with Kokoro ef_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-8991c6bd614f1d6545e7": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/es/storm-at-sea-segment-1-8991c6bd614f1d6545e7.wav",
+      "attribution": "Generated locally with Kokoro ef_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-82abc9fd447647dcf6a1": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/es/jonah-overboard-segment-1-82abc9fd447647dcf6a1.wav",
+      "attribution": "Generated locally with Kokoro ef_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-1daba6b488bfa52cb407": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/es/jonah-rescued-segment-1-1daba6b488bfa52cb407.wav",
+      "attribution": "Generated locally with Kokoro ef_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-5db9fbabda0c63be71df": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/es/jonah-prays-segment-1-5db9fbabda0c63be71df.wav",
+      "attribution": "Generated locally with Kokoro ef_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-3781eae236667d222a34": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/es/jonah-ashore-segment-1-3781eae236667d222a34.wav",
+      "attribution": "Generated locally with Kokoro ef_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-5f91984baff9ac445cf1": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/es/nineveh-warning-segment-1-5f91984baff9ac445cf1.wav",
+      "attribution": "Generated locally with Kokoro ef_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-4f5ed146fa41824c8944": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/es/nineveh-turns-segment-1-4f5ed146fa41824c8944.wav",
+      "attribution": "Generated locally with Kokoro ef_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-bf6d08961e469b9269b1": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/es/jonah-angry-segment-1-bf6d08961e469b9269b1.wav",
+      "attribution": "Generated locally with Kokoro ef_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-09535c0612ab52ebb314": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/es/shade-for-jonah-segment-1-09535c0612ab52ebb314.wav",
+      "attribution": "Generated locally with Kokoro ef_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-295434632e107a49983c": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/es/plant-withers-segment-1-295434632e107a49983c.wav",
+      "attribution": "Generated locally with Kokoro ef_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-3d05d9000e8a1dd10e3a": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/es/jonah-mercy-segment-1-3d05d9000e8a1dd10e3a.wav",
+      "attribution": "Generated locally with Kokoro ef_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-e41e95a398b9c88d0a33": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/fr/jonah-called-segment-1-e41e95a398b9c88d0a33.wav",
+      "attribution": "Generated locally with Kokoro ff_siwis · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-13e045412e9c7655085e": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/fr/jonah-boards-ship-segment-1-13e045412e9c7655085e.wav",
+      "attribution": "Generated locally with Kokoro ff_siwis · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-638187fb350fa750a1dc": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/fr/storm-at-sea-segment-1-638187fb350fa750a1dc.wav",
+      "attribution": "Generated locally with Kokoro ff_siwis · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-d63d111874e8437d9f6f": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/fr/jonah-overboard-segment-1-d63d111874e8437d9f6f.wav",
+      "attribution": "Generated locally with Kokoro ff_siwis · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-36dd0eb21d26bc504b7e": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/fr/jonah-rescued-segment-1-36dd0eb21d26bc504b7e.wav",
+      "attribution": "Generated locally with Kokoro ff_siwis · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-8d6da95733adcddf3679": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/fr/jonah-prays-segment-1-8d6da95733adcddf3679.wav",
+      "attribution": "Generated locally with Kokoro ff_siwis · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-c01c65c8f11a14cf0fc7": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/fr/jonah-ashore-segment-1-c01c65c8f11a14cf0fc7.wav",
+      "attribution": "Generated locally with Kokoro ff_siwis · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-ce10ef327453484fec20": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/fr/nineveh-warning-segment-1-ce10ef327453484fec20.wav",
+      "attribution": "Generated locally with Kokoro ff_siwis · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-6c2c20d3bc15fe71de6f": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/fr/nineveh-turns-segment-1-6c2c20d3bc15fe71de6f.wav",
+      "attribution": "Generated locally with Kokoro ff_siwis · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-e402c2e2fbf5708dc167": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/fr/jonah-angry-segment-1-e402c2e2fbf5708dc167.wav",
+      "attribution": "Generated locally with Kokoro ff_siwis · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-66cc813f7bbea738be41": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/fr/shade-for-jonah-segment-1-66cc813f7bbea738be41.wav",
+      "attribution": "Generated locally with Kokoro ff_siwis · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-0babf0271c3c7528b3f1": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/fr/plant-withers-segment-1-0babf0271c3c7528b3f1.wav",
+      "attribution": "Generated locally with Kokoro ff_siwis · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-6c792781ba7cfbfbbfa9": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/fr/jonah-mercy-segment-1-6c792781ba7cfbfbbfa9.wav",
+      "attribution": "Generated locally with Kokoro ff_siwis · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-1e631c65d7969c89eb85": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/it/jonah-called-segment-1-1e631c65d7969c89eb85.wav",
+      "attribution": "Generated locally with Kokoro if_sara · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-2202a212eb175070ee2a": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/it/jonah-boards-ship-segment-1-2202a212eb175070ee2a.wav",
+      "attribution": "Generated locally with Kokoro if_sara · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-e17711d3bef659a5066e": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/it/storm-at-sea-segment-1-e17711d3bef659a5066e.wav",
+      "attribution": "Generated locally with Kokoro if_sara · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-f4a979b5e3f6707bdcd4": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/it/jonah-overboard-segment-1-f4a979b5e3f6707bdcd4.wav",
+      "attribution": "Generated locally with Kokoro if_sara · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-caf8bb0f482272809f64": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/it/jonah-rescued-segment-1-caf8bb0f482272809f64.wav",
+      "attribution": "Generated locally with Kokoro if_sara · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-ddda26a7ab30c02ce33e": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/it/jonah-prays-segment-1-ddda26a7ab30c02ce33e.wav",
+      "attribution": "Generated locally with Kokoro if_sara · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-137cfcf8b54b2fee12ba": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/it/jonah-ashore-segment-1-137cfcf8b54b2fee12ba.wav",
+      "attribution": "Generated locally with Kokoro if_sara · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-36b0bd3affd91b24e43c": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/it/nineveh-warning-segment-1-36b0bd3affd91b24e43c.wav",
+      "attribution": "Generated locally with Kokoro if_sara · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-44d6b182461b81ceb9d3": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/it/nineveh-turns-segment-1-44d6b182461b81ceb9d3.wav",
+      "attribution": "Generated locally with Kokoro if_sara · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-ebbe6a5b99358ff5c558": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/it/jonah-angry-segment-1-ebbe6a5b99358ff5c558.wav",
+      "attribution": "Generated locally with Kokoro if_sara · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-089170b6f94b04f9dfc3": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/it/shade-for-jonah-segment-1-089170b6f94b04f9dfc3.wav",
+      "attribution": "Generated locally with Kokoro if_sara · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-85657cab9f94a0e3758b": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/it/plant-withers-segment-1-85657cab9f94a0e3758b.wav",
+      "attribution": "Generated locally with Kokoro if_sara · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-457203cfed6c1135b1b6": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/it/jonah-mercy-segment-1-457203cfed6c1135b1b6.wav",
+      "attribution": "Generated locally with Kokoro if_sara · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-313e92ec469b09cfb62b": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/pt-BR/jonah-called-segment-1-313e92ec469b09cfb62b.wav",
+      "attribution": "Generated locally with Kokoro pf_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-d75a71ffca9c1aa95b54": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/pt-BR/jonah-boards-ship-segment-1-d75a71ffca9c1aa95b54.wav",
+      "attribution": "Generated locally with Kokoro pf_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-61e3b44e07439a859a1a": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/pt-BR/storm-at-sea-segment-1-61e3b44e07439a859a1a.wav",
+      "attribution": "Generated locally with Kokoro pf_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-d0eb087bf87e87737d50": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/pt-BR/jonah-overboard-segment-1-d0eb087bf87e87737d50.wav",
+      "attribution": "Generated locally with Kokoro pf_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-6291d4c962c52bc45c82": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/pt-BR/jonah-rescued-segment-1-6291d4c962c52bc45c82.wav",
+      "attribution": "Generated locally with Kokoro pf_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-39af10c685c9dfe57607": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/pt-BR/jonah-prays-segment-1-39af10c685c9dfe57607.wav",
+      "attribution": "Generated locally with Kokoro pf_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-511cd9000b7d0bc23d69": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/pt-BR/jonah-ashore-segment-1-511cd9000b7d0bc23d69.wav",
+      "attribution": "Generated locally with Kokoro pf_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-57e919bd5ad4d14a4686": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/pt-BR/nineveh-warning-segment-1-57e919bd5ad4d14a4686.wav",
+      "attribution": "Generated locally with Kokoro pf_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-200bb52912f529688083": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/pt-BR/nineveh-turns-segment-1-200bb52912f529688083.wav",
+      "attribution": "Generated locally with Kokoro pf_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-5968d484839db7e097e2": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/pt-BR/jonah-angry-segment-1-5968d484839db7e097e2.wav",
+      "attribution": "Generated locally with Kokoro pf_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-b92ddc185857d30f4f9c": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/pt-BR/shade-for-jonah-segment-1-b92ddc185857d30f4f9c.wav",
+      "attribution": "Generated locally with Kokoro pf_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-30deccb9172051f3fb9a": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/pt-BR/plant-withers-segment-1-30deccb9172051f3fb9a.wav",
+      "attribution": "Generated locally with Kokoro pf_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-4f157e10b65851e5f93d": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/pt-BR/jonah-mercy-segment-1-4f157e10b65851e5f93d.wav",
+      "attribution": "Generated locally with Kokoro pf_dora · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "great-fish-cutaway": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/great-fish-cutaway.webp",
+      "attribution": "Original illustration generated for this book; see the production brief at assets/books/jonah-and-the-whale/prompts/great-fish-cutaway.txt."
+    },
+    "jonah-waiting": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/jonah-waiting.webp",
+      "attribution": "Original illustration generated for this book; see the production brief at assets/books/jonah-and-the-whale/prompts/jonah-waiting.txt."
+    },
+    "nineveh-people": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/nineveh-people.webp",
+      "attribution": "Original illustration generated for this book; see the production brief at assets/books/jonah-and-the-whale/prompts/nineveh-people.txt."
+    },
+    "harbor-calm-surf": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/soundtracks/harbor-calm-surf.wav",
+      "attribution": "Original deterministic algorithmic ambience composed for Little Light Library; no recordings, external services, or third-party audio samples."
+    },
+    "storm-wind-and-rain": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/soundtracks/storm-wind-and-rain.wav",
+      "attribution": "Original deterministic algorithmic ambience composed for Little Light Library; no recordings, external services, or third-party audio samples."
+    },
+    "deep-water-prayer": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/soundtracks/deep-water-prayer.wav",
+      "attribution": "Original deterministic algorithmic ambience composed for Little Light Library; no recordings, external services, or third-party audio samples."
+    },
+    "warm-nineveh-breeze": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/soundtracks/warm-nineveh-breeze.wav",
+      "attribution": "Original deterministic algorithmic ambience composed for Little Light Library; no recordings, external services, or third-party audio samples."
+    },
+    "narration-30acfdd496b899a3097e": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/hi/jonah-called-segment-1-30acfdd496b899a3097e.wav",
+      "attribution": "Generated locally with Kokoro hf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-8fb126963cf4b50f4f8f": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/hi/jonah-boards-ship-segment-1-8fb126963cf4b50f4f8f.wav",
+      "attribution": "Generated locally with Kokoro hf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-220e9251b513fda9fdef": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/hi/storm-at-sea-segment-1-220e9251b513fda9fdef.wav",
+      "attribution": "Generated locally with Kokoro hf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-70b029c39ae224602c07": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/hi/jonah-overboard-segment-1-70b029c39ae224602c07.wav",
+      "attribution": "Generated locally with Kokoro hf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-93b2b4fc603fe8718839": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/hi/jonah-rescued-segment-1-93b2b4fc603fe8718839.wav",
+      "attribution": "Generated locally with Kokoro hf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-c683c54a0d2475ef1f6f": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/hi/jonah-prays-segment-1-c683c54a0d2475ef1f6f.wav",
+      "attribution": "Generated locally with Kokoro hf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-23da8410d6ec71f4dc78": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/hi/jonah-ashore-segment-1-23da8410d6ec71f4dc78.wav",
+      "attribution": "Generated locally with Kokoro hf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-848b99a5045827096711": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/hi/nineveh-warning-segment-1-848b99a5045827096711.wav",
+      "attribution": "Generated locally with Kokoro hf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-a4aa723cbfaf58e8afe1": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/hi/nineveh-turns-segment-1-a4aa723cbfaf58e8afe1.wav",
+      "attribution": "Generated locally with Kokoro hf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-5380003f7e8c34b58fcf": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/hi/jonah-angry-segment-1-5380003f7e8c34b58fcf.wav",
+      "attribution": "Generated locally with Kokoro hf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-0b71081078168e4847ee": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/hi/shade-for-jonah-segment-1-0b71081078168e4847ee.wav",
+      "attribution": "Generated locally with Kokoro hf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-7d91f6b027f362a493ed": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/hi/plant-withers-segment-1-7d91f6b027f362a493ed.wav",
+      "attribution": "Generated locally with Kokoro hf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-cc9fd4a1c0d96f8dda48": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/hi/jonah-mercy-segment-1-cc9fd4a1c0d96f8dda48.wav",
+      "attribution": "Generated locally with Kokoro hf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-b9235eaa75f8a0fe8535": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-GB/jonah-called-segment-1-b9235eaa75f8a0fe8535.wav",
+      "attribution": "Generated locally with Kokoro bf_emma · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-6a58d3d04fee2fb4b3fb": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-GB/jonah-boards-ship-segment-1-6a58d3d04fee2fb4b3fb.wav",
+      "attribution": "Generated locally with Kokoro bf_emma · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-24717e31ca3dc55dbd39": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-GB/storm-at-sea-segment-1-24717e31ca3dc55dbd39.wav",
+      "attribution": "Generated locally with Kokoro bf_emma · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-92083bb19a272609452a": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-GB/jonah-overboard-segment-1-92083bb19a272609452a.wav",
+      "attribution": "Generated locally with Kokoro bf_emma · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-e9c88d8facdfa5a9269c": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-GB/jonah-rescued-segment-1-e9c88d8facdfa5a9269c.wav",
+      "attribution": "Generated locally with Kokoro bf_emma · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-ba8cb5012e72982da3d5": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-GB/jonah-prays-segment-1-ba8cb5012e72982da3d5.wav",
+      "attribution": "Generated locally with Kokoro bf_emma · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-7543f189a39dca57ac50": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-GB/jonah-ashore-segment-1-7543f189a39dca57ac50.wav",
+      "attribution": "Generated locally with Kokoro bf_emma · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-71929c427ecd3695f096": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-GB/nineveh-warning-segment-1-71929c427ecd3695f096.wav",
+      "attribution": "Generated locally with Kokoro bf_emma · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-22ed324242cb002e1bf0": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-GB/nineveh-turns-segment-1-22ed324242cb002e1bf0.wav",
+      "attribution": "Generated locally with Kokoro bf_emma · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-709a75b0fe5fa31d943c": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-GB/jonah-angry-segment-1-709a75b0fe5fa31d943c.wav",
+      "attribution": "Generated locally with Kokoro bf_emma · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-ea6dc2a7056568a10060": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-GB/shade-for-jonah-segment-1-ea6dc2a7056568a10060.wav",
+      "attribution": "Generated locally with Kokoro bf_emma · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-b61f5ff266528fbcd1a4": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-GB/plant-withers-segment-1-b61f5ff266528fbcd1a4.wav",
+      "attribution": "Generated locally with Kokoro bf_emma · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-d75c81fe2b548eecee86": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/en-GB/jonah-mercy-segment-1-d75c81fe2b548eecee86.wav",
+      "attribution": "Generated locally with Kokoro bf_emma · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-15efeea74ec7137822a3": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/ja/jonah-called-segment-1-15efeea74ec7137822a3.wav",
+      "attribution": "Generated locally with Kokoro jf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-71bc8acdd22e5ce2119e": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/ja/jonah-boards-ship-segment-1-71bc8acdd22e5ce2119e.wav",
+      "attribution": "Generated locally with Kokoro jf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-476784a62cd4937dd73a": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/ja/storm-at-sea-segment-1-476784a62cd4937dd73a.wav",
+      "attribution": "Generated locally with Kokoro jf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-4e4e9537f3518982eb64": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/ja/jonah-overboard-segment-1-4e4e9537f3518982eb64.wav",
+      "attribution": "Generated locally with Kokoro jf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-e6401d2d3a43931a53e9": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/ja/jonah-rescued-segment-1-e6401d2d3a43931a53e9.wav",
+      "attribution": "Generated locally with Kokoro jf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-3017c53bdace1d2d084d": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/ja/jonah-prays-segment-1-3017c53bdace1d2d084d.wav",
+      "attribution": "Generated locally with Kokoro jf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-dbc12781d67ff3744b44": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/ja/jonah-ashore-segment-1-dbc12781d67ff3744b44.wav",
+      "attribution": "Generated locally with Kokoro jf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-73e4a6b74cc032798073": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/ja/nineveh-warning-segment-1-73e4a6b74cc032798073.wav",
+      "attribution": "Generated locally with Kokoro jf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-f3c719480f59556099da": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/ja/nineveh-turns-segment-1-f3c719480f59556099da.wav",
+      "attribution": "Generated locally with Kokoro jf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-5d86aab18e035649431d": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/ja/jonah-angry-segment-1-5d86aab18e035649431d.wav",
+      "attribution": "Generated locally with Kokoro jf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-02464610c830990a3af3": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/ja/shade-for-jonah-segment-1-02464610c830990a3af3.wav",
+      "attribution": "Generated locally with Kokoro jf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-9affbf4206397956a7ac": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/ja/plant-withers-segment-1-9affbf4206397956a7ac.wav",
+      "attribution": "Generated locally with Kokoro jf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-c738aa431d81494c6413": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/ja/jonah-mercy-segment-1-c738aa431d81494c6413.wav",
+      "attribution": "Generated locally with Kokoro jf_alpha · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-0b7f44a7b436084e7906": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/zh-CN/jonah-called-segment-1-0b7f44a7b436084e7906.wav",
+      "attribution": "Generated locally with Kokoro zf_xiaoxiao · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-2cb296dab73a4497d264": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/zh-CN/jonah-boards-ship-segment-1-2cb296dab73a4497d264.wav",
+      "attribution": "Generated locally with Kokoro zf_xiaoxiao · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-41a2b81c1068d477bf09": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/zh-CN/storm-at-sea-segment-1-41a2b81c1068d477bf09.wav",
+      "attribution": "Generated locally with Kokoro zf_xiaoxiao · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-a6bf95a4819eadacbc34": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/zh-CN/jonah-overboard-segment-1-a6bf95a4819eadacbc34.wav",
+      "attribution": "Generated locally with Kokoro zf_xiaoxiao · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-4a249d1a2089f3f764b4": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/zh-CN/jonah-rescued-segment-1-4a249d1a2089f3f764b4.wav",
+      "attribution": "Generated locally with Kokoro zf_xiaoxiao · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-1e99183c2c72f2255bea": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/zh-CN/jonah-prays-segment-1-1e99183c2c72f2255bea.wav",
+      "attribution": "Generated locally with Kokoro zf_xiaoxiao · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-e002349e3ec2fc5830fe": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/zh-CN/jonah-ashore-segment-1-e002349e3ec2fc5830fe.wav",
+      "attribution": "Generated locally with Kokoro zf_xiaoxiao · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-8b92f1613f1c47b7f813": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/zh-CN/nineveh-warning-segment-1-8b92f1613f1c47b7f813.wav",
+      "attribution": "Generated locally with Kokoro zf_xiaoxiao · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-ddad39a3d20f5ad636b6": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/zh-CN/nineveh-turns-segment-1-ddad39a3d20f5ad636b6.wav",
+      "attribution": "Generated locally with Kokoro zf_xiaoxiao · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-26ccf9b7c54eaca0b931": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/zh-CN/jonah-angry-segment-1-26ccf9b7c54eaca0b931.wav",
+      "attribution": "Generated locally with Kokoro zf_xiaoxiao · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-f0a217dfe50ab885f705": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/zh-CN/shade-for-jonah-segment-1-f0a217dfe50ab885f705.wav",
+      "attribution": "Generated locally with Kokoro zf_xiaoxiao · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-c4095e4e50880d16950a": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/zh-CN/plant-withers-segment-1-c4095e4e50880d16950a.wav",
+      "attribution": "Generated locally with Kokoro zf_xiaoxiao · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "narration-b66997e8f552ecb169e6": {
+      "kind": "audio",
+      "src": "assets/books/jonah-and-the-whale/audio/zh-CN/jonah-mercy-segment-1-b66997e8f552ecb169e6.wav",
+      "attribution": "Generated locally with Kokoro zf_xiaoxiao · 1×; Kokoro-82M (Apache-2.0)."
+    },
+    "joppa-harbor-backdrop": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/joppa-harbor-backdrop.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/joppa-harbor-backdrop.txt."
+    },
+    "joppa-quay-ground": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/joppa-quay-ground.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/joppa-quay-ground.txt."
+    },
+    "calm-harbor-water-ground": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/calm-harbor-water-ground.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/calm-harbor-water-ground.txt."
+    },
+    "storm-water-ground": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/storm-water-ground.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/storm-water-ground.txt."
+    },
+    "storm-wave-layer": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/storm-wave-layer.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/storm-wave-layer.txt."
+    },
+    "storm-deck-jonah": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/storm-deck-jonah.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/storm-deck-jonah.txt."
+    },
+    "storm-ship-sailors": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/storm-ship-sailors.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/storm-ship-sailors.txt."
+    },
+    "jonah-overboard": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/jonah-overboard.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/jonah-overboard.txt."
+    },
+    "deepwater-ground": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/deepwater-ground.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/deepwater-ground.txt."
+    },
+    "great-fish-open-mouth": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/great-fish-open-mouth.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/great-fish-open-mouth.txt."
+    },
+    "jonah-floating-fullbody": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/jonah-floating-fullbody.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/jonah-floating-fullbody.txt."
+    },
+    "beach-coast-backdrop": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/beach-coast-backdrop.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/beach-coast-backdrop.txt."
+    },
+    "beach-shore-ground": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/beach-shore-ground.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/beach-shore-ground.txt."
+    },
+    "fish-jonah-landing": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/fish-jonah-landing.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/fish-jonah-landing.txt."
+    },
+    "nineveh-citygate-backdrop": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/nineveh-citygate-backdrop.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/nineveh-citygate-backdrop.txt."
+    },
+    "nineveh-listeners": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/nineveh-listeners.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/nineveh-listeners.txt."
+    },
+    "nineveh-remorseful-prayers": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/nineveh-remorseful-prayers.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/nineveh-remorseful-prayers.txt."
+    },
+    "jonah-speaking": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/jonah-speaking.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/jonah-speaking.txt."
+    },
+    "nineveh-outskirts-backdrop": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/nineveh-outskirts-backdrop.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/nineveh-outskirts-backdrop.txt."
+    },
+    "dry-earth-ground": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/dry-earth-ground.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/dry-earth-ground.txt."
+    },
+    "jonah-happy-seated": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/jonah-happy-seated.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/jonah-happy-seated.txt."
+    },
+    "jonah-divine-question-sunlight": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/jonah-divine-question-sunlight.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/jonah-divine-question-sunlight.txt."
+    },
+    "ship-jonah-boarding": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/ship-jonah-boarding.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/ship-jonah-boarding.txt."
+    },
+    "great-fish-serious-open-mouth": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/great-fish-serious-open-mouth.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/great-fish-serious-open-mouth.txt."
+    },
+    "fish-jonah-landing-balanced": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/fish-jonah-landing-balanced.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/fish-jonah-landing-balanced.txt."
+    },
+    "nineveh-children-lively": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/nineveh-children-lively.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/nineveh-children-lively.txt."
+    },
+    "nineveh-flock-lively": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/nineveh-flock-lively.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/nineveh-flock-lively.txt."
+    },
+    "nineveh-children-remorseful": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/nineveh-children-remorseful.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/nineveh-children-remorseful.txt."
+    },
+    "nineveh-flock-remorseful": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/nineveh-flock-remorseful.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/nineveh-flock-remorseful.txt."
+    },
+    "jonah-divine-question-sunlight-outline": {
+      "kind": "image",
+      "src": "assets/books/jonah-and-the-whale/art/jonah-divine-question-sunlight-outline.webp",
+      "attribution": "Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/jonah-divine-question-sunlight-outline.txt."
+    }
+  },
+  "spreads": [
+    {
+      "id": "jonah-called",
+      "title": "Jonah hears a call",
+      "source": "Jonah 1:1–3",
+      "stagingNote": "Jonah stands on a broad stone quay at Joppa, with the open harbor and distant limestone gate behind him. The bay is calm; no detached wave crosses the paving.",
+      "segments": [
+        {
+          "id": "segment-1",
+          "text": "God sent Jonah to Nineveh to call its people away from harm. Jonah set out toward the sea instead.",
+          "narration": {
+            "asset": "narration-225beca98c9fc7ff8476",
+            "recordedText": "God sent Jonah to Nineveh to call its people away from harm. Jonah set out toward the sea instead.",
+            "duration": 6.35,
+            "voice": "Kokoro af_heart · 1×"
+          }
+        }
+      ],
+      "backdrop": {
+        "asset": "joppa-harbor-backdrop"
+      },
+      "elements": [
+        {
+          "id": "jonah",
+          "label": "Jonah",
+          "kind": "actor",
+          "asset": "jonah-cutout",
+          "placement": {
+            "x": -0.95,
+            "depth": 0,
+            "width": 0.9,
+            "height": 1.9,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 4.8,
+            "strength": 1.3,
+            "loop": true
+          }
+        }
+      ],
+      "ground": {
+        "asset": "joppa-quay-ground",
+        "x": 0,
+        "depth": -0.15,
+        "width": 5.85,
+        "height": 2.74,
+        "opacity": 1
+      }
+    },
+    {
+      "id": "jonah-boards-ship",
+      "title": "Jonah boards a ship",
+      "source": "Jonah 1:3",
+      "stagingNote": "The ship and Jonah aboard are one illustrated cutout on calm water in Joppa harbor, with the quay and distant limestone city behind it. Jonah stands on the deck beside the crew; no separate Jonah image or beach/paving sits beneath the vessel.",
+      "segments": [
+        {
+          "id": "segment-1",
+          "text": "At Joppa, Jonah found a ship sailing away. He paid the fare and went aboard.",
+          "narration": {
+            "asset": "narration-b494e2e3af9633691742",
+            "recordedText": "At Joppa, Jonah found a ship sailing away. He paid the fare and went aboard.",
+            "duration": 4.975,
+            "voice": "Kokoro af_heart · 1×"
+          }
+        }
+      ],
+      "backdrop": {
+        "asset": "joppa-harbor-backdrop"
+      },
+      "elements": [
+        {
+          "id": "ship",
+          "label": "Ship and sailors",
+          "kind": "prop",
+          "asset": "ship-jonah-boarding",
+          "placement": {
+            "x": 0.25,
+            "depth": -0.1,
+            "width": 4,
+            "height": 2.67,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "rock",
+            "trigger": "open",
+            "duration": 3.8,
+            "strength": 2.2,
+            "loop": true
+          }
+        }
+      ],
+      "ground": {
+        "asset": "calm-harbor-water-ground",
+        "x": 0,
+        "depth": -0.15,
+        "width": 5.85,
+        "height": 2.74,
+        "opacity": 1
+      }
+    },
+    {
+      "id": "storm-at-sea",
+      "title": "A storm at sea",
+      "source": "Jonah 1:4–5",
+      "stagingNote": "A distressed Jonah clings to a smaller, centered deck among three frightened sailors. Three storm crests cross the water at separate depths; a broad foreground crest masks the lower hull while side crests move at distinct rates and parallax.",
+      "segments": [
+        {
+          "id": "segment-1",
+          "text": "A fierce storm tossed the ship. The sailors cried out and threw cargo into the sea.",
+          "narration": {
+            "asset": "narration-4f381c811ae9c37e7cb7",
+            "recordedText": "A fierce storm tossed the ship. The sailors cried out and threw cargo into the sea.",
+            "duration": 5.175,
+            "voice": "Kokoro af_heart · 1×"
+          }
+        }
+      ],
+      "backdrop": {
+        "asset": "storm-sea"
+      },
+      "elements": [
+        {
+          "id": "ship",
+          "label": "Ship and sailors",
+          "kind": "actor",
+          "asset": "storm-deck-jonah",
+          "placement": {
+            "x": -0.15,
+            "depth": -0.45,
+            "width": 3.75,
+            "height": 2.5,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "rock",
+            "trigger": "open",
+            "duration": 3.8,
+            "strength": 2.2,
+            "loop": true
+          }
+        },
+        {
+          "id": "storm-wave-rear",
+          "label": "Ocean wave",
+          "kind": "prop",
+          "asset": "storm-wave-layer",
+          "placement": {
+            "x": 1.7,
+            "depth": 0.25,
+            "width": 3.7,
+            "height": 1.233,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "float",
+            "trigger": "open",
+            "duration": 4.6,
+            "strength": 1.8,
+            "loop": true
+          },
+          "flipX": false
+        },
+        {
+          "id": "storm-wave",
+          "label": "Ocean wave",
+          "kind": "prop",
+          "asset": "storm-wave-layer",
+          "placement": {
+            "x": -1.55,
+            "depth": -0.1,
+            "width": 3.8,
+            "height": 1.267,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "float",
+            "trigger": "open",
+            "duration": 3.4,
+            "strength": 2.4,
+            "loop": true
+          },
+          "flipX": false
+        },
+        {
+          "id": "storm-wave-front",
+          "label": "Ocean wave",
+          "kind": "prop",
+          "asset": "storm-wave-layer",
+          "flipX": true,
+          "placement": {
+            "x": 0.05,
+            "depth": -1,
+            "width": 5.4,
+            "height": 1.8,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "float",
+            "trigger": "open",
+            "duration": 5.6,
+            "strength": 2,
+            "loop": true
+          }
+        }
+      ],
+      "ground": {
+        "asset": "storm-water-ground",
+        "x": 0,
+        "depth": -0.15,
+        "width": 5.85,
+        "height": 2.74,
+        "opacity": 1
+      }
+    },
+    {
+      "id": "jonah-overboard",
+      "title": "Jonah goes into the sea",
+      "source": "Jonah 1:7–16",
+      "stagingNote": "The same storm water surrounds the boatless swimmer. Jonah floats on the right between the foreground crest and rear wave; the front crest reaches his chest while his frightened face and raised hands stay clear. The Jonah-free ship and its distressed crew sit farther back and left.",
+      "segments": [
+        {
+          "id": "segment-1",
+          "text": "Jonah told them he was running from the Lord. At his request, they lifted him and threw him into the sea, and the water grew calm.",
+          "narration": {
+            "asset": "narration-2dc4e6178d593052bb06",
+            "recordedText": "Jonah told them he was running from the Lord. At his request, they lifted him and threw him into the sea, and the water grew calm.",
+            "duration": 8.1,
+            "voice": "Kokoro af_heart · 1×"
+          }
+        }
+      ],
+      "backdrop": {
+        "asset": "storm-sea"
+      },
+      "elements": [
+        {
+          "id": "ship",
+          "label": "Ship and sailors",
+          "kind": "actor",
+          "asset": "storm-ship-sailors",
+          "placement": {
+            "x": -0.9,
+            "depth": 0.2,
+            "width": 3.1,
+            "height": 2.067,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "rock",
+            "trigger": "open",
+            "duration": 5.4,
+            "strength": 1.2,
+            "loop": true
+          }
+        },
+        {
+          "id": "jonah",
+          "label": "Jonah",
+          "kind": "actor",
+          "asset": "jonah-overboard",
+          "placement": {
+            "x": 1.2,
+            "depth": -0.25,
+            "width": 0.93,
+            "height": 1.395,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "float",
+            "trigger": "open",
+            "duration": 4.8,
+            "strength": 1,
+            "loop": true
+          }
+        },
+        {
+          "id": "calming-wave",
+          "label": "Ocean wave",
+          "kind": "prop",
+          "asset": "storm-wave-layer",
+          "placement": {
+            "x": 1.2,
+            "depth": -0.75,
+            "width": 4,
+            "height": 1.95,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "float",
+            "trigger": "open",
+            "duration": 3.5,
+            "strength": 2.2,
+            "loop": true
+          }
+        },
+        {
+          "id": "overboard-wave-left",
+          "label": "Ocean wave",
+          "kind": "prop",
+          "asset": "storm-wave-layer",
+          "flipX": true,
+          "placement": {
+            "x": -1.6,
+            "depth": -0.12,
+            "width": 3.5,
+            "height": 1.167,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "float",
+            "trigger": "open",
+            "duration": 4.6,
+            "strength": 2,
+            "loop": true
+          }
+        },
+        {
+          "id": "overboard-wave-rear",
+          "label": "Ocean wave",
+          "kind": "prop",
+          "asset": "storm-wave-layer",
+          "placement": {
+            "x": 0.35,
+            "depth": 0.6,
+            "width": 4.3,
+            "height": 1.433,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "float",
+            "trigger": "open",
+            "duration": 5.5,
+            "strength": 1.4,
+            "loop": true
+          }
+        }
+      ],
+      "ground": {
+        "asset": "storm-water-ground",
+        "x": 0,
+        "depth": -0.15,
+        "width": 5.85,
+        "height": 2.74,
+        "opacity": 1
+      }
+    },
+    {
+      "id": "jonah-rescued",
+      "title": "A great fish rescues Jonah",
+      "source": "Jonah 1:17",
+      "stagingNote": "In open deep water, a large serious-looking great fish approaches from the left with its open mouth facing Jonah. Jonah floats frightened near its mouth, still outside the fish; the next spread shows him safe within the fish.",
+      "segments": [
+        {
+          "id": "segment-1",
+          "text": "God sent a great fish to swallow Jonah. Inside it, Jonah was safe in the deep.",
+          "narration": {
+            "asset": "narration-8a93037c407dba6b44b0",
+            "recordedText": "God sent a great fish to swallow Jonah. Inside it, Jonah was safe in the deep.",
+            "duration": 5.325,
+            "voice": "Kokoro af_heart · 1×"
+          }
+        }
+      ],
+      "backdrop": {
+        "asset": "underwater-backdrop"
+      },
+      "elements": [
+        {
+          "id": "great-fish",
+          "label": "Great fish",
+          "kind": "actor",
+          "asset": "great-fish-serious-open-mouth",
+          "placement": {
+            "x": -0.45,
+            "depth": -0.12,
+            "width": 4.7,
+            "height": 3.13,
+            "anchor": "center",
+            "elevation": 0.92,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "float",
+            "trigger": "open",
+            "duration": 6.2,
+            "strength": 0.45,
+            "loop": true
+          }
+        },
+        {
+          "id": "jonah",
+          "label": "Jonah",
+          "kind": "actor",
+          "asset": "jonah-floating-fullbody",
+          "placement": {
+            "x": 2,
+            "depth": -0.42,
+            "width": 1.2,
+            "height": 0.8,
+            "anchor": "center",
+            "elevation": 0.85,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "float",
+            "trigger": "open",
+            "duration": 4.9,
+            "strength": 0.75,
+            "loop": true
+          }
+        }
+      ],
+      "ground": {
+        "asset": "deepwater-ground",
+        "x": 0,
+        "depth": -0.15,
+        "width": 5.85,
+        "height": 2.74,
+        "opacity": 1
+      }
+    },
+    {
+      "id": "jonah-prays",
+      "title": "Jonah prays in the deep",
+      "source": "Jonah 2:1–10",
+      "stagingNote": "Inside the fish, Jonah prays in a symbolic cutaway illustration. The small fish drift through open water outside the fish; all motion is gentle and contemplative.",
+      "segments": [
+        {
+          "id": "segment-1",
+          "text": "From the fish, Jonah prayed and remembered God's help. After three days and nights, God spoke to the fish.",
+          "narration": {
+            "asset": "narration-926506debc00fcf644b9",
+            "recordedText": "From the fish, Jonah prayed and remembered God's help. After three days and nights, God spoke to the fish.",
+            "duration": 6.7,
+            "voice": "Kokoro af_heart · 1×"
+          }
+        }
+      ],
+      "backdrop": {
+        "asset": "underwater-backdrop"
+      },
+      "elements": [
+        {
+          "id": "great-fish",
+          "label": "Great fish",
+          "kind": "actor",
+          "asset": "great-fish-cutaway",
+          "placement": {
+            "x": 0.12,
+            "depth": -0.08,
+            "width": 4.2,
+            "height": 2.8,
+            "anchor": "bottom",
+            "elevation": 0.52,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "float",
+            "trigger": "open",
+            "duration": 5.6,
+            "strength": 1,
+            "loop": true
+          }
+        },
+        {
+          "id": "small-fish",
+          "label": "Little fish",
+          "kind": "prop",
+          "asset": "small-fish-school",
+          "placement": {
+            "x": -1.72,
+            "depth": -0.25,
+            "width": 0.96,
+            "height": 0.5,
+            "anchor": "center",
+            "elevation": 1.18,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 5.6,
+            "strength": 1,
+            "loop": true
+          }
+        }
+      ],
+      "ground": {
+        "asset": "deepwater-ground",
+        "x": 0,
+        "depth": -0.15,
+        "width": 5.85,
+        "height": 2.74,
+        "opacity": 1
+      }
+    },
+    {
+      "id": "jonah-ashore",
+      "title": "Jonah reaches dry land",
+      "source": "Jonah 2:10; 3:1–3",
+      "stagingNote": "A large, serious great fish sends wet Jonah toward dry land: one connected water arc carries the smaller Jonah onto his hands and knees at right. The transparent action card contains no beach or ground, and it is the only fish/Jonah artwork on the spread.",
+      "segments": [
+        {
+          "id": "segment-1",
+          "text": "The fish brought Jonah to dry land. God called Jonah again, and this time Jonah went to Nineveh.",
+          "narration": {
+            "asset": "narration-c5242829716eb551f12a",
+            "recordedText": "The fish brought Jonah to dry land. God called Jonah again, and this time Jonah went to Nineveh.",
+            "duration": 6.225,
+            "voice": "Kokoro af_heart · 1×"
+          }
+        }
+      ],
+      "backdrop": {
+        "asset": "beach-coast-backdrop"
+      },
+      "elements": [
+        {
+          "id": "great-fish",
+          "label": "Great fish lands Jonah",
+          "kind": "actor",
+          "asset": "fish-jonah-landing-balanced",
+          "placement": {
+            "x": 0,
+            "depth": -0.18,
+            "width": 5.25,
+            "height": 2.63,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          }
+        }
+      ],
+      "ground": {
+        "asset": "beach-shore-ground",
+        "x": 0,
+        "depth": -0.15,
+        "width": 5.85,
+        "height": 2.74,
+        "opacity": 1
+      }
+    },
+    {
+      "id": "nineveh-warning",
+      "title": "Jonah speaks in Nineveh",
+      "source": "Jonah 3:3–4",
+      "stagingNote": "Jonah stands to the left of four attentive adults at Nineveh gate. His full-height portrait keeps its native aspect and matches the adults’ visible head-to-sandal height. Three children and a goat with a lamb listen nearby as smaller independent cutouts; Jonah faces the people across a clear gap. Children and the goat/lamb sit in the near foreground as separate, gently animated layers; their faces remain visible beside the adults.",
+      "segments": [
+        {
+          "id": "segment-1",
+          "text": "Jonah walked through the great city with God's warning. The people listened.",
+          "narration": {
+            "asset": "narration-2be626de96bde0f3a0af",
+            "recordedText": "Jonah walked through the great city with God's warning. The people listened.",
+            "duration": 4.475,
+            "voice": "Kokoro af_heart · 1×"
+          }
+        }
+      ],
+      "backdrop": {
+        "asset": "nineveh-citygate-backdrop"
+      },
+      "elements": [
+        {
+          "id": "jonah",
+          "label": "Jonah",
+          "kind": "actor",
+          "asset": "jonah-speaking",
+          "placement": {
+            "x": -1.38,
+            "depth": 0.05,
+            "width": 1.353,
+            "height": 2.03,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 5.1,
+            "strength": 0.45,
+            "loop": true
+          }
+        },
+        {
+          "id": "residents",
+          "label": "People of Nineveh",
+          "kind": "actor",
+          "asset": "nineveh-listeners",
+          "placement": {
+            "x": 1.28,
+            "depth": -0.08,
+            "width": 1.63,
+            "height": 2.445,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 6.1,
+            "strength": 0.3,
+            "loop": true
+          }
+        },
+        {
+          "id": "children",
+          "label": "Children of Nineveh",
+          "kind": "actor",
+          "asset": "nineveh-children-lively",
+          "placement": {
+            "x": -0.05,
+            "depth": -0.4,
+            "width": 1.243,
+            "height": 1.4,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 4.7,
+            "strength": 4.5,
+            "loop": true
+          }
+        },
+        {
+          "id": "flock",
+          "label": "Goat and lamb",
+          "kind": "prop",
+          "asset": "nineveh-flock-lively",
+          "placement": {
+            "x": 1.95,
+            "depth": -0.75,
+            "width": 1.376,
+            "height": 1.45,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 5.9,
+            "strength": 6.0,
+            "loop": true
+          },
+          "flipX": true
+        }
+      ],
+      "ground": {
+        "asset": "joppa-quay-ground",
+        "x": 0,
+        "depth": -0.15,
+        "width": 5.85,
+        "height": 2.74,
+        "opacity": 1
+      }
+    },
+    {
+      "id": "nineveh-turns",
+      "title": "Nineveh asks for mercy",
+      "source": "Jonah 3:5–10",
+      "stagingNote": "In the same city gate courtyard, adults and children respond with remorse: several adults kneel and pray, children kneel with hands clasped, and a goat and lamb settle beside them. Their knees and folded legs meet the stone floor; all cutouts preserve native proportions and remain below the standing adults’ visible height. Children and the goat/lamb sit in the near foreground as separate, gently animated layers; their faces remain visible beside the adults.",
+      "segments": [
+        {
+          "id": "segment-1",
+          "text": "The people stopped their harmful ways and asked God for mercy. God saw their change and spared the city.",
+          "narration": {
+            "asset": "narration-9f671e98b4df62edb954",
+            "recordedText": "The people stopped their harmful ways and asked God for mercy. God saw their change and spared the city.",
+            "duration": 6.6,
+            "voice": "Kokoro af_heart · 1×"
+          }
+        }
+      ],
+      "backdrop": {
+        "asset": "nineveh-citygate-backdrop"
+      },
+      "elements": [
+        {
+          "id": "residents",
+          "label": "People of Nineveh",
+          "kind": "actor",
+          "asset": "nineveh-remorseful-prayers",
+          "placement": {
+            "x": -0.45,
+            "depth": -0.08,
+            "width": 1.6,
+            "height": 2.4,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 6.4,
+            "strength": 0.2,
+            "loop": true
+          }
+        },
+        {
+          "id": "children",
+          "label": "Children of Nineveh",
+          "kind": "actor",
+          "asset": "nineveh-children-remorseful",
+          "placement": {
+            "x": -0.05,
+            "depth": -0.4,
+            "width": 1.094,
+            "height": 1,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 7.1,
+            "strength": 0.5,
+            "loop": true
+          }
+        },
+        {
+          "id": "flock",
+          "label": "Goat and lamb",
+          "kind": "prop",
+          "asset": "nineveh-flock-remorseful",
+          "placement": {
+            "x": 1.95,
+            "depth": -0.75,
+            "width": 1.376,
+            "height": 1.45,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 8,
+            "strength": 0.4,
+            "loop": true
+          },
+          "flipX": true
+        }
+      ],
+      "ground": {
+        "asset": "joppa-quay-ground",
+        "x": 0,
+        "depth": -0.15,
+        "width": 5.85,
+        "height": 2.74,
+        "opacity": 1
+      }
+    },
+    {
+      "id": "jonah-angry",
+      "title": "Jonah waits outside",
+      "source": "Jonah 4:1–5",
+      "stagingNote": "Outside Nineveh, sad and seated Jonah rests on the dry ground beneath the open sky. The distant city wall stays to the left; the following pages return to this same quiet place.",
+      "segments": [
+        {
+          "id": "segment-1",
+          "text": "Jonah was angry that God had spared Nineveh. He went outside the city and waited.",
+          "narration": {
+            "asset": "narration-4182bec23ace78dc0799",
+            "recordedText": "Jonah was angry that God had spared Nineveh. He went outside the city and waited.",
+            "duration": 5.2,
+            "voice": "Kokoro af_heart · 1×"
+          }
+        }
+      ],
+      "backdrop": {
+        "asset": "nineveh-outskirts-backdrop"
+      },
+      "elements": [
+        {
+          "id": "jonah",
+          "label": "Jonah",
+          "kind": "actor",
+          "asset": "jonah-waiting",
+          "placement": {
+            "x": 0.8,
+            "depth": 0.05,
+            "width": 0.95,
+            "height": 1.85,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "rock",
+            "trigger": "open",
+            "duration": 4,
+            "strength": 1.4,
+            "loop": true
+          }
+        }
+      ],
+      "ground": {
+        "asset": "dry-earth-ground",
+        "x": 0,
+        "depth": -0.15,
+        "width": 5.85,
+        "height": 2.74,
+        "opacity": 1
+      }
+    },
+    {
+      "id": "shade-for-jonah",
+      "title": "A plant gives Jonah shade",
+      "source": "Jonah 4:6",
+      "stagingNote": "The living vine arches over a happy, seated Jonah; place his head and shoulders beneath the broad leaf canopy, with his sandals meeting the earth. The vine stays behind him and sways very gently.",
+      "segments": [
+        {
+          "id": "segment-1",
+          "text": "God made a leafy plant grow over Jonah to shade him. Jonah was glad for the cool shelter.",
+          "narration": {
+            "asset": "narration-f47d50fd3decce0f9f45",
+            "recordedText": "God made a leafy plant grow over Jonah to shade him. Jonah was glad for the cool shelter.",
+            "duration": 6.15,
+            "voice": "Kokoro af_heart · 1×"
+          }
+        }
+      ],
+      "backdrop": {
+        "asset": "nineveh-outskirts-backdrop"
+      },
+      "elements": [
+        {
+          "id": "shade-plant",
+          "label": "Leafy shade plant",
+          "kind": "prop",
+          "asset": "shade-plant",
+          "placement": {
+            "x": 0.32,
+            "depth": 0.22,
+            "width": 3,
+            "height": 3,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 6.1,
+            "strength": 0.35,
+            "loop": true
+          }
+        },
+        {
+          "id": "jonah",
+          "label": "Jonah",
+          "kind": "actor",
+          "asset": "jonah-happy-seated",
+          "placement": {
+            "x": 0.55,
+            "depth": -0.12,
+            "width": 1.35,
+            "height": 2,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 6.4,
+            "strength": 0.2,
+            "loop": true
+          }
+        }
+      ],
+      "ground": {
+        "asset": "dry-earth-ground",
+        "x": 0,
+        "depth": -0.15,
+        "width": 5.85,
+        "height": 2.74,
+        "opacity": 1
+      }
+    },
+    {
+      "id": "plant-withers",
+      "title": "The shade is gone",
+      "source": "Jonah 4:7–9",
+      "stagingNote": "Jonah sits uncovered beside the withered plant on the same dry ground. His unhappy, questioning pose contrasts with the dead leaves; keep the plant and Jonah gently still.",
+      "segments": [
+        {
+          "id": "segment-1",
+          "text": "A worm damaged the plant, and a hot wind blew. Jonah felt sad and angry when its shade was gone.",
+          "narration": {
+            "asset": "narration-77e62b1298c30d6e1e70",
+            "recordedText": "A worm damaged the plant, and a hot wind blew. Jonah felt sad and angry when its shade was gone.",
+            "duration": 6.625,
+            "voice": "Kokoro af_heart · 1×"
+          }
+        }
+      ],
+      "backdrop": {
+        "asset": "nineveh-outskirts-backdrop"
+      },
+      "elements": [
+        {
+          "id": "withered-plant",
+          "label": "Withered plant",
+          "kind": "prop",
+          "asset": "withered-plant",
+          "placement": {
+            "x": 1.12,
+            "depth": 0.16,
+            "width": 1.9,
+            "height": 2.45,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 6.2,
+            "strength": 0.25,
+            "loop": true
+          }
+        },
+        {
+          "id": "jonah",
+          "label": "Jonah",
+          "kind": "actor",
+          "asset": "jonah-waiting",
+          "placement": {
+            "x": -0.6,
+            "depth": -0.12,
+            "width": 1.35,
+            "height": 2,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "rock",
+            "trigger": "open",
+            "duration": 5.8,
+            "strength": 0.25,
+            "loop": true
+          }
+        }
+      ],
+      "ground": {
+        "asset": "dry-earth-ground",
+        "x": 0,
+        "depth": -0.15,
+        "width": 5.85,
+        "height": 2.74,
+        "opacity": 1
+      }
+    },
+    {
+      "id": "jonah-mercy",
+      "title": "Who receives mercy?",
+      "source": "Jonah 4:10–11",
+      "stagingNote": "The same seated Jonah is now happy beside the still-withered plant. A small vision of sunlit Nineveh floats above and to his right, with the thought dots pointing back toward him; keep the image open and spacious.",
+      "segments": [
+        {
+          "id": "segment-1",
+          "text": "God reminded Jonah that Nineveh held many people and animals. Shouldn't God care for them? The story leaves us with that question.",
+          "narration": {
+            "asset": "narration-46fbbcf4a9288eb45c54",
+            "recordedText": "God reminded Jonah that Nineveh held many people and animals. Shouldn't God care for them? The story leaves us with that question.",
+            "duration": 8.225,
+            "voice": "Kokoro af_heart · 1×"
+          }
+        }
+      ],
+      "backdrop": {
+        "asset": "nineveh-outskirts-backdrop"
+      },
+      "elements": [
+        {
+          "id": "jonah",
+          "label": "Jonah",
+          "kind": "actor",
+          "asset": "jonah-happy-seated",
+          "placement": {
+            "x": -1.18,
+            "depth": 0.02,
+            "width": 1.35,
+            "height": 2,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 6.7,
+            "strength": 0.16,
+            "loop": true
+          }
+        },
+        {
+          "id": "withered-plant",
+          "label": "Withered plant",
+          "kind": "prop",
+          "asset": "withered-plant",
+          "placement": {
+            "x": 1.75,
+            "depth": 0.18,
+            "width": 1.48,
+            "height": 1.95,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "motion": {
+            "preset": "sway",
+            "trigger": "open",
+            "duration": 7.2,
+            "strength": 0.18,
+            "loop": true
+          }
+        },
+        {
+          "id": "city-thought",
+          "label": "A glimpse of Nineveh",
+          "kind": "prop",
+          "asset": "jonah-divine-question-sunlight-outline",
+          "flipX": true,
+          "placement": {
+            "x": -0.05,
+            "depth": -0.18,
+            "width": 1.9,
+            "height": 1,
+            "anchor": "bottom",
+            "elevation": 1.8,
+            "rotation": 0
+          }
+        }
+      ],
+      "ground": {
+        "asset": "dry-earth-ground",
+        "x": 0,
+        "depth": -0.15,
+        "width": 5.85,
+        "height": 2.74,
+        "opacity": 1
+      }
+    }
+  ],
+  "narrationSettings": {
+    "en-US": {
+      "voice": "af_heart",
+      "speed": 1
+    },
+    "es": {
+      "voice": "ef_dora",
+      "speed": 1
+    },
+    "fr": {
+      "voice": "ff_siwis",
+      "speed": 1
+    },
+    "it": {
+      "voice": "if_sara",
+      "speed": 1
+    },
+    "pt-BR": {
+      "voice": "pf_dora",
+      "speed": 1
+    },
+    "en-GB": {
+      "voice": "bf_emma",
+      "speed": 1
+    },
+    "hi": {
+      "voice": "hf_alpha",
+      "speed": 1
+    },
+    "ja": {
+      "voice": "jf_alpha",
+      "speed": 1
+    },
+    "zh-CN": {
+      "voice": "zf_xiaoxiao",
+      "speed": 1
+    }
+  },
+  "narrationVolume": 0.9,
+  "translations": {
+    "es": {
+      "sourceFingerprint": "v1-0bacdb91",
+      "title": "Jonás y la ballena",
+      "subtitle": "Una historia de escucha, misericordia y un gran respiro en las profundidades",
+      "source": "Jonás 1–4",
+      "retellingNote": "Una adaptación delicada de Jonás 1–4. El texto del relato no es una cita de la Biblia; las escenas y las acciones del teatro de papel son una puesta en escena inventada. El final deja sin respuesta la pregunta de Dios a Jonás sobre su compasión por Nínive.",
+      "spreads": [
+        {
+          "id": "jonah-called",
+          "title": "Jonás escucha un llamado",
+          "source": "Jonás 1:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Dios envió a Jonás a Nínive para llamar a sus habitantes a dejar de hacer daño. Pero Jonás se dirigió al mar.",
+              "narration": {
+                "asset": "narration-49fc9ec3f1f5e704ef9f",
+                "recordedText": "Dios envió a Jonás a Nínive para llamar a sus habitantes a dejar de hacer daño. Pero Jonás se dirigió al mar.",
+                "duration": 6.425,
+                "voice": "Kokoro ef_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonás"
+            }
+          ]
+        },
+        {
+          "id": "jonah-boards-ship",
+          "title": "Jonás sube a bordo de un barco",
+          "source": "Jonás 1:3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "En Jope, Jonás encontró un barco que se alejaba. Pagó el pasaje y subió a bordo.",
+              "narration": {
+                "asset": "narration-9cdeb1e968d843319f14",
+                "recordedText": "En Jope, Jonás encontró un barco que se alejaba. Pagó el pasaje y subió a bordo.",
+                "duration": 4.95,
+                "voice": "Kokoro ef_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Barco y marineros"
+            }
+          ]
+        },
+        {
+          "id": "storm-at-sea",
+          "title": "Una tormenta en el mar",
+          "source": "Jonás 1:4–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Una fuerte tormenta sacudió el barco. Los marineros gritaron y arrojaron la carga al mar.",
+              "narration": {
+                "asset": "narration-8991c6bd614f1d6545e7",
+                "recordedText": "Una fuerte tormenta sacudió el barco. Los marineros gritaron y arrojaron la carga al mar.",
+                "duration": 5.5,
+                "voice": "Kokoro ef_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Barco y marineros"
+            },
+            {
+              "id": "storm-wave",
+              "label": "Ola del mar"
+            },
+            {
+              "id": "storm-wave-rear",
+              "label": "Ola del mar"
+            },
+            {
+              "id": "storm-wave-front",
+              "label": "Ola del mar"
+            }
+          ]
+        },
+        {
+          "id": "jonah-overboard",
+          "title": "Jonás es arrojado al mar",
+          "source": "Jonás 1:7–16",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Jonás les dijo que huía del Señor. A petición suya, lo alzaron y lo arrojaron al mar; entonces el agua se calmó.",
+              "narration": {
+                "asset": "narration-82abc9fd447647dcf6a1",
+                "recordedText": "Jonás les dijo que huía del Señor. A petición suya, lo alzaron y lo arrojaron al mar; entonces el agua se calmó.",
+                "duration": 6.975,
+                "voice": "Kokoro ef_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Barco y marineros"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonás"
+            },
+            {
+              "id": "calming-wave",
+              "label": "Ola del mar"
+            },
+            {
+              "id": "overboard-wave-left",
+              "label": "Ola del mar"
+            },
+            {
+              "id": "overboard-wave-rear",
+              "label": "Ola del mar"
+            }
+          ]
+        },
+        {
+          "id": "jonah-rescued",
+          "title": "Un gran pez rescata a Jonás",
+          "source": "Jonás 1:17",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Dios envió un gran pez que se tragó a Jonás. Dentro de él, Jonás estaba a salvo en las profundidades.",
+              "narration": {
+                "asset": "narration-1daba6b488bfa52cb407",
+                "recordedText": "Dios envió un gran pez que se tragó a Jonás. Dentro de él, Jonás estaba a salvo en las profundidades.",
+                "duration": 6.075,
+                "voice": "Kokoro ef_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "Gran pez"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonás"
+            }
+          ]
+        },
+        {
+          "id": "jonah-prays",
+          "title": "Jonás ora en las profundidades",
+          "source": "Jonás 2:1–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Desde el pez, Jonás oró y recordó la ayuda de Dios. Después de tres días y tres noches, Dios habló al pez.",
+              "narration": {
+                "asset": "narration-5db9fbabda0c63be71df",
+                "recordedText": "Desde el pez, Jonás oró y recordó la ayuda de Dios. Después de tres días y tres noches, Dios habló al pez.",
+                "duration": 6.5,
+                "voice": "Kokoro ef_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "Gran pez"
+            },
+            {
+              "id": "small-fish",
+              "label": "Pececitos"
+            }
+          ]
+        },
+        {
+          "id": "jonah-ashore",
+          "title": "Jonás llega a tierra firme",
+          "source": "Jonás 2:10; 3:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "El pez llevó a Jonás a tierra firme. Dios volvió a llamar a Jonás y esta vez Jonás fue a Nínive.",
+              "narration": {
+                "asset": "narration-3781eae236667d222a34",
+                "recordedText": "El pez llevó a Jonás a tierra firme. Dios volvió a llamar a Jonás y esta vez Jonás fue a Nínive.",
+                "duration": 5.675,
+                "voice": "Kokoro ef_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "El gran pez deja a Jonás en tierra"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-warning",
+          "title": "Jonás habla en Nínive",
+          "source": "Jonás 3:3–4",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Jonás recorrió la gran ciudad con la advertencia de Dios. La gente escuchó.",
+              "narration": {
+                "asset": "narration-5f91984baff9ac445cf1",
+                "recordedText": "Jonás recorrió la gran ciudad con la advertencia de Dios. La gente escuchó.",
+                "duration": 4.525,
+                "voice": "Kokoro ef_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonás"
+            },
+            {
+              "id": "residents",
+              "label": "Habitantes de Nínive"
+            },
+            {
+              "id": "children",
+              "label": "Niños de Nínive"
+            },
+            {
+              "id": "flock",
+              "label": "Cabra y cordero"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-turns",
+          "title": "Nínive pide misericordia",
+          "source": "Jonás 3:5–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "La gente dejó de hacer el mal y le pidió misericordia a Dios. Dios vio que habían cambiado y perdonó a la ciudad.",
+              "narration": {
+                "asset": "narration-4f5ed146fa41824c8944",
+                "recordedText": "La gente dejó de hacer el mal y le pidió misericordia a Dios. Dios vio que habían cambiado y perdonó a la ciudad.",
+                "duration": 6.7,
+                "voice": "Kokoro ef_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "residents",
+              "label": "Habitantes de Nínive"
+            },
+            {
+              "id": "children",
+              "label": "Niños de Nínive"
+            },
+            {
+              "id": "flock",
+              "label": "Cabra y cordero"
+            }
+          ]
+        },
+        {
+          "id": "jonah-angry",
+          "title": "Jonás espera fuera de la ciudad",
+          "source": "Jonás 4:1–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Jonás se enojó porque Dios había perdonado a Nínive. Salió de la ciudad y esperó.",
+              "narration": {
+                "asset": "narration-bf6d08961e469b9269b1",
+                "recordedText": "Jonás se enojó porque Dios había perdonado a Nínive. Salió de la ciudad y esperó.",
+                "duration": 5.025,
+                "voice": "Kokoro ef_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonás"
+            }
+          ]
+        },
+        {
+          "id": "shade-for-jonah",
+          "title": "Una planta le da sombra a Jonás",
+          "source": "Jonás 4:6",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Dios hizo crecer sobre Jonás una planta frondosa para darle sombra. Jonás se alegró por ese refugio fresco.",
+              "narration": {
+                "asset": "narration-09535c0612ab52ebb314",
+                "recordedText": "Dios hizo crecer sobre Jonás una planta frondosa para darle sombra. Jonás se alegró por ese refugio fresco.",
+                "duration": 6.625,
+                "voice": "Kokoro ef_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "shade-plant",
+              "label": "Planta frondosa que da sombra"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonás"
+            }
+          ]
+        },
+        {
+          "id": "plant-withers",
+          "title": "Se acaba la sombra",
+          "source": "Jonás 4:7–9",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Un gusano dañó la planta y después llegó un viento abrasador. Jonás se entristeció y se enojó cuando se quedó sin sombra.",
+              "narration": {
+                "asset": "narration-295434632e107a49983c",
+                "recordedText": "Un gusano dañó la planta y después llegó un viento abrasador. Jonás se entristeció y se enojó cuando se quedó sin sombra.",
+                "duration": 7.175,
+                "voice": "Kokoro ef_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "withered-plant",
+              "label": "Planta marchita"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonás"
+            }
+          ]
+        },
+        {
+          "id": "jonah-mercy",
+          "title": "¿Quién recibe misericordia?",
+          "source": "Jonás 4:10–11",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Dios le recordó a Jonás que Nínive tenía muchas personas y animales. ¿Acaso Dios no debería preocuparse por ellos? El relato nos deja con esa pregunta.",
+              "narration": {
+                "asset": "narration-3d05d9000e8a1dd10e3a",
+                "recordedText": "Dios le recordó a Jonás que Nínive tenía muchas personas y animales. ¿Acaso Dios no debería preocuparse por ellos? El relato nos deja con esa pregunta.",
+                "duration": 9.15,
+                "voice": "Kokoro ef_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonás"
+            },
+            {
+              "id": "withered-plant",
+              "label": "Planta marchita"
+            },
+            {
+              "id": "city-thought",
+              "label": "Una imagen de Nínive"
+            }
+          ]
+        }
+      ]
+    },
+    "fr": {
+      "sourceFingerprint": "v1-0bacdb91",
+      "title": "Jonas et la baleine",
+      "subtitle": "Une histoire d’écoute, de miséricorde et d’un grand souffle au fond des profondeurs",
+      "source": "Jonas 1–4",
+      "retellingNote": "Un récit doux inspiré de Jonas 1–4. Le texte de l’histoire n’est pas une citation de la Bible ; les scènes et les gestes du théâtre de papier sont inventés. La fin laisse sans réponse la question que Dieu pose à Jonas sur sa compassion pour Ninive.",
+      "spreads": [
+        {
+          "id": "jonah-called",
+          "title": "Jonas entend un appel",
+          "source": "Jonas 1:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Dieu envoya Jonas à Ninive pour appeler ses habitants à renoncer au mal. Mais Jonas prit la direction de la mer.",
+              "narration": {
+                "asset": "narration-e41e95a398b9c88d0a33",
+                "recordedText": "Dieu envoya Jonas à Ninive pour appeler ses habitants à renoncer au mal. Mais Jonas prit la direction de la mer.",
+                "duration": 7.2,
+                "voice": "Kokoro ff_siwis · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            }
+          ]
+        },
+        {
+          "id": "jonah-boards-ship",
+          "title": "Jonas monte à bord d’un navire",
+          "source": "Jonas 1:3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "À Joppé, Jonas trouva un navire qui partait. Il paya le prix du passage et monta à bord.",
+              "narration": {
+                "asset": "narration-13e045412e9c7655085e",
+                "recordedText": "À Joppé, Jonas trouva un navire qui partait. Il paya le prix du passage et monta à bord.",
+                "duration": 5.675,
+                "voice": "Kokoro ff_siwis · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Navire et marins"
+            }
+          ]
+        },
+        {
+          "id": "storm-at-sea",
+          "title": "Une tempête en mer",
+          "source": "Jonas 1:4–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Une violente tempête secoua le navire. Les marins crièrent et jetèrent la cargaison à la mer.",
+              "narration": {
+                "asset": "narration-638187fb350fa750a1dc",
+                "recordedText": "Une violente tempête secoua le navire. Les marins crièrent et jetèrent la cargaison à la mer.",
+                "duration": 5.775,
+                "voice": "Kokoro ff_siwis · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Navire et marins"
+            },
+            {
+              "id": "storm-wave",
+              "label": "Vague de l’océan"
+            },
+            {
+              "id": "storm-wave-rear",
+              "label": "Vague de l’océan"
+            },
+            {
+              "id": "storm-wave-front",
+              "label": "Vague de l’océan"
+            }
+          ]
+        },
+        {
+          "id": "jonah-overboard",
+          "title": "Jonas est jeté à la mer",
+          "source": "Jonas 1:7–16",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Jonas leur dit qu’il fuyait le Seigneur. À sa demande, ils le soulevèrent et le jetèrent à la mer ; alors l’eau se calma.",
+              "narration": {
+                "asset": "narration-d63d111874e8437d9f6f",
+                "recordedText": "Jonas leur dit qu’il fuyait le Seigneur. À sa demande, ils le soulevèrent et le jetèrent à la mer ; alors l’eau se calma.",
+                "duration": 7.35,
+                "voice": "Kokoro ff_siwis · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Navire et marins"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            },
+            {
+              "id": "calming-wave",
+              "label": "Vague de l’océan"
+            },
+            {
+              "id": "overboard-wave-left",
+              "label": "Vague de l’océan"
+            },
+            {
+              "id": "overboard-wave-rear",
+              "label": "Vague de l’océan"
+            }
+          ]
+        },
+        {
+          "id": "jonah-rescued",
+          "title": "Un grand poisson sauve Jonas",
+          "source": "Jonas 1:17",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Dieu envoya un grand poisson qui engloutit Jonas. À l’intérieur, Jonas était en sécurité dans les profondeurs.",
+              "narration": {
+                "asset": "narration-36dd0eb21d26bc504b7e",
+                "recordedText": "Dieu envoya un grand poisson qui engloutit Jonas. À l’intérieur, Jonas était en sécurité dans les profondeurs.",
+                "duration": 7,
+                "voice": "Kokoro ff_siwis · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "Grand poisson"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            }
+          ]
+        },
+        {
+          "id": "jonah-prays",
+          "title": "Jonas prie dans les profondeurs",
+          "source": "Jonas 2:1–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "À l’intérieur du poisson, Jonas pria et se souvint de l’aide de Dieu. Au bout de trois jours et trois nuits, Dieu parla au poisson.",
+              "narration": {
+                "asset": "narration-8d6da95733adcddf3679",
+                "recordedText": "À l’intérieur du poisson, Jonas pria et se souvint de l’aide de Dieu. Au bout de trois jours et trois nuits, Dieu parla au poisson.",
+                "duration": 7.525,
+                "voice": "Kokoro ff_siwis · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "Grand poisson"
+            },
+            {
+              "id": "small-fish",
+              "label": "Petits poissons"
+            }
+          ]
+        },
+        {
+          "id": "jonah-ashore",
+          "title": "Jonas atteint la terre ferme",
+          "source": "Jonas 2:10 ; 3:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Le poisson conduisit Jonas jusqu’à la terre ferme. Dieu appela de nouveau Jonas, et cette fois Jonas partit pour Ninive.",
+              "narration": {
+                "asset": "narration-c01c65c8f11a14cf0fc7",
+                "recordedText": "Le poisson conduisit Jonas jusqu’à la terre ferme. Dieu appela de nouveau Jonas, et cette fois Jonas partit pour Ninive.",
+                "duration": 7.325,
+                "voice": "Kokoro ff_siwis · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "Le grand poisson dépose Jonas à terre"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-warning",
+          "title": "Jonas parle à Ninive",
+          "source": "Jonas 3:3–4",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Jonas parcourut la grande ville avec l’avertissement de Dieu. Les habitants écoutèrent.",
+              "narration": {
+                "asset": "narration-ce10ef327453484fec20",
+                "recordedText": "Jonas parcourut la grande ville avec l’avertissement de Dieu. Les habitants écoutèrent.",
+                "duration": 5.325,
+                "voice": "Kokoro ff_siwis · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            },
+            {
+              "id": "residents",
+              "label": "Habitants de Ninive"
+            },
+            {
+              "id": "children",
+              "label": "Enfants de Ninive"
+            },
+            {
+              "id": "flock",
+              "label": "Chèvre et agneau"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-turns",
+          "title": "Ninive demande miséricorde",
+          "source": "Jonas 3:5–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Les habitants cessèrent de faire le mal et demandèrent la miséricorde de Dieu. Dieu vit qu’ils avaient changé et épargna la ville.",
+              "narration": {
+                "asset": "narration-6c2c20d3bc15fe71de6f",
+                "recordedText": "Les habitants cessèrent de faire le mal et demandèrent la miséricorde de Dieu. Dieu vit qu’ils avaient changé et épargna la ville.",
+                "duration": 7.55,
+                "voice": "Kokoro ff_siwis · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "residents",
+              "label": "Habitants de Ninive"
+            },
+            {
+              "id": "children",
+              "label": "Enfants de Ninive"
+            },
+            {
+              "id": "flock",
+              "label": "Chèvre et agneau"
+            }
+          ]
+        },
+        {
+          "id": "jonah-angry",
+          "title": "Jonas attend hors de la ville",
+          "source": "Jonas 4:1–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Jonas était en colère parce que Dieu avait épargné Ninive. Il sortit de la ville et attendit.",
+              "narration": {
+                "asset": "narration-e402c2e2fbf5708dc167",
+                "recordedText": "Jonas était en colère parce que Dieu avait épargné Ninive. Il sortit de la ville et attendit.",
+                "duration": 5.9,
+                "voice": "Kokoro ff_siwis · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            }
+          ]
+        },
+        {
+          "id": "shade-for-jonah",
+          "title": "Une plante fait de l’ombre à Jonas",
+          "source": "Jonas 4:6",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Dieu fit pousser une plante feuillue au-dessus de Jonas pour le protéger du soleil. Jonas fut heureux de trouver cet abri frais.",
+              "narration": {
+                "asset": "narration-66cc813f7bbea738be41",
+                "recordedText": "Dieu fit pousser une plante feuillue au-dessus de Jonas pour le protéger du soleil. Jonas fut heureux de trouver cet abri frais.",
+                "duration": 7.5,
+                "voice": "Kokoro ff_siwis · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "shade-plant",
+              "label": "Plante feuillue qui donne de l’ombre"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            }
+          ]
+        },
+        {
+          "id": "plant-withers",
+          "title": "L’ombre a disparu",
+          "source": "Jonas 4:7–9",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Un ver abîma la plante, et un vent brûlant se leva. Jonas fut triste et en colère lorsque l’ombre disparut.",
+              "narration": {
+                "asset": "narration-0babf0271c3c7528b3f1",
+                "recordedText": "Un ver abîma la plante, et un vent brûlant se leva. Jonas fut triste et en colère lorsque l’ombre disparut.",
+                "duration": 6.9,
+                "voice": "Kokoro ff_siwis · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "withered-plant",
+              "label": "Plante flétrie"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            }
+          ]
+        },
+        {
+          "id": "jonah-mercy",
+          "title": "Qui reçoit la miséricorde ?",
+          "source": "Jonas 4:10–11",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Dieu rappela à Jonas que Ninive comptait de nombreux habitants et animaux. Dieu ne devrait-il pas prendre soin d’eux ? L’histoire nous laisse avec cette question.",
+              "narration": {
+                "asset": "narration-6c792781ba7cfbfbbfa9",
+                "recordedText": "Dieu rappela à Jonas que Ninive comptait de nombreux habitants et animaux. Dieu ne devrait-il pas prendre soin d’eux ? L’histoire nous laisse avec cette question.",
+                "duration": 9.125,
+                "voice": "Kokoro ff_siwis · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            },
+            {
+              "id": "withered-plant",
+              "label": "Plante flétrie"
+            },
+            {
+              "id": "city-thought",
+              "label": "Un aperçu de Ninive"
+            }
+          ]
+        }
+      ]
+    },
+    "it": {
+      "sourceFingerprint": "v1-0bacdb91",
+      "title": "Giona e la balena",
+      "subtitle": "Una storia di ascolto, misericordia e un bel respiro nel profondo del mare",
+      "source": "Giona 1–4",
+      "retellingNote": "Un racconto delicato ispirato a Giona 1–4. Il testo della storia non è una citazione della Bibbia; le scene e le azioni del teatro di carta sono inventate. Il finale lascia senza risposta la domanda che Dio rivolge a Giona sulla sua compassione per Ninive.",
+      "spreads": [
+        {
+          "id": "jonah-called",
+          "title": "Giona ascolta una chiamata",
+          "source": "Giona 1:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Dio mandò Giona a Ninive per invitare i suoi abitanti ad abbandonare il male. Giona, invece, si diresse verso il mare.",
+              "narration": {
+                "asset": "narration-1e631c65d7969c89eb85",
+                "recordedText": "Dio mandò Giona a Ninive per invitare i suoi abitanti ad abbandonare il male. Giona, invece, si diresse verso il mare.",
+                "duration": 7.425,
+                "voice": "Kokoro if_sara · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Giona"
+            }
+          ]
+        },
+        {
+          "id": "jonah-boards-ship",
+          "title": "Giona sale su una nave",
+          "source": "Giona 1:3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "A Giaffa, Giona trovò una nave in partenza. Pagò il viaggio e salì a bordo.",
+              "narration": {
+                "asset": "narration-2202a212eb175070ee2a",
+                "recordedText": "A Giaffa, Giona trovò una nave in partenza. Pagò il viaggio e salì a bordo.",
+                "duration": 4.875,
+                "voice": "Kokoro if_sara · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Nave e marinai"
+            }
+          ]
+        },
+        {
+          "id": "storm-at-sea",
+          "title": "Una tempesta in mare",
+          "source": "Giona 1:4–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Una violenta tempesta sballottò la nave. I marinai gridarono e gettarono il carico in mare.",
+              "narration": {
+                "asset": "narration-e17711d3bef659a5066e",
+                "recordedText": "Una violenta tempesta sballottò la nave. I marinai gridarono e gettarono il carico in mare.",
+                "duration": 6.025,
+                "voice": "Kokoro if_sara · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Nave e marinai"
+            },
+            {
+              "id": "storm-wave",
+              "label": "Onda del mare"
+            },
+            {
+              "id": "storm-wave-rear",
+              "label": "Onda del mare"
+            },
+            {
+              "id": "storm-wave-front",
+              "label": "Onda del mare"
+            }
+          ]
+        },
+        {
+          "id": "jonah-overboard",
+          "title": "Giona viene gettato in mare",
+          "source": "Giona 1:7–16",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Giona disse loro che stava fuggendo dal Signore. Su sua richiesta, lo sollevarono e lo gettarono in mare, e l’acqua si calmò.",
+              "narration": {
+                "asset": "narration-f4a979b5e3f6707bdcd4",
+                "recordedText": "Giona disse loro che stava fuggendo dal Signore. Su sua richiesta, lo sollevarono e lo gettarono in mare, e l’acqua si calmò.",
+                "duration": 7.65,
+                "voice": "Kokoro if_sara · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Nave e marinai"
+            },
+            {
+              "id": "jonah",
+              "label": "Giona"
+            },
+            {
+              "id": "calming-wave",
+              "label": "Onda del mare"
+            },
+            {
+              "id": "overboard-wave-left",
+              "label": "Onda del mare"
+            },
+            {
+              "id": "overboard-wave-rear",
+              "label": "Onda del mare"
+            }
+          ]
+        },
+        {
+          "id": "jonah-rescued",
+          "title": "Un grande pesce salva Giona",
+          "source": "Giona 1:17",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Dio mandò un grande pesce che inghiottì Giona. Al suo interno, Giona era al sicuro nelle profondità.",
+              "narration": {
+                "asset": "narration-caf8bb0f482272809f64",
+                "recordedText": "Dio mandò un grande pesce che inghiottì Giona. Al suo interno, Giona era al sicuro nelle profondità.",
+                "duration": 6.3,
+                "voice": "Kokoro if_sara · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "Grande pesce"
+            },
+            {
+              "id": "jonah",
+              "label": "Giona"
+            }
+          ]
+        },
+        {
+          "id": "jonah-prays",
+          "title": "Giona prega nelle profondità",
+          "source": "Giona 2:1–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Dal pesce, Giona pregò e ricordò l’aiuto di Dio. Dopo tre giorni e tre notti, Dio parlò al pesce.",
+              "narration": {
+                "asset": "narration-ddda26a7ab30c02ce33e",
+                "recordedText": "Dal pesce, Giona pregò e ricordò l’aiuto di Dio. Dopo tre giorni e tre notti, Dio parlò al pesce.",
+                "duration": 6.175,
+                "voice": "Kokoro if_sara · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "Grande pesce"
+            },
+            {
+              "id": "small-fish",
+              "label": "Pesciolini"
+            }
+          ]
+        },
+        {
+          "id": "jonah-ashore",
+          "title": "Giona raggiunge la terraferma",
+          "source": "Giona 2:10; 3:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Il pesce portò Giona sulla terraferma. Dio chiamò di nuovo Giona e questa volta Giona andò a Ninive.",
+              "narration": {
+                "asset": "narration-137cfcf8b54b2fee12ba",
+                "recordedText": "Il pesce portò Giona sulla terraferma. Dio chiamò di nuovo Giona e questa volta Giona andò a Ninive.",
+                "duration": 6.525,
+                "voice": "Kokoro if_sara · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "Il grande pesce lascia Giona sulla riva"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-warning",
+          "title": "Giona parla a Ninive",
+          "source": "Giona 3:3–4",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Giona attraversò la grande città con l’avvertimento di Dio. Gli abitanti ascoltarono.",
+              "narration": {
+                "asset": "narration-36b0bd3affd91b24e43c",
+                "recordedText": "Giona attraversò la grande città con l’avvertimento di Dio. Gli abitanti ascoltarono.",
+                "duration": 5.525,
+                "voice": "Kokoro if_sara · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Giona"
+            },
+            {
+              "id": "residents",
+              "label": "Abitanti di Ninive"
+            },
+            {
+              "id": "children",
+              "label": "Bambini di Ninive"
+            },
+            {
+              "id": "flock",
+              "label": "Capra e agnello"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-turns",
+          "title": "Ninive chiede misericordia",
+          "source": "Giona 3:5–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Gli abitanti smisero di fare il male e chiesero misericordia a Dio. Dio vide che erano cambiati e risparmiò la città.",
+              "narration": {
+                "asset": "narration-44d6b182461b81ceb9d3",
+                "recordedText": "Gli abitanti smisero di fare il male e chiesero misericordia a Dio. Dio vide che erano cambiati e risparmiò la città.",
+                "duration": 7.55,
+                "voice": "Kokoro if_sara · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "residents",
+              "label": "Abitanti di Ninive"
+            },
+            {
+              "id": "children",
+              "label": "Bambini di Ninive"
+            },
+            {
+              "id": "flock",
+              "label": "Capra e agnello"
+            }
+          ]
+        },
+        {
+          "id": "jonah-angry",
+          "title": "Giona aspetta fuori dalla città",
+          "source": "Giona 4:1–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Giona era arrabbiato perché Dio aveva risparmiato Ninive. Uscì dalla città e aspettò.",
+              "narration": {
+                "asset": "narration-ebbe6a5b99358ff5c558",
+                "recordedText": "Giona era arrabbiato perché Dio aveva risparmiato Ninive. Uscì dalla città e aspettò.",
+                "duration": 5.5,
+                "voice": "Kokoro if_sara · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Giona"
+            }
+          ]
+        },
+        {
+          "id": "shade-for-jonah",
+          "title": "Una pianta fa ombra a Giona",
+          "source": "Giona 4:6",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Dio fece crescere sopra Giona una pianta frondosa che gli dava ombra. Giona fu felice di quel fresco riparo.",
+              "narration": {
+                "asset": "narration-089170b6f94b04f9dfc3",
+                "recordedText": "Dio fece crescere sopra Giona una pianta frondosa che gli dava ombra. Giona fu felice di quel fresco riparo.",
+                "duration": 7.1,
+                "voice": "Kokoro if_sara · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "shade-plant",
+              "label": "Pianta frondosa che fa ombra"
+            },
+            {
+              "id": "jonah",
+              "label": "Giona"
+            }
+          ]
+        },
+        {
+          "id": "plant-withers",
+          "title": "L’ombra è scomparsa",
+          "source": "Giona 4:7–9",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Un verme danneggiò la pianta e si alzò un vento caldo. Giona si rattristò e si arrabbiò quando rimase senza ombra.",
+              "narration": {
+                "asset": "narration-85657cab9f94a0e3758b",
+                "recordedText": "Un verme danneggiò la pianta e si alzò un vento caldo. Giona si rattristò e si arrabbiò quando rimase senza ombra.",
+                "duration": 7.2,
+                "voice": "Kokoro if_sara · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "withered-plant",
+              "label": "Pianta appassita"
+            },
+            {
+              "id": "jonah",
+              "label": "Giona"
+            }
+          ]
+        },
+        {
+          "id": "jonah-mercy",
+          "title": "Chi riceve misericordia?",
+          "source": "Giona 4:10–11",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Dio ricordò a Giona che a Ninive vivevano molte persone e animali. Dio non dovrebbe prendersi cura anche di loro? La storia ci lascia con questa domanda.",
+              "narration": {
+                "asset": "narration-457203cfed6c1135b1b6",
+                "recordedText": "Dio ricordò a Giona che a Ninive vivevano molte persone e animali. Dio non dovrebbe prendersi cura anche di loro? La storia ci lascia con questa domanda.",
+                "duration": 9.375,
+                "voice": "Kokoro if_sara · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Giona"
+            },
+            {
+              "id": "withered-plant",
+              "label": "Pianta appassita"
+            },
+            {
+              "id": "city-thought",
+              "label": "Uno scorcio di Ninive"
+            }
+          ]
+        }
+      ]
+    },
+    "pt-BR": {
+      "sourceFingerprint": "v1-0bacdb91",
+      "title": "Jonas e a baleia",
+      "subtitle": "Uma história sobre ouvir, ter misericórdia e respirar fundo nas profundezas",
+      "source": "Jonas 1–4",
+      "retellingNote": "Uma releitura delicada de Jonas 1–4. O texto da história não é uma citação da Bíblia; as cenas e as ações do teatro de papel foram inventadas. O final deixa sem resposta a pergunta que Deus faz a Jonas sobre sua compaixão por Nínive.",
+      "spreads": [
+        {
+          "id": "jonah-called",
+          "title": "Jonas ouve um chamado",
+          "source": "Jonas 1:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Deus enviou Jonas a Nínive para chamar seus habitantes a abandonar o mal. Mas Jonas seguiu em direção ao mar.",
+              "narration": {
+                "asset": "narration-313e92ec469b09cfb62b",
+                "recordedText": "Deus enviou Jonas a Nínive para chamar seus habitantes a abandonar o mal. Mas Jonas seguiu em direção ao mar.",
+                "duration": 6.45,
+                "voice": "Kokoro pf_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            }
+          ]
+        },
+        {
+          "id": "jonah-boards-ship",
+          "title": "Jonas embarca em um navio",
+          "source": "Jonas 1:3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Em Jope, Jonas encontrou um navio que estava partindo. Pagou a passagem e embarcou.",
+              "narration": {
+                "asset": "narration-d75a71ffca9c1aa95b54",
+                "recordedText": "Em Jope, Jonas encontrou um navio que estava partindo. Pagou a passagem e embarcou.",
+                "duration": 5,
+                "voice": "Kokoro pf_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Navio e marinheiros"
+            }
+          ]
+        },
+        {
+          "id": "storm-at-sea",
+          "title": "Uma tempestade no mar",
+          "source": "Jonas 1:4–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Uma forte tempestade sacudiu o navio. Os marinheiros gritaram e lançaram a carga ao mar.",
+              "narration": {
+                "asset": "narration-61e3b44e07439a859a1a",
+                "recordedText": "Uma forte tempestade sacudiu o navio. Os marinheiros gritaram e lançaram a carga ao mar.",
+                "duration": 5.675,
+                "voice": "Kokoro pf_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Navio e marinheiros"
+            },
+            {
+              "id": "storm-wave",
+              "label": "Onda do mar"
+            },
+            {
+              "id": "storm-wave-rear",
+              "label": "Onda do mar"
+            },
+            {
+              "id": "storm-wave-front",
+              "label": "Onda do mar"
+            }
+          ]
+        },
+        {
+          "id": "jonah-overboard",
+          "title": "Jonas é lançado ao mar",
+          "source": "Jonas 1:7–16",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Jonas contou que estava fugindo do Senhor. A pedido dele, os marinheiros o ergueram e o lançaram ao mar; então a água se acalmou.",
+              "narration": {
+                "asset": "narration-d0eb087bf87e87737d50",
+                "recordedText": "Jonas contou que estava fugindo do Senhor. A pedido dele, os marinheiros o ergueram e o lançaram ao mar; então a água se acalmou.",
+                "duration": 7.55,
+                "voice": "Kokoro pf_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Navio e marinheiros"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            },
+            {
+              "id": "calming-wave",
+              "label": "Onda do mar"
+            },
+            {
+              "id": "overboard-wave-left",
+              "label": "Onda do mar"
+            },
+            {
+              "id": "overboard-wave-rear",
+              "label": "Onda do mar"
+            }
+          ]
+        },
+        {
+          "id": "jonah-rescued",
+          "title": "Um grande peixe resgata Jonas",
+          "source": "Jonas 1:17",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Deus enviou um grande peixe que engoliu Jonas. Dentro dele, Jonas estava a salvo nas profundezas.",
+              "narration": {
+                "asset": "narration-6291d4c962c52bc45c82",
+                "recordedText": "Deus enviou um grande peixe que engoliu Jonas. Dentro dele, Jonas estava a salvo nas profundezas.",
+                "duration": 5.975,
+                "voice": "Kokoro pf_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "Grande peixe"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            }
+          ]
+        },
+        {
+          "id": "jonah-prays",
+          "title": "Jonas ora nas profundezas",
+          "source": "Jonas 2:1–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Do peixe, Jonas orou e se lembrou da ajuda de Deus. Depois de três dias e três noites, Deus falou ao peixe.",
+              "narration": {
+                "asset": "narration-39af10c685c9dfe57607",
+                "recordedText": "Do peixe, Jonas orou e se lembrou da ajuda de Deus. Depois de três dias e três noites, Deus falou ao peixe.",
+                "duration": 6.65,
+                "voice": "Kokoro pf_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "Grande peixe"
+            },
+            {
+              "id": "small-fish",
+              "label": "Peixinhos"
+            }
+          ]
+        },
+        {
+          "id": "jonah-ashore",
+          "title": "Jonas chega à terra firme",
+          "source": "Jonas 2:10; 3:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "O peixe levou Jonas para a terra firme. Deus chamou Jonas outra vez, e desta vez Jonas foi a Nínive.",
+              "narration": {
+                "asset": "narration-511cd9000b7d0bc23d69",
+                "recordedText": "O peixe levou Jonas para a terra firme. Deus chamou Jonas outra vez, e desta vez Jonas foi a Nínive.",
+                "duration": 6.3,
+                "voice": "Kokoro pf_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "O grande peixe deixa Jonas em terra"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-warning",
+          "title": "Jonas fala em Nínive",
+          "source": "Jonas 3:3–4",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Jonas atravessou a grande cidade com o aviso de Deus. O povo ouviu.",
+              "narration": {
+                "asset": "narration-57e919bd5ad4d14a4686",
+                "recordedText": "Jonas atravessou a grande cidade com o aviso de Deus. O povo ouviu.",
+                "duration": 4.175,
+                "voice": "Kokoro pf_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            },
+            {
+              "id": "residents",
+              "label": "Povo de Nínive"
+            },
+            {
+              "id": "children",
+              "label": "Crianças de Nínive"
+            },
+            {
+              "id": "flock",
+              "label": "Cabra e cordeiro"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-turns",
+          "title": "Nínive pede misericórdia",
+          "source": "Jonas 3:5–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "O povo abandonou seus maus caminhos e pediu misericórdia a Deus. Deus viu que eles haviam mudado e poupou a cidade.",
+              "narration": {
+                "asset": "narration-200bb52912f529688083",
+                "recordedText": "O povo abandonou seus maus caminhos e pediu misericórdia a Deus. Deus viu que eles haviam mudado e poupou a cidade.",
+                "duration": 7.1,
+                "voice": "Kokoro pf_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "residents",
+              "label": "Povo de Nínive"
+            },
+            {
+              "id": "children",
+              "label": "Crianças de Nínive"
+            },
+            {
+              "id": "flock",
+              "label": "Cabra e cordeiro"
+            }
+          ]
+        },
+        {
+          "id": "jonah-angry",
+          "title": "Jonas espera fora da cidade",
+          "source": "Jonas 4:1–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Jonas ficou zangado porque Deus havia poupado Nínive. Ele saiu da cidade e esperou.",
+              "narration": {
+                "asset": "narration-5968d484839db7e097e2",
+                "recordedText": "Jonas ficou zangado porque Deus havia poupado Nínive. Ele saiu da cidade e esperou.",
+                "duration": 5.375,
+                "voice": "Kokoro pf_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            }
+          ]
+        },
+        {
+          "id": "shade-for-jonah",
+          "title": "Uma planta dá sombra a Jonas",
+          "source": "Jonas 4:6",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Deus fez uma planta frondosa crescer sobre Jonas para lhe dar sombra. Jonas ficou feliz com aquele abrigo fresco.",
+              "narration": {
+                "asset": "narration-b92ddc185857d30f4f9c",
+                "recordedText": "Deus fez uma planta frondosa crescer sobre Jonas para lhe dar sombra. Jonas ficou feliz com aquele abrigo fresco.",
+                "duration": 6.9,
+                "voice": "Kokoro pf_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "shade-plant",
+              "label": "Planta frondosa que faz sombra"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            }
+          ]
+        },
+        {
+          "id": "plant-withers",
+          "title": "A sombra desaparece",
+          "source": "Jonas 4:7–9",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Um verme danificou a planta, e um vento quente soprou. Jonas ficou triste e zangado quando perdeu a sombra.",
+              "narration": {
+                "asset": "narration-30deccb9172051f3fb9a",
+                "recordedText": "Um verme danificou a planta, e um vento quente soprou. Jonas ficou triste e zangado quando perdeu a sombra.",
+                "duration": 6.475,
+                "voice": "Kokoro pf_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "withered-plant",
+              "label": "Planta murcha"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            }
+          ]
+        },
+        {
+          "id": "jonah-mercy",
+          "title": "Quem recebe misericórdia?",
+          "source": "Jonas 4:10–11",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Deus lembrou Jonas de que Nínive tinha muitas pessoas e animais. Deus não deveria cuidar deles? A história termina com essa pergunta.",
+              "narration": {
+                "asset": "narration-4f157e10b65851e5f93d",
+                "recordedText": "Deus lembrou Jonas de que Nínive tinha muitas pessoas e animais. Deus não deveria cuidar deles? A história termina com essa pergunta.",
+                "duration": 7.875,
+                "voice": "Kokoro pf_dora · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonas"
+            },
+            {
+              "id": "withered-plant",
+              "label": "Planta murcha"
+            },
+            {
+              "id": "city-thought",
+              "label": "Um vislumbre de Nínive"
+            }
+          ]
+        }
+      ]
+    },
+    "hi": {
+      "sourceFingerprint": "v1-0bacdb91",
+      "title": "योना और बड़ी मछली",
+      "subtitle": "सुनने, दया और गहरी साँस की कहानी",
+      "source": "योना 1–4",
+      "retellingNote": "योना 1–4 की एक कोमल, नए ढंग से कही गई कहानी। कहानी का पाठ बाइबल का शब्दशः उद्धरण नहीं है; दृश्यों और काग़ज़ी रंगमंच की गतिविधियों को कहानी के लिए बनाया गया है। अंत में करुणा के बारे में परमेश्वर का योना से पूछा गया प्रश्न अनुत्तरित रह जाता है।",
+      "spreads": [
+        {
+          "id": "jonah-called",
+          "title": "योना को बुलावा सुनाई देता है",
+          "source": "योना 1:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "परमेश्वर ने योना को नीनवे भेजा, ताकि वह वहाँ के लोगों से बुराई छोड़ने को कहे। लेकिन योना समुद्र की ओर चल पड़ा।",
+              "narration": {
+                "asset": "narration-30acfdd496b899a3097e",
+                "recordedText": "परमेश्वर ने योना को नीनवे भेजा, ताकि वह वहाँ के लोगों से बुराई छोड़ने को कहे। लेकिन योना समुद्र की ओर चल पड़ा।",
+                "duration": 9.675,
+                "voice": "Kokoro hf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "योना"
+            }
+          ]
+        },
+        {
+          "id": "jonah-boards-ship",
+          "title": "योना जहाज़ पर चढ़ता है",
+          "source": "योना 1:3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "याफा में योना को दूर जा रहा एक जहाज़ मिला। उसने किराया चुकाया और जहाज़ पर चढ़ गया।",
+              "narration": {
+                "asset": "narration-8fb126963cf4b50f4f8f",
+                "recordedText": "याफा में योना को दूर जा रहा एक जहाज़ मिला। उसने किराया चुकाया और जहाज़ पर चढ़ गया।",
+                "duration": 7.725,
+                "voice": "Kokoro hf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "जहाज़ और नाविक"
+            }
+          ]
+        },
+        {
+          "id": "storm-at-sea",
+          "title": "समुद्र में तूफ़ान",
+          "source": "योना 1:4–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "भयंकर तूफ़ान से जहाज़ डोलने लगा। नाविक पुकार उठे और उन्होंने सामान समुद्र में फेंक दिया।",
+              "narration": {
+                "asset": "narration-220e9251b513fda9fdef",
+                "recordedText": "भयंकर तूफ़ान से जहाज़ डोलने लगा। नाविक पुकार उठे और उन्होंने सामान समुद्र में फेंक दिया।",
+                "duration": 8.1,
+                "voice": "Kokoro hf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "जहाज़ और नाविक"
+            },
+            {
+              "id": "storm-wave",
+              "label": "समुद्र की लहर"
+            },
+            {
+              "id": "storm-wave-rear",
+              "label": "समुद्र की लहर"
+            },
+            {
+              "id": "storm-wave-front",
+              "label": "समुद्र की लहर"
+            }
+          ]
+        },
+        {
+          "id": "jonah-overboard",
+          "title": "योना समुद्र में जाता है",
+          "source": "योना 1:7–16",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "योना ने उन्हें बताया कि वह प्रभु से भाग रहा था। उसके कहने पर नाविकों ने उसे उठाकर समुद्र में फेंक दिया, और पानी शांत हो गया।",
+              "narration": {
+                "asset": "narration-70b029c39ae224602c07",
+                "recordedText": "योना ने उन्हें बताया कि वह प्रभु से भाग रहा था। उसके कहने पर नाविकों ने उसे उठाकर समुद्र में फेंक दिया, और पानी शांत हो गया।",
+                "duration": 10.9,
+                "voice": "Kokoro hf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "जहाज़ और नाविक"
+            },
+            {
+              "id": "jonah",
+              "label": "योना"
+            },
+            {
+              "id": "calming-wave",
+              "label": "समुद्र की लहर"
+            },
+            {
+              "id": "overboard-wave-left",
+              "label": "समुद्र की लहर"
+            },
+            {
+              "id": "overboard-wave-rear",
+              "label": "समुद्र की लहर"
+            }
+          ]
+        },
+        {
+          "id": "jonah-rescued",
+          "title": "एक बड़ी मछली योना को बचाती है",
+          "source": "योना 1:17",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "परमेश्वर ने एक बड़ी मछली भेजी, जिसने योना को निगल लिया। मछली के भीतर वह समुद्र की गहराई में सुरक्षित था।",
+              "narration": {
+                "asset": "narration-93b2b4fc603fe8718839",
+                "recordedText": "परमेश्वर ने एक बड़ी मछली भेजी, जिसने योना को निगल लिया। मछली के भीतर वह समुद्र की गहराई में सुरक्षित था।",
+                "duration": 9.275,
+                "voice": "Kokoro hf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "बड़ी मछली"
+            },
+            {
+              "id": "jonah",
+              "label": "योना"
+            }
+          ]
+        },
+        {
+          "id": "jonah-prays",
+          "title": "योना गहराई में प्रार्थना करता है",
+          "source": "योना 2:1–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "मछली के भीतर से योना ने प्रार्थना की और परमेश्वर की मदद को याद किया। तीन दिन और रातों के बाद परमेश्वर ने मछली से बात की।",
+              "narration": {
+                "asset": "narration-c683c54a0d2475ef1f6f",
+                "recordedText": "मछली के भीतर से योना ने प्रार्थना की और परमेश्वर की मदद को याद किया। तीन दिन और रातों के बाद परमेश्वर ने मछली से बात की।",
+                "duration": 10.675,
+                "voice": "Kokoro hf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "बड़ी मछली"
+            },
+            {
+              "id": "small-fish",
+              "label": "छोटी मछली"
+            }
+          ]
+        },
+        {
+          "id": "jonah-ashore",
+          "title": "योना सूखी धरती पर पहुँचता है",
+          "source": "योना 2:10; 3:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "मछली योना को सूखी धरती पर ले आई। परमेश्वर ने योना को फिर बुलाया, और इस बार योना नीनवे गया।",
+              "narration": {
+                "asset": "narration-23da8410d6ec71f4dc78",
+                "recordedText": "मछली योना को सूखी धरती पर ले आई। परमेश्वर ने योना को फिर बुलाया, और इस बार योना नीनवे गया।",
+                "duration": 8.4,
+                "voice": "Kokoro hf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "बड़ी मछली योना को किनारे पर छोड़ती है"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-warning",
+          "title": "योना नीनवे में बोलता है",
+          "source": "योना 3:3–4",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "योना परमेश्वर की चेतावनी लेकर बड़े नगर में चला। लोगों ने उसकी बात सुनी।",
+              "narration": {
+                "asset": "narration-848b99a5045827096711",
+                "recordedText": "योना परमेश्वर की चेतावनी लेकर बड़े नगर में चला। लोगों ने उसकी बात सुनी।",
+                "duration": 6.75,
+                "voice": "Kokoro hf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "योना"
+            },
+            {
+              "id": "residents",
+              "label": "नीनवे के लोग"
+            },
+            {
+              "id": "children",
+              "label": "नीनवे के बच्चे"
+            },
+            {
+              "id": "flock",
+              "label": "बकरी और मेमना"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-turns",
+          "title": "नीनवे के लोग दया माँगते हैं",
+          "source": "योना 3:5–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "लोगों ने अपने बुरे काम छोड़ दिए और परमेश्वर से दया माँगी। परमेश्वर ने उनका बदला हुआ मन देखा और नगर को नष्ट नहीं किया।",
+              "narration": {
+                "asset": "narration-a4aa723cbfaf58e8afe1",
+                "recordedText": "लोगों ने अपने बुरे काम छोड़ दिए और परमेश्वर से दया माँगी। परमेश्वर ने उनका बदला हुआ मन देखा और नगर को नष्ट नहीं किया।",
+                "duration": 10.275,
+                "voice": "Kokoro hf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "residents",
+              "label": "नीनवे के लोग"
+            },
+            {
+              "id": "children",
+              "label": "नीनवे के बच्चे"
+            },
+            {
+              "id": "flock",
+              "label": "बकरी और मेमना"
+            }
+          ]
+        },
+        {
+          "id": "jonah-angry",
+          "title": "योना नगर के बाहर इंतज़ार करता है",
+          "source": "योना 4:1–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "नीनवे को बचाने पर योना क्रोधित हुआ। वह नगर से बाहर गया और इंतज़ार करने लगा।",
+              "narration": {
+                "asset": "narration-5380003f7e8c34b58fcf",
+                "recordedText": "नीनवे को बचाने पर योना क्रोधित हुआ। वह नगर से बाहर गया और इंतज़ार करने लगा।",
+                "duration": 7.4,
+                "voice": "Kokoro hf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "योना"
+            }
+          ]
+        },
+        {
+          "id": "shade-for-jonah",
+          "title": "एक पौधा योना को छाया देता है",
+          "source": "योना 4:6",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "परमेश्वर ने योना के ऊपर पत्तों वाला एक पौधा उगाया, ताकि उसे छाया मिले। ठंडी छाँव में योना खुश हुआ।",
+              "narration": {
+                "asset": "narration-0b71081078168e4847ee",
+                "recordedText": "परमेश्वर ने योना के ऊपर पत्तों वाला एक पौधा उगाया, ताकि उसे छाया मिले। ठंडी छाँव में योना खुश हुआ।",
+                "duration": 8.85,
+                "voice": "Kokoro hf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "shade-plant",
+              "label": "छायादार पत्तों वाला पौधा"
+            },
+            {
+              "id": "jonah",
+              "label": "योना"
+            }
+          ]
+        },
+        {
+          "id": "plant-withers",
+          "title": "छाया चली जाती है",
+          "source": "योना 4:7–9",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "एक कीड़े ने पौधे को नुकसान पहुँचाया और गरम हवा चली। छाया चली जाने पर योना उदास और क्रोधित हुआ।",
+              "narration": {
+                "asset": "narration-7d91f6b027f362a493ed",
+                "recordedText": "एक कीड़े ने पौधे को नुकसान पहुँचाया और गरम हवा चली। छाया चली जाने पर योना उदास और क्रोधित हुआ।",
+                "duration": 8.875,
+                "voice": "Kokoro hf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "withered-plant",
+              "label": "मुरझाया पौधा"
+            },
+            {
+              "id": "jonah",
+              "label": "योना"
+            }
+          ]
+        },
+        {
+          "id": "jonah-mercy",
+          "title": "दया किसे मिलती है?",
+          "source": "योना 4:10–11",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "परमेश्वर ने योना को याद दिलाया कि नीनवे में बहुत से लोग और जानवर रहते थे। क्या परमेश्वर को उनकी परवाह नहीं करनी चाहिए? कहानी हमें इसी सवाल के साथ छोड़ देती है।",
+              "narration": {
+                "asset": "narration-cc9fd4a1c0d96f8dda48",
+                "recordedText": "परमेश्वर ने योना को याद दिलाया कि नीनवे में बहुत से लोग और जानवर रहते थे। क्या परमेश्वर को उनकी परवाह नहीं करनी चाहिए? कहानी हमें इसी सवाल के साथ छोड़ देती है।",
+                "duration": 13.5,
+                "voice": "Kokoro hf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "योना"
+            },
+            {
+              "id": "withered-plant",
+              "label": "मुरझाया पौधा"
+            },
+            {
+              "id": "city-thought",
+              "label": "नीनवे की एक झलक"
+            }
+          ]
+        }
+      ]
+    },
+    "ja": {
+      "sourceFingerprint": "v1-0bacdb91",
+      "title": "ヨナと大きな魚",
+      "subtitle": "耳を傾けること、あわれみ、そして深く息をすることのお話",
+      "source": "ヨナ書 1–4章",
+      "retellingNote": "ヨナ書1～4章をもとに、やさしく語り直したお話です。本文は聖書からの直接の引用ではありません。場面や紙の人形劇の動きは、このお話のために作られたものです。結びには、あわれみについて神がヨナに問いかけた質問が、答えのないまま残ります。",
+      "spreads": [
+        {
+          "id": "jonah-called",
+          "title": "ヨナに呼びかけが届く",
+          "source": "ヨナ書 1:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "神はヨナをニネベへ遣わし、人々に悪い道から離れるよう告げさせました。ところがヨナは、海へ向かって出発しました。",
+              "narration": {
+                "asset": "narration-15efeea74ec7137822a3",
+                "recordedText": "神はヨナをニネベへ遣わし、人々に悪い道から離れるよう告げさせました。ところがヨナは、海へ向かって出発しました。",
+                "duration": 9.075,
+                "voice": "Kokoro jf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "ヨナ"
+            }
+          ]
+        },
+        {
+          "id": "jonah-boards-ship",
+          "title": "ヨナが船に乗る",
+          "source": "ヨナ書 1:3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "ヨッパで、ヨナは遠くへ向かう船を見つけました。船賃を払い、船に乗り込みました。",
+              "narration": {
+                "asset": "narration-71bc8acdd22e5ce2119e",
+                "recordedText": "ヨッパで、ヨナは遠くへ向かう船を見つけました。船賃を払い、船に乗り込みました。",
+                "duration": 6.575,
+                "voice": "Kokoro jf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "船と船乗りたち"
+            }
+          ]
+        },
+        {
+          "id": "storm-at-sea",
+          "title": "海の嵐",
+          "source": "ヨナ書 1:4–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "激しい嵐が船を揺さぶりました。船乗りたちは叫び、積み荷を海へ投げ捨てました。",
+              "narration": {
+                "asset": "narration-476784a62cd4937dd73a",
+                "recordedText": "激しい嵐が船を揺さぶりました。船乗りたちは叫び、積み荷を海へ投げ捨てました。",
+                "duration": 6.925,
+                "voice": "Kokoro jf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "船と船乗りたち"
+            },
+            {
+              "id": "storm-wave",
+              "label": "海の波"
+            },
+            {
+              "id": "storm-wave-rear",
+              "label": "海の波"
+            },
+            {
+              "id": "storm-wave-front",
+              "label": "海の波"
+            }
+          ]
+        },
+        {
+          "id": "jonah-overboard",
+          "title": "ヨナが海へ落とされる",
+          "source": "ヨナ書 1:7–16",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "ヨナは、主から逃げているのだと船乗りたちに話しました。ヨナに頼まれ、彼らはヨナを持ち上げて海へ投げ入れました。すると海は静かになりました。",
+              "narration": {
+                "asset": "narration-4e4e9537f3518982eb64",
+                "recordedText": "ヨナは、主から逃げているのだと船乗りたちに話しました。ヨナに頼まれ、彼らはヨナを持ち上げて海へ投げ入れました。すると海は静かになりました。",
+                "duration": 11.075,
+                "voice": "Kokoro jf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "船と船乗りたち"
+            },
+            {
+              "id": "jonah",
+              "label": "ヨナ"
+            },
+            {
+              "id": "calming-wave",
+              "label": "海の波"
+            },
+            {
+              "id": "overboard-wave-left",
+              "label": "海の波"
+            },
+            {
+              "id": "overboard-wave-rear",
+              "label": "海の波"
+            }
+          ]
+        },
+        {
+          "id": "jonah-rescued",
+          "title": "大きな魚がヨナを助ける",
+          "source": "ヨナ書 1:17",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "神は大きな魚を送り、魚はヨナをのみ込みました。魚の中で、ヨナは深い海の中でも守られていました。",
+              "narration": {
+                "asset": "narration-e6401d2d3a43931a53e9",
+                "recordedText": "神は大きな魚を送り、魚はヨナをのみ込みました。魚の中で、ヨナは深い海の中でも守られていました。",
+                "duration": 8.975,
+                "voice": "Kokoro jf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "大きな魚"
+            },
+            {
+              "id": "jonah",
+              "label": "ヨナ"
+            }
+          ]
+        },
+        {
+          "id": "jonah-prays",
+          "title": "ヨナが深いところで祈る",
+          "source": "ヨナ書 2:1–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "魚の中からヨナは祈り、神の助けを思い出しました。三日三晩の後、神は魚に命じられました。",
+              "narration": {
+                "asset": "narration-3017c53bdace1d2d084d",
+                "recordedText": "魚の中からヨナは祈り、神の助けを思い出しました。三日三晩の後、神は魚に命じられました。",
+                "duration": 8.675,
+                "voice": "Kokoro jf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "大きな魚"
+            },
+            {
+              "id": "small-fish",
+              "label": "小さな魚"
+            }
+          ]
+        },
+        {
+          "id": "jonah-ashore",
+          "title": "ヨナが陸に着く",
+          "source": "ヨナ書 2:10; 3:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "魚はヨナを陸へ運びました。神はもう一度ヨナに呼びかけました。今度はヨナはニネベへ向かいました。",
+              "narration": {
+                "asset": "narration-dbc12781d67ff3744b44",
+                "recordedText": "魚はヨナを陸へ運びました。神はもう一度ヨナに呼びかけました。今度はヨナはニネベへ向かいました。",
+                "duration": 8.225,
+                "voice": "Kokoro jf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "大きな魚がヨナを岸に下ろす"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-warning",
+          "title": "ヨナがニネベで語る",
+          "source": "ヨナ書 3:3–4",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "ヨナは神の警告を伝えながら、大きな町を歩きました。人々は耳を傾けました。",
+              "narration": {
+                "asset": "narration-73e4a6b74cc032798073",
+                "recordedText": "ヨナは神の警告を伝えながら、大きな町を歩きました。人々は耳を傾けました。",
+                "duration": 7.075,
+                "voice": "Kokoro jf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "ヨナ"
+            },
+            {
+              "id": "residents",
+              "label": "ニネベの人々"
+            },
+            {
+              "id": "children",
+              "label": "ニネベの子どもたち"
+            },
+            {
+              "id": "flock",
+              "label": "ヤギと子羊"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-turns",
+          "title": "ニネベの人々があわれみを願う",
+          "source": "ヨナ書 3:5–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "人々は悪い行いをやめ、神にあわれみを願いました。神は人々の変化をご覧になり、町を滅ぼしませんでした。",
+              "narration": {
+                "asset": "narration-f3c719480f59556099da",
+                "recordedText": "人々は悪い行いをやめ、神にあわれみを願いました。神は人々の変化をご覧になり、町を滅ぼしませんでした。",
+                "duration": 9.575,
+                "voice": "Kokoro jf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "residents",
+              "label": "ニネベの人々"
+            },
+            {
+              "id": "children",
+              "label": "ニネベの子どもたち"
+            },
+            {
+              "id": "flock",
+              "label": "ヤギと子羊"
+            }
+          ]
+        },
+        {
+          "id": "jonah-angry",
+          "title": "ヨナが町の外で待つ",
+          "source": "ヨナ書 4:1–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "神がニネベを滅ぼさなかったので、ヨナは腹を立てました。町の外へ出て、そこで待ちました。",
+              "narration": {
+                "asset": "narration-5d86aab18e035649431d",
+                "recordedText": "神がニネベを滅ぼさなかったので、ヨナは腹を立てました。町の外へ出て、そこで待ちました。",
+                "duration": 7.05,
+                "voice": "Kokoro jf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "ヨナ"
+            }
+          ]
+        },
+        {
+          "id": "shade-for-jonah",
+          "title": "植物がヨナに木陰をつくる",
+          "source": "ヨナ書 4:6",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "神は葉の茂った植物をヨナの上に生やし、日陰をつくりました。涼しい場所ができて、ヨナは喜びました。",
+              "narration": {
+                "asset": "narration-02464610c830990a3af3",
+                "recordedText": "神は葉の茂った植物をヨナの上に生やし、日陰をつくりました。涼しい場所ができて、ヨナは喜びました。",
+                "duration": 8.375,
+                "voice": "Kokoro jf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "shade-plant",
+              "label": "木陰をつくる葉の茂った植物"
+            },
+            {
+              "id": "jonah",
+              "label": "ヨナ"
+            }
+          ]
+        },
+        {
+          "id": "plant-withers",
+          "title": "木陰がなくなる",
+          "source": "ヨナ書 4:7–9",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "虫が植物を傷め、暑い風が吹きました。木陰がなくなると、ヨナは悲しみ、腹を立てました。",
+              "narration": {
+                "asset": "narration-9affbf4206397956a7ac",
+                "recordedText": "虫が植物を傷め、暑い風が吹きました。木陰がなくなると、ヨナは悲しみ、腹を立てました。",
+                "duration": 7.175,
+                "voice": "Kokoro jf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "withered-plant",
+              "label": "枯れた植物"
+            },
+            {
+              "id": "jonah",
+              "label": "ヨナ"
+            }
+          ]
+        },
+        {
+          "id": "jonah-mercy",
+          "title": "だれがあわれみを受けるの？",
+          "source": "ヨナ書 4:10–11",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "神はヨナに、ニネベにはたくさんの人と動物がいると思い出させました。神はみんなを大切にしてはいけないのでしょうか。お話は、この問いを残して終わります。",
+              "narration": {
+                "asset": "narration-c738aa431d81494c6413",
+                "recordedText": "神はヨナに、ニネベにはたくさんの人と動物がいると思い出させました。神はみんなを大切にしてはいけないのでしょうか。お話は、この問いを残して終わります。",
+                "duration": 12.325,
+                "voice": "Kokoro jf_alpha · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "ヨナ"
+            },
+            {
+              "id": "withered-plant",
+              "label": "枯れた植物"
+            },
+            {
+              "id": "city-thought",
+              "label": "ニネベの光景"
+            }
+          ]
+        }
+      ]
+    },
+    "zh-CN": {
+      "sourceFingerprint": "v1-0bacdb91",
+      "title": "约拿和大鱼",
+      "subtitle": "关于聆听、怜悯与深深呼吸的故事",
+      "source": "约拿书 1–4章",
+      "retellingNote": "这是根据《约拿书》1至4章温和改编的故事。故事文字并非圣经原文引述；场景和纸偶剧中的动作是为讲故事创作的。结尾保留了上帝向约拿提出的、关于怜悯的问题，没有给出答案。",
+      "spreads": [
+        {
+          "id": "jonah-called",
+          "title": "约拿听见呼唤",
+          "source": "约拿书 1:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "上帝派约拿去尼尼微，叫那里的人离开恶行。约拿却转身朝大海走去。",
+              "narration": {
+                "asset": "narration-0b7f44a7b436084e7906",
+                "recordedText": "上帝派约拿去尼尼微，叫那里的人离开恶行。约拿却转身朝大海走去。",
+                "duration": 6.825,
+                "voice": "Kokoro zf_xiaoxiao · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "约拿"
+            }
+          ]
+        },
+        {
+          "id": "jonah-boards-ship",
+          "title": "约拿上了船",
+          "source": "约拿书 1:3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "在约帕，约拿找到一艘要驶向远方的船。他付了船费，就上了船。",
+              "narration": {
+                "asset": "narration-2cb296dab73a4497d264",
+                "recordedText": "在约帕，约拿找到一艘要驶向远方的船。他付了船费，就上了船。",
+                "duration": 6.325,
+                "voice": "Kokoro zf_xiaoxiao · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "船和水手"
+            }
+          ]
+        },
+        {
+          "id": "storm-at-sea",
+          "title": "海上风暴",
+          "source": "约拿书 1:4–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "猛烈的风暴摇撼着船。水手们大声呼喊，把货物扔进海里。",
+              "narration": {
+                "asset": "narration-41a2b81c1068d477bf09",
+                "recordedText": "猛烈的风暴摇撼着船。水手们大声呼喊，把货物扔进海里。",
+                "duration": 5.75,
+                "voice": "Kokoro zf_xiaoxiao · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "船和水手"
+            },
+            {
+              "id": "storm-wave",
+              "label": "海浪"
+            },
+            {
+              "id": "storm-wave-rear",
+              "label": "海浪"
+            },
+            {
+              "id": "storm-wave-front",
+              "label": "海浪"
+            }
+          ]
+        },
+        {
+          "id": "jonah-overboard",
+          "title": "约拿落入海中",
+          "source": "约拿书 1:7–16",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "约拿告诉水手们，他正在逃避主。应约拿的请求，他们抬起他，把他扔进海里，海水就平静了。",
+              "narration": {
+                "asset": "narration-a6bf95a4819eadacbc34",
+                "recordedText": "约拿告诉水手们，他正在逃避主。应约拿的请求，他们抬起他，把他扔进海里，海水就平静了。",
+                "duration": 8.425,
+                "voice": "Kokoro zf_xiaoxiao · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "船和水手"
+            },
+            {
+              "id": "jonah",
+              "label": "约拿"
+            },
+            {
+              "id": "calming-wave",
+              "label": "海浪"
+            },
+            {
+              "id": "overboard-wave-left",
+              "label": "海浪"
+            },
+            {
+              "id": "overboard-wave-rear",
+              "label": "海浪"
+            }
+          ]
+        },
+        {
+          "id": "jonah-rescued",
+          "title": "大鱼救了约拿",
+          "source": "约拿书 1:17",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "上帝派来一条大鱼，把约拿吞了下去。在鱼腹中，约拿在深海里安然无恙。",
+              "narration": {
+                "asset": "narration-4a249d1a2089f3f764b4",
+                "recordedText": "上帝派来一条大鱼，把约拿吞了下去。在鱼腹中，约拿在深海里安然无恙。",
+                "duration": 7.075,
+                "voice": "Kokoro zf_xiaoxiao · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "大鱼"
+            },
+            {
+              "id": "jonah",
+              "label": "约拿"
+            }
+          ]
+        },
+        {
+          "id": "jonah-prays",
+          "title": "约拿在深处祷告",
+          "source": "约拿书 2:1–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "约拿在鱼腹中祷告，想起上帝怎样帮助他。过了三天三夜，上帝吩咐那条鱼。",
+              "narration": {
+                "asset": "narration-1e99183c2c72f2255bea",
+                "recordedText": "约拿在鱼腹中祷告，想起上帝怎样帮助他。过了三天三夜，上帝吩咐那条鱼。",
+                "duration": 7.275,
+                "voice": "Kokoro zf_xiaoxiao · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "大鱼"
+            },
+            {
+              "id": "small-fish",
+              "label": "小鱼"
+            }
+          ]
+        },
+        {
+          "id": "jonah-ashore",
+          "title": "约拿回到陆地",
+          "source": "约拿书 2:10; 3:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "鱼把约拿带到陆地上。上帝再次呼唤约拿，这一次约拿去了尼尼微。",
+              "narration": {
+                "asset": "narration-e002349e3ec2fc5830fe",
+                "recordedText": "鱼把约拿带到陆地上。上帝再次呼唤约拿，这一次约拿去了尼尼微。",
+                "duration": 6.525,
+                "voice": "Kokoro zf_xiaoxiao · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "大鱼把约拿送回岸边"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-warning",
+          "title": "约拿在尼尼微传话",
+          "source": "约拿书 3:3–4",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "约拿带着上帝的警告走过大城。人们听见了他的话。",
+              "narration": {
+                "asset": "narration-8b92f1613f1c47b7f813",
+                "recordedText": "约拿带着上帝的警告走过大城。人们听见了他的话。",
+                "duration": 5.15,
+                "voice": "Kokoro zf_xiaoxiao · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "约拿"
+            },
+            {
+              "id": "residents",
+              "label": "尼尼微人"
+            },
+            {
+              "id": "children",
+              "label": "尼尼微的孩子们"
+            },
+            {
+              "id": "flock",
+              "label": "山羊和羊羔"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-turns",
+          "title": "尼尼微人求怜悯",
+          "source": "约拿书 3:5–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "人们不再作恶，转而求上帝怜悯。上帝看见他们改变了，就没有毁灭那座城。",
+              "narration": {
+                "asset": "narration-ddad39a3d20f5ad636b6",
+                "recordedText": "人们不再作恶，转而求上帝怜悯。上帝看见他们改变了，就没有毁灭那座城。",
+                "duration": 6.975,
+                "voice": "Kokoro zf_xiaoxiao · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "residents",
+              "label": "尼尼微人"
+            },
+            {
+              "id": "children",
+              "label": "尼尼微的孩子们"
+            },
+            {
+              "id": "flock",
+              "label": "山羊和羊羔"
+            }
+          ]
+        },
+        {
+          "id": "jonah-angry",
+          "title": "约拿在城外等候",
+          "source": "约拿书 4:1–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "上帝饶恕了尼尼微，约拿因此生气。他走到城外，等在那里。",
+              "narration": {
+                "asset": "narration-26ccf9b7c54eaca0b931",
+                "recordedText": "上帝饶恕了尼尼微，约拿因此生气。他走到城外，等在那里。",
+                "duration": 5.825,
+                "voice": "Kokoro zf_xiaoxiao · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "约拿"
+            }
+          ]
+        },
+        {
+          "id": "shade-for-jonah",
+          "title": "植物为约拿遮阴",
+          "source": "约拿书 4:6",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "上帝使一株枝叶茂密的植物长在约拿头上，为他遮阴。凉爽的树荫让约拿很高兴。",
+              "narration": {
+                "asset": "narration-f0a217dfe50ab885f705",
+                "recordedText": "上帝使一株枝叶茂密的植物长在约拿头上，为他遮阴。凉爽的树荫让约拿很高兴。",
+                "duration": 7.9,
+                "voice": "Kokoro zf_xiaoxiao · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "shade-plant",
+              "label": "枝叶茂密的遮阴植物"
+            },
+            {
+              "id": "jonah",
+              "label": "约拿"
+            }
+          ]
+        },
+        {
+          "id": "plant-withers",
+          "title": "树荫消失了",
+          "source": "约拿书 4:7–9",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "虫子伤了植物，热风也吹了起来。树荫消失后，约拿既难过又生气。",
+              "narration": {
+                "asset": "narration-c4095e4e50880d16950a",
+                "recordedText": "虫子伤了植物，热风也吹了起来。树荫消失后，约拿既难过又生气。",
+                "duration": 6.575,
+                "voice": "Kokoro zf_xiaoxiao · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "withered-plant",
+              "label": "枯萎的植物"
+            },
+            {
+              "id": "jonah",
+              "label": "约拿"
+            }
+          ]
+        },
+        {
+          "id": "jonah-mercy",
+          "title": "谁能得到怜悯？",
+          "source": "约拿书 4:10–11",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "上帝提醒约拿，尼尼微住着许多人和动物。上帝难道不该关心他们吗？故事把这个问题留给了我们。",
+              "narration": {
+                "asset": "narration-b66997e8f552ecb169e6",
+                "recordedText": "上帝提醒约拿，尼尼微住着许多人和动物。上帝难道不该关心他们吗？故事把这个问题留给了我们。",
+                "duration": 8.75,
+                "voice": "Kokoro zf_xiaoxiao · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "约拿"
+            },
+            {
+              "id": "withered-plant",
+              "label": "枯萎的植物"
+            },
+            {
+              "id": "city-thought",
+              "label": "尼尼微城的一瞥"
+            }
+          ]
+        }
+      ]
+    },
+    "en-GB": {
+      "sourceFingerprint": "v1-0bacdb91",
+      "title": "Jonah and the Whale",
+      "subtitle": "A story of listening, mercy and a great deep breath",
+      "source": "Jonah 1–4",
+      "retellingNote": "A gentle retelling of Jonah 1–4. The story text is not a quotation from the Bible; the scenes and paper-theatre actions are invented for this story. The ending leaves God's question to Jonah about compassion unanswered.",
+      "spreads": [
+        {
+          "id": "jonah-called",
+          "title": "Jonah hears a call",
+          "source": "Jonah 1:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "God sent Jonah to Nineveh to call its people away from harm. Jonah set out towards the sea instead.",
+              "narration": {
+                "asset": "narration-b9235eaa75f8a0fe8535",
+                "recordedText": "God sent Jonah to Nineveh to call its people away from harm. Jonah set out towards the sea instead.",
+                "duration": 6.55,
+                "voice": "Kokoro bf_emma · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonah"
+            }
+          ]
+        },
+        {
+          "id": "jonah-boards-ship",
+          "title": "Jonah boards a ship",
+          "source": "Jonah 1:3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "At Joppa, Jonah found a ship sailing away. He paid the fare and went aboard.",
+              "narration": {
+                "asset": "narration-6a58d3d04fee2fb4b3fb",
+                "recordedText": "At Joppa, Jonah found a ship sailing away. He paid the fare and went aboard.",
+                "duration": 5.075,
+                "voice": "Kokoro bf_emma · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Ship and sailors"
+            }
+          ]
+        },
+        {
+          "id": "storm-at-sea",
+          "title": "A storm at sea",
+          "source": "Jonah 1:4–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "A fierce storm tossed the ship. The sailors cried out and threw cargo into the sea.",
+              "narration": {
+                "asset": "narration-24717e31ca3dc55dbd39",
+                "recordedText": "A fierce storm tossed the ship. The sailors cried out and threw cargo into the sea.",
+                "duration": 5.275,
+                "voice": "Kokoro bf_emma · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Ship and sailors"
+            },
+            {
+              "id": "storm-wave",
+              "label": "Ocean wave"
+            },
+            {
+              "id": "storm-wave-rear",
+              "label": "Ocean wave"
+            },
+            {
+              "id": "storm-wave-front",
+              "label": "Ocean wave"
+            }
+          ]
+        },
+        {
+          "id": "jonah-overboard",
+          "title": "Jonah goes into the sea",
+          "source": "Jonah 1:7–16",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Jonah told them he was running from the Lord. At his request, they lifted him and threw him into the sea, and the water grew calm.",
+              "narration": {
+                "asset": "narration-92083bb19a272609452a",
+                "recordedText": "Jonah told them he was running from the Lord. At his request, they lifted him and threw him into the sea, and the water grew calm.",
+                "duration": 7.6,
+                "voice": "Kokoro bf_emma · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "ship",
+              "label": "Ship and sailors"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonah"
+            },
+            {
+              "id": "calming-wave",
+              "label": "Ocean wave"
+            },
+            {
+              "id": "overboard-wave-left",
+              "label": "Ocean wave"
+            },
+            {
+              "id": "overboard-wave-rear",
+              "label": "Ocean wave"
+            }
+          ]
+        },
+        {
+          "id": "jonah-rescued",
+          "title": "A great fish rescues Jonah",
+          "source": "Jonah 1:17",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "God sent a great fish to swallow Jonah. Inside it, Jonah was safe in the deep.",
+              "narration": {
+                "asset": "narration-e9c88d8facdfa5a9269c",
+                "recordedText": "God sent a great fish to swallow Jonah. Inside it, Jonah was safe in the deep.",
+                "duration": 5.3,
+                "voice": "Kokoro bf_emma · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "Great fish"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonah"
+            }
+          ]
+        },
+        {
+          "id": "jonah-prays",
+          "title": "Jonah prays in the deep",
+          "source": "Jonah 2:1–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "From the fish, Jonah prayed and remembered God's help. After three days and nights, God spoke to the fish.",
+              "narration": {
+                "asset": "narration-ba8cb5012e72982da3d5",
+                "recordedText": "From the fish, Jonah prayed and remembered God's help. After three days and nights, God spoke to the fish.",
+                "duration": 6.4,
+                "voice": "Kokoro bf_emma · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "Great fish"
+            },
+            {
+              "id": "small-fish",
+              "label": "Little fish"
+            }
+          ]
+        },
+        {
+          "id": "jonah-ashore",
+          "title": "Jonah reaches dry land",
+          "source": "Jonah 2:10; 3:1–3",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "The fish brought Jonah to dry land. God called Jonah again, and this time Jonah went to Nineveh.",
+              "narration": {
+                "asset": "narration-7543f189a39dca57ac50",
+                "recordedText": "The fish brought Jonah to dry land. God called Jonah again, and this time Jonah went to Nineveh.",
+                "duration": 6.175,
+                "voice": "Kokoro bf_emma · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "great-fish",
+              "label": "Great fish lands Jonah"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-warning",
+          "title": "Jonah speaks in Nineveh",
+          "source": "Jonah 3:3–4",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Jonah walked through the great city with God's warning. The people listened.",
+              "narration": {
+                "asset": "narration-71929c427ecd3695f096",
+                "recordedText": "Jonah walked through the great city with God's warning. The people listened.",
+                "duration": 4.6,
+                "voice": "Kokoro bf_emma · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonah"
+            },
+            {
+              "id": "residents",
+              "label": "People of Nineveh"
+            },
+            {
+              "id": "children",
+              "label": "Children of Nineveh"
+            },
+            {
+              "id": "flock",
+              "label": "Goat and lamb"
+            }
+          ]
+        },
+        {
+          "id": "nineveh-turns",
+          "title": "Nineveh asks for mercy",
+          "source": "Jonah 3:5–10",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "The people stopped their harmful ways and asked God for mercy. God saw their change and spared the city.",
+              "narration": {
+                "asset": "narration-22ed324242cb002e1bf0",
+                "recordedText": "The people stopped their harmful ways and asked God for mercy. God saw their change and spared the city.",
+                "duration": 6.475,
+                "voice": "Kokoro bf_emma · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "residents",
+              "label": "People of Nineveh"
+            },
+            {
+              "id": "children",
+              "label": "Children of Nineveh"
+            },
+            {
+              "id": "flock",
+              "label": "Goat and lamb"
+            }
+          ]
+        },
+        {
+          "id": "jonah-angry",
+          "title": "Jonah waits outside",
+          "source": "Jonah 4:1–5",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "Jonah was angry that God had spared Nineveh. He went outside the city and waited.",
+              "narration": {
+                "asset": "narration-709a75b0fe5fa31d943c",
+                "recordedText": "Jonah was angry that God had spared Nineveh. He went outside the city and waited.",
+                "duration": 5.375,
+                "voice": "Kokoro bf_emma · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonah"
+            }
+          ]
+        },
+        {
+          "id": "shade-for-jonah",
+          "title": "A plant gives Jonah shade",
+          "source": "Jonah 4:6",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "God made a leafy plant grow over Jonah to shade him. Jonah was glad for the cool shelter.",
+              "narration": {
+                "asset": "narration-ea6dc2a7056568a10060",
+                "recordedText": "God made a leafy plant grow over Jonah to shade him. Jonah was glad for the cool shelter.",
+                "duration": 6.05,
+                "voice": "Kokoro bf_emma · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "shade-plant",
+              "label": "Leafy shade plant"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonah"
+            }
+          ]
+        },
+        {
+          "id": "plant-withers",
+          "title": "The shade is gone",
+          "source": "Jonah 4:7–9",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "A worm damaged the plant, and a hot wind blew. Jonah felt sad and angry when its shade was gone.",
+              "narration": {
+                "asset": "narration-b61f5ff266528fbcd1a4",
+                "recordedText": "A worm damaged the plant, and a hot wind blew. Jonah felt sad and angry when its shade was gone.",
+                "duration": 6.3,
+                "voice": "Kokoro bf_emma · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "withered-plant",
+              "label": "Withered plant"
+            },
+            {
+              "id": "jonah",
+              "label": "Jonah"
+            }
+          ]
+        },
+        {
+          "id": "jonah-mercy",
+          "title": "Who receives mercy?",
+          "source": "Jonah 4:10–11",
+          "segments": [
+            {
+              "id": "segment-1",
+              "text": "God reminded Jonah that Nineveh held many people and animals. Shouldn't God care for them? The story leaves us with that question.",
+              "narration": {
+                "asset": "narration-d75c81fe2b548eecee86",
+                "recordedText": "God reminded Jonah that Nineveh held many people and animals. Shouldn't God care for them? The story leaves us with that question.",
+                "duration": 8,
+                "voice": "Kokoro bf_emma · 1×"
+              }
+            }
+          ],
+          "elements": [
+            {
+              "id": "jonah",
+              "label": "Jonah"
+            },
+            {
+              "id": "withered-plant",
+              "label": "Withered plant"
+            },
+            {
+              "id": "city-thought",
+              "label": "A glimpse of Nineveh"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "soundtracks": [
+    {
+      "id": "harbor-calm-surf",
+      "label": "Harbor surf",
+      "asset": "harbor-calm-surf",
+      "startPage": "jonah-called",
+      "endPage": "jonah-boards-ship",
+      "startOffset": 0,
+      "endOffset": 0,
+      "volume": 0.4,
+      "fadeIn": 1.4,
+      "fadeOut": 1.4,
+      "loop": true
+    },
+    {
+      "id": "storm-wind-and-rain",
+      "label": "Storm wind and rain",
+      "asset": "storm-wind-and-rain",
+      "startPage": "storm-at-sea",
+      "endPage": "jonah-overboard",
+      "startOffset": 0,
+      "endOffset": 0,
+      "volume": 0.4,
+      "fadeIn": 1.4,
+      "fadeOut": 1.6,
+      "loop": true
+    },
+    {
+      "id": "deep-water-prayer",
+      "label": "Deep water",
+      "asset": "deep-water-prayer",
+      "startPage": "jonah-rescued",
+      "endPage": "jonah-prays",
+      "startOffset": 0,
+      "endOffset": 0,
+      "volume": 0.4,
+      "fadeIn": 1.6,
+      "fadeOut": 1.4,
+      "loop": true
+    },
+    {
+      "id": "warm-nineveh-breeze",
+      "label": "Warm city breeze",
+      "asset": "warm-nineveh-breeze",
+      "startPage": "nineveh-warning",
+      "endPage": "jonah-mercy",
+      "startOffset": 0,
+      "endOffset": 0,
+      "volume": 0.4,
+      "fadeIn": 1.6,
+      "fadeOut": 1.8,
+      "loop": true
+    },
+    {
+      "id": "shore-surf",
+      "label": "Quiet shore surf",
+      "asset": "harbor-calm-surf",
+      "startPage": "jonah-ashore",
+      "endPage": "jonah-ashore",
+      "startOffset": 0,
+      "endOffset": 0,
+      "volume": 0.4,
+      "fadeIn": 1.4,
+      "fadeOut": 1.4,
+      "loop": true
+    }
+  ],
+  "languages": [
+    "en-US",
+    "en-GB",
+    "es",
+    "fr",
+    "hi",
+    "it",
+    "ja",
+    "pt-BR",
+    "zh-CN"
+  ]
+}

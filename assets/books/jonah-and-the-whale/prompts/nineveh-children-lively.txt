@@ -1,0 +1,20 @@
+Use case: illustration-story.
+Asset type: transparent portrait cutout of three child residents for a layered paper-theatre scene in a children’s picture book.
+Scene/backdrop: none; this is a stand-alone character group for Nineveh’s city gate.
+Subject: three children of ancient Near Eastern appearance, around ages 5–10, standing together. Give them clearly distinct, natural faces and simple linen tunics in muted cream, rust, teal and ochre. Show lively attention to a serious warning: curious, alert expressions; one child leans slightly toward the others and one makes a small hand gesture. Keep the mood engaged and thoughtful, not carefree or laughing.
+Style/medium: hand-painted watercolor and gouache, warm skin tones, subtle visible paper grain, soft irregular painted edges, matching the existing Little Light Library Jonah and Nineveh cutouts.
+Composition/framing: portrait group, full bodies from hair to sandals visible, each child separately readable with small gaps between silhouettes, centered with clear transparent margin around all sides. Natural proportions, small enough to sit among the adult residents at story-page scale.
+Lighting/mood: soft even daylight, gentle, quiet.
+Materials/textures: matte linen folds and painted paper texture.
+Constraints: request a genuinely transparent background with clean alpha outside the children.
+Avoid: adults, Jonah, other people, animals, city, wall, floor, ground shadow, scenery, modern garments, weapons, text, letters, symbols, border, watermark, UI, shiny CGI, cropped feet, overlapping faces, exaggerated cartoon heads.
+
+
+Framing and alpha-edge refinement prompt (same asset):
+Use case: precise-object-edit.
+Asset type: transparent portrait paper-theatre cutout of three Nineveh children.
+Input images: Image 1 is the edit target and the identity, pose, clothing, and watercolor-style reference.
+Primary request: clean the alpha edges and improve the margins on this existing cutout. Preserve exactly the same three children, their faces, hair, clothes, colors, expressions, gestures, proportions, and arrangement. Scale the complete group down slightly and center it so there is at least 7% clean transparent margin on every side. Remove the visible saturated red, yellow, or green fringe around hair, sleeves, hems, and sandals; keep the natural soft painted edge without a bright halo. Make all pixels outside the children genuinely transparent.
+Style/medium: retain the current hand-painted watercolor and gouache with subtle paper grain and the same warm muted palette.
+Constraints: change only edge cleanup and framing; keep the existing children and poses unchanged. Preserve full head-to-sandal visibility and the same portrait canvas.
+Avoid: adding or removing a child, changing their identity or expression, changing garments or colors, adding background, floor, shadow, outline, props, text, watermark, UI, or redesigning the illustration.

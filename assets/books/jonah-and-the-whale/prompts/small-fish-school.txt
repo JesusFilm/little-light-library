@@ -1,0 +1,8 @@
+Use case: illustration-story
+Asset type: transparent paper-theatre character cutout
+Primary request: a small school of three colorful little sea fish swimming together, for an underwater Jonah story scene.
+Input images: Jonah character cutout is a style reference for painted paper texture only.
+Style/medium: gentle gouache and watercolor storybook art, natural fish forms with muted teal, gold, and coral accents, soft paper grain.
+Composition/framing: three distinct fish at different heights, all facing right, loose horizontal group, visible whole bodies and fins, generous transparent margin.
+Lighting/mood: curious and peaceful.
+Constraints: true transparent background; no sea, bubbles, coral reef, Jonah, whale, text, border, shadow, or watermark.

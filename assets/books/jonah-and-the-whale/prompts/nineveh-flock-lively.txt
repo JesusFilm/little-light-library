@@ -1,0 +1,13 @@
+Use case: illustration-story.
+Asset type: transparent cutout of two small livestock animals, separate from people, for a layered Nineveh street scene in a children's picture book.
+Scene/backdrop: none; isolated figures for page 8 of Jonah's Nineveh story.
+Subject: one small sandy-tan goat and one young cream-white lamb standing together. The goat holds its head alertly with ears raised while the lamb nuzzles gently near its shoulder; lively, calm animal curiosity without comic exaggeration. Show natural goat and lamb anatomy, four legs and hooves clear, full bodies visible.
+Style/medium: hand-painted watercolor and gouache with visible subtle paper grain, warm muted natural colors and soft painted edges, matching the Little Light Library Jonah and Nineveh cutouts.
+Composition/framing: portrait grouping with both complete animals clearly separated enough to animate independently, centered, clear transparent margin on all sides; no overlaps that hide legs or faces.
+Lighting/mood: warm soft daylight, gentle and lively.
+Materials/textures: softly painted wool and short fur, matte paper texture.
+Constraints: request a genuinely transparent background with clean alpha outside the goat and lamb.
+Avoid: people, human clothing or human expressions, extra animals, city, wall, floor, grass, ground plane, cast shadow, scenery, text, letters, symbols, frame, watermark, UI, shiny CGI, cropped hooves, tangled legs.
+
+
+Framing refinement: preserve the exact same goat and lamb and their lively pose. Reduce both animals together and center the pair with visible transparent breathing room. Keep the complete ears, horns, bodies, legs and hooves inside the canvas; do not add or remove animals. Keep true transparency and do not add ground, shadow, background, glow, or fringe.

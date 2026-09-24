@@ -1,0 +1,12 @@
+Use case: illustration-story.
+Asset type: transparent cutout of two small livestock animals, separate from people, for a layered Nineveh street scene in a children's picture book.
+Scene/backdrop: none; isolated figures for page 9 of Jonah's Nineveh story.
+Subject: the same small sandy-tan goat and young cream-white lamb as the lively page 8 asset. The goat sits back on folded legs and gently lowers its head; the lamb stands close with head lowered and ears relaxed. Natural quiet animal posture, never human-like prayer or expression.
+Style/medium: hand-painted watercolor and gouache with subtle paper grain and warm muted natural colors, matching the Little Light Library Jonah cutouts.
+Composition/framing: full bodies, all legs and hooves visible, centered, with generous true transparent margin; the animals remain separate enough to animate.
+Lighting/mood: warm soft daylight, subdued and calm.
+Materials/textures: softly painted wool and short fur, matte paper texture.
+Constraints: preserve recognizable pair identities and their natural proportions; isolated transparent alpha.
+Avoid: people, clothing, city, floor, grass, cast shadow, scenery, text, letters, symbols, frame, watermark, UI, extra animals.
+
+Generation prompt: Create the p9 quiet/remorseful counterpart of this exact goat and lamb pair. Preserve the same goat's sandy tawny coat, the same small cream lamb, recognizable faces, proportions, watercolor-and-gouache style, subtle paper grain, and relative scale. Make both animals visibly subdued and calm: the goat gently lowers its head and sits back on folded legs, while the lamb stands close beside it with head lowered and ears relaxed. Natural animal posture only, no human-like praying or expressions. Keep both full bodies, all legs and hooves visible, centered together, and surrounded by generous true transparent margin on every side. Match the p8 lively asset's general canvas and animal scale. No people, clothing, city, floor, grass, cast shadow, scenery, lettering, glow, or extra animals.

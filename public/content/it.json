@@ -1,0 +1,126 @@
+{
+  "id": "it",
+  "name": "Italiano",
+  "voice": "if_sara",
+  "ui": {
+    "appTitle": "Biblioteca della Piccola Luce",
+    "welcome": "Benvenuti nella Biblioteca della Piccola Luce",
+    "chooseLanguage": "Scegli una lingua",
+    "enter": "Entra nella biblioteca",
+    "library": "Biblioteca",
+    "chooseBook": "Scegli una storia",
+    "settings": "Impostazioni",
+    "language": "Lingua",
+    "speed": "Velocità di lettura",
+    "audio": "Narrazione",
+    "volume": "Volume",
+    "close": "Chiudi",
+    "previous": "Precedente",
+    "next": "Successiva",
+    "play": "Riproduci",
+    "pause": "Pausa",
+    "replay": "Riascolta",
+    "back": "Torna alla biblioteca",
+    "loading": "Preparazione della storia…",
+    "retry": "Riprova",
+    "error": "Qualcosa è andato storto.",
+    "audioError": "La narrazione non è disponibile, ma puoi ancora leggere la storia.",
+    "imageError": "Non è stato possibile caricare questa immagine. Riprova.",
+    "page": "Pagina",
+    "of": "di",
+    "help": "Aiuto",
+    "helpText": "Leggete, ascoltate e girate le pagine insieme. Potete mettere in pausa o ripetere ogni pagina.",
+    "characters": "Personaggi",
+    "finished": "Pagina completata",
+    "source": "Passo biblico",
+    "loadingPause": "Metti in pausa l'animazione di caricamento",
+    "loadingResume": "Riprendi l'animazione di caricamento",
+    "lookAround": "Guardati intorno",
+    "lookLeft": "Guarda a sinistra",
+    "centerView": "Ricentra la visuale",
+    "lookRight": "Guarda a destra",
+    "serpent": "Serpente",
+    "dove": "Colomba"
+  },
+  "characters": { "adam": "Adamo", "eve": "Eva", "noah": "Noè" },
+  "stories": [
+    {
+      "id": "eden",
+      "title": "Adamo, Eva e il giardino",
+      "subtitle": "Una storia dalla Genesi 2–3",
+      "pages": [
+        { "id": "eden-01", "title": "Un giardino chiamato Eden", "segments": [
+          { "id": "s1", "text": "Dio creò i cieli e la terra, poi piantò uno splendido giardino chiamato Eden. Mise Adamo lì, perché lo coltivasse e godesse dei suoi alberi." },
+          { "id": "s2", "text": "Dio soffiò in Adamo il respiro della vita. Ogni creatura aveva il suo posto, ma Adamo aveva bisogno di una compagna." }
+        ], "image": "assets/art/eden-01.webp", "passage": "Genesi 2:4–20" },
+        { "id": "eden-02", "title": "Una compagna e un comando", "segments": [
+          { "id": "s1", "text": "Dio fece Eva dal fianco di Adamo e la condusse da lui. Erano fatti per stare insieme, senza vergogna e in pace." },
+          { "id": "s2", "text": "Dio diede loro i frutti del giardino, ma un albero era proibito: l'albero della conoscenza del bene e del male. Disse loro di non mangiarne." }
+        ], "image": "assets/art/eden-02.webp", "passage": "Genesi 2:16–25" },
+        { "id": "eden-03", "title": "La domanda del serpente", "segments": [
+          { "id": "s1", "text": "Un serpente parlò a Eva e mise in dubbio il comando di Dio. Promise che il frutto proibito li avrebbe resi come Dio, capaci di conoscere il bene e il male." },
+          { "id": "s2", "text": "Eva vide che il frutto sembrava buono, lo prese e ne mangiò. Ne diede ad Adamo, e anche lui ne mangiò." }
+        ], "image": "assets/art/eden-03.webp", "passage": "Genesi 3:1–6" },
+        { "id": "eden-04", "title": "Vergogna e nascondimento", "segments": [
+          { "id": "s1", "text": "Subito si accorsero di essere nudi, e la vergogna li fece nascondere. Cucirono insieme delle foglie per coprirsi." },
+          { "id": "s2", "text": "Quando Dio li chiamò, Adamo diede la colpa a Eva, ed Eva al serpente. La loro fiducia si era spezzata, e la loro scelta aveva portato il peccato nel giardino." }
+        ], "image": "assets/art/eden-04.webp", "passage": "Genesi 3:7–13" },
+        { "id": "eden-05", "title": "Le conseguenze", "segments": [
+          { "id": "s1", "text": "Dio disse che il serpente sarebbe stato maledetto. La discendenza della donna gli avrebbe schiacciato la testa, anche se il serpente le avrebbe ferito il calcagno." },
+          { "id": "s2", "text": "Dio disse a Eva che avrebbe partorito con dolore, e ad Adamo che la terra avrebbe resistito al suo lavoro. Le loro vite avrebbero portato pena e fatica." }
+        ], "image": "assets/art/eden-05.webp", "passage": "Genesi 3:14–19" },
+        { "id": "eden-06", "title": "Fuori dal giardino", "segments": [
+          { "id": "s1", "text": "Dio fece dei vestiti per Adamo ed Eva e li vestì. Poi li mandò fuori dall'Eden, perché non prendessero il frutto dell'albero della vita." },
+          { "id": "s2", "text": "I cherubini e una spada fiammeggiante custodivano la via dell'albero della vita. Adamo ed Eva non potevano tornare indietro." }
+        ], "image": "assets/art/eden-06.webp", "passage": "Genesi 3:20–24" },
+        { "id": "eden-07", "title": "La vita oltre l'Eden", "segments": [
+          { "id": "s1", "text": "Fuori dall'Eden, Adamo ed Eva lavorarono duramente per il cibo tra le spine. Sarebbero invecchiati e sarebbero tornati alla polvere da cui Adamo era stato formato." },
+          { "id": "s2", "text": "La perdita era reale, ma Dio non aveva smesso di vederli. La loro storia mostrò quanto la disubbidienza ferisce e perché le persone hanno bisogno del soccorso di Dio." }
+        ], "image": "assets/art/eden-07.webp", "passage": "Genesi 3:17–24" },
+        { "id": "eden-08", "title": "Una promessa che continua", "segments": [
+          { "id": "s1", "text": "L'Eden era alle loro spalle, ma la parola di Dio sul serpente portava una promessa di vittoria. La Bibbia conserva questa speranza mentre la sua storia continua." },
+          { "id": "s2", "text": "Adamo ed Eva non potevano riparare da soli ciò che avevano spezzato. La loro prima scelta ci ricorda di fidarci delle vie buone di Dio e cercare la sua misericordia." }
+        ], "image": "assets/art/eden-08.webp", "passage": "Genesi 3:14–24" }
+      ]
+    },
+    {
+      "id": "noah",
+      "title": "Noè e il grande diluvio",
+      "subtitle": "Una storia dalla Genesi 6–9",
+      "pages": [
+        { "id": "noah-01", "title": "Un mondo andato male", "segments": [
+          { "id": "s1", "text": "Dio vide che la violenza e la malvagità si erano diffuse sulla terra. Il mondo che aveva creato buono era pieno di un male terribile." },
+          { "id": "s2", "text": "Noè camminava con Dio. Dio gli disse che sarebbe arrivato un grande diluvio e gli diede un modo per proteggere la sua famiglia e gli animali." }
+        ], "image": "assets/art/noah-01.webp", "passage": "Genesi 6:5–22" },
+        { "id": "noah-02", "title": "Costruire una grande arca", "segments": [
+          { "id": "s1", "text": "Dio disse a Noè di costruire un'arca enorme, con stanze all'interno e abbastanza forte da galleggiare sulle acque che salivano. Noè seguì le istruzioni di Dio." },
+          { "id": "s2", "text": "Ricoprì l'arca perché l'acqua non entrasse. Non era una barchetta giocattolo, ma un rifugio per una famiglia e molte creature." }
+        ], "image": "assets/art/noah-02.webp", "passage": "Genesi 6:14–22" },
+        { "id": "noah-03", "title": "Nell'arca", "segments": [
+          { "id": "s1", "text": "Gli animali vennero da Noè, a coppie di ogni specie, e Noè li fece entrare. Entrarono anche sua moglie, i suoi figli e le mogli dei suoi figli." },
+          { "id": "s2", "text": "Poi Dio chiuse la porta. Cominciò a piovere, e l'arca attese mentre il mondo fuori cambiava." }
+        ], "image": "assets/art/noah-03.webp", "passage": "Genesi 7:1–16" },
+        { "id": "noah-04", "title": "Le acque sulla terra", "segments": [
+          { "id": "s1", "text": "La pioggia cadde per quaranta giorni e quaranta notti, e le acque salirono sempre più. L'arca si sollevò da terra e cominciò a galleggiare." },
+          { "id": "s2", "text": "Il diluvio coprì la terra e persino le montagne più alte. Dentro la grande arca, la famiglia di Noè e gli animali aspettavano nel buio." }
+        ], "image": "assets/art/noah-04.webp", "passage": "Genesi 7:17–24" },
+        { "id": "noah-05", "title": "Una foglia di speranza", "segments": [
+          { "id": "s1", "text": "Alla fine Dio mandò un vento, e le acque cominciarono a scendere. L'arca si fermò sulle montagne di Ararat." },
+          { "id": "s2", "text": "Noè mandò fuori un corvo e poi una colomba. Quando la colomba tornò con una foglia d'olivo fresca, Noè capì che la terra riappariva." }
+        ], "image": "assets/art/noah-05.webp", "passage": "Genesi 8:1–12" },
+        { "id": "noah-06", "title": "In un mondo cambiato", "segments": [
+          { "id": "s1", "text": "Quando il terreno fu asciutto, Dio disse a Noè di uscire dall'arca. La sua famiglia uscì, e ogni animale ritrovò la terra aperta." },
+          { "id": "s2", "text": "Le persone rimaste fuori dall'arca furono travolte dall'acqua e annegarono. Il diluvio fu un giudizio, e la famiglia salvata entrò in un mondo solenne e cambiato." }
+        ], "image": "assets/art/noah-06.webp", "passage": "Genesi 7:21–23; 8:13–19" },
+        { "id": "noah-07", "title": "Il patto di Dio", "segments": [
+          { "id": "s1", "text": "Noè costruì un altare e adorò Dio. Dio fece un patto con Noè, la sua famiglia e ogni creatura vivente." },
+          { "id": "s2", "text": "Dio promise che un diluvio non avrebbe mai più distrutto tutta la vita sulla terra. Mise un arcobaleno nelle nuvole come segno della sua promessa." }
+        ], "image": "assets/art/noah-07.webp", "passage": "Genesi 8:20–22; 9:1–17" },
+        { "id": "noah-08", "title": "Ricordare l'arcobaleno", "segments": [
+          { "id": "s1", "text": "L'arcobaleno divenne un luminoso ricordo del patto di Dio. Quando apparivano i suoi colori, Dio ricordava la sua promessa, e anche il suo popolo poteva ricordarla." },
+          { "id": "s2", "text": "La storia del diluvio tiene insieme dolore, salvezza e un nuovo inizio. Dopo che le acque furono sparite, la famiglia di Noè portò la misericordia di Dio nel mondo." }
+        ], "image": "assets/art/noah-08.webp", "passage": "Genesi 9:8–17" }
+      ]
+    }
+  ]
+}

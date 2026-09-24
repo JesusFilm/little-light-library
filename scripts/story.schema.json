@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Little Light Library localized manifest",
+  "type": "object",
+  "required": ["id", "name", "voice", "ui", "characters", "stories"],
+  "properties": {
+    "id": {
+      "enum": ["en-US", "en-GB", "es", "fr", "hi", "it", "ja", "pt-BR", "zh-CN"]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "voice": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ui": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "characters": {
+      "type": "object",
+      "required": ["adam", "eve", "noah"],
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "stories": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "subtitle", "pages"],
+        "properties": {
+          "id": {
+            "enum": ["eden", "noah"]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subtitle": {
+            "type": "string",
+            "minLength": 1
+          },
+          "pages": {
+            "type": "array",
+            "minItems": 8,
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "required": ["id", "title", "segments", "image", "passage"],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^(eden|noah)-0[1-8]$"
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "segments": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": {
+                    "type": "object",
+                    "required": ["id", "text"],
+                    "properties": {
+                      "id": {
+                        "enum": ["s1", "s2"]
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "image": {
+                  "type": "string",
+                  "pattern": "^assets/art/(eden|noah)-0[1-8]\\.webp$"
+                },
+                "passage": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

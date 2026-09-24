@@ -1,0 +1,5 @@
+Use case: exploratory character pose for the prayer-in-the-fish illustration.
+Asset type: transparent full-body Jonah character cutout, derived from the established Jonah character artwork.
+Art brief (recorded after generation; this is not an exact provider prompt transcript): show Jonah seated in prayer with eyes gently closed and hands together, wearing his cream tunic and rust-red cloak. Preserve his curly hair, beard, face, sandals, and the original character's warm painted paper texture.
+Composition: complete seated figure visible, centered with clear transparent margins, readable at small picture-book stage size.
+Status: unused exploration. The reader uses Jonah within `great-fish-cutaway.webp` instead, to show that Jonah is inside the fish without duplicating him beside it.

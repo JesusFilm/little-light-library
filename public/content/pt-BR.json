@@ -1,0 +1,126 @@
+{
+  "id": "pt-BR",
+  "name": "Português (Brasil)",
+  "voice": "pf_dora",
+  "ui": {
+    "appTitle": "Biblioteca da Pequena Luz",
+    "welcome": "Bem-vindos à Biblioteca da Pequena Luz",
+    "chooseLanguage": "Escolha um idioma",
+    "enter": "Entrar na biblioteca",
+    "library": "Biblioteca",
+    "chooseBook": "Escolha uma história",
+    "settings": "Configurações",
+    "language": "Idioma",
+    "speed": "Velocidade da leitura",
+    "audio": "Narração",
+    "volume": "Volume",
+    "close": "Fechar",
+    "previous": "Anterior",
+    "next": "Próxima",
+    "play": "Reproduzir",
+    "pause": "Pausar",
+    "replay": "Ouvir de novo",
+    "back": "Voltar à biblioteca",
+    "loading": "Preparando a história…",
+    "retry": "Tentar novamente",
+    "error": "Algo deu errado.",
+    "audioError": "A narração não está disponível, mas você ainda pode ler a história.",
+    "imageError": "Não foi possível carregar esta imagem. Tente novamente.",
+    "page": "Página",
+    "of": "de",
+    "help": "Ajuda",
+    "helpText": "Leiam, escutem e virem as páginas juntos. Vocês podem pausar ou repetir qualquer página.",
+    "characters": "Personagens",
+    "finished": "Página concluída",
+    "source": "Passagem bíblica",
+    "loadingPause": "Pausar a animação de carregamento",
+    "loadingResume": "Retomar a animação de carregamento",
+    "lookAround": "Olhe ao redor",
+    "lookLeft": "Olhe para a esquerda",
+    "centerView": "Centralize a câmera",
+    "lookRight": "Olhe para a direita",
+    "serpent": "Serpente",
+    "dove": "Pomba"
+  },
+  "characters": { "adam": "Adão", "eve": "Eva", "noah": "Noé" },
+  "stories": [
+    {
+      "id": "eden",
+      "title": "Adão, Eva e o jardim",
+      "subtitle": "Uma história de Gênesis 2–3",
+      "pages": [
+        { "id": "eden-01", "title": "Um jardim chamado Éden", "segments": [
+          { "id": "s1", "text": "Deus criou os céus e a terra, e depois plantou um belo jardim chamado Éden. Ele colocou Adão ali para cuidar dele e desfrutar de suas árvores." },
+          { "id": "s2", "text": "Deus soprou vida em Adão. Cada criatura tinha seu lugar, mas Adão precisava de uma companheira." }
+        ], "image": "assets/art/eden-01.webp", "passage": "Gênesis 2:4–20" },
+        { "id": "eden-02", "title": "Uma companheira e um mandamento", "segments": [
+          { "id": "s1", "text": "Deus fez Eva do lado de Adão e a levou até ele. Os dois pertenciam um ao outro, sem vergonha e em paz." },
+          { "id": "s2", "text": "Deus lhes deu os frutos do jardim, mas uma árvore era proibida: a árvore do conhecimento do bem e do mal. Ele avisou que não comessem dela." }
+        ], "image": "assets/art/eden-02.webp", "passage": "Gênesis 2:16–25" },
+        { "id": "eden-03", "title": "A pergunta da serpente", "segments": [
+          { "id": "s1", "text": "Uma serpente falou com Eva e questionou a ordem de Deus. Ela prometeu que o fruto proibido os tornaria como Deus, conhecendo o bem e o mal." },
+          { "id": "s2", "text": "Eva viu que o fruto parecia bom, pegou-o e comeu. Depois deu um pouco a Adão, e ele também comeu." }
+        ], "image": "assets/art/eden-03.webp", "passage": "Gênesis 3:1–6" },
+        { "id": "eden-04", "title": "Vergonha e esconderijo", "segments": [
+          { "id": "s1", "text": "Na mesma hora, perceberam que estavam nus, e a vergonha fez com que se escondessem. Eles costuraram folhas para se cobrir." },
+          { "id": "s2", "text": "Quando Deus chamou, Adão culpou Eva, e Eva culpou a serpente. A confiança dos dois havia se quebrado, e sua escolha trouxe o pecado ao jardim." }
+        ], "image": "assets/art/eden-04.webp", "passage": "Gênesis 3:7–13" },
+        { "id": "eden-05", "title": "As consequências", "segments": [
+          { "id": "s1", "text": "Deus disse que a serpente seria amaldiçoada. A descendência da mulher pisaria em sua cabeça, embora a serpente ferisse o seu calcanhar." },
+          { "id": "s2", "text": "Deus disse a Eva que teria dor ao dar à luz, e disse a Adão que a terra resistiria ao seu trabalho. A vida dos dois levaria tristeza e esforço." }
+        ], "image": "assets/art/eden-05.webp", "passage": "Gênesis 3:14–19" },
+        { "id": "eden-06", "title": "Fora do jardim", "segments": [
+          { "id": "s1", "text": "Deus fez roupas para Adão e Eva e os vestiu. Depois os mandou para fora do Éden, para que não pegassem o fruto da árvore da vida." },
+          { "id": "s2", "text": "Querubins e uma espada flamejante guardavam o caminho para a árvore da vida. Adão e Eva não podiam voltar." }
+        ], "image": "assets/art/eden-06.webp", "passage": "Gênesis 3:20–24" },
+        { "id": "eden-07", "title": "A vida além do Éden", "segments": [
+          { "id": "s1", "text": "Fora do Éden, Adão e Eva trabalharam duro para conseguir alimento entre espinhos. Eles envelheceriam e voltariam ao pó de onde Adão havia sido formado." },
+          { "id": "s2", "text": "A perda era real, mas Deus não deixou de vê-los. A história mostrou como a desobediência machuca e por que as pessoas precisam do resgate de Deus." }
+        ], "image": "assets/art/eden-07.webp", "passage": "Gênesis 3:17–24" },
+        { "id": "eden-08", "title": "Uma promessa que continua", "segments": [
+          { "id": "s1", "text": "O Éden ficou para trás, mas a palavra de Deus sobre a serpente carregava uma promessa de vitória. A Bíblia guarda essa esperança enquanto sua história continua." },
+          { "id": "s2", "text": "Adão e Eva não podiam consertar sozinhos o que haviam quebrado. A primeira escolha deles nos lembra de confiar nos bons caminhos de Deus e buscar sua misericórdia." }
+        ], "image": "assets/art/eden-08.webp", "passage": "Gênesis 3:14–24" }
+      ]
+    },
+    {
+      "id": "noah",
+      "title": "Noé e o grande dilúvio",
+      "subtitle": "Uma história de Gênesis 6–9",
+      "pages": [
+        { "id": "noah-01", "title": "Um mundo corrompido", "segments": [
+          { "id": "s1", "text": "Deus viu que a violência e a maldade haviam se espalhado pela terra. O mundo que ele criou bom estava cheio de um mal terrível." },
+          { "id": "s2", "text": "Noé andava com Deus. Deus contou que viria um grande dilúvio e mostrou um caminho para proteger sua família e os animais." }
+        ], "image": "assets/art/noah-01.webp", "passage": "Gênesis 6:5–22" },
+        { "id": "noah-02", "title": "Construir uma grande arca", "segments": [
+          { "id": "s1", "text": "Deus mandou Noé construir uma arca enorme, com compartimentos dentro e forte o bastante para flutuar sobre as águas que subiriam. Noé obedeceu às instruções de Deus." },
+          { "id": "s2", "text": "Ele cobriu a arca para que a água não entrasse. Não era um barquinho de brinquedo, mas um abrigo para uma família e muitas criaturas." }
+        ], "image": "assets/art/noah-02.webp", "passage": "Gênesis 6:14–22" },
+        { "id": "noah-03", "title": "Dentro da arca", "segments": [
+          { "id": "s1", "text": "Os animais vieram até Noé, aos pares de cada espécie, e Noé os levou para dentro. Sua esposa, seus filhos e as esposas deles também entraram." },
+          { "id": "s2", "text": "Então Deus fechou a porta. A chuva começou a cair, e a arca esperou enquanto o mundo lá fora mudava." }
+        ], "image": "assets/art/noah-03.webp", "passage": "Gênesis 7:1–16" },
+        { "id": "noah-04", "title": "As águas sobre a terra", "segments": [
+          { "id": "s1", "text": "Choveu durante quarenta dias e quarenta noites, e as águas subiram cada vez mais. A arca saiu do chão e começou a flutuar." },
+          { "id": "s2", "text": "O dilúvio cobriu a terra e até as montanhas mais altas. Dentro da grande arca, a família de Noé e os animais esperavam na escuridão." }
+        ], "image": "assets/art/noah-04.webp", "passage": "Gênesis 7:17–24" },
+        { "id": "noah-05", "title": "Uma folha de esperança", "segments": [
+          { "id": "s1", "text": "Por fim, Deus enviou um vento, e as águas começaram a baixar. A arca parou nas montanhas de Ararate." },
+          { "id": "s2", "text": "Noé soltou um corvo e depois uma pomba. Quando a pomba voltou com uma folha nova de oliveira, Noé soube que a terra estava reaparecendo." }
+        ], "image": "assets/art/noah-05.webp", "passage": "Gênesis 8:1–12" },
+        { "id": "noah-06", "title": "Um mundo transformado", "segments": [
+          { "id": "s1", "text": "Quando o chão secou, Deus mandou Noé sair da arca. Sua família saiu, e cada animal encontrou novamente a terra aberta." },
+          { "id": "s2", "text": "As pessoas que ficaram fora da arca foram levadas pelas águas e morreram afogadas. O dilúvio foi juízo, e a família resgatada entrou em um mundo sério e transformado." }
+        ], "image": "assets/art/noah-06.webp", "passage": "Gênesis 7:21–23; 8:13–19" },
+        { "id": "noah-07", "title": "A aliança de Deus", "segments": [
+          { "id": "s1", "text": "Noé construiu um altar e adorou a Deus. Deus fez uma aliança com Noé, sua família e todos os seres vivos." },
+          { "id": "s2", "text": "Deus prometeu que um dilúvio nunca mais destruiria toda a vida na terra. Colocou um arco-íris nas nuvens como sinal da sua promessa." }
+        ], "image": "assets/art/noah-07.webp", "passage": "Gênesis 8:20–22; 9:1–17" },
+        { "id": "noah-08", "title": "Lembrar do arco-íris", "segments": [
+          { "id": "s1", "text": "O arco-íris se tornou uma lembrança brilhante da aliança de Deus. Quando suas cores apareciam, Deus se lembrava da promessa, e seu povo também podia se lembrar." },
+          { "id": "s2", "text": "A história do dilúvio une tristeza, resgate e um novo começo. Depois que as águas sumiram, a família de Noé levou a misericórdia de Deus para o mundo." }
+        ], "image": "assets/art/noah-08.webp", "passage": "Gênesis 9:8–17" }
+      ]
+    }
+  ]
+}

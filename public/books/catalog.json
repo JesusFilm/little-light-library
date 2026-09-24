@@ -1,0 +1,24 @@
+[
+  {
+    "id": "eden",
+    "legacyStory": "eden",
+    "appearance": {
+      "coverColor": "#536c45",
+      "spineColor": "#344831",
+      "accentColor": "#d5b46a"
+    }
+  },
+  {
+    "id": "noah",
+    "legacyStory": "noah",
+    "appearance": {
+      "coverColor": "#79543e",
+      "spineColor": "#503829",
+      "accentColor": "#d6b16b"
+    }
+  },
+  {
+    "id": "jonah-and-the-whale",
+    "path": "jonah-and-the-whale.book.json"
+  }
+]

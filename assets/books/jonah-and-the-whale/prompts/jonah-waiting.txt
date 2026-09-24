@@ -1,0 +1,5 @@
+Use case: character transition for the final Jonah pages.
+Asset type: transparent, full-body Jonah character cutout, based on the established Jonah character artwork.
+Art brief (recorded after generation; this is not an exact provider prompt transcript): Jonah stands with a thoughtful, unsettled expression and one hand resting near his chin, as if waiting outside Nineveh and wrestling with what has happened. Keep his age, dark curly hair and beard, cream tunic, rust-red cloak, sandals, painted proportions, and warm watercolor-gouache texture consistent with the original Jonah cutout.
+Composition: front three-quarter view, complete feet and cloak visible, centered with transparent margins, readable at small picture-book stage size.
+Avoid: a broad smile, a comic or exaggerated angry face, new props, background, lettering, border, watermark, or hard CGI rendering.

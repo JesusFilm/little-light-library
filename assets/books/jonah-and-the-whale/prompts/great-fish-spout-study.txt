@@ -1,0 +1,5 @@
+Reference-only source PNG copied from the first output of `great-fish-open-mouth.txt`.
+That variant includes a blowhole fountain that is unsuitable for the underwater
+scene, so it has no reader WebP and is not registered in the book. The active
+fish is `source-art/great-fish-open-mouth.png`, corrected with
+`great-fish-open-mouth-correction.txt`.
