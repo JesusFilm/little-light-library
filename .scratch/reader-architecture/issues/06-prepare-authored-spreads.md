@@ -4,10 +4,10 @@
 
 **Blocked by:** 04: Control playback and recover failures.
 
-**Status:** ready-for-agent
+**Status:** ready-for-human
 
-- [ ] Authored visual preparation owns its textures and scene objects until the current successful result commits; failed or superseded work disposes them.
-- [ ] The last completed artwork remains visible during a pending authored load and after an artwork failure, while requested text and the existing artwork retry remain available.
-- [ ] Narration failure leaves committed artwork and text usable; retry remains paused.
-- [ ] A newer page or book choice cannot be overwritten by an older authored result or error.
-- [ ] Authored interactions, reduced motion, page-turn reveal, and autoplay timing retain their existing behavior.
+- [x] Authored visual preparation owns its textures and scene objects until the current successful result commits; failed or superseded work disposes them.
+- [x] The last completed artwork remains visible during a pending authored load and after an artwork failure, while requested text and the existing artwork retry remain available.
+- [x] Narration failure leaves committed artwork and text usable; retry remains paused.
+- [x] A newer page or book choice cannot be overwritten by an older authored result or error.
+- [x] Authored interactions, reduced motion, page-turn reveal, and autoplay timing retain their existing behavior.

@@ -1576,12 +1576,33 @@ export class LibraryScene {
     this.foldingOut = 0;
   }
   async spread(story: Story, page: Page, locale: LocaleData) {
+    const generation = ++this.loadGeneration;
+    const authored = page.authored;
+    // Build authored artwork off scene. The previous completed spread stays visible
+    // until every asset is ready and this request still owns the commit.
+    let preparedAuthored: AuthoredStage | undefined;
+    if (authored) {
+      try {
+        preparedAuthored = await AuthoredStage.create(
+          authored.book,
+          authored.spread,
+          new THREE.TextureLoader(),
+          () => !this.disposed && generation === this.loadGeneration,
+        );
+      } catch (error) {
+        if (generation !== this.loadGeneration || this.disposed) return;
+        throw error;
+      }
+      if (generation !== this.loadGeneration || this.disposed) {
+        preparedAuthored.dispose();
+        return;
+      }
+    }
     this.shelfCoverMotion = undefined;
     this.clearCreatureTargets();
     this.clearReadingFocus();
     this.roomOrbit.reset();
     this.drift.set(0, 0);
-    const generation = ++this.loadGeneration;
     const wasRoom = this.mode === "room";
     const landedShelfBook = wasRoom && this.landedShelfBook;
     this.landedShelfBook = false;
@@ -1653,7 +1674,10 @@ export class LibraryScene {
     if (!wasRoom && !this.reduced && this.popups.length && this.loadedPage) {
       this.foldingOut = performance.now();
       await new Promise((resolve) => setTimeout(resolve, 260));
-      if (generation !== this.loadGeneration) return;
+      if (generation !== this.loadGeneration) {
+        preparedAuthored?.dispose();
+        return;
+      }
     }
     this.foldingOut = 0;
     this.mode = "spread";
@@ -1695,7 +1719,6 @@ export class LibraryScene {
     this.authoredStage = undefined;
     this.authoredPosition = 0;
     this.authoredPlaying = false;
-    const authored = page.authored;
     const loader = new THREE.TextureLoader();
     let texture: THREE.Texture;
     const popup = (x: number, y: number) => {
@@ -1758,13 +1781,7 @@ export class LibraryScene {
       return cutout;
     };
     if (authored) {
-      const stage = await AuthoredStage.create(
-        authored.book,
-        authored.spread,
-        loader,
-        () => !this.disposed && generation === this.loadGeneration,
-      );
-      if (this.disposed || generation !== this.loadGeneration) return;
+      const stage = preparedAuthored!;
       this.pageRoot.add(stage.root);
       this.authoredStage = stage;
       this.pageMaps.push(...stage.textures);
@@ -2250,6 +2267,7 @@ export class LibraryScene {
         this.pageRoot.getObjectByName("stage-ground")?.userData.gardenGround,
       ),
       stageVisible: this.pageRoot.visible,
+      loadedPage: this.loadedPage ?? null,
       stageScale: this.pageRoot.scale.x,
       stageOffsetY: this.pageRoot.position.y,
       stageOffsetZ: this.pageRoot.position.z,

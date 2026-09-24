@@ -360,11 +360,87 @@ try {
       },
     );
   }
+
+  book.assets["later-backdrop"] = {
+    kind: "image",
+    src: "assets/art/theatre/boarding.webp",
+    attribution: "Existing local artwork reused for a disposable test fixture.",
+  };
+  book.spreads[1].backdrop.asset = "later-backdrop";
+  await check(
+    "Pending and failed generic artwork keep the completed spread until Retry",
+    async (page) => {
+      await enter(page);
+      await openBook(page);
+      const before = await page.evaluate(() => window.libraryDebug().scene);
+      assert.equal(before.loadedPage?.index, 0);
+      assert.equal(before.stageVisible, true);
+      const route = url + book.assets[book.spreads[1].backdrop.asset].src;
+      let reached;
+      let release;
+      const requested = new Promise((resolve) => (reached = resolve));
+      const pending = new Promise((resolve) => (release = resolve));
+      await page.route(route, async (request) => {
+        reached();
+        await pending;
+        await request.fulfill({
+          status: 503,
+          body: "Injected artwork failure",
+        });
+      });
+      await page.locator("#next").click();
+      await Promise.race([
+        requested,
+        new Promise((_, reject) =>
+          setTimeout(
+            () => reject(Error("Second backdrop was not requested")),
+            12000,
+          ),
+        ),
+      ]);
+      const whileLoading = await page.evaluate(
+        () => window.libraryDebug().scene,
+      );
+      assert.equal(whileLoading.loadedPage?.index, 0);
+      assert.equal(whileLoading.stageVisible, true);
+      await page.screenshot({
+        path: path.join(path.dirname(output), "authored-pending.png"),
+      });
+      release();
+      await page.locator("#notice button").waitFor({ state: "visible" });
+      const afterFailure = await page.evaluate(
+        () => window.libraryDebug().scene,
+      );
+      assert.equal(afterFailure.loadedPage?.index, 0);
+      assert.equal(afterFailure.stageVisible, true);
+      await page.screenshot({
+        path: path.join(path.dirname(output), "authored-failure.png"),
+      });
+      assert.deepEqual(
+        await page.locator(".story-text [data-segment]").allTextContents(),
+        book.spreads[1].segments.map(({ text }) => text),
+      );
+      await page.unroute(route);
+      await page.locator("#notice button").click();
+      await page.waitForFunction(
+        () => window.libraryDebug().scene.loadedPage?.index === 1,
+      );
+      assert.equal(
+        await page.evaluate(() => window.libraryDebug().playing),
+        false,
+      );
+      return {
+        previousArtVisibleDuringLoad: true,
+        previousArtVisibleAfterFailure: true,
+        retryPaused: true,
+      };
+    },
+  );
 } finally {
   await browser?.close();
   await new Promise((resolve) => server.close(resolve));
   results.passed =
-    results.checks.length === 5 &&
+    results.checks.length === 6 &&
     results.checks.every(({ passed }) => passed) &&
     !results.pageErrors.length &&
     !results.unexpectedRequests.length;
