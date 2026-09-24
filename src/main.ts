@@ -62,8 +62,7 @@ let locale: LocaleData,
   manifest: AudioManifest = {},
   scene: LibraryScene,
   narration: Narration | BookNarration,
-  entered = false,
-  ready = false;
+  entered = false;
 let soundscape: Soundscape | undefined;
 let entering = false;
 let toyAudio: ShelfToyAudio | undefined;
@@ -87,6 +86,7 @@ type RoomBook = Awaited<ReturnType<RoomLibrary["resolve"]>>[number];
 let roomBooks: RoomBook[] = [];
 let readerNeedsReload = false;
 let session: ReadingSession<RoomBook>;
+let shownMediaFailure: "artwork" | "narration" | null = null;
 
 async function shelfAction(action: () => Promise<void>) {
   return session.run(action);
@@ -252,7 +252,7 @@ function languageDialog(startup: boolean) {
           toyAudio?.stop();
           readerNeedsReload = Boolean(state.book);
           state.hide();
-          ready = false;
+          session.setReady(false);
           notice();
           try {
             const fetched = await fetchLocale(id);
@@ -294,7 +294,7 @@ function languageDialog(startup: boolean) {
                   await scene.setShelfToys(currentToys);
                 }
                 scene.browseShelf();
-                if (!state.book) ready = true;
+                if (!state.book) session.setReady(true);
                 renderShelf();
               }
             }
@@ -342,23 +342,13 @@ function settingsDialog() {
   const d = $<HTMLDialogElement>("#settings-dialog");
   d.innerHTML = `<h2>${escaped(t("settings"))}</h2><label>${escaped(t("speed"))}<select id="speed">${[0.75, 1, 1.25, 1.5].map((v) => `<option ${prefs.speed === v ? "selected" : ""}>${v}</option>`).join("")}</select></label><label class="check">${escaped(t("audio"))}<input id="audio" type="checkbox" ${prefs.audio ? "checked" : ""}></label><label>${escaped(t("volume"))}<input id="volume" type="range" min="0" max="1" step=".05" value="${prefs.volume}"></label>${button("settings-language", "🌐 " + escaped(t("language")), "wide")}<p class="help">${escaped(t("helpText"))}</p>${button("settings-close", escaped(t("close")), "primary wide")}`;
   $<HTMLSelectElement>("#speed").onchange = (e) => {
-    prefs.speed = Number((e.target as HTMLSelectElement).value);
-    narration?.speed(prefs.speed);
-    persist();
+    session.setSpeed(Number((e.target as HTMLSelectElement).value));
   };
   $<HTMLInputElement>("#audio").onchange = (e) => {
-    prefs.audio = (e.target as HTMLInputElement).checked;
-    narration?.volume(prefs.volume, prefs.audio);
-    soundscape?.settings(prefs.volume, prefs.audio);
-    toyAudio?.settings(prefs.volume, prefs.audio);
-    persist();
+    session.setAudio((e.target as HTMLInputElement).checked);
   };
   $<HTMLInputElement>("#volume").oninput = (e) => {
-    prefs.volume = Number((e.target as HTMLInputElement).value);
-    narration?.volume(prefs.volume, prefs.audio);
-    soundscape?.settings(prefs.volume, prefs.audio);
-    toyAudio?.settings(prefs.volume, prefs.audio);
-    persist();
+    session.setVolume(Number((e.target as HTMLInputElement).value));
   };
   $("#settings-language").onclick = () => {
     d.close();
@@ -389,6 +379,24 @@ function updatePageNavigation() {
   if (previous) previous.disabled = loading || state.page === 0;
   if (next) next.disabled = loading || next.dataset.lastPage === "true";
 }
+function renderMediaFailure() {
+  const failure = session.snapshot.failure;
+  if (failure === shownMediaFailure) return;
+  shownMediaFailure = failure;
+  if (!failure) return;
+  const message = t(failure === "artwork" ? "imageError" : "audioError");
+  notice(message);
+  $("#notice").append(
+    Object.assign(document.createElement("button"), {
+      textContent: t("retry"),
+      onclick: () => void session.retryMedia(),
+    }),
+  );
+  if (failure === "narration") {
+    const status = document.querySelector("#play-status");
+    if (status) status.textContent = message;
+  }
+}
 async function renderPage(
   autoplay: boolean,
   resume: boolean,
@@ -396,8 +404,8 @@ async function renderPage(
   current: () => boolean,
 ) {
   if (!resume) readerNeedsReload = false;
-  const previousReady = ready;
-  ready = false;
+  const previousReady = session.snapshot.playback.ready;
+  session.setReady(false);
   lastHighlight = "";
   const preserveBookSoundtrack = Boolean(
     pageTurn && narration instanceof BookNarration,
@@ -465,27 +473,9 @@ async function renderPage(
   $("#next").onclick = () => {
     void session.turnPage(1);
   };
-  $("#play").onclick = async () => {
-    if (session.snapshot.busy || session.snapshot.loading) return;
-    if (!ready) {
-      await session.loadPage(true);
-      return;
-    }
-    if (narration.clock.playing) {
-      narration.pause();
-      state.hide();
-    } else {
-      const active = narration;
-      if (!(await scene.waitForUnfold(() => current() && narration === active)))
-        return;
-      await active.play();
-      if (!current() || narration !== active || !ready) return;
-      if (active.clock.playing) state.play();
-    }
-    updatePlayback();
-  };
+  $("#play").onclick = () => void session.togglePlayback(current);
   if (resume) {
-    ready = previousReady;
+    session.setReady(previousReady);
     if (
       page.authored &&
       narrationIssues({
@@ -504,15 +494,7 @@ async function renderPage(
     await scene.spread(story, page, locale);
     if (!current()) return;
   } catch (error) {
-    if (current()) {
-      notice(t("imageError"));
-      $("#notice").append(
-        Object.assign(document.createElement("button"), {
-          textContent: t("retry"),
-          onclick: () => void session.loadPage(false),
-        }),
-      );
-    }
+    session.reportFailure("artwork", current);
     return;
   }
   if (!current()) return;
@@ -550,18 +532,11 @@ async function renderPage(
       if (!current() || narration !== active) return;
       if (active.clock.playing) state.play();
     } else state.hide();
-    ready = true;
+    session.setReady(true);
   } catch (error) {
     if (current()) {
-      notice(t("audioError"));
-      $("#notice").append(
-        Object.assign(document.createElement("button"), {
-          textContent: t("retry"),
-          onclick: () => void session.loadPage(false),
-        }),
-      );
-      $("#play-status").textContent = t("audioError");
       state.hide();
+      session.reportFailure("narration", current);
     }
   }
   updatePlayback();
@@ -578,7 +553,7 @@ async function playToy(id: string) {
 }
 function updatePlayback() {
   if (!state.book) return;
-  const playing = Boolean(narration?.clock.playing);
+  const { playing, ready } = session.snapshot.playback;
   const b = document.querySelector<HTMLButtonElement>("#play");
   if (b) {
     const label = t(playing ? "pause" : "play");
@@ -629,13 +604,7 @@ function updatePlayback() {
   }
 }
 document.addEventListener("visibilitychange", () => {
-  soundscape?.pause(document.hidden);
-  if (document.hidden) {
-    toyAudio?.stop();
-    narration?.pause();
-    state.hide();
-    updatePlayback();
-  }
+  session?.visibilityChanged(document.hidden);
 });
 function frame() {
   scene?.playback(Boolean(narration?.clock.playing));
@@ -660,7 +629,7 @@ window.libraryDebug = () => ({
   session: session?.snapshot,
   state: { ...state },
   pagePending: session?.snapshot.loading ?? false,
-  ready,
+  ready: session?.snapshot.playback.ready ?? false,
   shelf: {
     browsing: session?.snapshot.browsing ?? true,
     busy: session?.snapshot.busy ?? false,
@@ -670,12 +639,12 @@ window.libraryDebug = () => ({
     toys: currentToys.map(({ id, label }) => ({ id, label })),
     toyAudioPlaying: toyAudio?.playing ?? false,
   },
-  position: narration?.clock.position,
-  playing: narration?.clock.playing,
+  position: session?.snapshot.playback.position,
+  playing: session?.snapshot.playback.playing,
   segment: narration?.clock.segment,
-  speed: prefs.speed,
-  volume: prefs.volume,
-  audio: prefs.audio,
+  speed: session?.snapshot.playback.speed,
+  volume: session?.snapshot.playback.volume,
+  audio: session?.snapshot.playback.audio,
   onsetSamples: [...onsetSamples],
 });
 async function boot() {
@@ -709,6 +678,8 @@ async function boot() {
         header();
         if (session.snapshot.browsing) renderShelf();
         else updatePageNavigation();
+        renderMediaFailure();
+        updatePlayback();
       },
       (error) =>
         notice(
@@ -780,7 +751,7 @@ async function boot() {
           document.body.classList.remove("reading");
           await refreshRoomBooks();
           scene.browseShelf();
-          if (!state.book) ready = true;
+          if (!state.book) session.setReady(true);
           window.storyLoading.ready();
         },
         resumePage: async () => {
@@ -798,6 +769,63 @@ async function boot() {
         },
         render: ({ autoplay, resume, pageTurn, current }) =>
           renderPage(autoplay, resume, pageTurn, current),
+      },
+      {
+        snapshot: () => ({
+          playing: Boolean(narration?.clock.playing),
+          position: narration?.clock.position ?? 0,
+          speed: prefs.speed,
+          audio: prefs.audio,
+          volume: prefs.volume,
+        }),
+        play: async (current) => {
+          const active = narration;
+          if (
+            !(await scene.waitForUnfold(
+              () => current() && narration === active,
+            ))
+          )
+            return false;
+          await active.play();
+          if (
+            !current() ||
+            narration !== active ||
+            !session.snapshot.playback.ready
+          )
+            return false;
+          if (active.clock.playing) state.play();
+          return active.clock.playing;
+        },
+        pause: () => {
+          narration?.pause();
+          state.hide();
+        },
+        setSpeed: (value) => {
+          prefs.speed = value;
+          narration?.speed(value);
+          persist();
+        },
+        setAudio: (value) => {
+          prefs.audio = value;
+          narration?.volume(prefs.volume, value);
+          soundscape?.settings(prefs.volume, value);
+          toyAudio?.settings(prefs.volume, value);
+          persist();
+        },
+        setVolume: (value) => {
+          prefs.volume = value;
+          narration?.volume(value, prefs.audio);
+          soundscape?.settings(value, prefs.audio);
+          toyAudio?.settings(value, prefs.audio);
+          persist();
+        },
+        visibility: (hidden) => {
+          soundscape?.pause(hidden);
+          if (!hidden) return;
+          toyAudio?.stop();
+          narration?.pause();
+          state.hide();
+        },
       },
     );
     header();

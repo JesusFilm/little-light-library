@@ -81,6 +81,9 @@ test("opening, switching, Library and Continue keep the session place and toys t
   let roomView = true;
   const turning = deferred();
   let committedPage: number | null = null;
+  let mediaPlaying = false;
+  let rejectPlay = false;
+  let speed = 1;
   const entries = [
     { key: "builtin:eden", id: "eden" },
     { key: "builtin:noah", id: "noah" },
@@ -142,6 +145,31 @@ test("opening, switching, Library and Continue keep the session place and toys t
         if (current()) committedPage = page;
       },
     },
+    {
+      snapshot: () => ({
+        playing: mediaPlaying,
+        position: 0,
+        speed,
+        audio: true,
+        volume: 0.8,
+      }),
+      async play() {
+        if (rejectPlay) throw Error("audio device unavailable");
+        mediaPlaying = true;
+        return true;
+      },
+      pause() {
+        mediaPlaying = false;
+      },
+      setSpeed(value) {
+        speed = value;
+      },
+      setAudio() {},
+      setVolume() {},
+      visibility(hidden) {
+        if (hidden) mediaPlaying = false;
+      },
+    },
   );
 
   await session.inspect(entries[0]);
@@ -167,6 +195,22 @@ test("opening, switching, Library and Continue keep the session place and toys t
   assert.equal(await turn, true);
   assert.equal(committedPage, null);
   assert.equal(session.snapshot.loading, false);
+  session.setReady(true);
+  assert.equal(await session.togglePlayback(() => true), true);
+  assert.equal(session.snapshot.playback.playing, true);
+  session.setSpeed(1.25);
+  assert.equal(session.snapshot.playback.speed, 1.25);
+  session.visibilityChanged(true);
+  assert.equal(session.snapshot.playback.playing, false);
+  rejectPlay = true;
+  assert.equal(await session.togglePlayback(() => true), false);
+  assert.equal(session.snapshot.failure, "narration");
+  rejectPlay = false;
+  session.reportFailure("artwork", () => true);
+  assert.equal(session.snapshot.failure, "artwork");
+  assert.equal(await session.retryMedia(), true);
+  assert.equal(session.snapshot.failure, null);
+  assert.equal(session.snapshot.playback.playing, false);
   page = 3;
   const library = session.browseLibrary();
   assert.equal(session.snapshot.busy, true);
