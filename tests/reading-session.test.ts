@@ -79,6 +79,8 @@ test("opening, switching, Library and Continue keep the session place and toys t
   let paused = false;
   let tableScene: string | null = null;
   let roomView = true;
+  const turning = deferred();
+  let committedPage: number | null = null;
   const entries = [
     { key: "builtin:eden", id: "eden" },
     { key: "builtin:noah", id: "noah" },
@@ -94,7 +96,7 @@ test("opening, switching, Library and Continue keep the session place and toys t
       throw error;
     },
     {
-      reading: () => ({ book, page, toys }),
+      reading: () => ({ book, page, pageCount: 8, toys }),
       validate: () => {},
       stop: () => {
         paused = true;
@@ -130,15 +132,41 @@ test("opening, switching, Library and Continue keep the session place and toys t
         roomView = false;
       },
     },
+    {
+      cancel() {},
+      commitTurn(target) {
+        page = target;
+      },
+      async render({ current }) {
+        await turning.promise;
+        if (current()) committedPage = page;
+      },
+    },
   );
 
   await session.inspect(entries[0]);
   assert.equal(await session.openInspected(), true);
   assert.deepEqual(
     { ...session.snapshot.reading, table: session.snapshot.table },
-    { book: "eden", page: 0, toys: ["adam", "eve"], table: "builtin:eden" },
+    {
+      book: "eden",
+      page: 0,
+      pageCount: 8,
+      toys: ["adam", "eve"],
+      table: "builtin:eden",
+    },
   );
   assert.equal(roomView, false);
+  assert.equal(await session.turnPage(-1), false);
+  const turn = session.turnPage(1);
+  assert.equal(session.snapshot.reading.page, 1);
+  assert.equal(session.snapshot.loading, true);
+  assert.equal(await session.turnPage(1), false);
+  session.invalidatePage();
+  turning.resolve();
+  assert.equal(await turn, true);
+  assert.equal(committedPage, null);
+  assert.equal(session.snapshot.loading, false);
   page = 3;
   const library = session.browseLibrary();
   assert.equal(session.snapshot.busy, true);
@@ -159,7 +187,13 @@ test("opening, switching, Library and Continue keep the session place and toys t
   assert.equal(await session.openInspected(), true);
   assert.deepEqual(
     { ...session.snapshot.reading, table: session.snapshot.table },
-    { book: "noah", page: 0, toys: ["ark", "dove"], table: "builtin:noah" },
+    {
+      book: "noah",
+      page: 0,
+      pageCount: 8,
+      toys: ["ark", "dove"],
+      table: "builtin:noah",
+    },
   );
   assert.equal(tableScene, "builtin:noah");
 });

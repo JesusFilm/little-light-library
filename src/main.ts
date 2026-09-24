@@ -63,8 +63,7 @@ let locale: LocaleData,
   scene: LibraryScene,
   narration: Narration | BookNarration,
   entered = false,
-  ready = false,
-  operation = 0;
+  ready = false;
 let soundscape: Soundscape | undefined;
 let entering = false;
 let toyAudio: ShelfToyAudio | undefined;
@@ -86,7 +85,6 @@ function localizedBook() {
 const roomLibrary = new RoomLibrary();
 type RoomBook = Awaited<ReturnType<RoomLibrary["resolve"]>>[number];
 let roomBooks: RoomBook[] = [];
-let pendingPage: Promise<void> | undefined;
 let readerNeedsReload = false;
 let session: ReadingSession<RoomBook>;
 
@@ -248,8 +246,8 @@ function languageDialog(startup: boolean) {
       (b.onclick = async () => {
         const id = b.dataset.locale as LocaleId;
         const applyLanguage = async () => {
-          await pendingPage;
-          const selection = ++operation;
+          await session.waitForPage();
+          const selection = session.invalidatePage();
           narration?.stop();
           toyAudio?.stop();
           readerNeedsReload = Boolean(state.book);
@@ -258,7 +256,7 @@ function languageDialog(startup: boolean) {
           notice();
           try {
             const fetched = await fetchLocale(id);
-            if (selection !== operation) return;
+            if (selection !== session.revision) return;
             locale = fetched;
             state.changeLanguage(id);
             if (
@@ -274,7 +272,7 @@ function languageDialog(startup: boolean) {
             languageDialog(startup);
             if (entered) {
               if (state.book && !session.snapshot.browsing) {
-                await showPage(false);
+                await session.loadPage(false);
                 currentToys = shelfToys(
                   activeBook,
                   state.book,
@@ -301,8 +299,8 @@ function languageDialog(startup: boolean) {
               }
             }
           } catch {
-            if (selection !== operation) return;
-            if (entered && state.book) await showPage(false);
+            if (selection !== session.revision) return;
+            if (entered && state.book) await session.loadPage(false);
             notice(t("error"));
           }
         };
@@ -384,24 +382,20 @@ function failure(error?: unknown) {
   );
   window.storyLoading.fail(t("error"));
 }
-function showPage(autoplay: boolean, resume = false, pageTurn = false) {
-  if (!resume) readerNeedsReload = false;
-  const loading = renderPage(autoplay, resume, pageTurn).finally(() => {
-    if (pendingPage !== loading) return;
-    pendingPage = undefined;
-    const previous = document.querySelector<HTMLButtonElement>("#previous");
-    const next = document.querySelector<HTMLButtonElement>("#next");
-    if (previous) previous.disabled = state.page === 0;
-    if (next) next.disabled = next.dataset.lastPage === "true";
-  });
-  pendingPage = loading;
-  document
-    .querySelectorAll<HTMLButtonElement>("#previous, #next")
-    .forEach((button) => (button.disabled = true));
-  return loading;
+function updatePageNavigation() {
+  const loading = session.snapshot.loading;
+  const previous = document.querySelector<HTMLButtonElement>("#previous");
+  const next = document.querySelector<HTMLButtonElement>("#next");
+  if (previous) previous.disabled = loading || state.page === 0;
+  if (next) next.disabled = loading || next.dataset.lastPage === "true";
 }
-async function renderPage(autoplay: boolean, resume = false, pageTurn = false) {
-  const token = ++operation;
+async function renderPage(
+  autoplay: boolean,
+  resume: boolean,
+  pageTurn: boolean,
+  current: () => boolean,
+) {
+  if (!resume) readerNeedsReload = false;
   const previousReady = ready;
   ready = false;
   lastHighlight = "";
@@ -466,22 +460,15 @@ async function renderPage(autoplay: boolean, resume = false, pageTurn = false) {
   $("#next").setAttribute("aria-label", t("next"));
   $<HTMLButtonElement>("#previous").disabled = state.page === 0;
   $("#previous").onclick = () => {
-    if (session.snapshot.busy || pendingPage) return;
-    soundscape?.cue("page");
-    state.turn(state.page - 1);
-    void showPage(true, false, true);
+    void session.turnPage(-1);
   };
   $("#next").onclick = () => {
-    if (session.snapshot.busy || pendingPage) return;
-    if (state.page >= story.pages.length - 1) return;
-    soundscape?.cue("page");
-    state.turn(state.page + 1);
-    void showPage(true, false, true);
+    void session.turnPage(1);
   };
   $("#play").onclick = async () => {
-    if (session.snapshot.busy || pendingPage) return;
+    if (session.snapshot.busy || session.snapshot.loading) return;
     if (!ready) {
-      await showPage(true);
+      await session.loadPage(true);
       return;
     }
     if (narration.clock.playing) {
@@ -489,14 +476,10 @@ async function renderPage(autoplay: boolean, resume = false, pageTurn = false) {
       state.hide();
     } else {
       const active = narration;
-      if (
-        !(await scene.waitForUnfold(
-          () => token === operation && narration === active,
-        ))
-      )
+      if (!(await scene.waitForUnfold(() => current() && narration === active)))
         return;
       await active.play();
-      if (token !== operation || narration !== active || !ready) return;
+      if (!current() || narration !== active || !ready) return;
       if (active.clock.playing) state.play();
     }
     updatePlayback();
@@ -519,20 +502,20 @@ async function renderPage(autoplay: boolean, resume = false, pageTurn = false) {
   }
   try {
     await scene.spread(story, page, locale);
-    if (token !== operation) return;
+    if (!current()) return;
   } catch (error) {
-    if (token === operation) {
+    if (current()) {
       notice(t("imageError"));
       $("#notice").append(
         Object.assign(document.createElement("button"), {
           textContent: t("retry"),
-          onclick: () => void showPage(false),
+          onclick: () => void session.loadPage(false),
         }),
       );
     }
     return;
   }
-  if (token !== operation) return;
+  if (!current()) return;
   try {
     const authored = page.authored;
     if (
@@ -558,27 +541,23 @@ async function renderPage(autoplay: boolean, resume = false, pageTurn = false) {
             (s) => manifest[`${locale.id}/${story.id}/${page.id}/${s.id}`],
           ),
         );
-    if (token !== operation || !loaded) return;
+    if (!current() || !loaded) return;
     const active = narration;
-    if (
-      !(await scene.waitForUnfold(
-        () => token === operation && narration === active,
-      ))
-    )
+    if (!(await scene.waitForUnfold(() => current() && narration === active)))
       return;
     if (autoplay && !document.hidden) {
       await active.play();
-      if (token !== operation || narration !== active) return;
+      if (!current() || narration !== active) return;
       if (active.clock.playing) state.play();
     } else state.hide();
     ready = true;
   } catch (error) {
-    if (token === operation) {
+    if (current()) {
       notice(t("audioError"));
       $("#notice").append(
         Object.assign(document.createElement("button"), {
           textContent: t("retry"),
-          onclick: () => void showPage(false),
+          onclick: () => void session.loadPage(false),
         }),
       );
       $("#play-status").textContent = t("audioError");
@@ -616,7 +595,7 @@ function updatePlayback() {
     (!(narration instanceof BookNarration) || narration.narrationActive)
   ) {
     const segment = narration.clock.segment;
-    const key = `${operation}/${segment}`;
+    const key = `${session.revision}/${segment}`;
     if (key !== lastHighlight) {
       lastHighlight = key;
       const boundary = narration.clock.durations
@@ -680,7 +659,7 @@ window.libraryDebug = () => ({
   scene: scene?.debug(),
   session: session?.snapshot,
   state: { ...state },
-  pagePending: Boolean(pendingPage),
+  pagePending: session?.snapshot.loading ?? false,
   ready,
   shelf: {
     browsing: session?.snapshot.browsing ?? true,
@@ -729,6 +708,7 @@ async function boot() {
       () => {
         header();
         if (session.snapshot.browsing) renderShelf();
+        else updatePageNavigation();
       },
       (error) =>
         notice(
@@ -738,6 +718,7 @@ async function boot() {
         reading: () => ({
           book: state.book,
           page: state.page,
+          pageCount: state.pageCount,
           toys: currentToys.map(({ id }) => id),
         }),
         validate: (entry) => {
@@ -751,7 +732,6 @@ async function boot() {
             );
         },
         stop: () => {
-          ++operation;
           narration.stop();
           state.hide();
           toyAudio?.stop();
@@ -781,16 +761,16 @@ async function boot() {
           );
           soundscape?.cue("open");
         },
-        showFirstPage: () => showPage(true),
+        showFirstPage: () => session.loadPage(true),
         loadToys: async () => {
           currentToys = shelfToys(activeBook, state.book!, locale, manifest);
           await scene.setShelfToys(currentToys);
         },
         suspendPage: async () => {
-          ++operation;
           narration?.pause();
           state.hide();
-          await pendingPage;
+          scene.browseShelf();
+          await session.waitForPage();
         },
         prepareLibrary: async () => {
           soundscape?.ambience(true);
@@ -806,9 +786,18 @@ async function boot() {
         resumePage: async () => {
           scene.resumeTable();
           document.body.classList.add("reading");
-          await showPage(false, !readerNeedsReload);
+          await session.loadPage(false, !readerNeedsReload);
           soundscape?.pause(document.hidden);
         },
+      },
+      {
+        cancel: () => scene.cancelPendingSpread(),
+        commitTurn: (target) => {
+          soundscape?.cue("page");
+          state.turn(target);
+        },
+        render: ({ autoplay, resume, pageTurn, current }) =>
+          renderPage(autoplay, resume, pageTurn, current),
       },
     );
     header();

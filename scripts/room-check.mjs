@@ -338,6 +338,7 @@ const assertSessionAgreement = (state) => {
   assert.equal(state.session.browsing, state.shelf.browsing);
   assert.equal(state.session.reading.book, state.state.book);
   assert.equal(state.session.reading.page, state.state.page);
+  assert.equal(state.session.loading, state.pagePending);
   assert.deepEqual(
     state.session.reading.toys,
     state.shelf.toys.map(({ id }) => id),
@@ -540,6 +541,8 @@ await check(
       document.querySelector("#next")?.click();
       if (!window.libraryDebug?.().pagePending)
         throw Error("The page load must still be pending before Library");
+      if (!document.querySelector(".reader-meta")?.textContent?.includes("2"))
+        throw Error("Requested page text did not appear before media settled");
       document.querySelector("#shelf")?.click();
     });
     await waitShelf(

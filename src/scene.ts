@@ -1571,6 +1571,10 @@ export class LibraryScene {
     if (cover) this.showSharedCover(cover);
     this.landedShelfBook = true;
   }
+  cancelPendingSpread() {
+    this.loadGeneration++;
+    this.foldingOut = 0;
+  }
   async spread(story: Story, page: Page, locale: LocaleData) {
     this.shelfCoverMotion = undefined;
     this.clearCreatureTargets();

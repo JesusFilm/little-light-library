@@ -8,7 +8,13 @@ export interface ShelfSnapshot<T extends ShelfEntry> {
   inspected: T | null;
   status: string;
   table: string | null;
-  reading: { book: string | null; page: number; toys: string[] };
+  loading: boolean;
+  reading: {
+    book: string | null;
+    page: number;
+    pageCount: number;
+    toys: string[];
+  };
 }
 
 export interface ShelfScene {
@@ -31,6 +37,17 @@ export interface ReadingTransfer<T extends ShelfEntry> {
   resumePage(): Promise<void>;
 }
 
+export interface PagePort {
+  cancel(): void;
+  commitTurn(target: number): void;
+  render(request: {
+    autoplay: boolean;
+    resume: boolean;
+    pageTurn: boolean;
+    current: () => boolean;
+  }): Promise<void>;
+}
+
 export class ReadingSession<T extends ShelfEntry> {
   private current = {
     browsing: true,
@@ -39,6 +56,8 @@ export class ReadingSession<T extends ShelfEntry> {
     status: "",
   };
   private table: string | null = null;
+  private pageGeneration = 0;
+  private pendingPage?: Promise<void>;
 
   constructor(
     private readonly scene: ShelfScene,
@@ -46,14 +65,73 @@ export class ReadingSession<T extends ShelfEntry> {
     private readonly changed: () => void,
     private readonly failed: (error: unknown) => void,
     private readonly transfer?: ReadingTransfer<T>,
+    private readonly pages?: PagePort,
   ) {}
 
   get snapshot(): ShelfSnapshot<T> {
     return {
       ...this.current,
       table: this.table,
-      reading: this.transfer?.reading() ?? { book: null, page: 0, toys: [] },
+      loading: Boolean(this.pendingPage),
+      reading: this.transfer?.reading() ?? {
+        book: null,
+        page: 0,
+        pageCount: 0,
+        toys: [],
+      },
     };
+  }
+
+  get revision() {
+    return this.pageGeneration;
+  }
+
+  invalidatePage() {
+    const generation = ++this.pageGeneration;
+    this.pages?.cancel();
+    return generation;
+  }
+
+  async waitForPage() {
+    await this.pendingPage;
+  }
+
+  loadPage(autoplay: boolean, resume = false, pageTurn = false) {
+    const pages = this.pages;
+    if (!pages) return Promise.resolve();
+    const generation = ++this.pageGeneration;
+    const current = () => generation === this.pageGeneration;
+    let rendering: Promise<void>;
+    try {
+      rendering = pages.render({ autoplay, resume, pageTurn, current });
+    } catch (error) {
+      rendering = Promise.reject(error);
+    }
+    const loading = rendering.finally(() => {
+      if (this.pendingPage !== loading) return;
+      this.pendingPage = undefined;
+      this.changed();
+    });
+    this.pendingPage = loading;
+    this.changed();
+    return loading;
+  }
+
+  async turnPage(delta: -1 | 1): Promise<boolean> {
+    if (
+      !this.pages ||
+      this.current.busy ||
+      this.current.browsing ||
+      this.pendingPage ||
+      !this.snapshot.reading.book
+    )
+      return false;
+    const { page, pageCount } = this.snapshot.reading;
+    const target = page + delta;
+    if (target < 0 || target >= pageCount) return false;
+    this.pages.commitTurn(target);
+    await this.loadPage(true, false, true);
+    return true;
   }
 
   clearTable() {
@@ -128,6 +206,7 @@ export class ReadingSession<T extends ShelfEntry> {
     if (!entry || !transfer) return false;
     return this.run(async () => {
       transfer.validate(entry);
+      this.invalidatePage();
       transfer.stop();
       this.setStatus(
         this.snapshot.reading.book
@@ -153,6 +232,7 @@ export class ReadingSession<T extends ShelfEntry> {
     const transfer = this.transfer;
     if (!transfer) return false;
     return this.run(async () => {
+      this.invalidatePage();
       await transfer.suspendPage();
       this.setBrowsing(true);
       await transfer.prepareLibrary();
