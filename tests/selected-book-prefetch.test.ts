@@ -128,3 +128,46 @@ test("changing inspection and returning abort only the selected book's requests"
       });
   }
 });
+
+test("inspection pause runs before prefetch and cannot cancel the new request", async () => {
+  const previous = globalThis.window;
+  Object.defineProperty(globalThis, "window", {
+    configurable: true,
+    value: phoneWindow,
+  });
+  const events: string[] = [];
+  let aborted = 0;
+  const fetcher = ((url: string, init: RequestInit) =>
+    new Promise<Response>((_resolve, reject) => {
+      events.push(`fetch:${url}`);
+      init.signal!.addEventListener("abort", () => {
+        aborted++;
+        reject(new DOMException("Aborted", "AbortError"));
+      });
+    })) as typeof fetch;
+  const prefetch = new SelectedBookPrefetch(fetcher);
+  try {
+    const locale = readJson<LocaleData>("public/content/en-US.json");
+    assert.equal(
+      await prefetch.inspectSelected(entry("eden"), locale, manifest, () => {
+        events.push("pause");
+        prefetch.cancel(); // Matches the session's synchronous pause callback.
+        return Promise.resolve(true);
+      }),
+      true,
+    );
+    assert.equal(events[0], "pause");
+    assert.equal(aborted, 0, "inspection pause did not cancel new prefetch");
+    assert.ok(events.length > 1, "first-page requests began during inspection");
+    prefetch.cancel();
+    assert.equal(aborted, events.length - 1);
+  } finally {
+    prefetch.cancel();
+    if (previous === undefined) Reflect.deleteProperty(globalThis, "window");
+    else
+      Object.defineProperty(globalThis, "window", {
+        configurable: true,
+        value: previous,
+      });
+  }
+});

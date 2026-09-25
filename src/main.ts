@@ -133,9 +133,12 @@ async function inspectShelfBook(key: string) {
   }
   const entry = roomBooks.find((book) => book.key === key);
   if (!entry) return;
-  void selectedBookPrefetch.prepare(entry, locale, manifest).catch(() => {});
-  if (await session.inspect(entry)) $("#shelf-read")?.focus();
-  else selectedBookPrefetch.cancel();
+  if (
+    await selectedBookPrefetch.inspectSelected(entry, locale, manifest, () =>
+      session.inspect(entry),
+    )
+  )
+    $("#shelf-read")?.focus();
 }
 async function returnShelfBook() {
   selectedBookPrefetch.cancel();
@@ -832,7 +835,6 @@ async function boot() {
           return active.clock.playing;
         },
         pause: () => {
-          selectedBookPrefetch.cancel();
           narration?.pause();
           state.hide();
         },
@@ -867,6 +869,7 @@ async function boot() {
         current: () => state.language,
         fetch: fetchLocale,
         pause: () => {
+          selectedBookPrefetch.cancel();
           narration?.stop();
           toyAudio?.stop();
           readerNeedsReload = Boolean(state.book);

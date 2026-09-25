@@ -84,6 +84,25 @@ export class SelectedBookPrefetch {
     this.controller = undefined;
   }
 
+  /** Let inspection's synchronous pause run before beginning network work. */
+  async inspectSelected(
+    entry: ResolvedRoomEntry,
+    locale: LocaleData,
+    manifest: AudioManifest,
+    beginInspection: () => Promise<boolean>,
+  ): Promise<boolean> {
+    const inspection = beginInspection();
+    void this.prepare(entry, locale, manifest).catch(() => {});
+    try {
+      const accepted = await inspection;
+      if (!accepted) this.cancel();
+      return accepted;
+    } catch (error) {
+      this.cancel();
+      throw error;
+    }
+  }
+
   async prepare(
     entry: ResolvedRoomEntry,
     locale: LocaleData,
