@@ -311,12 +311,13 @@ export function createRigidPaperActor(
   let disposed = false;
   return {
     root,
-    update(_time, _mood, _speaking, _reduced, reaction = 0, hover = false) {
+    update(_time, _mood, _speaking, reduced, reaction = 0, hover = false) {
       if (disposed) return;
       const touch = Number.isFinite(reaction)
         ? THREE.MathUtils.clamp(reaction, 0, 1)
         : 0;
-      material.emissiveIntensity = touch * 0.16 + (hover ? 0.035 : 0);
+      material.emissiveIntensity = touch * 0.22 + (hover ? 0.035 : 0);
+      imageCard.scale.setScalar(1 + (reduced ? 0 : touch * 0.055));
     },
     dispose() {
       if (disposed) return;
@@ -450,7 +451,7 @@ export function createPaperActor(
       const touch = Number.isFinite(reaction)
         ? THREE.MathUtils.clamp(reaction, 0, 1)
         : 0;
-      material.emissiveIntensity = touch * 0.16 + (hover ? 0.035 : 0);
+      material.emissiveIntensity = touch * 0.22 + (hover ? 0.035 : 0);
       const hammering = Boolean(
         split && kind === "noah" && mood === "work" && !reduced,
       );
@@ -487,7 +488,7 @@ export function createPaperActor(
         work: 0.004,
         hope: -0.008,
       }[mood];
-      const reactionLean = touch * (mood === "sad" ? 0.003 : -0.012);
+      const reactionLean = touch * (mood === "sad" ? 0.006 : -0.026);
       currentLean += (leanTarget + reactionLean - currentLean) * blend;
       root.rotation.z = currentLean + (speaking ? -0.002 : 0);
       // Pose 0 has the mallet in the raised image-left hand. Pause, strike,

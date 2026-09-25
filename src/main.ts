@@ -383,15 +383,37 @@ async function renderPage(
     const { book, spread } = page.authored;
     $(".reader").setAttribute("lang", book.locale);
     $(".reader-controls").setAttribute("lang", locale.id);
-    const interactiveElements = spread.elements.filter((e) => e.interaction);
+    const interactiveElements = spread.elements.filter(
+      (e) => e.kind === "actor" || e.interaction,
+    );
     if (interactiveElements.length) {
       const interactions = document.createElement("div");
       interactions.className = "authored-interactions";
       interactions.setAttribute("aria-label", "Story interactions");
       for (const element of interactiveElements) {
         const b = document.createElement("button");
-        b.textContent = element.interaction!.label;
+        b.type = "button";
+        b.textContent = element.interaction?.label ?? element.label;
         b.dataset.element = element.id;
+        if (element.interaction?.effect === "hold-rock") {
+          const release = () => scene.releaseAuthoredHolds();
+          b.onpointerdown = (event) => {
+            if (event.button !== 0) return;
+            b.setPointerCapture(event.pointerId);
+            scene.holdAuthored(element.id, true);
+          };
+          b.onpointerup = release;
+          b.onpointercancel = release;
+          b.onlostpointercapture = release;
+          b.onkeydown = (event) => {
+            if (event.key === " " || event.key === "Enter")
+              scene.holdAuthored(element.id, true);
+          };
+          b.onkeyup = (event) => {
+            if (event.key === " " || event.key === "Enter") release();
+          };
+          b.onblur = release;
+        }
         b.onclick = () => {
           const result = scene.activateAuthored(element.id);
           if (result) {
@@ -544,6 +566,7 @@ function updatePlayback() {
   }
 }
 document.addEventListener("visibilitychange", () => {
+  if (document.hidden) scene?.releaseAuthoredHolds();
   session?.visibilityChanged(document.hidden);
 });
 function frame() {
@@ -606,6 +629,10 @@ async function boot() {
         else if (id.startsWith("toy:")) void playToy(id.slice(4));
       },
       () => soundscape?.cue("tap"),
+      (result) => {
+        notice(result.response, bookLocale || activeBook?.locale || locale.id);
+        if (result.sound) soundscape?.cue(result.sound);
+      },
     );
     session = new ReadingSession<RoomBook>(
       scene,

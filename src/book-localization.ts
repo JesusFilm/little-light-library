@@ -177,6 +177,9 @@ export function resolveBook(book: AuthoredBook, locale: string): AuthoredBook {
           ...(element.interaction.sound
             ? { sound: element.interaction.sound }
             : {}),
+          ...(element.interaction.effect
+            ? { effect: element.interaction.effect }
+            : {}),
         };
     }
   }

@@ -178,7 +178,12 @@ export const bookSchema = {
                   placement,
                   motion,
                   interaction: object(
-                    { label: text, response: text, sound: choice("tap") },
+                    {
+                      label: text,
+                      response: text,
+                      sound: choice("tap"),
+                      effect: choice("hop", "hold-rock"),
+                    },
                     ["label", "response"],
                   ),
                 },

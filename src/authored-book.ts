@@ -43,7 +43,13 @@ export interface BookElement extends BookImageFlip {
   pose?: { index: number; columns: number };
   placement: BookPlacement;
   motion?: BookMotion;
-  interaction?: { label: string; response: string; sound?: "tap" };
+  interaction?: {
+    label: string;
+    response: string;
+    sound?: "tap";
+    /** Optional bounded stage response layered over the element's open motion. */
+    effect?: "hop" | "hold-rock";
+  };
 }
 export interface BookSegment {
   id: string;
