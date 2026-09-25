@@ -12,7 +12,8 @@ phone images and MP3 audio without changing book, spread, segment, or asset IDs.
   Original recordings, prompt/source notes, and attribution remain available.
 - The 114 original runtime images remain under `public/assets/`. The generator
   creates `.mobile.webp` derivatives for narrow screens, at up to 768 px on
-  scenery, 640 px on most cutouts, and 1152 px on multi-pose actor atlases.
+  scenery, 640 px on most cutouts, and 960 px on multi-pose actor atlases (320 px per pose, above their
+  rendered phone size).
   Three `.cover.webp` derivatives at up to 256 px serve the shelf. The explicit
   `src/generated-media.ts` list lets new or fixture images use their original
   paths until optimized.

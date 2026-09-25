@@ -79,7 +79,7 @@ def optimize_images() -> tuple[int, int, int]:
             # retains ample detail at the renderer's bounded 1.5x pixel ratio.
             alpha = "A" in image.getbands()
             max_side = (
-                1152 if "-poses" in source.stem
+                960 if "-poses" in source.stem
                 else 640 if alpha and image.width / image.height < 1.5
                 else MOBILE_MAX_SIDE
             )
