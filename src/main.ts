@@ -2,6 +2,7 @@ import { validateBook } from "./book-validation";
 import { ShelfToyAudio } from "./shelf-toy-audio";
 import { shelfToys, type ShelfToy } from "./room-toys";
 import { RoomLibrary } from "./room-library";
+import { SelectedBookPrefetch } from "./selected-book-prefetch";
 import { BookNarration } from "./book-reader-audio";
 import {
   productionLanguages,
@@ -82,6 +83,7 @@ function localizedBook() {
   return viewBook!;
 }
 const roomLibrary = new RoomLibrary();
+const selectedBookPrefetch = new SelectedBookPrefetch();
 type RoomBook = Awaited<ReturnType<RoomLibrary["resolve"]>>[number];
 let roomBooks: RoomBook[] = [];
 let readerNeedsReload = false;
@@ -124,15 +126,19 @@ function renderShelf() {
 }
 async function inspectShelfBook(key: string) {
   if (session.snapshot.busy || !entered) return;
+  if (session.snapshot.inspected?.key === key) return;
   if (key === session.snapshot.table) {
     await resumeReading();
     return;
   }
   const entry = roomBooks.find((book) => book.key === key);
   if (!entry) return;
+  void selectedBookPrefetch.prepare(entry, locale, manifest).catch(() => {});
   if (await session.inspect(entry)) $("#shelf-read")?.focus();
+  else selectedBookPrefetch.cancel();
 }
 async function returnShelfBook() {
+  selectedBookPrefetch.cancel();
   const key = session.snapshot.inspected?.key;
   if (key && (await session.returnInspected()))
     document
@@ -826,6 +832,7 @@ async function boot() {
           return active.clock.playing;
         },
         pause: () => {
+          selectedBookPrefetch.cancel();
           narration?.pause();
           state.hide();
         },

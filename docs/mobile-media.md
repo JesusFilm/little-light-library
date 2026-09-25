@@ -22,6 +22,13 @@ phone images and MP3 audio without changing book, spread, segment, or asset IDs.
   512,000 bytes total; Data Saver disables preparation. Page changes clear
   prior encoded preparation, and the decoded buffers from prior pages are
   released. `BookAudio.cacheFootprint` reports decoded and encoded residency.
+- Inspecting one shelf book begins fetching just that book's first-page phone
+  art and localized compressed audio into the browser HTTP cache. It does not
+  decode those files or inspect other shelf books. Requests are capped at
+  three parallel images and one audio cue; changing selection, returning the
+  preview, or changing language aborts in-flight requests. Data Saver skips
+  inspection prefetch. The current catalog's largest first-page encoded set is
+  under 650 kB across all nine locales.
 
 The conversion script checks source/MP3 container durations within 3 ms, and
 the reader uses Web Audio's decoded durations for its segment clock. Run

@@ -42,6 +42,7 @@ import {
   type TurnDirection,
 } from "./turning-leaf";
 import { stageDirections } from "./stage-direction";
+import { legacyStageImageSources, stageAssetUrl } from "./legacy-stage-media";
 import { mobileImageUrl } from "./mobile-images";
 import { alphaBounds } from "./alpha-bounds";
 import {
@@ -235,14 +236,6 @@ function fitCutout(texture: THREE.Texture, cell = 0, cells = 1) {
     (bounds.maxX - bounds.minX + 1) / (bounds.maxY - bounds.minY + 1);
 }
 
-/** Resolve either a retained theatre shorthand or a local path relative to public/. */
-function stageAssetUrl(source: string) {
-  if (source.startsWith("assets/")) return `./${source}`;
-  if (source.startsWith("./")) return source;
-  if (source.startsWith("/")) return `.${source}`;
-  const filename = /\.[a-z0-9]+$/i.test(source) ? source : `${source}.webp`;
-  return `./assets/art/theatre/${filename}`;
-}
 const roomTint = new THREE.Color(0xffdc91);
 const roomGlow = new THREE.Color(0x251600);
 const constrainedPhone = () => {
@@ -1848,43 +1841,7 @@ export class LibraryScene {
       // Begin the current spread's unique image transfers together. Each
       // later use receives its own Texture (atlas offsets may differ), while
       // the decoded image and network request are shared per URL.
-      [
-        direction.background,
-        direction.ground,
-        ...direction.actors.map((actor) =>
-          actor.image
-            ? actor.image
-            : `assets/art/theatre/${actor.kind}-poses.webp`,
-        ),
-        ...(direction.props ?? []).map((prop) => prop.file),
-        ...(direction.family
-          ? [
-              typeof direction.family === "object"
-                ? direction.family.file
-                : "family-seven.webp",
-            ]
-          : []),
-        ...(direction.ark
-          ? [
-              typeof direction.ark === "object"
-                ? direction.ark.file
-                : "ark.webp",
-            ]
-          : []),
-        ...(direction.dove
-          ? [
-              typeof direction.dove === "object"
-                ? direction.dove.file
-                : "dove-olive.webp",
-            ]
-          : []),
-        ...(direction.tree !== undefined ? ["assets/art/eden-tree.webp"] : []),
-        ...(Array.isArray(direction.waves)
-          ? direction.waves.map((wave) => wave.file)
-          : direction.waves
-            ? ["assets/books/jonah-and-the-whale/art/storm-wave-layer.webp"]
-            : []),
-      ].forEach(stageImage);
+      legacyStageImageSources(direction).forEach(stageImage);
       draft.wideEnsemble = Boolean(direction.family);
       const backdrop = direction.background;
       draft.actorMood = direction.actors[0]?.mood || "listen";
