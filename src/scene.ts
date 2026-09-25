@@ -10,6 +10,7 @@ import {
 } from "./reading-focus";
 import { createPageGround } from "./garden-floor";
 import { RoomOrbitGesture, orbitRoomGoal } from "./room-orbit";
+import { cameraBlendForElapsed } from "./camera-settle";
 import {
   wallPaperUv,
   curtainGeometry,
@@ -2660,9 +2661,8 @@ export class LibraryScene {
         !document.querySelector("#loading:not([hidden])"),
       this.reduced,
     );
-    const dt = this.lastFrame
-      ? Math.min(0.05, (now - this.lastFrame) / 1000)
-      : 0.016;
+    const elapsed = this.lastFrame ? (now - this.lastFrame) / 1000 : 0.016;
+    const dt = Math.min(0.05, elapsed);
     if (this.lastFrame && now - this.lastFrame > 28) this.slowFrames++;
     else this.slowFrames = Math.max(0, this.slowFrames - 1);
     if (this.slowFrames > 45 && !this.lowQuality) {
@@ -2688,8 +2688,11 @@ export class LibraryScene {
       goal.x += this.drift.x * 0.32;
       goal.y -= this.drift.y * 0.15;
     }
-    this.camera.position.lerp(goal, this.reduced ? 1 : 1 - Math.exp(-dt * 3.4));
-    this.look.lerp(this.lookGoal, this.reduced ? 1 : 1 - Math.exp(-dt * 3.4));
+    // Camera settling must follow wall time even when software rendering produces
+    // only a few frames per second. The capped dt above is for actor animation.
+    const cameraBlend = cameraBlendForElapsed(elapsed, this.reduced);
+    this.camera.position.lerp(goal, cameraBlend);
+    this.look.lerp(this.lookGoal, cameraBlend);
     this.camera.lookAt(this.look);
     if (this.reviewTime !== undefined) {
       this.camera.position.copy(orbitGoal);
