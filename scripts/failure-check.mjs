@@ -73,7 +73,7 @@ let browser;
 
 const enter = async (page, navigate = true) => {
   if (navigate) await page.goto(url);
-  await page.locator("#enter").click();
+  await page.locator("#enter").tap();
   await page.waitForFunction(
     (count) =>
       window.libraryDebug?.().ready &&
@@ -88,13 +88,13 @@ const enter = async (page, navigate = true) => {
   );
 };
 const openBook = async (page) => {
-  await page.locator('[data-shelf-key="book:fixture-book"]').click();
+  await page.locator('[data-shelf-key="book:fixture-book"]').tap();
   await page.waitForFunction(
     () =>
       window.libraryDebug?.().shelf.inspected === "book:fixture-book" &&
       !window.libraryDebug?.().shelf.busy,
   );
-  await page.locator("#shelf-read").click();
+  await page.locator("#shelf-read").tap();
   await page.waitForFunction(
     () =>
       window.libraryDebug?.().shelf.table === "book:fixture-book" &&
@@ -119,7 +119,7 @@ const recoverStartup = async (page, route) => {
   await page.unroute(route);
   if (route.endsWith("/fixture-book.book.json"))
     await page.route(route, (request) => request.fulfill({ json: book }));
-  await page.locator(".loading-retry").click();
+  await page.locator(".loading-retry").tap();
   await enter(page, false);
   assert.equal((await page.locator("#notice").innerText()).trim(), "");
 };
@@ -139,6 +139,8 @@ const check = async (name, run) => {
   console.log(`Running: ${name}`);
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },
+    isMobile: true,
+    hasTouch: true,
     reducedMotion: "reduce",
     serviceWorkers: "block",
   });
@@ -295,7 +297,7 @@ try {
           .count(),
         1,
       );
-      await page.locator('[data-shelf-key="book:jonah-and-the-whale"]').click();
+      await page.locator('[data-shelf-key="book:jonah-and-the-whale"]').tap();
       await page.waitForFunction(
         () =>
           window.libraryDebug?.().shelf.inspected ===
@@ -362,7 +364,7 @@ try {
         const restored = page.waitForResponse(
           (response) => response.url() === route && response.ok(),
         );
-        await page.locator("#notice button").click();
+        await page.locator("#notice button").tap();
         await restored;
         await page.waitForFunction(
           () =>
@@ -388,7 +390,7 @@ try {
           ids,
           book.spreads[0].elements.map(({ id }) => id),
         );
-        await page.locator("#play").click();
+        await page.locator("#play").tap();
         await page.waitForFunction(
           () =>
             window.libraryDebug?.().playing &&
@@ -434,7 +436,7 @@ try {
           body: "Injected artwork failure",
         });
       });
-      await page.locator("#next").click();
+      await page.locator("#next").tap();
       await Promise.race([
         requested,
         new Promise((_, reject) =>
@@ -467,7 +469,7 @@ try {
         book.spreads[1].segments.map(({ text }) => text),
       );
       await page.unroute(route);
-      await page.locator("#notice button").click();
+      await page.locator("#notice button").tap();
       await page.waitForFunction(
         () => window.libraryDebug().scene.loadedPage?.index === 1,
       );
@@ -494,14 +496,14 @@ try {
       async (page) => {
         await enter(page);
         const key = `builtin:${story}`;
-        await page.locator(`[data-shelf-key="${key}"]`).click();
+        await page.locator(`[data-shelf-key="${key}"]`).tap();
         await page.waitForFunction(
           (selected) =>
             window.libraryDebug().shelf.inspected === selected &&
             !window.libraryDebug().shelf.busy,
           key,
         );
-        await page.locator("#shelf-read").click();
+        await page.locator("#shelf-read").tap();
         await page.waitForFunction(
           (selected) =>
             window.libraryDebug().shelf.table === selected &&
@@ -522,7 +524,7 @@ try {
             body: "Injected legacy art failure",
           });
         });
-        await page.locator("#next").click();
+        await page.locator("#next").tap();
         await Promise.race([
           requested,
           new Promise((_, reject) =>
@@ -542,7 +544,7 @@ try {
         assert.equal(failed.stageVisible, true);
         assert.match(await page.locator(".reader-meta").innerText(), /2/);
         await page.unroute(route);
-        await page.locator("#notice button").click();
+        await page.locator("#notice button").tap();
         await page.waitForFunction(
           () => window.libraryDebug().scene.loadedPage?.index === 1,
         );
@@ -562,13 +564,13 @@ try {
     "Leaving during a legacy load cannot commit stale actors or artwork",
     async (page) => {
       await enter(page);
-      await page.locator('[data-shelf-key="builtin:eden"]').click();
+      await page.locator('[data-shelf-key="builtin:eden"]').tap();
       await page.waitForFunction(
         () =>
           window.libraryDebug().shelf.inspected === "builtin:eden" &&
           !window.libraryDebug().shelf.busy,
       );
-      await page.locator("#shelf-read").click();
+      await page.locator("#shelf-read").tap();
       await page.waitForFunction(
         () =>
           window.libraryDebug().scene.loadedPage?.index === 0 &&
@@ -584,7 +586,7 @@ try {
         await pending;
         await request.continue();
       });
-      await page.locator("#next").click();
+      await page.locator("#next").tap();
       await Promise.race([
         requested,
         new Promise((_, reject) =>
@@ -594,7 +596,7 @@ try {
           ),
         ),
       ]);
-      await page.locator("#shelf").click();
+      await page.locator("#shelf").tap();
       release();
       await page.waitForFunction(
         () =>
@@ -606,7 +608,7 @@ try {
       assert.equal(onShelf.scene.loadedPage?.index, 0);
       assert.equal(onShelf.session.failure, null);
       await page.unroute(route);
-      await page.locator("#shelf").click();
+      await page.locator("#shelf").tap();
       await page.waitForFunction(
         () =>
           !window.libraryDebug().shelf.browsing &&

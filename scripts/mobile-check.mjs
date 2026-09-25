@@ -498,26 +498,47 @@ try {
       await page.setViewportSize({ width: 740, height: 360 });
       await inspectLayout(page, scenario, "landscape");
       await page.setViewportSize(profile.viewport);
-      const intervals = await page.evaluate(
+      const cadence = await page.evaluate(
         () =>
           new Promise((resolve) => {
-            const values = [];
-            let previous = performance.now();
+            const callbacks = [],
+              renders = [];
+            let previous = performance.now(),
+              frameCount = -1;
             function frame(now) {
-              values.push(now - previous);
+              callbacks.push(now - previous);
               previous = now;
-              if (values.length < 90) requestAnimationFrame(frame);
-              else resolve(values.slice(5).sort((a, b) => a - b));
+              const scene = window.libraryDebug().scene;
+              if (
+                scene.renderedFrames !== frameCount &&
+                scene.renderFrameIntervalMs > 0
+              ) {
+                renders.push(scene.renderFrameIntervalMs);
+                frameCount = scene.renderedFrames;
+              }
+              if (callbacks.length < 120) requestAnimationFrame(frame);
+              else
+                resolve({
+                  callbacks: callbacks.slice(5),
+                  renders: renders.slice(3),
+                });
             }
             requestAnimationFrame(frame);
           }),
       );
-      budget(
-        scenario,
-        "frameP95Ms",
-        Math.round(intervals[Math.floor(intervals.length * 0.95)]),
-        limits.frameP95Ms,
+      assert.ok(
+        cadence.renders.length >= 20,
+        "Scene continues rendering during reading",
       );
+      for (const [name, values] of Object.entries(cadence)) {
+        values.sort((a, b) => a - b);
+        budget(
+          scenario,
+          `${name}.frameP95Ms`,
+          Math.round(values[Math.floor(values.length * 0.95)]),
+          limits.frameP95Ms,
+        );
+      }
       // Return/continue must retain the book and requested page after real transfer.
       await page.locator("#shelf").tap();
       await page.waitForFunction(
