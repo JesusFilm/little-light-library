@@ -834,6 +834,10 @@ export class BookAudio {
 
   pause() {
     this.playRequest++;
+    if (this.prefetchTimer) clearTimeout(this.prefetchTimer);
+    this.prefetchTimer = undefined;
+    this.prefetchAbort?.abort();
+    this.prefetchAbort = undefined;
     this.cursor = this.position;
     this.active = false;
     this.unschedule();
