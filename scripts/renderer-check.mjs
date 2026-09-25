@@ -4,7 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import { chromium } from "playwright";
 
-// Temporary CI comparison of headless WebGL backends. This is an unthrottled
+// Manual comparison of headless WebGL backends. This is an unthrottled
 // browser diagnostic, not a Samsung A50 GPU or mobile acceptance benchmark.
 const dist = path.resolve("dist");
 const output = path.resolve(".test-output/renderer-diagnostic");
@@ -176,7 +176,7 @@ async function measure(variant) {
     result.edenArtMs = Math.round(performance.now() - reading);
     result.shelfToEdenMs = Math.round(performance.now() - journey);
     result.renderer = await page.evaluate(() => {
-      const canvas = document.querySelector("canvas");
+      const canvas = document.querySelector("#scene canvas");
       const gl = canvas?.getContext("webgl2") || canvas?.getContext("webgl");
       const info = gl?.getExtension("WEBGL_debug_renderer_info");
       return {
