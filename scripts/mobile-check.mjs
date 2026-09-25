@@ -355,6 +355,10 @@ try {
         titleFor(entry.id, "en-US", 0),
       );
       await inspectLayout(page, scenario, "portrait-first");
+      const initialGpu = await page.evaluate(() => {
+        const scene = window.libraryDebug().scene;
+        return { textures: scene.gpuTextures, geometries: scene.gpuGeometries };
+      });
 
       if (!(await page.evaluate(() => window.libraryDebug().playing)))
         await page.locator("#play").tap();
@@ -551,6 +555,24 @@ try {
       assert.equal(
         await page.locator(".reader h1").textContent(),
         titleFor(entry.id, locales.at(-1), 0),
+      );
+      const finalGpu = await page.evaluate(() => {
+        const scene = window.libraryDebug().scene;
+        return { textures: scene.gpuTextures, geometries: scene.gpuGeometries };
+      });
+      scenario.gpuResources = { initial: initialGpu, final: finalGpu };
+      assert.ok(
+        Number.isFinite(finalGpu.textures) &&
+          Number.isFinite(finalGpu.geometries),
+        "GPU resource counts are observable",
+      );
+      assert.ok(
+        finalGpu.textures <= initialGpu.textures + limits.textureGrowth,
+        "Repeated transfers do not accumulate page textures",
+      );
+      assert.ok(
+        finalGpu.geometries <= initialGpu.geometries + limits.geometryGrowth,
+        "Repeated transfers do not accumulate page geometry",
       );
       assert.deepEqual(
         scenario.errors,

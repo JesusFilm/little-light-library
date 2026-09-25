@@ -1,6 +1,9 @@
 {
   "profile": {
-    "viewport": { "width": 360, "height": 660 },
+    "viewport": {
+      "width": 360,
+      "height": 660
+    },
     "deviceScaleFactor": 3,
     "cpuSlowdown": 4,
     "latencyMs": 150,
@@ -20,6 +23,8 @@
     "languageMs": 3000,
     "minimumPixelRatio": 1.5,
     "frameP95Ms": 50,
-    "pageTransferBytes": 650000
+    "pageTransferBytes": 650000,
+    "textureGrowth": 8,
+    "geometryGrowth": 16
   }
 }
