@@ -43,7 +43,9 @@ fs.writeFileSync(tonePath, makeTone());
 const book = readerFixture(root);
 for (const spread of book.spreads) {
   spread.seconds = 1;
-  spread.elements = spread.elements.filter((element) => !element.interaction);
+  spread.elements = spread.elements.filter(
+    (element) => element.kind !== "actor" && !element.interaction,
+  );
   for (const segment of spread.segments) delete segment.narration;
 }
 book.spreads.push({

@@ -46,7 +46,7 @@ Generated per-book review index. Edit the book JSON and media sources, then rege
 
 **Source:** Jonah 1:3
 
-**Staging note:** The ship and Jonah aboard are one illustrated cutout on calm water in Joppa harbor, with the quay and distant limestone city behind it. Jonah stands on the deck beside the crew; no separate Jonah image or beach/paving sits beneath the vessel.
+**Staging note:** The ship and Jonah aboard are one illustrated cutout on calm water in Joppa harbor, with the quay and distant limestone city behind it. Jonah stands on the deck beside the crew; no separate Jonah image or beach/paving sits beneath the vessel. Small fish at the waterline briefly leap when tapped; this optional playful motion is invented staging, not a biblical event.
 
 **Text (source locale):**
 
@@ -58,6 +58,7 @@ Generated per-book review index. Edit the book JSON and media sources, then rege
 **Characters, props, and motion:**
 
 - prop `ship` (Ship and sailors): [assets/books/jonah-and-the-whale/art/ship-jonah-boarding.webp](../../public/assets/books/jonah-and-the-whale/art/ship-jonah-boarding.webp); rock motion on open, loops.
+- prop `small-fish` (Little fish): [assets/books/jonah-and-the-whale/art/small-fish-school.webp](../../public/assets/books/jonah-and-the-whale/art/small-fish-school.webp); static pose; interaction: “Make little fish leap” → “The little fish leap above the harbor water and splash back in.”.
 
 **Narration:**
 
@@ -71,7 +72,7 @@ Generated per-book review index. Edit the book JSON and media sources, then rege
 
 **Source:** Jonah 1:4–5
 
-**Staging note:** A distressed Jonah clings to a smaller, centered deck among three frightened sailors. Three storm crests cross the water at separate depths; a broad foreground crest masks the lower hull while side crests move at distinct rates and parallax.
+**Staging note:** A distressed Jonah clings to a smaller, centered deck among three frightened sailors. Three storm crests cross the water at separate depths; a broad foreground crest masks the lower hull while side crests move at distinct rates and parallax. Holding the ship to deepen its rocking is an optional invented stage response; it adds no story event.
 
 **Text (source locale):**
 
@@ -82,7 +83,7 @@ Generated per-book review index. Edit the book JSON and media sources, then rege
 
 **Characters, props, and motion:**
 
-- actor `ship` (Ship and sailors): [assets/books/jonah-and-the-whale/art/storm-deck-jonah.webp](../../public/assets/books/jonah-and-the-whale/art/storm-deck-jonah.webp); rock motion on open, loops.
+- actor `ship` (Ship and sailors): [assets/books/jonah-and-the-whale/art/storm-deck-jonah.webp](../../public/assets/books/jonah-and-the-whale/art/storm-deck-jonah.webp); rock motion on open, loops; interaction: “Hold to rock the ship” → “The ship rocks with the storm.”.
 - prop `storm-wave-rear` (Ocean wave): [assets/books/jonah-and-the-whale/art/storm-wave-layer.webp](../../public/assets/books/jonah-and-the-whale/art/storm-wave-layer.webp); float motion on open, loops.
 - prop `storm-wave` (Ocean wave): [assets/books/jonah-and-the-whale/art/storm-wave-layer.webp](../../public/assets/books/jonah-and-the-whale/art/storm-wave-layer.webp); float motion on open, loops.
 - prop `storm-wave-front` (Ocean wave): [assets/books/jonah-and-the-whale/art/storm-wave-layer.webp](../../public/assets/books/jonah-and-the-whale/art/storm-wave-layer.webp); float motion on open, loops.

@@ -1,5 +1,6 @@
 import { authoredMotionTransform } from "./book-animation";
 import * as THREE from "three";
+import { installCompactHitMask, visiblePaintHit } from "./room-interaction";
 import type {
   AuthoredBook,
   BookElement,
@@ -42,6 +43,7 @@ type RuntimeElement = {
   baseRotation: number;
   entranceIndex: number;
   interactionStarted?: number;
+  held: boolean;
 };
 
 type RuntimeGround = {
@@ -299,7 +301,10 @@ export class AuthoredStage {
     this.coverTexture = coverTexture;
     this.elements = elements;
     this.interactiveIds = elements
-      .filter(({ definition }) => definition.interaction)
+      .filter(
+        ({ definition }) =>
+          definition.kind === "actor" || definition.interaction,
+      )
       .map(({ definition }) => definition.id);
     let start = 0;
     for (const segment of spread.segments) {
@@ -377,6 +382,8 @@ export class AuthoredStage {
 
       for (const definition of spread.elements) {
         const texture = await load(definition.asset);
+        if (definition.kind === "actor" || definition.interaction)
+          installCompactHitMask(texture);
         if (definition.pose)
           selectAtlasPose(
             texture,
@@ -431,6 +438,7 @@ export class AuthoredStage {
           material,
           baseRotation: pivot.rotation.z,
           entranceIndex,
+          held: false,
         });
       }
       if (!stillCurrent()) throw new Error("authored-stage-superseded");
@@ -467,18 +475,46 @@ export class AuthoredStage {
 
   activate(id: string): AuthoredInteractionResult | undefined {
     const element = this.elements.find(
-      ({ definition }) => definition.id === id && definition.interaction,
+      ({ definition }) =>
+        definition.id === id &&
+        (definition.kind === "actor" || definition.interaction),
     );
-    if (!element?.definition.interaction) return;
+    if (!element) return;
     element.interactionStarted = performance.now() / 1000;
     return {
-      response: element.definition.interaction.response,
-      sound: element.definition.interaction.sound,
+      response:
+        element.definition.interaction?.response ?? element.definition.label,
+      sound: element.definition.interaction?.sound,
     };
+  }
+
+  hit(ray: THREE.Raycaster): string | undefined {
+    const targets = this.elements.filter(
+      ({ definition }) => definition.kind === "actor" || definition.interaction,
+    );
+    for (const hit of ray.intersectObjects(targets.map(({ mesh }) => mesh))) {
+      if (!visiblePaintHit(hit)) continue;
+      return targets.find(({ mesh }) => mesh === hit.object)?.definition.id;
+    }
+  }
+
+  hold(id: string, active: boolean) {
+    const element = this.elements.find(
+      ({ definition }) => definition.id === id,
+    );
+    if (element?.definition.interaction?.effect !== "hold-rock") return false;
+    element.held = active;
+    if (active) element.interactionStarted = performance.now() / 1000;
+    return true;
+  }
+
+  releaseHolds() {
+    for (const element of this.elements) element.held = false;
   }
 
   begin() {
     this.openedAt = undefined;
+    this.releaseHolds();
   }
 
   dispose() {
@@ -486,6 +522,7 @@ export class AuthoredStage {
   }
 
   rest() {
+    this.releaseHolds();
     for (const element of this.elements) {
       element.pivot.position.set(
         0,
@@ -518,7 +555,8 @@ export class AuthoredStage {
         element.interactionStarted === undefined
           ? Infinity
           : now - element.interactionStarted;
-      material.emissiveIntensity = interactionAge < 1.4 ? 0.14 : 0;
+      material.emissiveIntensity =
+        interactionAge < 1.4 || element.held ? 0.18 : 0;
       const motion = definition.motion;
       let elapsed = -1;
       if (motion && !reduced && !folded) {
@@ -548,15 +586,37 @@ export class AuthoredStage {
         material.opacity = entrance.opacity;
         mesh.scale.set(entrance.scale, entrance.scale, 1);
       }
-      pivot.rotation.z = baseRotation + transform.rotation;
+      const effect = definition.interaction?.effect;
+      const hop =
+        effect === "hop" && !reduced && !folded && interactionAge < 0.85
+          ? Math.sin((Math.PI * interactionAge) / 0.85) ** 2 * 0.36
+          : 0;
+      const tapPulse =
+        !effect &&
+        definition.kind === "actor" &&
+        !reduced &&
+        !folded &&
+        interactionAge < 0.7
+          ? Math.sin((Math.PI * interactionAge) / 0.7) ** 2 * 0.055
+          : 0;
+      const rock =
+        effect === "hold-rock" && element.held && !reduced && !folded
+          ? THREE.MathUtils.clamp(transform.rotation * 2, -0.087, 0.087)
+          : transform.rotation;
+      pivot.rotation.z = baseRotation + rock;
       pivot.position.set(
         transform.x * definition.placement.width,
         (definition.placement.elevation ?? 0) +
-          transform.y * definition.placement.height,
+          transform.y * definition.placement.height +
+          hop,
         0,
       );
-      pivot.scale.set(transform.scale, transform.scale, 1);
-      pivot.userData.authoredRocking = transform.rotation;
+      pivot.scale.set(
+        transform.scale + tapPulse,
+        transform.scale + tapPulse,
+        1,
+      );
+      pivot.userData.authoredRocking = rock;
     }
   }
 

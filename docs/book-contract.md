@@ -77,7 +77,7 @@ An element may select `{ "index": 0, "columns": 3 }` from a horizontal image atl
 
 Authored books use their explicit soundtrack layers; procedural library ambience is paused while they are open. The reader master mute/volume and playback rate apply to narration and soundtrack together. Use reader playback for authoring review.
 
-`interaction` supplies a concise accessible `label`, a visible `response`, and optionally `sound: "tap"`. The reader provides named buttons below the text for both pointer activation and a keyboard equivalent (Tab, Enter or Space). Canvas cutouts are not direct hit targets in v1. Do not hide story-critical information exclusively inside an interaction.
+Actors respond to a tap or click on their visible cutout with a short pulse and visible name. Named buttons below the text provide the same feedback through Tab and Enter or Space; authored props need an explicit `interaction` to respond. `interaction` supplies a concise accessible `label`, a visible `response`, and optionally `sound: "tap"`. The optional `effect: "hop"` adds one brief upward movement on activation. `effect: "hold-rock"` deepens an existing rock motion while the cutout or named button is held, then restores its baseline on release, cancellation, page turn, or backgrounding. Both effects are bounded, and reduced-motion mode retains the visible response without the movement. Do not hide story-critical information exclusively inside an interaction.
 
 ## Narration and stale recordings
 

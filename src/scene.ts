@@ -572,7 +572,29 @@ export class LibraryScene {
   private shelfToyButtons: HTMLButtonElement[] = [];
   private toyGeneration = 0;
   private toyResponseTokens = new Map<string, number>();
+  private heldAuthoredPointer?: number;
+  private heldAuthoredId?: string;
+  private hitAuthored(event: PointerEvent) {
+    if (this.mode !== "spread" || !this.authoredStage || !this.pageRoot.visible)
+      return;
+    const bounds = this.renderer.domElement.getBoundingClientRect();
+    this.pointer.set(
+      ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
+      (-(event.clientY - bounds.top) / bounds.height) * 2 + 1,
+    );
+    this.ray.setFromCamera(this.pointer, this.camera);
+    return this.authoredStage.hit(this.ray);
+  }
   private onDown = (event: PointerEvent) => {
+    if (this.mode === "spread" && event.button === 0) {
+      const id = this.hitAuthored(event);
+      if (id && this.authoredStage?.hold(id, true)) {
+        this.heldAuthoredPointer = event.pointerId;
+        this.heldAuthoredId = id;
+        this.renderer.domElement.setPointerCapture(event.pointerId);
+      }
+      return;
+    }
     if (this.mode !== "room" || event.button !== 0) return;
     this.roomOrbit.down(
       event.pointerId,
@@ -582,6 +604,8 @@ export class LibraryScene {
     );
   };
   private onCancel = (event: PointerEvent) => {
+    if (event.pointerId === this.heldAuthoredPointer)
+      this.releaseAuthoredHolds();
     this.roomOrbit.cancel(event.pointerId);
     this.hoveredRoom = null;
     this.renderer.domElement.style.cursor = "";
@@ -609,7 +633,11 @@ export class LibraryScene {
       this.hoveredActor = this.hitActor(e);
       this.hoveredCreature = this.hoveredActor < 0 ? this.hitCreature(e) : -1;
       this.renderer.domElement.style.cursor =
-        this.hoveredActor >= 0 || this.hoveredCreature >= 0 ? "pointer" : "";
+        this.hoveredActor >= 0 ||
+        this.hoveredCreature >= 0 ||
+        Boolean(this.hitAuthored(e))
+          ? "pointer"
+          : "";
     }
     if (this.mode === "room") {
       this.hoveredRoom = this.hitRoom(e);
@@ -622,6 +650,11 @@ export class LibraryScene {
     );
   };
   private onPointer = (event: PointerEvent) => {
+    const heldId =
+      event.pointerId === this.heldAuthoredPointer
+        ? this.heldAuthoredId
+        : undefined;
+    if (heldId) this.releaseAuthoredHolds();
     const tracked = this.roomOrbit.has(event.pointerId);
     const tap = tracked ? this.roomOrbit.up(event.pointerId) : false;
     if (this.renderer.domElement.hasPointerCapture(event.pointerId))
@@ -638,6 +671,12 @@ export class LibraryScene {
     );
     this.ray.setFromCamera(this.pointer, this.camera);
     if (this.mode === "spread") {
+      const authoredId = heldId ?? this.hitAuthored(event);
+      if (authoredId) {
+        const result = this.activateAuthored(authoredId);
+        if (result) this.onAuthoredInteraction(result);
+        return;
+      }
       const index = this.hitActor(event);
       if (index >= 0) this.activateActor(index);
       else {
@@ -693,6 +732,9 @@ export class LibraryScene {
     private container: HTMLElement,
     private onSelect: (id: Selection) => void,
     private onTouch: () => void = () => {},
+    private onAuthoredInteraction: (
+      result: AuthoredInteractionResult,
+    ) => void = () => {},
   ) {
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -1408,6 +1450,7 @@ export class LibraryScene {
     })();
   }
   browseShelf() {
+    this.releaseAuthoredHolds();
     if (this.mode === "room" && this.shelfBrowsingTable) return;
     this.clearReadingFocus();
     this.shelfBrowsingTable = this.bookRoot.visible;
@@ -1969,6 +2012,7 @@ export class LibraryScene {
   }
 
   async spread(story: Story, page: Page, locale: LocaleData) {
+    this.releaseAuthoredHolds();
     const generation = ++this.loadGeneration;
     const authored = page.authored;
     // Build authored artwork off scene. The previous completed spread stays visible
@@ -2264,6 +2308,21 @@ export class LibraryScene {
   activateAuthored(id: string): AuthoredInteractionResult | undefined {
     if (this.mode !== "spread" || this.transitionWaiting) return;
     return this.authoredStage?.activate(id);
+  }
+  holdAuthored(id: string, active: boolean) {
+    if (this.mode !== "spread" || this.transitionWaiting) return;
+    this.authoredStage?.hold(id, active);
+  }
+  releaseAuthoredHolds() {
+    const pointer = this.heldAuthoredPointer;
+    this.heldAuthoredPointer = undefined;
+    this.heldAuthoredId = undefined;
+    this.authoredStage?.releaseHolds();
+    if (
+      pointer !== undefined &&
+      this.renderer.domElement.hasPointerCapture(pointer)
+    )
+      this.renderer.domElement.releasePointerCapture(pointer);
   }
   private projectedBounds(object: THREE.Object3D) {
     object.updateWorldMatrix(true, true);

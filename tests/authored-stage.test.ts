@@ -116,6 +116,7 @@ async function makeStage(
     elevation?: number;
     flipY?: boolean;
     rotation?: number;
+    effect?: "hop" | "hold-rock";
   } = {},
 ) {
   const calls: string[] = [];
@@ -137,6 +138,12 @@ async function makeStage(
   if (options.flipY !== undefined)
     book.spreads[0].elements[0].flipY = options.flipY;
   if (options.rotation !== undefined) placement.rotation = options.rotation;
+  if (options.effect)
+    book.spreads[0].elements[0].interaction = {
+      label: "Try the actor",
+      response: "The actor responds.",
+      effect: options.effect,
+    };
   const stage = await AuthoredStage.create(
     book,
     book.spreads[0],
@@ -216,6 +223,53 @@ test("reduced motion holds the authored base rotation without rocking", async ()
       closeTo(element.rotation, THREE.MathUtils.degToRad(7));
     }
   });
+});
+
+test("a held rock returns to baseline on release, rest, and reduced motion", async () => {
+  const { stage } = await makeStage(
+    { preset: "rock", trigger: "open", duration: 1, strength: 2.2, loop: true },
+    { effect: "hold-rock" },
+  );
+  stage.update(0.25, false, false, false, true);
+  const baseline = stage.debug().elements[0].rocking;
+  assert.ok(baseline > 0);
+  assert.equal(stage.hold("actor", true), true);
+  stage.update(0.25, false, false, false, true);
+  closeTo(stage.debug().elements[0].rocking, baseline * 2);
+  stage.releaseHolds();
+  stage.update(0.25, false, false, false, true);
+  closeTo(stage.debug().elements[0].rocking, baseline);
+  stage.hold("actor", true);
+  stage.update(0.25, false, true, false, true);
+  closeTo(stage.debug().elements[0].rocking, 0);
+  stage.rest();
+  stage.update(0.25, false, false, false, true);
+  closeTo(stage.debug().elements[0].rocking, baseline);
+  stage.dispose();
+});
+
+test("hop is bounded, repeatable, and stationary in reduced motion", async () => {
+  const { stage } = await makeStage(
+    { preset: "rock", trigger: "open", duration: 1, strength: 0 },
+    { effect: "hop" },
+  );
+  await withFakeNow(async (setNow) => {
+    setNow(1);
+    stage.activate("actor");
+    setNow(1.425);
+    stage.update(0, false, false);
+    closeTo(stage.debug().elements[0].anchorPosition[1], 0.36);
+    setNow(1.9);
+    stage.update(0, false, false);
+    closeTo(stage.debug().elements[0].anchorPosition[1], 0);
+    stage.activate("actor");
+    setNow(2.325);
+    stage.update(0, false, false);
+    closeTo(stage.debug().elements[0].anchorPosition[1], 0.36);
+    stage.update(0, false, true);
+    closeTo(stage.debug().elements[0].anchorPosition[1], 0);
+  });
+  stage.dispose();
 });
 
 test("narration gesture follows the named segment's measured position", async () => {

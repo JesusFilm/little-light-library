@@ -428,6 +428,12 @@
                       "enum": [
                         "tap"
                       ]
+                    },
+                    "effect": {
+                      "enum": [
+                        "hop",
+                        "hold-rock"
+                      ]
                     }
                   },
                   "required": [

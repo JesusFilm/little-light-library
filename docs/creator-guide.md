@@ -118,10 +118,13 @@ the story. A narration-triggered gesture requires a valid segment and current
 recording. Check the cue for the selected locale in the book index and use reader
 playback to verify its timing and mix.
 
-Interactions use named DOM buttons and visible text responses; `sound: "tap"`
-is the supported page interaction sound. Essential story meaning belongs in the
-text/art even when audio and motion are off. Optional `toys` provide up to four
-book-specific standees on the cabinet with click animation and optional audio.
+Actors respond to taps on their cutouts, and named DOM buttons provide
+equivalent keyboard access. Explicit interactions add visible text responses;
+`sound: "tap"` is the supported page interaction sound. The optional `hop` and
+`hold-rock` effects are short stage gestures layered over existing motion.
+Record invented gestures in `stagingNote`; essential story meaning belongs in
+the text/art even when audio and motion are off. Optional `toys` provide up to
+four book-specific standees on the cabinet with click animation and optional audio.
 See the [contract](book-contract.md) for precise limits.
 
 ## Revise without unnecessary regeneration

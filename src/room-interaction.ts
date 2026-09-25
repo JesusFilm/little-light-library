@@ -1,5 +1,36 @@
 import * as THREE from "three";
 
+/** A small alpha mask makes cutout taps follow paint without retaining full image pixels. */
+export function installCompactHitMask(texture: THREE.Texture) {
+  const image = texture.image as CanvasImageSource & {
+    naturalWidth?: number;
+    naturalHeight?: number;
+    width?: number;
+    height?: number;
+  };
+  const width = image?.naturalWidth ?? image?.width ?? 0;
+  const height = image?.naturalHeight ?? image?.height ?? 0;
+  if (!width || !height || typeof document === "undefined") return;
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.min(128, width);
+    canvas.height = Math.min(128, height);
+    const context = canvas.getContext("2d");
+    if (!context) return;
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+    const alpha = new Uint8Array(canvas.width * canvas.height);
+    for (let i = 0; i < alpha.length; i++) alpha[i] = pixels[i * 4 + 3];
+    texture.userData.hitMask = {
+      alpha,
+      width: canvas.width,
+      height: canvas.height,
+    };
+  } catch {
+    // A non-image test texture remains selectable by its card bounds.
+  }
+}
+
 /** Raycaster does not itself reject invisible ancestors or transparent texels. */
 export function visiblePaintHit(hit: THREE.Intersection): boolean {
   for (

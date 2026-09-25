@@ -909,7 +909,7 @@
       "id": "jonah-boards-ship",
       "title": "Jonah boards a ship",
       "source": "Jonah 1:3",
-      "stagingNote": "The ship and Jonah aboard are one illustrated cutout on calm water in Joppa harbor, with the quay and distant limestone city behind it. Jonah stands on the deck beside the crew; no separate Jonah image or beach/paving sits beneath the vessel.",
+      "stagingNote": "The ship and Jonah aboard are one illustrated cutout on calm water in Joppa harbor, with the quay and distant limestone city behind it. Jonah stands on the deck beside the crew; no separate Jonah image or beach/paving sits beneath the vessel. Small fish at the waterline briefly leap when tapped; this optional playful motion is invented staging, not a biblical event.",
       "segments": [
         {
           "id": "segment-1",
@@ -947,6 +947,26 @@
             "strength": 2.2,
             "loop": true
           }
+        },
+        {
+          "id": "small-fish",
+          "label": "Little fish",
+          "kind": "prop",
+          "asset": "small-fish-school",
+          "placement": {
+            "x": -2.15,
+            "depth": -0.75,
+            "width": 0.72,
+            "height": 0.48,
+            "anchor": "bottom",
+            "elevation": 0,
+            "rotation": 0
+          },
+          "interaction": {
+            "label": "Make little fish leap",
+            "response": "The little fish leap above the harbor water and splash back in.",
+            "effect": "hop"
+          }
         }
       ],
       "ground": {
@@ -962,7 +982,7 @@
       "id": "storm-at-sea",
       "title": "A storm at sea",
       "source": "Jonah 1:4–5",
-      "stagingNote": "A distressed Jonah clings to a smaller, centered deck among three frightened sailors. Three storm crests cross the water at separate depths; a broad foreground crest masks the lower hull while side crests move at distinct rates and parallax.",
+      "stagingNote": "A distressed Jonah clings to a smaller, centered deck among three frightened sailors. Three storm crests cross the water at separate depths; a broad foreground crest masks the lower hull while side crests move at distinct rates and parallax. Holding the ship to deepen its rocking is an optional invented stage response; it adds no story event.",
       "segments": [
         {
           "id": "segment-1",
@@ -999,6 +1019,11 @@
             "duration": 3.8,
             "strength": 2.2,
             "loop": true
+          },
+          "interaction": {
+            "label": "Hold to rock the ship",
+            "response": "The ship rocks with the storm.",
+            "effect": "hold-rock"
           }
         },
         {
@@ -1523,7 +1548,7 @@
             "preset": "sway",
             "trigger": "open",
             "duration": 5.9,
-            "strength": 6.0,
+            "strength": 6,
             "loop": true
           },
           "flipX": true
@@ -1972,7 +1997,7 @@
   "narrationVolume": 0.9,
   "translations": {
     "es": {
-      "sourceFingerprint": "v1-0bacdb91",
+      "sourceFingerprint": "v1-47c78707",
       "title": "Jonás y la ballena",
       "subtitle": "Una historia de escucha, misericordia y un gran respiro en las profundidades",
       "source": "Jonás 1–4",
@@ -2021,6 +2046,14 @@
             {
               "id": "ship",
               "label": "Barco y marineros"
+            },
+            {
+              "id": "small-fish",
+              "label": "Pececitos",
+              "interaction": {
+                "label": "Haz saltar a los pececitos",
+                "response": "Los pececitos saltan sobre el agua del puerto y vuelven a caer."
+              }
             }
           ]
         },
@@ -2043,7 +2076,11 @@
           "elements": [
             {
               "id": "ship",
-              "label": "Barco y marineros"
+              "label": "Barco y marineros",
+              "interaction": {
+                "label": "Mantén pulsado para mecer el barco",
+                "response": "El barco se mece con la tormenta."
+              }
             },
             {
               "id": "storm-wave",
@@ -2352,7 +2389,7 @@
       ]
     },
     "fr": {
-      "sourceFingerprint": "v1-0bacdb91",
+      "sourceFingerprint": "v1-47c78707",
       "title": "Jonas et la baleine",
       "subtitle": "Une histoire d’écoute, de miséricorde et d’un grand souffle au fond des profondeurs",
       "source": "Jonas 1–4",
@@ -2401,6 +2438,14 @@
             {
               "id": "ship",
               "label": "Navire et marins"
+            },
+            {
+              "id": "small-fish",
+              "label": "Petits poissons",
+              "interaction": {
+                "label": "Fais bondir les petits poissons",
+                "response": "Les petits poissons bondissent hors de l’eau du port et retombent."
+              }
             }
           ]
         },
@@ -2423,7 +2468,11 @@
           "elements": [
             {
               "id": "ship",
-              "label": "Navire et marins"
+              "label": "Navire et marins",
+              "interaction": {
+                "label": "Maintiens pour faire tanguer le bateau",
+                "response": "Le bateau tangue dans la tempête."
+              }
             },
             {
               "id": "storm-wave",
@@ -2732,7 +2781,7 @@
       ]
     },
     "it": {
-      "sourceFingerprint": "v1-0bacdb91",
+      "sourceFingerprint": "v1-47c78707",
       "title": "Giona e la balena",
       "subtitle": "Una storia di ascolto, misericordia e un bel respiro nel profondo del mare",
       "source": "Giona 1–4",
@@ -2781,6 +2830,14 @@
             {
               "id": "ship",
               "label": "Nave e marinai"
+            },
+            {
+              "id": "small-fish",
+              "label": "Pesciolini",
+              "interaction": {
+                "label": "Fai saltare i pesciolini",
+                "response": "I pesciolini saltano fuori dall’acqua del porto e ricadono."
+              }
             }
           ]
         },
@@ -2803,7 +2860,11 @@
           "elements": [
             {
               "id": "ship",
-              "label": "Nave e marinai"
+              "label": "Nave e marinai",
+              "interaction": {
+                "label": "Tieni premuto per far dondolare la nave",
+                "response": "La nave dondola nella tempesta."
+              }
             },
             {
               "id": "storm-wave",
@@ -3112,7 +3173,7 @@
       ]
     },
     "pt-BR": {
-      "sourceFingerprint": "v1-0bacdb91",
+      "sourceFingerprint": "v1-47c78707",
       "title": "Jonas e a baleia",
       "subtitle": "Uma história sobre ouvir, ter misericórdia e respirar fundo nas profundezas",
       "source": "Jonas 1–4",
@@ -3161,6 +3222,14 @@
             {
               "id": "ship",
               "label": "Navio e marinheiros"
+            },
+            {
+              "id": "small-fish",
+              "label": "Peixinhos",
+              "interaction": {
+                "label": "Faça os peixinhos saltarem",
+                "response": "Os peixinhos saltam da água do porto e voltam a mergulhar."
+              }
             }
           ]
         },
@@ -3183,7 +3252,11 @@
           "elements": [
             {
               "id": "ship",
-              "label": "Navio e marinheiros"
+              "label": "Navio e marinheiros",
+              "interaction": {
+                "label": "Segure para balançar o barco",
+                "response": "O barco balança na tempestade."
+              }
             },
             {
               "id": "storm-wave",
@@ -3492,7 +3565,7 @@
       ]
     },
     "hi": {
-      "sourceFingerprint": "v1-0bacdb91",
+      "sourceFingerprint": "v1-47c78707",
       "title": "योना और बड़ी मछली",
       "subtitle": "सुनने, दया और गहरी साँस की कहानी",
       "source": "योना 1–4",
@@ -3541,6 +3614,14 @@
             {
               "id": "ship",
               "label": "जहाज़ और नाविक"
+            },
+            {
+              "id": "small-fish",
+              "label": "छोटी मछली",
+              "interaction": {
+                "label": "छोटी मछलियों को उछालें",
+                "response": "छोटी मछलियाँ बंदरगाह के पानी से उछलकर वापस गिरती हैं।"
+              }
             }
           ]
         },
@@ -3563,7 +3644,11 @@
           "elements": [
             {
               "id": "ship",
-              "label": "जहाज़ और नाविक"
+              "label": "जहाज़ और नाविक",
+              "interaction": {
+                "label": "नाव को हिलाने के लिए दबाए रखें",
+                "response": "तूफ़ान में नाव हिलती है।"
+              }
             },
             {
               "id": "storm-wave",
@@ -3872,7 +3957,7 @@
       ]
     },
     "ja": {
-      "sourceFingerprint": "v1-0bacdb91",
+      "sourceFingerprint": "v1-47c78707",
       "title": "ヨナと大きな魚",
       "subtitle": "耳を傾けること、あわれみ、そして深く息をすることのお話",
       "source": "ヨナ書 1–4章",
@@ -3921,6 +4006,14 @@
             {
               "id": "ship",
               "label": "船と船乗りたち"
+            },
+            {
+              "id": "small-fish",
+              "label": "小さな魚",
+              "interaction": {
+                "label": "小さな魚を跳ねさせる",
+                "response": "小さな魚たちは港の水面から跳ねて、また水に戻ります。"
+              }
             }
           ]
         },
@@ -3943,7 +4036,11 @@
           "elements": [
             {
               "id": "ship",
-              "label": "船と船乗りたち"
+              "label": "船と船乗りたち",
+              "interaction": {
+                "label": "長押しして船を揺らす",
+                "response": "嵐の中で船が揺れます。"
+              }
             },
             {
               "id": "storm-wave",
@@ -4252,7 +4349,7 @@
       ]
     },
     "zh-CN": {
-      "sourceFingerprint": "v1-0bacdb91",
+      "sourceFingerprint": "v1-47c78707",
       "title": "约拿和大鱼",
       "subtitle": "关于聆听、怜悯与深深呼吸的故事",
       "source": "约拿书 1–4章",
@@ -4301,6 +4398,14 @@
             {
               "id": "ship",
               "label": "船和水手"
+            },
+            {
+              "id": "small-fish",
+              "label": "小鱼",
+              "interaction": {
+                "label": "让小鱼跃起",
+                "response": "小鱼跃出港口的水面，又落回水中。"
+              }
             }
           ]
         },
@@ -4323,7 +4428,11 @@
           "elements": [
             {
               "id": "ship",
-              "label": "船和水手"
+              "label": "船和水手",
+              "interaction": {
+                "label": "按住让船摇晃",
+                "response": "船在风暴中摇晃。"
+              }
             },
             {
               "id": "storm-wave",
@@ -4632,7 +4741,7 @@
       ]
     },
     "en-GB": {
-      "sourceFingerprint": "v1-0bacdb91",
+      "sourceFingerprint": "v1-47c78707",
       "title": "Jonah and the Whale",
       "subtitle": "A story of listening, mercy and a great deep breath",
       "source": "Jonah 1–4",
@@ -4681,6 +4790,14 @@
             {
               "id": "ship",
               "label": "Ship and sailors"
+            },
+            {
+              "id": "small-fish",
+              "label": "Little fish",
+              "interaction": {
+                "label": "Make little fish leap",
+                "response": "The little fish leap above the harbour water and splash back in."
+              }
             }
           ]
         },
@@ -4703,7 +4820,11 @@
           "elements": [
             {
               "id": "ship",
-              "label": "Ship and sailors"
+              "label": "Ship and sailors",
+              "interaction": {
+                "label": "Hold to rock the ship",
+                "response": "The ship rocks with the storm."
+              }
             },
             {
               "id": "storm-wave",

@@ -196,9 +196,13 @@ test("p2 boat, p3 storm and p4 swimmer use layered, continuous water layouts", (
   assert.equal(boat.asset, "ship-jonah-boarding");
   assert.deepEqual(
     p2.elements.map((element: { id: string }) => element.id),
-    ["ship"],
-    "Jonah is painted aboard the boat and is not duplicated as a standing cutout",
+    ["ship", "small-fish"],
+    "Jonah stays painted aboard the boat while a small optional fish appears at the waterline",
   );
+  const fish = p2.elements[1];
+  assert.equal(fish.asset, "small-fish-school");
+  assert.equal(fish.interaction.effect, "hop");
+  assertNativeAspect(fish);
   assertNativeAspect(boat);
   assert.ok(boat.placement.width >= 4);
 
