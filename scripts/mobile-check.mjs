@@ -266,7 +266,7 @@ async function inspectLayout(page, scenario, name) {
   );
   await page.screenshot({
     path: path.join(output, `${scenario.book}-${name}.png`),
-    fullPage: true,
+    fullPage: false,
   });
 }
 
@@ -706,7 +706,7 @@ try {
       await page
         .screenshot({
           path: path.join(output, `${entry.id}-failure.png`),
-          fullPage: true,
+          fullPage: false,
         })
         .catch(() => {});
     } finally {
