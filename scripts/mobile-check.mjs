@@ -417,6 +417,35 @@ try {
         return { textures: scene.gpuTextures, geometries: scene.gpuGeometries };
       });
 
+      if (entry.id === "jonah-and-the-whale") {
+        await page
+          .locator(".authored-interactions [data-element]")
+          .first()
+          .tap();
+        await page.waitForFunction(() =>
+          Boolean(document.querySelector("#notice")?.textContent?.trim()),
+        );
+        scenario.characterFeedback = "authored response shown after touch";
+      } else {
+        // Paper-target buttons supply keyboard access; the canvas owns touch
+        // raycasting. Tap the rendered character position through the canvas.
+        const character = await page
+          .locator(".paper-target")
+          .first()
+          .boundingBox();
+        assert.ok(character, "Character has a visible projected target");
+        await page.touchscreen.tap(
+          character.x + character.width / 2,
+          character.y + character.height / 2,
+        );
+        await page.waitForFunction(
+          () =>
+            window.libraryDebug().scene.reacting &&
+            window.libraryDebug().scene.touchedActor >= 0,
+        );
+        scenario.characterFeedback = "paper character reacted to touch";
+      }
+
       if (!(await page.evaluate(() => window.libraryDebug().playing)))
         await page.locator("#play").tap();
       await page.waitForFunction(

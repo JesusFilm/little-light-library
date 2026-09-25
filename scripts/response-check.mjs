@@ -11,8 +11,12 @@ const book = JSON.parse(
   fs.readFileSync(path.join(root, "books/jonah-and-the-whale.book.json")),
 );
 const [first, next, latest] = book.spreads;
-const firstArt = book.assets[first.ground.asset].src;
-const nextArt = book.assets[next.ground.asset].src;
+const phoneImage = (src) => {
+  const candidate = src.replace(/\.(?:png|webp)$/i, ".mobile.webp");
+  return fs.existsSync(path.join(root, candidate)) ? candidate : src;
+};
+const firstArt = phoneImage(book.assets[first.ground.asset].src);
+const nextArt = phoneImage(book.assets[next.ground.asset].src);
 assert.notEqual(firstArt, nextArt, "Adjacent art must use distinct URLs");
 assert.notEqual(nextArt, book.assets[latest.ground.asset].src);
 const mime = {
@@ -47,7 +51,10 @@ await new Promise((resolve, reject) => {
   server.once("error", reject);
   server.listen(0, "127.0.0.1", resolve);
 });
-const browser = await chromium.launch({ channel: "chrome", headless: true });
+const browser = await chromium.launch({
+  ...(process.env.CI ? {} : { channel: "chrome" }),
+  headless: true,
+});
 const context = await browser.newContext({
   ...devices["Pixel 5"],
   reducedMotion: "no-preference",
@@ -123,6 +130,10 @@ try {
       !window.libraryDebug?.().shelf.busy,
   );
   await page.locator("#shelf-read").tap();
+  await page.waitForFunction(
+    () =>
+      window.libraryDebug().pagePending && !window.libraryDebug().shelf.busy,
+  );
   await waitForRoute(firstArt);
   await assertPending(0);
   assert.equal((await snapshot()).session.playback.requested, true);

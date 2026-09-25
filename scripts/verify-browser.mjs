@@ -30,6 +30,7 @@ async function check(script, env) {
 try {
   for (const suite of ["room", "recovery", "failure", "audio-continuity"])
     await check(`scripts/${suite}-check.mjs`, { READER_DIST: fixtureRoot });
+  await check("scripts/response-check.mjs");
   await check("scripts/mobile-check.mjs");
 } finally {
   await fs.rm(fixtureRoot, { recursive: true, force: true });

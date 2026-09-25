@@ -13,20 +13,18 @@ Open the URL Vite prints. Choose a language and enter the library. Select a book
 
 ## Validate and build
 
+Install Node.js 22 or newer and local `ffprobe` (included with FFmpeg) for media
+validation. Browser checks use installed Chrome locally; CI installs Chromium.
+
 ```sh
-npm run verify
-npm run test:room
-npm run test:recovery
-npm run test:failures
-npm run test:audio-continuity
-npm run build
+npm run verify:all
 ```
 
 The production build is `dist/` and uses relative URLs, so it can be served from a nested static path. The catalog is [`public/books/catalog.json`](public/books/catalog.json). The runtime reads only local static assets; optional local narration synthesis is an authoring tool, not a reader dependency.
 
 ## GitHub Pages
 
-The workflow in [`.github/workflows/pages.yml`](.github/workflows/pages.yml) builds and deploys the site when `main` changes. In the GitHub repository's **Settings → Pages**, select **GitHub Actions** as the build and deployment source. The project site is [jesusfilm.github.io/little-light-library/](https://jesusfilm.github.io/little-light-library/).
+The workflows in [`.github/workflows/verify.yml`](.github/workflows/verify.yml) and [`.github/workflows/pages.yml`](.github/workflows/pages.yml) verify the reader and deploy the exact passing build when `main` changes. The required **Reader and mobile acceptance** check protects `main`, including administrator merges. See the [mobile budgets and review process](review/mobile-acceptance.md). In the GitHub repository's **Settings → Pages**, select **GitHub Actions** as the build and deployment source. The project site is [jesusfilm.github.io/little-light-library/](https://jesusfilm.github.io/little-light-library/).
 
 ## Edit books
 

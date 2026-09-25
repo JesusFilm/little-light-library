@@ -2,7 +2,9 @@
 
 Mobile is the primary reader experience. Run `npm run verify:all` before release.
 GitHub pull requests run the same verification. Pages deploys only the artifact
-produced by the successful verification job, without rebuilding it.
+produced by the successful verification job, without rebuilding it. `main` requires
+the **Reader and mobile acceptance** check on an up-to-date pull request, including
+administrator merges.
 
 ## Automated evidence
 
@@ -17,6 +19,11 @@ The committed budgets are in `review/mobile-budgets.json`. The profile uses a
 1.6 Mbps download. It reports two logical cores and 2 GB device memory to exercise
 resource-constrained feature selection. Budgets distinguish immediate feedback,
 completed artwork/audio, warm navigation, transferred bytes and raster resolution.
+
+Input latency starts at the real pointer event; browser-automation waits for
+button animations are excluded. Rotation checks wait for ResizeObserver to
+resize the drawing buffer. GPU texture/geometry counts must remain bounded
+through repeated transfers; these counts do not measure physical device RAM.
 
 The test records screenshots, browser traces, decoded non-silent audio source
 observations, failures and measurements under `.test-output/mobile-acceptance`.
