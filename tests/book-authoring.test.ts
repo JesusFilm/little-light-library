@@ -140,6 +140,9 @@ test("invalid versions, unsupported behavior, duplicate IDs, unsafe sources and 
 });
 test("text changes identify exactly one stale cue; targeted WAV replacement preserves other recordings", () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "light-book-"));
+  const recordingDirectory = fs.mkdtempSync(
+    path.join("public", "assets", "audio", "__authoring-test-"),
+  );
   try {
     const book = fixture(),
       original = fixture();
@@ -149,6 +152,21 @@ test("text changes identify exactly one stale cue; targeted WAV replacement pres
     assert.equal(result.errors.length, 0);
     assert.equal(result.warnings.length, 1);
     assert.match(result.warnings[0].message, /Stale/);
+    const runtimeSrc = book.assets[replacement.narration!.asset].src;
+    const sourceWav = path.join(
+      "assets",
+      "source-recordings",
+      runtimeSrc.replace(/^assets\//, "").replace(/\.mp3$/, ".wav"),
+    );
+    const recordingFile = path.join(
+      recordingDirectory,
+      path.basename(sourceWav),
+    );
+    fs.copyFileSync(sourceWav, recordingFile);
+    const recordingSrc = path
+      .relative("public", recordingFile)
+      .split(path.sep)
+      .join("/");
     const file = path.join(directory, "book.json");
     fs.writeFileSync(file, JSON.stringify(book));
     execFileSync(process.execPath, [
@@ -159,7 +177,7 @@ test("text changes identify exactly one stale cue; targeted WAV replacement pres
       file,
       book.spreads[0].id,
       book.spreads[0].segments[0].id,
-      book.assets[replacement.narration!.asset].src,
+      recordingSrc,
       replacement.narration!.voice,
     ]);
     const updated = JSON.parse(fs.readFileSync(file, "utf8"));
@@ -177,6 +195,7 @@ test("text changes identify exactly one stale cue; targeted WAV replacement pres
     );
   } finally {
     fs.rmSync(directory, { recursive: true, force: true });
+    fs.rmSync(recordingDirectory, { recursive: true, force: true });
   }
 });
 test("media validation rejects missing assets and mismatched measured durations", async () => {
