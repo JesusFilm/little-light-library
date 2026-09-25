@@ -18,10 +18,21 @@ const run = (script, env = {}) =>
       code === 0 ? resolve() : reject(new Error(`${script} exited ${code}`)),
     );
   });
+const failures = [];
+async function check(script, env) {
+  try {
+    await run(script, env);
+  } catch (error) {
+    failures.push(error.message);
+    console.error(error.message);
+  }
+}
 try {
   for (const suite of ["room", "recovery", "failure", "audio-continuity"])
-    await run(`scripts/${suite}-check.mjs`, { READER_DIST: fixtureRoot });
-  await run("scripts/mobile-check.mjs");
+    await check(`scripts/${suite}-check.mjs`, { READER_DIST: fixtureRoot });
+  await check("scripts/mobile-check.mjs");
 } finally {
   await fs.rm(fixtureRoot, { recursive: true, force: true });
 }
+
+if (failures.length) throw new Error(failures.join("\n"));
