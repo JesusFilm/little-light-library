@@ -411,9 +411,18 @@ export class ReadingSession<T extends ShelfEntry> {
         )
           this.failed(error);
       });
-      void transfer.loadToys().catch((error) => {
-        if (this.table === entry.key && !this.current.browsing)
-          this.failed(error);
+      // Cabinet toys are optional while reading. Give the requested page its
+      // full network/CPU budget, then restore the toys for Library browsing.
+      void (async () => {
+        await firstPage.catch(() => {});
+        while (this.pendingPage) {
+          const page = this.pendingPage;
+          await page.catch(() => {});
+        }
+        if (this.table !== entry.key) return;
+        await transfer.loadToys();
+      })().catch((error) => {
+        if (this.table === entry.key) this.failed(error);
       });
       this.changed();
     });

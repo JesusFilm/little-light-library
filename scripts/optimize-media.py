@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build small local reader media while retaining the original recordings.
 
-Requires ffmpeg/ffprobe and Pillow with WebP support. Re-running is safe: newly
+Requires ffmpeg and Pillow with WebP support. Re-running is safe: newly
 authored WAVs are moved to assets/source-recordings and converted; the existing
 source recordings remain available for lossless regeneration.
 """
@@ -31,10 +31,14 @@ SHELF_COVERS = {
 
 def probe_duration(path: Path) -> float:
     result = subprocess.run(
-        ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "json", str(path)],
-        check=True, capture_output=True, text=True,
+        ["ffmpeg", "-nostdin", "-v", "error", "-i", str(path), "-ac", "1", "-ar", "24000", "-f", "s16le", "pipe:1"],
+        check=True, capture_output=True, timeout=30,
     )
-    return float(json.loads(result.stdout)["format"]["duration"])
+    # MP3 container duration includes encoder padding on older ffprobe builds;
+    # decoded PCM samples reflect the audible, gapless playback length.
+    if len(result.stdout) > 32 * 1024 * 1024:
+        raise ValueError(f"Decoded audio exceeds 32 MiB: {path}")
+    return len(result.stdout) / (24000 * 2)
 
 
 def optimize_audio(source: Path) -> tuple[int, int]:
@@ -79,7 +83,10 @@ def optimize_images() -> tuple[int, int, int]:
             # retains ample detail at the renderer's bounded 1.5x pixel ratio.
             alpha = "A" in image.getbands()
             max_side = (
-                960 if "-poses" in source.stem
+                # Eden's tree spans about 100 CSS pixels on a 360 px phone;
+                # 448 retains over 2x source pixels at the 1.5 DPR canvas cap.
+                448 if relative == "art/eden-tree.webp"
+                else 960 if "-poses" in source.stem
                 else 640 if alpha and image.width / image.height < 1.5
                 else MOBILE_MAX_SIDE
             )

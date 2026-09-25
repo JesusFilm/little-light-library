@@ -79,6 +79,7 @@ test("the first page's slow media load does not lock turning or Library", async 
   let page = 0;
   let renders = 0;
   let cancellations = 0;
+  let toyLoads = 0;
   const autoplayChecks: (() => boolean)[] = [];
   const session: ReadingSession<{ key: string }> = new ReadingSession(
     {
@@ -102,7 +103,9 @@ test("the first page's slow media load does not lock turning or Library", async 
         page = 0;
       },
       showFirstPage: (): Promise<void> => session.loadPage(true),
-      async loadToys() {},
+      async loadToys() {
+        toyLoads++;
+      },
       async suspendPage() {},
       async prepareLibrary() {},
       async resumePage() {},
@@ -151,6 +154,7 @@ test("the first page's slow media load does not lock turning or Library", async 
     "reader controls unlock while media loads",
   );
   assert.equal(session.snapshot.loading, true);
+  assert.equal(toyLoads, 0, "page artwork gets priority over cabinet toys");
   assert.equal(autoplayChecks[0](), true);
   assert.equal(await session.togglePlayback(() => true), true);
   assert.equal(autoplayChecks[0](), false, "Pause cancels queued autoplay");
@@ -179,6 +183,8 @@ test("the first page's slow media load does not lock turning or Library", async 
   assert.equal(autoplayChecks[1](), false, "Library cancels queued autoplay");
   firstPage.resolve();
   await opening;
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(toyLoads, 1, "toys load after the first page settles");
 });
 
 test("opening, switching, Library and Continue keep the session place and toys together", async () => {
