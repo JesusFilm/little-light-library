@@ -28,10 +28,12 @@ async function check(script, env) {
   }
 }
 try {
+  // Run the primary phone budget first so slow CI rendering cannot hide its
+  // diagnostics behind the longer fixture suite.
+  await check("scripts/mobile-check.mjs");
+  await check("scripts/response-check.mjs");
   for (const suite of ["room", "recovery", "failure", "audio-continuity"])
     await check(`scripts/${suite}-check.mjs`, { READER_DIST: fixtureRoot });
-  await check("scripts/response-check.mjs");
-  await check("scripts/mobile-check.mjs");
 } finally {
   await fs.rm(fixtureRoot, { recursive: true, force: true });
 }
