@@ -1,7 +1,8 @@
 # Reading-room backdrop
 
-`reading-room-source.png` is a newly generated background for the reader's
-surrounding room. `src/assets/reading-room.webp` is its 70 KB runtime version.
+`reading-room-source.png` is a previously generated room concept. It is kept
+as source/reference art. The reader now renders its actual 3D room through the
+entire viewport; this bitmap is no longer used or bundled at runtime.
 It contains no pixels from the feedback mockups. The mockups guided the
 composition: a warm room, soft lamp light, blurred depth, and dark space for
 live text. The book, stage, actors, and text are rendered separately.
@@ -20,5 +21,5 @@ Generated with Codex ImageGen on 25 September 2026. Prompt:
 > over it. The center and left can be warmer. No people, no book in foreground,
 > no illustration, no text, no controls, no logo, no watermark.
 
-The source PNG was converted to WebP at quality 78 with Pillow. Keep the source
-for future edits; the WebP alone is loaded by the reader.
+The earlier runtime WebP was converted from this PNG at quality 78 with Pillow
+and removed when the reader switched to the continuous 3D room.

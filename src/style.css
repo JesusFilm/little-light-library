@@ -452,21 +452,7 @@ body {
 }
 .reading #app {
   color: #fff9ed;
-  background:
-    radial-gradient(ellipse 14% 30% at 74% 10%, #bd82434a, transparent 90%),
-    linear-gradient(90deg, #18242a00 42%, #15202854 66%, #10191ec9 100%),
-    url("./assets/reading-room.webp") center center / cover no-repeat,
-    #30231d;
-}
-.reading[data-reader-scene="jonah-called"] #app,
-.reading[data-reader-scene="jonah-boards-ship"] #app {
-  background: radial-gradient(
-      ellipse 40% 50% at 20% 42%,
-      #dcb477a6,
-      transparent 85%
-    ),
-    radial-gradient(ellipse 32% 34% at 75% 90%, #84684bba, transparent 90%),
-    linear-gradient(145deg, #113d55, #245c69 47%, #655e4d 100%);
+  background: #273b3a;
 }
 .reading #header {
   position: absolute;
@@ -517,19 +503,29 @@ body {
   display: none;
 }
 .reading #scene {
-  width: 70%;
+  position: fixed;
+  inset: 0;
+  width: 100%;
   height: 100svh;
-  -webkit-mask-image: linear-gradient(to right, #000 0 80%, transparent 97%);
-  mask-image: linear-gradient(to right, #000 0 80%, transparent 97%);
+  mask-image: none;
+  -webkit-mask-image: none;
 }
 .reading #panel {
   position: relative;
   margin-left: auto;
-  width: 32%;
+  width: 34%;
   min-height: 100svh;
   padding: 90px clamp(18px, 3vw, 56px) 24px 0;
   justify-content: center;
   align-items: stretch;
+}
+.reading #panel::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, #0b2023bb 22%, #0b2023e0);
+  pointer-events: none;
 }
 .reading .reader {
   width: 100%;
@@ -607,45 +603,30 @@ body {
   font-size: 12px;
 }
 @media (max-aspect-ratio: 6/5), (max-width: 700px) {
-  .reading #app {
-    background:
-      radial-gradient(ellipse 82% 34% at 78% 92%, #a9683d70, transparent 95%),
-      linear-gradient(180deg, #141d2100 35%, #10191c91 65%, #191a18ab 100%),
-      url("./assets/reading-room.webp") center center / auto 100% no-repeat,
-      #30231d;
-  }
-  .reading[data-reader-scene="jonah-called"] #app,
-  .reading[data-reader-scene="jonah-boards-ship"] #app {
-    background: radial-gradient(
-        ellipse 82% 25% at 11% 64%,
-        #ae8158a8,
-        transparent 95%
-      ),
-      radial-gradient(ellipse 64% 38% at 86% 100%, #826f56a8, transparent 90%),
-      linear-gradient(160deg, #1b526e 5%, #1c5363 53%, #524d43 100%);
-  }
   .reading #header {
     padding: 14px 18px;
     padding-top: max(14px, env(safe-area-inset-top));
   }
   .reading #scene {
     width: 100%;
-    height: 48svh;
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      #000 0 78%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(to bottom, #000 0 78%, transparent 100%);
+    height: 100svh;
   }
   .reading #panel {
     width: 100%;
     min-height: 100svh;
-    padding: calc(56svh + 4px) max(24px, env(safe-area-inset-right))
+    padding: calc(48svh + 4px) max(24px, env(safe-area-inset-right))
       calc(24px + env(safe-area-inset-bottom))
       max(24px, env(safe-area-inset-left));
     justify-content: flex-start;
     align-items: center;
+  }
+  .reading #panel::before {
+    background: linear-gradient(
+      180deg,
+      transparent 31svh,
+      #102b2db3 46svh,
+      #102b2de8 64svh
+    );
   }
   .reading .reader {
     width: min(720px, 100%);
@@ -685,10 +666,10 @@ body {
     font-size: 21px;
   }
   .reading #scene {
-    height: 48svh;
+    height: 100svh;
   }
   .reading #panel {
-    padding: calc(54svh + 2px) 22px calc(22px + env(safe-area-inset-bottom));
+    padding: calc(45svh + 2px) 22px calc(22px + env(safe-area-inset-bottom));
     padding-left: max(22px, env(safe-area-inset-left));
     padding-right: max(22px, env(safe-area-inset-right));
   }
@@ -712,6 +693,54 @@ body {
   }
   .reading .transport-label {
     font-size: 11px;
+  }
+}
+@media (max-height: 500px) and (min-aspect-ratio: 6/5) {
+  .reading #panel {
+    width: 40%;
+    padding: 78px 14px 12px 0;
+  }
+  .reading #panel::before {
+    background: linear-gradient(90deg, transparent, #0b2023cb 16%, #0b2023ed);
+  }
+  .reading .reader {
+    max-height: calc(100svh - 90px);
+    overflow: auto;
+    padding-bottom: 68px;
+  }
+  .reading .reader h1 {
+    font-size: clamp(25px, 4vw, 38px);
+    margin: 9px 0 12px;
+  }
+  .reading .story-text {
+    font-size: clamp(16px, 2.1vw, 20px);
+    line-height: 1.35;
+  }
+  .reading .reader-controls {
+    position: fixed;
+    z-index: 5;
+    right: 14px;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    width: calc(40vw - 28px);
+    margin: 0;
+    gap: 4px;
+  }
+  .reading .reader-controls button {
+    min-width: 0;
+    min-height: 48px;
+    padding: 3px;
+  }
+  .reading .reader-transport {
+    min-height: 48px;
+  }
+  .reading .authored-interactions {
+    margin: 0;
+  }
+  .reading .transport-icon {
+    font-size: 20px;
+  }
+  .reading .transport-label {
+    font-size: 10px;
   }
 }
 @supports not (backdrop-filter: blur(1px)) {

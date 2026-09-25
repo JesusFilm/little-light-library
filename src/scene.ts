@@ -61,6 +61,7 @@ import {
   type PaperActorMood,
 } from "./paper-actor";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import type { LocaleData, Page, Story } from "./contracts";
 import {
   RoomShelf,
@@ -556,6 +557,10 @@ export class LibraryScene {
   private raf = 0;
   private lastFrame = 0;
   private slowFrames = 0;
+  private renderedFrames = 0;
+  private lastRenderedAt = 0;
+  private renderFrameIntervalMs = 0;
+  private renderCpuMs = 0;
   private lowQuality = false;
   private turnStarted = 0;
   private opening = false;
@@ -752,13 +757,11 @@ export class LibraryScene {
     this.lowQuality = constrainedPhone();
     document.documentElement.classList.toggle("low-graphics", this.lowQuality);
     this.renderer = new THREE.WebGLRenderer({
-      antialias: !this.lowQuality,
+      antialias: true,
       alpha: false,
       powerPreference: "low-power",
     });
-    this.renderer.setPixelRatio(
-      this.lowQuality ? 1 : Math.min(devicePixelRatio, 1.5),
-    );
+    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.12;
@@ -805,6 +808,7 @@ export class LibraryScene {
     this.scene.add(fill);
     this.scene.add(this.roomRoot, this.bookRoot);
     this.makeRoom();
+    this.batchStaticRoom();
     this.roomRoot.add(this.roomShelf.root);
     this.makeBook();
     this.resizeObserver = new ResizeObserver(() => this.resize());
@@ -818,6 +822,20 @@ export class LibraryScene {
     const w = Math.max(this.container.clientWidth, 1),
       h = Math.max(this.container.clientHeight, 1);
     this.camera.aspect = w / h;
+    // Keep the illustrated book at its original pixel scale when the reading
+    // canvas extends behind the controls. The taller frustum reveals the same
+    // room below the book instead of stretching or replacing it with a bitmap.
+    const readingViewportHeight = Math.min(h, Math.min(h * 0.52, w * 0.92));
+    this.camera.fov =
+      this.mode === "room"
+        ? 42
+        : THREE.MathUtils.radToDeg(
+            2 *
+              Math.atan(
+                Math.tan(THREE.MathUtils.degToRad(42 / 2)) *
+                  (h / readingViewportHeight),
+              ),
+          );
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(w, h, false);
     if (this.mode === "room") {
@@ -832,16 +850,70 @@ export class LibraryScene {
     } else {
       // Fill portrait reading views with the pop-up scene while the canvas
       // keeps its unscaled DOM bounds for actor hit targets and labels.
+      const effectiveAspect = w / readingViewportHeight;
       const framingSpan = THREE.MathUtils.lerp(
         0.95,
         1.25,
-        THREE.MathUtils.smoothstep(this.camera.aspect, 0.95, 1.25),
+        THREE.MathUtils.smoothstep(effectiveAspect, 0.95, 1.25),
       );
-      const scale = Math.max(1, framingSpan / this.camera.aspect);
+      const scale = Math.max(1, framingSpan / effectiveAspect);
       // Bring the illustrated stage forward, allowing peripheral book edges to crop.
       // Extremely narrow views still retain clearance for wide actor groups.
-      this.lookGoal.set(0, 2.22, 0.4);
+      this.lookGoal.set(0, 0.1, 0.4);
       this.cameraGoal.set(1.1 * scale, 2.45 + 3.4 * scale, 0.4 + 6.05 * scale);
+      if (effectiveAspect > 1.8) {
+        // Leave the book clear of the desktop text column.
+        this.cameraGoal.x += 2;
+        this.lookGoal.x += 2;
+      }
+    }
+  }
+  private batchStaticRoom() {
+    // Room trim, floor seams, quilt patches and decorative pieces never move.
+    // Combining equal materials cuts driver submissions without changing art,
+    // the interactive shelf, or any book/actor hit target.
+    const groups = new Map<string, THREE.Mesh[]>();
+    this.roomRoot.updateMatrixWorld(true);
+    this.roomRoot.traverse((object) => {
+      if (!(object instanceof THREE.Mesh) || Array.isArray(object.material))
+        return;
+      const geometry = object.geometry as THREE.BufferGeometry;
+      const signature = Object.entries(geometry.attributes)
+        .map(
+          ([name, attribute]) =>
+            `${name}:${attribute.itemSize}:${attribute.normalized}`,
+        )
+        .sort()
+        .join(",");
+      const key = [
+        object.material.uuid,
+        object.castShadow,
+        object.receiveShadow,
+        geometry.index ? "indexed" : "flat",
+        signature,
+      ].join("|");
+      const group = groups.get(key) ?? [];
+      group.push(object);
+      groups.set(key, group);
+    });
+    for (const group of groups.values()) {
+      if (group.length < 2) continue;
+      const transformed = group.map((mesh) =>
+        (mesh.geometry as THREE.BufferGeometry)
+          .clone()
+          .applyMatrix4(mesh.matrixWorld),
+      );
+      const geometry = mergeGeometries(transformed);
+      transformed.forEach((item) => item.dispose());
+      if (!geometry) continue;
+      const merged = new THREE.Mesh(geometry, group[0].material);
+      merged.castShadow = group[0].castShadow;
+      merged.receiveShadow = group[0].receiveShadow;
+      this.roomRoot.add(merged);
+      for (const mesh of group) {
+        mesh.parent?.remove(mesh);
+        mesh.geometry.dispose();
+      }
     }
   }
   private makeRoom() {
@@ -908,17 +980,9 @@ export class LibraryScene {
     }
     for (let x = -6.5; x < 7; x += 0.65)
       box(this.roomRoot, 0.035, 1.4, 0.05, teal, x, 0.85, -4.2);
+    const floorSeam = new THREE.MeshStandardMaterial({ color: 0x654631 });
     for (let x = -6.5; x < 7; x += 0.8)
-      box(
-        this.roomRoot,
-        0.018,
-        0.006,
-        13,
-        new THREE.MeshStandardMaterial({ color: 0x654631 }),
-        x,
-        0.004,
-        0,
-      );
+      box(this.roomRoot, 0.018, 0.006, 13, floorSeam, x, 0.004, 0);
     // A substantial recessed cabinet, rounded timber rails, panelled lower doors.
     box(this.roomRoot, 5.9, 3.45, 0.16, teal, 0, 2.87, -3.61);
     for (const y of [1.2, 2.92, 4.55])
@@ -2519,6 +2583,11 @@ export class LibraryScene {
           : null,
       drawCalls: this.renderer.info.render.calls,
       triangles: this.renderer.info.render.triangles,
+      gpuGeometries: this.renderer.info.memory.geometries,
+      gpuTextures: this.renderer.info.memory.textures,
+      renderedFrames: this.renderedFrames,
+      renderFrameIntervalMs: this.renderFrameIntervalMs,
+      renderCpuMs: this.renderCpuMs,
     };
   }
   private animate = () => {
@@ -2547,7 +2616,7 @@ export class LibraryScene {
     if (this.slowFrames > 45 && !this.lowQuality) {
       this.lowQuality = true;
       document.documentElement.classList.add("low-graphics");
-      this.renderer.setPixelRatio(1);
+      this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
       this.renderer.shadowMap.enabled = false;
     }
     this.lastFrame = now;
@@ -2891,7 +2960,14 @@ export class LibraryScene {
         }
       });
     }
+    const renderStartedAt = performance.now();
+    this.renderFrameIntervalMs = this.lastRenderedAt
+      ? renderStartedAt - this.lastRenderedAt
+      : 0;
+    this.lastRenderedAt = renderStartedAt;
     this.renderer.render(this.scene, this.camera);
+    this.renderCpuMs = performance.now() - renderStartedAt;
+    this.renderedFrames++;
   };
   private disposePageContents(
     root: THREE.Group,
