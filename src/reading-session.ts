@@ -160,14 +160,14 @@ export class ReadingSession<T extends ShelfEntry> {
   }
 
   async togglePlayback(current: () => boolean): Promise<boolean> {
-    if (!this.media || !this.snapshot.reading.book || this.current.busy)
-      return false;
-    if (this.pendingPage) {
+    if (!this.media || !this.snapshot.reading.book) return false;
+    if (this.pendingPage && (!this.current.busy || this.changingLanguage)) {
       this.autoplayRequested = !this.autoplayRequested;
       if (!this.autoplayRequested) this.media.pause();
       this.changed();
       return true;
     }
+    if (this.current.busy) return false;
     if (!this.mediaReady) {
       await this.loadPage(true);
       return true;

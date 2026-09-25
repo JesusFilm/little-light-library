@@ -440,3 +440,107 @@ test("language changes keep the reading place and only apply the latest fetched 
     "error",
   ]);
 });
+
+test("Play and Pause queue during a busy language refresh while physical transfers stay locked", async () => {
+  let language: LocaleId = "en-US";
+  let pageGate = deferred();
+  const renderStarted = deferred();
+  const transferGate = deferred();
+  let requested!: () => boolean;
+  let pauses = 0;
+  const session: ReadingSession<{ key: string }> = new ReadingSession(
+    {
+      async inspectShelfBook() {},
+      async returnShelfPreview() {},
+    },
+    () => {},
+    () => {},
+    () => {},
+    {
+      reading: () => ({ book: "eden", page: 2, pageCount: 8, toys: [] }),
+      validate() {},
+      stop() {},
+      async clearToys() {},
+      async closeBook() {},
+      async landBook() {},
+      activateBook() {},
+      async showFirstPage() {},
+      async loadToys() {},
+      async suspendPage() {},
+      async prepareLibrary() {},
+      async resumePage() {},
+    },
+    {
+      cancel() {},
+      commitTurn() {},
+      async render({ shouldAutoplay }) {
+        requested = shouldAutoplay;
+        session.setReady(true);
+        renderStarted.resolve();
+        await pageGate.promise;
+      },
+    },
+    {
+      snapshot: () => ({
+        playing: false,
+        position: 0,
+        speed: 1,
+        audio: true,
+        volume: 1,
+      }),
+      async play() {
+        return true;
+      },
+      pause() {
+        pauses++;
+      },
+      setSpeed() {},
+      setAudio() {},
+      setVolume() {},
+      visibility() {},
+    },
+    {
+      current: () => language,
+      async fetch(id) {
+        return {
+          id,
+          name: id,
+          voice: "",
+          ui: {},
+          characters: { adam: "", eve: "", noah: "" },
+          stories: [],
+        } satisfies LocaleData;
+      },
+      pause() {},
+      commit(id) {
+        language = id;
+      },
+      refresh: async () => session.loadPage(false),
+      async recover() {},
+      error() {},
+    },
+  );
+  session.setBrowsing(false);
+  const changing = session.changeLanguage("en-GB");
+  await renderStarted.promise;
+  assert.equal(session.snapshot.busy, true);
+  assert.equal(session.snapshot.loading, true);
+  assert.equal(session.snapshot.playback.ready, true);
+  assert.equal(await session.togglePlayback(() => true), true);
+  assert.equal(requested(), true);
+  assert.equal(await session.togglePlayback(() => true), true);
+  assert.equal(requested(), false);
+  assert.equal(pauses, 1);
+  pageGate.resolve();
+  assert.equal(await changing, true);
+  pageGate = deferred();
+  const pending = session.loadPage(false);
+  const transfer = session.run(async () => transferGate.promise);
+  assert.equal(session.snapshot.busy, true);
+  assert.equal(session.snapshot.loading, true);
+  assert.equal(await session.togglePlayback(() => true), false);
+  transferGate.resolve();
+  pageGate.resolve();
+  assert.equal(await transfer, true);
+  await pending;
+});
