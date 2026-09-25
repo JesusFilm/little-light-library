@@ -143,19 +143,66 @@ async function ready(page, book, index) {
     { timeout: 45000 },
   );
 }
-async function tapUntil(page, locator, predicate, arg) {
-  const start = performance.now();
+async function tapClock(page, locator) {
+  // Playwright waits for a button's CSS animation to settle before tapping.
+  // Measure the reader's response from the actual pointer event, excluding
+  // automation-only actionability waiting that a person's finger does not do.
+  await page.evaluate(() => {
+    window.mobileInputAt = undefined;
+    document.addEventListener(
+      "pointerdown",
+      () => {
+        window.mobileInputAt = performance.now();
+      },
+      { once: true, capture: true },
+    );
+  });
   await locator.tap();
+  const sinceInput = await page.evaluate(
+    () => performance.now() - window.mobileInputAt,
+  );
+  assert.ok(Number.isFinite(sinceInput), "Touch produced a pointer event");
+  return performance.now() - sinceInput;
+}
+async function tapUntil(page, locator, predicate, arg) {
+  const start = await tapClock(page, locator);
   await page.waitForFunction(predicate, arg);
   return Math.round(performance.now() - start);
 }
 async function inspectLayout(page, scenario, name) {
+  // ResizeObserver updates the drawing buffer on the next render opportunity.
+  // Wait for that real resize rather than measuring the old portrait buffer.
+  await page
+    .waitForFunction(
+      (minimum) => {
+        const canvas = document.querySelector("#scene canvas");
+        const bounds = canvas?.getBoundingClientRect();
+        return (
+          bounds &&
+          canvas.width / bounds.width >= minimum - 0.01 &&
+          canvas.height / bounds.height >= minimum - 0.01
+        );
+      },
+      limits.minimumPixelRatio,
+      { timeout: 5000 },
+    )
+    .catch(() => {});
   const layout = await page.evaluate(() => {
     const canvas = document.querySelector("#scene canvas");
     const bounds = canvas.getBoundingClientRect();
     const appStyle = getComputedStyle(document.querySelector("#app"));
+    const sceneStyle = getComputedStyle(document.querySelector("#scene"));
     return {
       width: innerWidth,
+      height: innerHeight,
+      canvas: {
+        top: bounds.top,
+        bottom: bounds.bottom,
+        left: bounds.left,
+        right: bounds.right,
+      },
+      mask: sceneStyle.maskImage,
+      webkitMask: sceneStyle.webkitMaskImage,
       scrollWidth: document.documentElement.scrollWidth,
       pixelRatio: canvas.width / bounds.width,
       background: appStyle.backgroundImage,
@@ -170,6 +217,17 @@ async function inspectLayout(page, scenario, name) {
   assert.ok(
     layout.scrollWidth <= layout.width + 1,
     `${name}: no horizontal overflow`,
+  );
+  assert.ok(
+    layout.canvas.top <= 1 &&
+      layout.canvas.bottom >= layout.height - 1 &&
+      layout.canvas.left <= 1 &&
+      layout.canvas.right >= layout.width - 1,
+    `${name}: actual scene covers the viewport behind the reader`,
+  );
+  assert.ok(
+    [layout.mask, layout.webkitMask].every((mask) => !mask || mask === "none"),
+    `${name}: scene has no fade mask replacing the continuous room`,
   );
   assert.ok(
     !layout.background.includes("url("),
@@ -306,9 +364,8 @@ try {
         ),
         limits.inspectionMs,
       );
-      const readAt = performance.now();
       const beforeBytes = transferred;
-      await page.locator("#shelf-read").tap();
+      const readAt = await tapClock(page, page.locator("#shelf-read"));
       await page.waitForFunction(
         () =>
           document.querySelector(".reader") ||
@@ -413,9 +470,8 @@ try {
       await page.locator("#settings-close").tap();
 
       for (let index = 1; index < countFor(entry.id); index++) {
-        const start = performance.now();
         const bytes = transferred;
-        await page.locator("#next").tap();
+        const start = await tapClock(page, page.locator("#next"));
         await page.waitForFunction(
           (index) =>
             window.libraryDebug().state.page === index ||
@@ -460,8 +516,7 @@ try {
         "last page cannot go forward",
       );
       for (let index = countFor(entry.id) - 2; index >= 0; index--) {
-        const start = performance.now();
-        await page.locator("#previous").tap();
+        const start = await tapClock(page, page.locator("#previous"));
         await ready(page, entry.id, index);
         budget(
           scenario,
@@ -477,8 +532,10 @@ try {
       );
       for (const locale of locales.slice(1)) {
         await page.locator("#language").tap();
-        const start = performance.now();
-        await page.locator(`[data-locale="${locale}"]`).tap();
+        const start = await tapClock(
+          page,
+          page.locator(`[data-locale="${locale}"]`),
+        );
         await page.waitForFunction(
           (locale) =>
             window.libraryDebug().state.language === locale &&
