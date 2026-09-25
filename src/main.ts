@@ -214,7 +214,7 @@ async function fetchLocale(id: LocaleId) {
 }
 function header() {
   $("#header").innerHTML =
-    `<a class="brand" href="./" aria-label="${escaped(t("back"))}"><span class="brand-star">✦</span><span>${escaped(t("appTitle"))}</span></a><nav>${state.book ? button("shelf", session.snapshot.browsing ? "↪ Continue reading" : "↩ " + escaped(t("library"))) : ""}${button("language", "🌐", "icon")}${button("settings", "⚙", "icon")}</nav>`;
+    `<a class="brand" href="./" aria-label="${escaped(t("back"))}"><span class="brand-star">✦</span><span class="brand-title">${escaped(t("appTitle"))}</span></a><nav>${state.book ? `<button id="shelf" class="header-action" aria-label="${escaped(session.snapshot.browsing ? "Continue reading" : t("library"))}"><span aria-hidden="true">📚</span><span class="header-action-label">${escaped(session.snapshot.browsing ? "Continue reading" : t("library"))}</span></button>` : ""}${button("language", "🌐", "icon")}${button("settings", "⚙", "icon")}</nav>`;
   $("#language").setAttribute("aria-label", t("language"));
   $("#settings").setAttribute("aria-label", t("settings"));
   $("#language").onclick = () => languageDialog(false);
@@ -359,6 +359,7 @@ async function renderPage(
   header();
   const story = currentStory();
   const page = story.pages[state.page];
+  document.body.dataset.readerScene = page.id;
   narration = page.authored ? bookNarration : standardNarration;
   narration.speed(prefs.speed);
   narration.volume(prefs.volume, prefs.audio);
@@ -560,7 +561,10 @@ function updatePlayback() {
     .forEach((el) =>
       el.classList.toggle(
         "active",
-        ready && Number(el.dataset.segment) === narration.clock.segment,
+        playing &&
+          ready &&
+          !narration.clock.ended &&
+          Number(el.dataset.segment) === narration.clock.segment,
       ),
     );
   const status = $("#play-status");

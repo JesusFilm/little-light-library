@@ -446,103 +446,288 @@ input[type="checkbox"] {
     scroll-behavior: auto !important;
   }
 }
-/* Reading is a stage beside a paper card, never a card over the actors. */
+/* The reading room continues behind the book and the text. */
 body {
   background: #273e3c;
 }
-#header {
-  background: linear-gradient(#f5eedde8, transparent);
+.reading #app {
+  color: #fff9ed;
+  background:
+    radial-gradient(ellipse 14% 30% at 74% 10%, #bd82434a, transparent 90%),
+    linear-gradient(90deg, #18242a00 42%, #15202854 66%, #10191ec9 100%),
+    url("./assets/reading-room.webp") center center / cover no-repeat,
+    #30231d;
+}
+.reading[data-reader-scene="jonah-called"] #app,
+.reading[data-reader-scene="jonah-boards-ship"] #app {
+  background: radial-gradient(
+      ellipse 40% 50% at 20% 42%,
+      #dcb477a6,
+      transparent 85%
+    ),
+    radial-gradient(ellipse 32% 34% at 75% 90%, #84684bba, transparent 90%),
+    linear-gradient(145deg, #113d55, #245c69 47%, #655e4d 100%);
+}
+.reading #header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 4;
+  padding: 20px 28px;
+  padding-top: max(20px, env(safe-area-inset-top));
+  background: none;
+  pointer-events: none;
+}
+.reading #header > * {
+  pointer-events: auto;
+}
+.reading .brand {
+  color: #f6f1e5;
+  text-shadow: 0 2px 14px #15161699;
+}
+.reading .brand-title {
+  display: none;
+}
+.reading .brand-star {
+  font-size: 39px;
+  color: #f8bc56;
+}
+.reading #header nav {
+  gap: 9px;
+}
+.reading #header button {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  min-height: 54px;
+  padding: 5px;
+  border: 1px solid #ffffff8c;
+  border-radius: 17px;
+  background: #ffffff15;
+  color: #fff9ee;
+  box-shadow: 0 6px 24px #1517133d;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: system-ui, sans-serif;
+  font-size: 25px;
+}
+.reading #header button:hover {
+  background: #ffffff38;
+}
+.reading .header-action-label {
+  display: none;
 }
 .reading #scene {
-  width: calc(100% - 390px);
+  width: 70%;
   height: 100svh;
+  -webkit-mask-image: linear-gradient(to right, #000 0 80%, transparent 97%);
+  mask-image: linear-gradient(to right, #000 0 80%, transparent 97%);
 }
 .reading #panel {
-  position: absolute;
-  right: 0;
-  top: 88px;
-  bottom: 0;
-  width: 390px;
-  min-height: 0;
-  padding: 20px 22px 24px 0;
+  position: relative;
+  margin-left: auto;
+  width: 32%;
+  min-height: 100svh;
+  padding: 90px clamp(18px, 3vw, 56px) 24px 0;
   justify-content: center;
+  align-items: stretch;
 }
-.reader {
+.reading .reader {
   width: 100%;
-  max-height: calc(100svh - 120px);
+  max-height: calc(100svh - 115px);
   overflow: auto;
-  border-radius: 8px 20px 20px 8px;
-  background: linear-gradient(105deg, #e5d9bb, #fff8e9 5%, #f6ebd5);
-  box-shadow:
-    0 12px 50px #14262240,
-    inset 5px 0 8px #aa936b16;
-  border: 1px solid #dac49a;
+  scrollbar-width: thin;
+  padding: 12px 0 8px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: #fffaf0;
+  text-shadow: 0 2px 12px #0912139e;
 }
-.reader h1 {
+.reading .reader-meta,
+.reading .reader-footer {
+  color: #f8f1e5;
+  font-size: 14px;
+  line-height: 1.4;
+  text-shadow: 0 2px 8px #081315b0;
+}
+.reading .reader h1 {
+  font-size: clamp(34px, 3.3vw, 54px);
+  line-height: 1.05;
+  font-weight: 700;
+  margin: 20px 0 24px;
+}
+.reading .story-text {
+  font-size: clamp(20px, 1.8vw, 28px);
+  line-height: 1.5;
+}
+.reading .story-text .active {
+  background: none;
+  color: #fff;
+  box-shadow: none;
+  text-decoration: underline;
+  text-decoration-color: #f3ca82;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.12em;
+}
+.reading .reader-footer {
+  margin-top: 26px;
+}
+.reading .reader-controls {
+  position: static;
+  gap: 9px;
+  margin-top: 20px;
+  padding: 0;
+  background: none;
+}
+.reading .reader-controls button,
+.reading .authored-interactions button {
+  border: 1px solid #ffffffb3;
+  background: #ffffff12;
+  color: #fff9ef;
+  box-shadow: 0 8px 26px #0b151433;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-shadow: none;
+}
+.reading .reader-controls button:hover,
+.reading .authored-interactions button:hover {
+  background: #ffffff35;
+}
+.reading .reader-controls button:disabled {
+  opacity: 0.48;
+}
+.reading .reader-transport {
+  min-height: 80px;
+}
+.reading .transport-icon {
   font-size: 27px;
 }
-.story-text {
-  font-size: 19px;
-  line-height: 1.55;
-}
-.reader-controls {
-  position: sticky;
-  bottom: -26px;
-  background: #f9efd9;
-  padding: 12px 0 4px;
+.reading .transport-label {
+  font-size: 12px;
 }
 @media (max-aspect-ratio: 6/5), (max-width: 700px) {
+  .reading #app {
+    background:
+      radial-gradient(ellipse 82% 34% at 78% 92%, #a9683d70, transparent 95%),
+      linear-gradient(180deg, #141d2100 35%, #10191c91 65%, #191a18ab 100%),
+      url("./assets/reading-room.webp") center center / auto 100% no-repeat,
+      #30231d;
+  }
+  .reading[data-reader-scene="jonah-called"] #app,
+  .reading[data-reader-scene="jonah-boards-ship"] #app {
+    background: radial-gradient(
+        ellipse 82% 25% at 11% 64%,
+        #ae8158a8,
+        transparent 95%
+      ),
+      radial-gradient(ellipse 64% 38% at 86% 100%, #826f56a8, transparent 90%),
+      linear-gradient(160deg, #1b526e 5%, #1c5363 53%, #524d43 100%);
+  }
+  .reading #header {
+    padding: 14px 18px;
+    padding-top: max(14px, env(safe-area-inset-top));
+  }
   .reading #scene {
     width: 100%;
-    height: 55svh;
+    height: 48svh;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0 78%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(to bottom, #000 0 78%, transparent 100%);
   }
   .reading #panel {
-    position: relative;
-    top: auto;
-    right: auto;
-    bottom: auto;
     width: 100%;
-    min-height: calc(100svh - 85px);
-    padding: calc(55svh - 85px) 18px 18px;
+    min-height: 100svh;
+    padding: calc(56svh + 4px) max(24px, env(safe-area-inset-right))
+      calc(24px + env(safe-area-inset-bottom))
+      max(24px, env(safe-area-inset-left));
     justify-content: flex-start;
     align-items: center;
   }
-  .reader {
-    max-width: 720px;
+  .reading .reader {
+    width: min(720px, 100%);
     max-height: none;
-    padding: 20px;
-    border-radius: 18px;
+    overflow: visible;
+    padding: 0;
   }
-  .reader-controls {
-    bottom: -20px;
+  .reading .reader h1 {
+    font-size: clamp(32px, 8vw, 54px);
+    margin: 13px 0 20px;
+  }
+  .reading .story-text {
+    font-size: clamp(20px, 5vw, 27px);
+    line-height: 1.43;
+  }
+  .reading .reader-controls {
+    margin-top: 22px;
+  }
+  .reading .reader-transport {
+    min-height: 73px;
   }
 }
 @media (max-width: 480px) {
+  .reading #header {
+    padding: 10px 14px;
+    padding-top: max(10px, env(safe-area-inset-top));
+  }
+  .reading .brand-star {
+    font-size: 31px;
+  }
+  .reading #header button {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 14px;
+    font-size: 21px;
+  }
   .reading #scene {
-    height: 44svh;
+    height: 48svh;
   }
   .reading #panel {
-    padding: calc(44svh - 76px) 10px 12px;
-    min-height: calc(100svh - 76px);
+    padding: calc(54svh + 2px) 22px calc(22px + env(safe-area-inset-bottom));
+    padding-left: max(22px, env(safe-area-inset-left));
+    padding-right: max(22px, env(safe-area-inset-right));
   }
-  .reader {
-    padding: 16px;
+  .reading .reader-meta,
+  .reading .reader-footer {
+    font-size: 13px;
   }
-  .reader h1 {
-    font-size: 23px;
-    margin: 10px 0;
+  .reading .reader h1 {
+    font-size: clamp(30px, 8.2vw, 40px);
+    margin: 11px 0 18px;
   }
-  .story-text {
-    font-size: 17px;
-    line-height: 1.43;
+  .reading .story-text {
+    font-size: clamp(18px, 5.1vw, 22px);
   }
-  .reader-controls {
-    bottom: -16px;
-    margin-top: 8px;
+  .reading .reader-controls {
+    gap: 7px;
+    margin-top: 18px;
   }
-  .reader-meta {
-    font-size: 10px;
+  .reading .reader-controls button {
+    padding: 8px 3px;
   }
+  .reading .transport-label {
+    font-size: 11px;
+  }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .reading #header button,
+  .reading .reader-controls button,
+  .reading .authored-interactions button {
+    background: #293b3bd9;
+  }
+}
+.low-graphics .reading #header button,
+.low-graphics .reading .reader-controls button,
+.low-graphics .reading .authored-interactions button {
+  background: #293b3bd9;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 /* Name tags follow the paper actor, while keyboard focus uses the same target. */

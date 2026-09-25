@@ -830,11 +830,18 @@ export class LibraryScene {
       );
       this.lookGoal.set(0, narrow ? 3.05 : 3.15, -1.7);
     } else {
-      const scale = Math.max(1, 1.25 / this.camera.aspect);
+      // Fill portrait reading views with the pop-up scene while the canvas
+      // keeps its unscaled DOM bounds for actor hit targets and labels.
+      const framingSpan = THREE.MathUtils.lerp(
+        0.95,
+        1.25,
+        THREE.MathUtils.smoothstep(this.camera.aspect, 0.95, 1.25),
+      );
+      const scale = Math.max(1, framingSpan / this.camera.aspect);
       // Bring the illustrated stage forward, allowing peripheral book edges to crop.
-      // Narrow views pull back enough to retain the widest family/actor staging.
-      this.lookGoal.set(0, 2.45, 0.4);
-      this.cameraGoal.set(1.1 * scale, 2.45 + 3.4 * scale, 0.4 + 5.65 * scale);
+      // Extremely narrow views still retain clearance for wide actor groups.
+      this.lookGoal.set(0, 2.22, 0.4);
+      this.cameraGoal.set(1.1 * scale, 2.45 + 3.4 * scale, 0.4 + 6.05 * scale);
     }
   }
   private makeRoom() {
