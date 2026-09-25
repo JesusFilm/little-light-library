@@ -213,7 +213,7 @@ Validation has distinct layers:
    and missing/stale narration diagnostics.
 3. Local asset existence, image-header checks and PCM WAV measurements. A header
    check cannot establish visual quality or even full decoder success. MP3/Ogg
-   measurement uses optional local `ffprobe`.
+   measurement uses optional local `ffmpeg`.
 4. Browser image/audio decoding, rendered scene/transition inspection and actual
    playback at desktop/phone sizes.
 5. Creator editorial, visual and listening review. No automated gate substitutes
@@ -255,7 +255,7 @@ specific; an empty test profile cannot establish that every user's work is safe.
 
 Current limits include fixed backdrop geometry, bounded layouts without an
 automatic solver, static atlas poses, whole-card motion, source-language toy
-labels, an optional `ffprobe` dependency for compressed audio measurement,
+labels, an optional `ffmpeg` dependency for compressed audio measurement,
 and no proof of review from metadata.
 Review fingerprints cover book data/asset references, not every externally
 modified file byte; changing bytes at the same path requires fresh review.

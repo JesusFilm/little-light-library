@@ -89,7 +89,7 @@ Use the targeted replacement command after recording or supplying a new public-r
 npm run book:replace-audio -- public/books/jonah-and-the-whale.book.json jonah-called segment-1 assets/books/jonah-and-the-whale/audio/en-US/jonah-call.wav af_heart
 ```
 
-The command measures the WAV, changes only that segment's narration and its asset registration, and snapshots its current text as `recordedText`. It does not synthesize speech. Missing narration still permits text reading but is reported so a finished narrated spread cannot pass unnoticed. The runtime can decode browser-supported WAV, MP3 or Ogg audio. Local validation measures PCM WAV directly and MP3/Ogg through optional local `ffprobe`; targeted replacement expects PCM WAV. See [audio and languages](audio-language-authoring.md) for selective local synthesis.
+The command measures the WAV, changes only that segment's narration and its asset registration, and snapshots its current text as `recordedText`. It does not synthesize speech. Missing narration still permits text reading but is reported so a finished narrated spread cannot pass unnoticed. The runtime can decode browser-supported WAV, MP3 or Ogg audio. Local validation measures PCM WAV directly and MP3/Ogg through optional local `ffmpeg`; targeted replacement expects PCM WAV. See [audio and languages](audio-language-authoring.md) for selective local synthesis.
 
 ## Validation and reader behavior
 
@@ -102,7 +102,7 @@ npm run book:validate -- public/books/jonah-and-the-whale.book.json
 Shared validation covers format/version, IDs, references, supported presets and
 triggers, numeric ranges, safe asset locations and narration freshness. The CLI
 checks local image headers and measured audio (PCM WAV directly, MP3/Ogg through
-optional local `ffprobe`). Shared asset validation reports
+optional local `ffmpeg`). Shared asset validation reports
 a narration duration mismatch exceeding 0.04 seconds. Runtime image/audio decoding
 provides an additional playback check; header validation alone cannot guarantee
 a complete image decodes correctly.

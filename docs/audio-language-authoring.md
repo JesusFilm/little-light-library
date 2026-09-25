@@ -79,7 +79,7 @@ attribution with truthful rights/provenance. Do not overwrite shared files to
 change one cue.
 
 Local validation measures PCM WAV frames directly; MP3/Ogg validation requires
-the optional local `ffprobe` executable and fails with an actionable message
+the optional local `ffmpeg` executable and fails with an actionable message
 when unavailable. The replacement command expects WAV. Browser decoding is an
 additional test, not a substitute for correct metadata.
 

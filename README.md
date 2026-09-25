@@ -13,7 +13,7 @@ Open the URL Vite prints. Choose a language and enter the library. Select a book
 
 ## Validate and build
 
-Install Node.js 22 or newer and local `ffprobe` (included with FFmpeg) for media
+Install Node.js 22 or newer and local `ffmpeg` (included with FFmpeg) for media
 validation. Browser checks use installed Chrome locally; CI installs Chromium.
 
 ```sh

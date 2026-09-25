@@ -12,6 +12,7 @@ import {
 import type { AuthoredBook } from "../src/authored-book";
 import { ReaderState } from "../src/state";
 import { readerFixture as fixture } from "../scripts/reader-fixture";
+import { measureWav, probeMedia } from "../scripts/book-files";
 
 test("fixture and generated schema agree with the live versioned contract", () => {
   const result = validateBook(fixture());
@@ -256,4 +257,23 @@ test("animation presets and flip booleans round-trip while invalid values report
       (error) => error.path === "/spreads/0/backdrop/flipX",
     ),
   );
+});
+
+test("compressed narration measures decoded frames without encoder padding", async () => {
+  const audio = Object.values(fixture().assets).filter(
+    (asset) => asset.kind === "audio" && asset.src.endsWith(".mp3"),
+  );
+  assert.ok(audio.length > 0);
+  for (const asset of audio) {
+    const source = path.join(
+      "assets/source-recordings",
+      asset.src.replace(/^assets\//, "").replace(/\.mp3$/, ".wav"),
+    );
+    const expected = measureWav(fs.readFileSync(source));
+    const measured = await probeMedia(asset);
+    assert.ok(
+      Math.abs(measured.duration! - expected) <= 1 / 24000,
+      `${asset.src}: ${measured.duration} differs from decoded source ${expected}`,
+    );
+  }
 });

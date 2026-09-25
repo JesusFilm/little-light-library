@@ -32,7 +32,7 @@ Register validates the full catalog and media before appending; repeat registrat
 Catalog books require public-relative files, with no embedded media.
 Missing/stale narration and editorial review are warnings; --strict fails on all warnings.
 Validation checks image headers and measured audio, not visual, editorial, or listening quality.
-MP3/Ogg measurement requires local ffprobe; PCM WAV needs no additional tools.`;
+MP3/Ogg measurement requires local ffmpeg; PCM WAV needs no additional tools.`;
 
 function scaffold(
   id: string,
