@@ -435,7 +435,11 @@ async function renderPage(
   $("#next").onclick = () => {
     void session.turnPage(1);
   };
-  $("#play").onclick = () => void session.togglePlayback(current);
+  $("#play").onclick = () => {
+    // Safari requires resume to begin in the tap task, before the scene wait.
+    void narration.unlock().catch(() => {});
+    void session.togglePlayback(current);
+  };
   if (resume) {
     session.setReady(previousReady);
     if (

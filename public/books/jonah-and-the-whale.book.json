@@ -17,8 +17,8 @@
   "assets": {
     "jonah-shore": {
       "kind": "image",
-      "src": "assets/art/jonah/jonah-shore.png",
-      "attribution": "Creator-supplied image generated for Story Lab; retained as the cover scene."
+      "src": "assets/art/jonah/jonah-shore.webp",
+      "attribution": "Creator-supplied image generated for Story Lab; WebP derivative of assets/art/jonah/jonah-shore.png retained as the cover scene."
     },
     "sandy-ground": {
       "kind": "image",
@@ -27,8 +27,8 @@
     },
     "jonah-cutout": {
       "kind": "image",
-      "src": "assets/art/jonah/jonah-cutout.png",
-      "attribution": "Creator-supplied character cutout generated for Story Lab."
+      "src": "assets/art/jonah/jonah-cutout.webp",
+      "attribution": "Creator-supplied character cutout generated for Story Lab; WebP derivative of assets/art/jonah/jonah-cutout.png."
     },
     "whale-cutout": {
       "kind": "image",

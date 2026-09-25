@@ -8,6 +8,7 @@ export class Narration {
   private sources: AudioBufferSourceNode[] = [];
   private generation = 0;
   private playRequest = 0;
+  private loadAbort?: AbortController;
   constructor(context = new AudioContext()) {
     this.context = context;
     this.clock = new PlaybackClock(() => this.context.currentTime);
@@ -16,18 +17,30 @@ export class Narration {
   }
   async unlock() {
     await this.context.resume();
+    if (this.context.state && this.context.state !== "running")
+      throw new Error("Audio is blocked. Tap Play again to retry.");
   }
   async load(cues: AudioCue[]) {
     this.stop();
     const generation = this.generation;
-    const buffers = await Promise.all(
-      cues.map(async (cue) => {
-        if (!cue) throw new Error("missing audio");
-        const response = await fetch(cue.src);
-        if (!response.ok) throw new Error("missing audio");
-        return this.context.decodeAudioData(await response.arrayBuffer());
-      }),
-    );
+    const controller = new AbortController();
+    this.loadAbort = controller;
+    let buffers: AudioBuffer[];
+    try {
+      buffers = await Promise.all(
+        cues.map(async (cue) => {
+          if (!cue) throw new Error("missing audio");
+          const response = await fetch(cue.src, { signal: controller.signal });
+          if (!response.ok) throw new Error("missing audio");
+          return this.context.decodeAudioData(await response.arrayBuffer());
+        }),
+      );
+    } catch (error) {
+      if (generation !== this.generation) return false;
+      throw error;
+    } finally {
+      if (this.loadAbort === controller) this.loadAbort = undefined;
+    }
     if (generation !== this.generation) return false;
     this.buffers = buffers;
     this.clock.load(buffers.map((b) => b.duration));
@@ -89,6 +102,7 @@ export class Narration {
     await this.play();
   }
   stop() {
+    this.loadAbort?.abort();
     this.generation++;
     this.pause();
     this.buffers = [];

@@ -16,15 +16,21 @@ test("reader reuses decoded audio between pages and reloads a changed language/b
   const reader = new BookNarration(context()),
     first = book();
   let loads = 0;
+  let pages = 0;
   reader.player.load = async (value) => {
     loads++;
     reader.player.timeline = buildBookTimeline(value);
+    return true;
+  };
+  reader.player.loadPage = async () => {
+    pages++;
     return true;
   };
   await reader.loadBook(first, 0);
   reader.stop();
   await reader.loadBook(first, 1);
   assert.equal(loads, 1);
+  assert.equal(pages, 1);
   assert.equal(reader.clock.position, 0);
   const second = structuredClone(first);
   second.locale = "es";
