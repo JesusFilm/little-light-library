@@ -313,7 +313,9 @@ const readSelected = async (key, capture = false) => {
       state?.shelf.table === selected &&
       state.shelf.browsing === false &&
       state.shelf.busy === false &&
-      state.scene?.tableShelfKey === selected
+      state.scene?.tableShelfKey === selected &&
+      state.ready &&
+      !state.pagePending
     );
   }, key);
 };
@@ -526,6 +528,9 @@ await check(
 
     await selectBook("builtin:eden");
     await readSelected("builtin:eden");
+    await page.waitForFunction(
+      () => window.libraryDebug().scene.shelfToys.length === 3,
+    );
     state = await debug();
     assertSessionAgreement(state);
     assert.equal(state.state.book, "eden");
@@ -544,8 +549,14 @@ await check(
       document.querySelector("#next")?.click();
       if (!window.libraryDebug?.().pagePending)
         throw Error("The page load must still be pending before Library");
-      if (!document.querySelector(".reader-meta")?.textContent?.includes("2"))
-        throw Error("Requested page text did not appear before media settled");
+      if (
+        document.querySelector("#panel")?.getAttribute("aria-busy") !==
+          "true" ||
+        !document.querySelector("#notice")?.textContent?.includes("2")
+      )
+        throw Error(
+          "Requested page must show explicit pending feedback while text stays paired with artwork",
+        );
       document.querySelector("#shelf")?.click();
     });
     await waitShelf(

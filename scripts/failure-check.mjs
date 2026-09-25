@@ -11,6 +11,13 @@ const { readerFixture } = await tsImport(
 
 const root = path.resolve(process.env.READER_DIST || "dist");
 const prefix = "/acceptance/little-light-library/";
+const phoneImage = (src, cover = false) => {
+  const candidate = src.replace(
+    /\.(?:png|webp)$/i,
+    cover ? ".cover.webp" : ".mobile.webp",
+  );
+  return fs.existsSync(path.join(root, candidate)) ? candidate : src;
+};
 const output = path.resolve(".test-output/room/failure-results.json");
 assert.ok(
   fs.existsSync(path.join(root, "index.html")),
@@ -98,7 +105,10 @@ const openBook = async (page) => {
   await page.waitForFunction(
     () =>
       window.libraryDebug?.().shelf.table === "book:fixture-book" &&
-      !window.libraryDebug?.().shelf.busy,
+      !window.libraryDebug?.().shelf.busy &&
+      !window.libraryDebug?.().pagePending &&
+      (window.libraryDebug?.().ready ||
+        window.libraryDebug?.().session.failure),
   );
 };
 const startupFailure = async (page, pattern) => {
@@ -282,7 +292,7 @@ try {
   await check(
     "A failed shelf cover leaves titled books selectable and reload restores the artwork",
     async (page) => {
-      const cover = url + "assets/art/jonah/jonah-shore.webp";
+      const cover = url + phoneImage("assets/art/jonah/jonah-shore.webp", true);
       await page.route(cover, (route) =>
         route.fulfill({ status: 503, body: "Injected cover failure" }),
       );
@@ -331,7 +341,8 @@ try {
             ? book.spreads[0].backdrop.asset
             : book.spreads[0].segments[0].narration.asset;
         const relativePath = book.assets[asset].src;
-        const route = url + relativePath;
+        const route =
+          url + (kind === "artwork" ? phoneImage(relativePath) : relativePath);
         let injected = 0;
         await page.route(route, (request) => {
           injected++;
@@ -423,7 +434,8 @@ try {
       const before = await page.evaluate(() => window.libraryDebug().scene);
       assert.equal(before.loadedPage?.index, 0);
       assert.equal(before.stageVisible, true);
-      const route = url + book.assets[book.spreads[1].backdrop.asset].src;
+      const route =
+        url + phoneImage(book.assets[book.spreads[1].backdrop.asset].src);
       let reached;
       let release;
       const requested = new Promise((resolve) => (reached = resolve));
@@ -466,7 +478,8 @@ try {
       });
       assert.deepEqual(
         await page.locator(".story-text [data-segment]").allTextContents(),
-        book.spreads[1].segments.map(({ text }) => text),
+        book.spreads[0].segments.map(({ text }) => text),
+        "Failed turns retain text paired with the previous artwork",
       );
       await page.unroute(route);
       await page.locator("#notice button").tap();
@@ -511,7 +524,7 @@ try {
             !window.libraryDebug().shelf.busy,
           key,
         );
-        const route = url + asset;
+        const route = url + phoneImage(asset);
         let reached;
         let release;
         const requested = new Promise((resolve) => (reached = resolve));
@@ -542,7 +555,8 @@ try {
         const failed = await page.evaluate(() => window.libraryDebug().scene);
         assert.equal(failed.loadedPage?.index, 0);
         assert.equal(failed.stageVisible, true);
-        assert.match(await page.locator(".reader-meta").innerText(), /2/);
+        assert.match(await page.locator(".reader-meta").innerText(), /Page 1/);
+        assert.match(await page.locator("#notice").innerText(), /Page 2/);
         await page.unroute(route);
         await page.locator("#notice button").tap();
         await page.waitForFunction(
@@ -576,7 +590,8 @@ try {
           window.libraryDebug().scene.loadedPage?.index === 0 &&
           !window.libraryDebug().shelf.busy,
       );
-      const route = url + "assets/art/theatre/eden-eve-behind-garden-bush.webp";
+      const route =
+        url + phoneImage("assets/art/theatre/eden-eve-behind-garden-bush.webp");
       let reached;
       let release;
       const requested = new Promise((resolve) => (reached = resolve));
