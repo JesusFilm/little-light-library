@@ -411,7 +411,7 @@ async function renderPage(
     bindControls();
     updatePlayback();
   }
-  const commitReaderPage = () => {
+  const commitReaderPage = (includeInteractions = true) => {
     document.body.dataset.readerScene = page.id;
     panel.innerHTML = `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><h1>${escaped(page.title)}</h1><div class="story-text">${page.segments.map((s, i) => `<span data-segment="${i}">${escaped(s.text)}</span>`).join(" ")}</div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", "←", t("previous"))}${transportButton("play", "▶", t("play"), "primary")}${transportButton("next", "→", t("next"))}</div></article>`;
     const next = $<HTMLButtonElement>("#next");
@@ -424,7 +424,7 @@ async function renderPage(
       const interactiveElements = spread.elements.filter(
         (e) => e.kind === "actor" || e.interaction,
       );
-      if (interactiveElements.length) {
+      if (includeInteractions && interactiveElements.length) {
         const interactions = document.createElement("div");
         interactions.className = "authored-interactions";
         interactions.setAttribute("aria-label", "Story interactions");
@@ -471,6 +471,14 @@ async function renderPage(
     updatePlayback();
   };
   if (resume) {
+    panel.setAttribute("aria-busy", "true");
+    panel.classList.add("reader-pending");
+    notice(`${pageCount} · ${t("loading")}`);
+    panel.querySelector(".authored-interactions")?.remove();
+    bindControls();
+    updatePlayback();
+    if (!(await scene.waitForVisibleStage(current))) return;
+    if (!current()) return;
     commitReaderPage();
     session.setReady(previousReady);
     if (
@@ -518,9 +526,14 @@ async function renderPage(
   } catch (error) {
     if (!current()) return;
     narration.stop();
+    // A first-page art failure still leaves the retelling readable. During a
+    // turn, preserve the last complete text/art pair behind the error notice.
+    if (!panel.querySelector(".story-text")) commitReaderPage(false);
     session.reportFailure("artwork", current);
     return;
   }
+  if (!current()) return;
+  if (!(await scene.waitForVisibleStage(current))) return;
   if (!current()) return;
   commitReaderPage();
   try {

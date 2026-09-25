@@ -363,6 +363,28 @@ export class LibraryScene {
     const age = this.pageMotionAge(performance.now());
     return this.reduced || bookPose(age, this.opening, false).popups === 1;
   }
+  /** Wait for the destination art to reach the canvas before its text is shown. */
+  async waitForVisibleStage(isCurrent: () => boolean): Promise<boolean> {
+    const generation = this.loadGeneration;
+    while (
+      !this.disposed &&
+      generation === this.loadGeneration &&
+      isCurrent()
+    ) {
+      if (
+        !document.hidden &&
+        this.mode === "spread" &&
+        this.pageRoot.visible &&
+        this.lastRenderedAt >= this.turnStarted &&
+        !this.transitionWaiting
+      )
+        return true;
+      await new Promise<void>((resolve) =>
+        requestAnimationFrame(() => resolve()),
+      );
+    }
+    return false;
+  }
   /** Resolve only after an upright frame, or cancel when the reader moves away. */
   async waitForUnfold(isCurrent: () => boolean): Promise<boolean> {
     const generation = this.loadGeneration;
