@@ -24,6 +24,10 @@ npm run build
 
 The production build is `dist/` and uses relative URLs, so it can be served from a nested static path. The catalog is [`public/books/catalog.json`](public/books/catalog.json). The runtime reads only local static assets; optional local narration synthesis is an authoring tool, not a reader dependency.
 
+## GitHub Pages
+
+The workflow in [`.github/workflows/pages.yml`](.github/workflows/pages.yml) builds and deploys the site when `main` changes. In the GitHub repository's **Settings → Pages**, select **GitHub Actions** as the build and deployment source. The project site is [jesusfilm.github.io/little-light-library/](https://jesusfilm.github.io/little-light-library/).
+
 ## Edit books
 
 Read the [creator guide](docs/creator-guide.md), [book contract](docs/book-contract.md), and [audio/language guide](docs/audio-language-authoring.md). The [book indexes](docs/books/README.md) point to each book's text, art, audio, and source files. Original art and prompts are under `assets/`; browser-ready media is under `public/assets/`. See [AGENTS.md](AGENTS.md) for project conventions.
