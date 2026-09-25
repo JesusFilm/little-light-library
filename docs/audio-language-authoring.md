@@ -53,7 +53,9 @@ unfiltered replacement over Jonah's completed nine-locale cues. The script:
 
 New media belongs beneath `public/assets/books/<id>/`, with `audio/<locale>/`
 for narration. The script writes `PAGE-SEGMENT-HASH.wav` there and records the
-public-relative path. Keep useful source takes separately; do not commit lab caches or
+public-relative path. Run `npm run media:optimize` before publishing; it preserves
+the WAV under `assets/source-recordings/`, writes a gapless MP3 runtime derivative,
+and updates the asset reference. Do not commit lab caches or
 temporary server outputs. Preserve all existing content paths.
 
 Select a same-language voice and listen before accepting it. `narrationSettings`
@@ -77,7 +79,7 @@ attribution with truthful rights/provenance. Do not overwrite shared files to
 change one cue.
 
 Local validation measures PCM WAV frames directly; MP3/Ogg validation requires
-the optional local `ffprobe` executable and fails with an actionable message
+the optional local `ffmpeg` executable and fails with an actionable message
 when unavailable. The replacement command expects WAV. Browser decoding is an
 additional test, not a substitute for correct metadata.
 

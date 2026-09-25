@@ -393,12 +393,13 @@ test("flips preserve atlas selection, placement and shared cover orientation", a
   stage.dispose();
 });
 
-test("character page entrances rise gently, finish, and respect reduced motion", () => {
+test("character page entrances stay opaque, settle, and respect reduced motion", () => {
   const start = authoredCharacterEntrance(0);
   const middle = authoredCharacterEntrance(0.16);
   const settled = authoredCharacterEntrance(0.32);
 
-  assert.equal(start.opacity, 0);
+  assert.equal(start.opacity, 1);
+  assert.equal(middle.opacity, 1);
   assert.ok(start.scale < middle.scale && middle.scale < settled.scale);
   assert.deepEqual(settled, { opacity: 1, scale: 1 });
   assert.deepEqual(authoredCharacterEntrance(0, true), {

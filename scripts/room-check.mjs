@@ -11,7 +11,7 @@ const { sourceTranslation } = await tsImport(
   import.meta.url,
 );
 
-const root = path.resolve("dist");
+const root = path.resolve(process.env.READER_DIST || "dist");
 const prefix = "/acceptance/little-light-library/";
 const output = path.resolve(
   process.env.ROOM_CHECK_OUTPUT || ".test-output/room",
@@ -96,7 +96,14 @@ const server = http.createServer((request, response) => {
 });
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 const url = `http://127.0.0.1:${server.address().port}${prefix}`;
-const browser = await chromium.launch({ channel: "chrome", headless: true });
+const browser = await chromium.launch({
+  ...(process.env.READER_BROWSER_CHANNEL
+    ? { channel: process.env.READER_BROWSER_CHANNEL }
+    : process.env.CI
+      ? {}
+      : { channel: "chrome" }),
+  headless: true,
+});
 const results = {
   generatedAt: new Date().toISOString(),
   method:
@@ -310,7 +317,9 @@ const readSelected = async (key, capture = false) => {
       state?.shelf.table === selected &&
       state.shelf.browsing === false &&
       state.shelf.busy === false &&
-      state.scene?.tableShelfKey === selected
+      state.scene?.tableShelfKey === selected &&
+      state.ready &&
+      !state.pagePending
     );
   }, key);
 };
@@ -523,6 +532,9 @@ await check(
 
     await selectBook("builtin:eden");
     await readSelected("builtin:eden");
+    await page.waitForFunction(
+      () => window.libraryDebug().scene.shelfToys.length === 3,
+    );
     state = await debug();
     assertSessionAgreement(state);
     assert.equal(state.state.book, "eden");
@@ -541,8 +553,14 @@ await check(
       document.querySelector("#next")?.click();
       if (!window.libraryDebug?.().pagePending)
         throw Error("The page load must still be pending before Library");
-      if (!document.querySelector(".reader-meta")?.textContent?.includes("2"))
-        throw Error("Requested page text did not appear before media settled");
+      if (
+        document.querySelector("#panel")?.getAttribute("aria-busy") !==
+          "true" ||
+        !document.querySelector("#notice")?.textContent?.includes("2")
+      )
+        throw Error(
+          "Requested page must show explicit pending feedback while text stays paired with artwork",
+        );
       document.querySelector("#shelf")?.click();
     });
     await waitShelf(
@@ -693,13 +711,22 @@ await check(
 
 await check("Busy lock rejects rapid shelf taps", async () => {
   await enter();
-  await page.evaluate(() => {
+  const immediate = await page.evaluate(() => {
     document.querySelector('[data-shelf-key="builtin:eden"]')?.click();
+    const state = window.libraryDebug?.();
+    const locked = {
+      busy: state?.shelf.busy,
+      settingsDisabled: document.querySelector("#settings")?.disabled,
+      languageDisabled: document.querySelector("#language")?.disabled,
+    };
     document.querySelector('[data-shelf-key="builtin:noah"]')?.click();
+    return locked;
   });
-  await page.waitForFunction(() => window.libraryDebug?.().shelf.busy === true);
-  assert.equal(await page.locator("#settings").isDisabled(), true);
-  assert.equal(await page.locator("#language").isDisabled(), true);
+  assert.deepEqual(immediate, {
+    busy: true,
+    settingsDisabled: true,
+    languageDisabled: true,
+  });
   await waitShelf(() => window.libraryDebug?.().shelf.busy === false);
   const state = await debug();
   assert.equal(state.shelf.inspected, "builtin:eden");
@@ -925,11 +952,23 @@ await check(
           );
           await page.keyboard.press("Enter");
           await page.waitForFunction(() => window.libraryDebug?.().playing);
-          assert.equal(
-            await page
-              .locator('.story-text [data-segment="0"]')
-              .evaluate((el) => el.classList.contains("active")),
-            true,
+          await page.waitForFunction(
+            () => {
+              const playback = window.libraryDebug?.();
+              const active = [
+                ...document.querySelectorAll(
+                  ".story-text [data-segment].active",
+                ),
+              ];
+              return (
+                playback?.playing &&
+                playback.segment >= 0 &&
+                active.length === 1 &&
+                Number(active[0].dataset.segment) === playback.segment
+              );
+            },
+            undefined,
+            { timeout: 15_000 },
           );
           await page.locator("#play").click();
           const paused = (await debug()).position;

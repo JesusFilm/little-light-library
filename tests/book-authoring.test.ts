@@ -12,6 +12,7 @@ import {
 import type { AuthoredBook } from "../src/authored-book";
 import { ReaderState } from "../src/state";
 import { readerFixture as fixture } from "../scripts/reader-fixture";
+import { measureWav, probeMedia } from "../scripts/book-files";
 
 test("fixture and generated schema agree with the live versioned contract", () => {
   const result = validateBook(fixture());
@@ -140,6 +141,9 @@ test("invalid versions, unsupported behavior, duplicate IDs, unsafe sources and 
 });
 test("text changes identify exactly one stale cue; targeted WAV replacement preserves other recordings", () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "light-book-"));
+  const recordingDirectory = fs.mkdtempSync(
+    path.join("public", "assets", "audio", "__authoring-test-"),
+  );
   try {
     const book = fixture(),
       original = fixture();
@@ -149,6 +153,21 @@ test("text changes identify exactly one stale cue; targeted WAV replacement pres
     assert.equal(result.errors.length, 0);
     assert.equal(result.warnings.length, 1);
     assert.match(result.warnings[0].message, /Stale/);
+    const runtimeSrc = book.assets[replacement.narration!.asset].src;
+    const sourceWav = path.join(
+      "assets",
+      "source-recordings",
+      runtimeSrc.replace(/^assets\//, "").replace(/\.mp3$/, ".wav"),
+    );
+    const recordingFile = path.join(
+      recordingDirectory,
+      path.basename(sourceWav),
+    );
+    fs.copyFileSync(sourceWav, recordingFile);
+    const recordingSrc = path
+      .relative("public", recordingFile)
+      .split(path.sep)
+      .join("/");
     const file = path.join(directory, "book.json");
     fs.writeFileSync(file, JSON.stringify(book));
     execFileSync(process.execPath, [
@@ -159,7 +178,7 @@ test("text changes identify exactly one stale cue; targeted WAV replacement pres
       file,
       book.spreads[0].id,
       book.spreads[0].segments[0].id,
-      book.assets[replacement.narration!.asset].src,
+      recordingSrc,
       replacement.narration!.voice,
     ]);
     const updated = JSON.parse(fs.readFileSync(file, "utf8"));
@@ -177,6 +196,7 @@ test("text changes identify exactly one stale cue; targeted WAV replacement pres
     );
   } finally {
     fs.rmSync(directory, { recursive: true, force: true });
+    fs.rmSync(recordingDirectory, { recursive: true, force: true });
   }
 });
 test("media validation rejects missing assets and mismatched measured durations", async () => {
@@ -237,4 +257,23 @@ test("animation presets and flip booleans round-trip while invalid values report
       (error) => error.path === "/spreads/0/backdrop/flipX",
     ),
   );
+});
+
+test("compressed narration measures decoded frames without encoder padding", async () => {
+  const audio = Object.values(fixture().assets).filter(
+    (asset) => asset.kind === "audio" && asset.src.endsWith(".mp3"),
+  );
+  assert.ok(audio.length > 0);
+  for (const asset of audio) {
+    const source = path.join(
+      "assets/source-recordings",
+      asset.src.replace(/^assets\//, "").replace(/\.mp3$/, ".wav"),
+    );
+    const expected = measureWav(fs.readFileSync(source));
+    const measured = await probeMedia(asset);
+    assert.ok(
+      Math.abs(measured.duration! - expected) <= 1 / 24000,
+      `${asset.src}: ${measured.duration} differs from decoded source ${expected}`,
+    );
+  }
 });

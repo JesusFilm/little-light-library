@@ -562,7 +562,16 @@ test("all 117 story segments, translation cues and WAV files stay unchanged", ()
           asset,
           `${locale}/${page.id}/${segment.id} audio is registered`,
         );
-        const bytes = readFileSync(path.join(projectRoot, "public", asset.src));
+        // Runtime MP3s are reproducible derivatives; lock the preserved
+        // recording bytes so media optimization cannot alter the narration.
+        const source = asset.src.endsWith(".mp3")
+          ? path.join(
+              projectRoot,
+              "assets/source-recordings",
+              asset.src.replace(/^assets\//, "").replace(/\.mp3$/, ".wav"),
+            )
+          : path.join(projectRoot, "public", asset.src);
+        const bytes = readFileSync(source);
         const audioHash = createHash("sha256").update(bytes).digest("hex");
         entries.push([locale, page.id, segment, audioHash]);
       }

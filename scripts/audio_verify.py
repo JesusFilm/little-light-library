@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the static phrase cue pack and measured WAV onset padding."""
+"""Check the optimized cue pack against preserved WAV source recordings."""
 
 from array import array
 import json
@@ -22,9 +22,12 @@ def main() -> int:
             expected.add(key)
             cue = manifest[key]
             expected_hash = hashlib.sha256("\0".join(("kokoro-82m-trim1", data["voice"], "1.0", text.strip())).encode()).hexdigest()[:20]
-            assert cue["src"].endswith(f"-{expected_hash}.wav"), f"Stale text/voice recording: {key}"
-            path = ROOT / "public" / cue["src"]
-            assert path.is_file(), f"Missing {path}"
+            assert cue["src"].endswith(f"-{expected_hash}.mp3"), f"Stale text/voice recording: {key}"
+            runtime = ROOT / "public" / cue["src"]
+            assert runtime.is_file(), f"Missing {runtime}"
+            path = ROOT / "assets/source-recordings" / cue["src"].removeprefix("assets/")
+            path = path.with_suffix(".wav")
+            assert path.is_file(), f"Missing source recording {path}"
             with wave.open(str(path), "rb") as source:
                 assert (source.getnchannels(), source.getsampwidth(), source.getframerate()) == (1, 2, 24_000), key
                 samples = array("h")

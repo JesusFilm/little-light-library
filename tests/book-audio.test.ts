@@ -307,7 +307,7 @@ test("phone reader fetches only the selected page and its soundtrack", async () 
   assert.deepEqual(back, ["./audio/first.wav", "./audio/music.mp3"]);
 });
 
-test("player loads serial assets and schedules bounded clips with fades and master volume", async () => {
+test("player loads bounded concurrent assets and schedules clips with fades and master volume", async () => {
   const fake = fakeContext();
   const player = new BookAudio(fake.context as unknown as AudioContext);
   const urls = await withFetch(async () => {
@@ -630,23 +630,94 @@ test("pause and stop invalidate late resume and load completions", async () => {
   await pendingPlay;
   assert.equal(fake.sources.length, 0);
 
-  let releaseFetch!: () => void;
+  const releaseFetches: (() => void)[] = [];
   const original = globalThis.fetch;
   globalThis.fetch = () =>
     new Promise<Response>((resolve) => {
-      releaseFetch = () =>
+      releaseFetches.push(() =>
         resolve({
           ok: true,
           arrayBuffer: async () => new ArrayBuffer(1),
-        } as Response);
+        } as Response),
+      );
     });
   try {
     const pendingLoad = player.load(book());
     player.stop();
-    releaseFetch();
+    for (const release of releaseFetches) release();
     assert.equal(await pendingLoad, false);
     assert.equal(player.timeline.total, 0);
   } finally {
     globalThis.fetch = original;
+  }
+});
+
+test("adjacent audio preparation keeps only bounded encoded bytes", async () => {
+  const originalWindow = globalThis.window;
+  const originalFetch = globalThis.fetch;
+  Object.defineProperty(globalThis, "window", {
+    configurable: true,
+    value: {},
+  });
+  const requests: string[] = [];
+  let nextBytes = 50_000;
+  globalThis.fetch = async (url) => {
+    requests.push(String(url));
+    return {
+      ok: true,
+      arrayBuffer: async () =>
+        new ArrayBuffer(String(url).includes("second.wav") ? nextBytes : 8),
+    } as Response;
+  };
+  const player = new BookAudio(
+    fakeContext().context as unknown as AudioContext,
+  );
+  const fixture = book();
+  try {
+    assert.equal(await player.load(fixture, 0), true);
+    await player.play();
+    await new Promise((resolve) => setTimeout(resolve, 1250));
+    assert.deepEqual(player.cacheFootprint, {
+      decodedBuffers: 2,
+      decodedBytes: 0,
+      encodedBuffers: 1,
+      encodedBytes: 50_000,
+    });
+    const secondFetches = requests.filter((url) => url.includes("second.wav"));
+    assert.equal(secondFetches.length, 1);
+    player.pause();
+    assert.equal(player.cacheFootprint.encodedBytes, 0);
+    await player.play();
+    await new Promise((resolve) => setTimeout(resolve, 1250));
+    assert.equal(
+      requests.filter((url) => url.includes("second.wav")).length,
+      2,
+      "resume retries a complete adjacent page after clearing partial prefetch",
+    );
+    assert.equal(await player.loadPage(fixture, 1), true);
+    assert.equal(
+      requests.filter((url) => url.includes("second.wav")).length,
+      2,
+      "page turn consumes prefetched bytes without a second transfer",
+    );
+    assert.equal(player.cacheFootprint.encodedBytes, 0);
+    assert.equal(player.cacheFootprint.decodedBuffers, 1);
+
+    nextBytes = 600_000;
+    assert.equal(await player.load(fixture, 0), true);
+    await player.play();
+    await new Promise((resolve) => setTimeout(resolve, 1250));
+    assert.equal(player.cacheFootprint.encodedBytes, 0);
+    assert.equal(player.cacheFootprint.encodedBuffers, 0);
+  } finally {
+    player.dispose();
+    globalThis.fetch = originalFetch;
+    if (originalWindow === undefined)
+      Reflect.deleteProperty(globalThis, "window");
+    else
+      Object.defineProperty(globalThis, "window", {
+        configurable: true,
+        value: originalWindow,
+      });
   }
 });

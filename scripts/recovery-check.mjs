@@ -9,7 +9,14 @@ const output = path.resolve(
   process.env.ROOM_CHECK_OUTPUT || ".test-output/room",
 );
 await fs.mkdir(output, { recursive: true });
-const browser = await chromium.launch({ channel: "chrome", headless: true });
+const browser = await chromium.launch({
+  ...(process.env.READER_BROWSER_CHANNEL
+    ? { channel: process.env.READER_BROWSER_CHANNEL }
+    : process.env.CI
+      ? {}
+      : { channel: "chrome" }),
+  headless: true,
+});
 const context = await browser.newContext({ acceptDownloads: true });
 const page = await context.newPage();
 const origin = "https://recovery-fixture.invalid/reader/";

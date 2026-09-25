@@ -1,0 +1,30 @@
+{
+  "profile": {
+    "viewport": {
+      "width": 360,
+      "height": 660
+    },
+    "deviceScaleFactor": 3,
+    "cpuSlowdown": 4,
+    "latencyMs": 150,
+    "downloadBytesPerSecond": 200000,
+    "uploadBytesPerSecond": 100000,
+    "deviceMemoryGB": 2,
+    "hardwareConcurrency": 2
+  },
+  "limits": {
+    "coldShelfMs": 5000,
+    "feedbackMs": 200,
+    "inspectionMs": 1000,
+    "pageArtMs": 3000,
+    "pageReadyMs": 4000,
+    "warmPageMs": 1000,
+    "controlMs": 250,
+    "languageMs": 3000,
+    "minimumPixelRatio": 1.5,
+    "frameP95Ms": 50,
+    "pageTransferBytes": 650000,
+    "textureGrowth": 8,
+    "geometryGrowth": 16
+  }
+}

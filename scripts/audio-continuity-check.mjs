@@ -4,7 +4,7 @@ import path from "node:path";
 import { chromium } from "playwright";
 import { tsImport } from "tsx/esm/api";
 
-const root = path.resolve("dist");
+const root = path.resolve(process.env.READER_DIST || "dist");
 const prefix = "/acceptance/little-light-library/";
 assert.ok(
   fs.existsSync(path.join(root, "index.html")),
@@ -94,7 +94,14 @@ const mime = {
 };
 const origin = "http://little-light-library.test";
 const url = `${origin}${prefix}`;
-const browser = await chromium.launch({ channel: "chrome", headless: true });
+const browser = await chromium.launch({
+  ...(process.env.READER_BROWSER_CHANNEL
+    ? { channel: process.env.READER_BROWSER_CHANNEL }
+    : process.env.CI
+      ? {}
+      : { channel: "chrome" }),
+  headless: true,
+});
 const context = await browser.newContext({
   viewport: { width: 1024, height: 768 },
   reducedMotion: "reduce",

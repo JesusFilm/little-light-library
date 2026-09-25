@@ -9,8 +9,15 @@ const { readerFixture } = await tsImport(
   import.meta.url,
 );
 
-const root = path.resolve("dist");
+const root = path.resolve(process.env.READER_DIST || "dist");
 const prefix = "/acceptance/little-light-library/";
+const phoneImage = (src, cover = false) => {
+  const candidate = src.replace(
+    /\.(?:png|webp)$/i,
+    cover ? ".cover.webp" : ".mobile.webp",
+  );
+  return fs.existsSync(path.join(root, candidate)) ? candidate : src;
+};
 const output = path.resolve(".test-output/room/failure-results.json");
 assert.ok(
   fs.existsSync(path.join(root, "index.html")),
@@ -73,7 +80,7 @@ let browser;
 
 const enter = async (page, navigate = true) => {
   if (navigate) await page.goto(url);
-  await page.locator("#enter").click();
+  await page.locator("#enter").tap();
   await page.waitForFunction(
     (count) =>
       window.libraryDebug?.().ready &&
@@ -88,17 +95,20 @@ const enter = async (page, navigate = true) => {
   );
 };
 const openBook = async (page) => {
-  await page.locator('[data-shelf-key="book:fixture-book"]').click();
+  await page.locator('[data-shelf-key="book:fixture-book"]').tap();
   await page.waitForFunction(
     () =>
       window.libraryDebug?.().shelf.inspected === "book:fixture-book" &&
       !window.libraryDebug?.().shelf.busy,
   );
-  await page.locator("#shelf-read").click();
+  await page.locator("#shelf-read").tap();
   await page.waitForFunction(
     () =>
       window.libraryDebug?.().shelf.table === "book:fixture-book" &&
-      !window.libraryDebug?.().shelf.busy,
+      !window.libraryDebug?.().shelf.busy &&
+      !window.libraryDebug?.().pagePending &&
+      (window.libraryDebug?.().ready ||
+        window.libraryDebug?.().session.failure),
   );
 };
 const startupFailure = async (page, pattern) => {
@@ -119,7 +129,7 @@ const recoverStartup = async (page, route) => {
   await page.unroute(route);
   if (route.endsWith("/fixture-book.book.json"))
     await page.route(route, (request) => request.fulfill({ json: book }));
-  await page.locator(".loading-retry").click();
+  await page.locator(".loading-retry").tap();
   await enter(page, false);
   assert.equal((await page.locator("#notice").innerText()).trim(), "");
 };
@@ -139,6 +149,8 @@ const check = async (name, run) => {
   console.log(`Running: ${name}`);
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },
+    isMobile: true,
+    hasTouch: true,
     reducedMotion: "reduce",
     serviceWorkers: "block",
   });
@@ -193,7 +205,14 @@ const check = async (name, run) => {
 };
 
 try {
-  browser = await chromium.launch({ channel: "chrome", headless: true });
+  browser = await chromium.launch({
+    ...(process.env.READER_BROWSER_CHANNEL
+      ? { channel: process.env.READER_BROWSER_CHANNEL }
+      : process.env.CI
+        ? {}
+        : { channel: "chrome" }),
+    headless: true,
+  });
   results.browser = browser.version();
   await check(
     "Cold missing catalog shows loader error and Retry restores committed shelf",
@@ -277,7 +296,7 @@ try {
   await check(
     "A failed shelf cover leaves titled books selectable and reload restores the artwork",
     async (page) => {
-      const cover = url + "assets/art/jonah/jonah-shore.webp";
+      const cover = url + phoneImage("assets/art/jonah/jonah-shore.webp", true);
       await page.route(cover, (route) =>
         route.fulfill({ status: 503, body: "Injected cover failure" }),
       );
@@ -292,7 +311,7 @@ try {
           .count(),
         1,
       );
-      await page.locator('[data-shelf-key="book:jonah-and-the-whale"]').click();
+      await page.locator('[data-shelf-key="book:jonah-and-the-whale"]').tap();
       await page.waitForFunction(
         () =>
           window.libraryDebug?.().shelf.inspected ===
@@ -326,7 +345,8 @@ try {
             ? book.spreads[0].backdrop.asset
             : book.spreads[0].segments[0].narration.asset;
         const relativePath = book.assets[asset].src;
-        const route = url + relativePath;
+        const route =
+          url + (kind === "artwork" ? phoneImage(relativePath) : relativePath);
         let injected = 0;
         await page.route(route, (request) => {
           injected++;
@@ -359,7 +379,7 @@ try {
         const restored = page.waitForResponse(
           (response) => response.url() === route && response.ok(),
         );
-        await page.locator("#notice button").click();
+        await page.locator("#notice button").tap();
         await restored;
         await page.waitForFunction(
           () =>
@@ -385,7 +405,7 @@ try {
           ids,
           book.spreads[0].elements.map(({ id }) => id),
         );
-        await page.locator("#play").click();
+        await page.locator("#play").tap();
         await page.waitForFunction(
           () =>
             window.libraryDebug?.().playing &&
@@ -418,7 +438,8 @@ try {
       const before = await page.evaluate(() => window.libraryDebug().scene);
       assert.equal(before.loadedPage?.index, 0);
       assert.equal(before.stageVisible, true);
-      const route = url + book.assets[book.spreads[1].backdrop.asset].src;
+      const route =
+        url + phoneImage(book.assets[book.spreads[1].backdrop.asset].src);
       let reached;
       let release;
       const requested = new Promise((resolve) => (reached = resolve));
@@ -431,7 +452,7 @@ try {
           body: "Injected artwork failure",
         });
       });
-      await page.locator("#next").click();
+      await page.locator("#next").tap();
       await Promise.race([
         requested,
         new Promise((_, reject) =>
@@ -461,10 +482,11 @@ try {
       });
       assert.deepEqual(
         await page.locator(".story-text [data-segment]").allTextContents(),
-        book.spreads[1].segments.map(({ text }) => text),
+        book.spreads[0].segments.map(({ text }) => text),
+        "Failed turns retain text paired with the previous artwork",
       );
       await page.unroute(route);
-      await page.locator("#notice button").click();
+      await page.locator("#notice button").tap();
       await page.waitForFunction(
         () => window.libraryDebug().scene.loadedPage?.index === 1,
       );
@@ -491,14 +513,14 @@ try {
       async (page) => {
         await enter(page);
         const key = `builtin:${story}`;
-        await page.locator(`[data-shelf-key="${key}"]`).click();
+        await page.locator(`[data-shelf-key="${key}"]`).tap();
         await page.waitForFunction(
           (selected) =>
             window.libraryDebug().shelf.inspected === selected &&
             !window.libraryDebug().shelf.busy,
           key,
         );
-        await page.locator("#shelf-read").click();
+        await page.locator("#shelf-read").tap();
         await page.waitForFunction(
           (selected) =>
             window.libraryDebug().shelf.table === selected &&
@@ -506,7 +528,7 @@ try {
             !window.libraryDebug().shelf.busy,
           key,
         );
-        const route = url + asset;
+        const route = url + phoneImage(asset);
         let reached;
         let release;
         const requested = new Promise((resolve) => (reached = resolve));
@@ -519,7 +541,7 @@ try {
             body: "Injected legacy art failure",
           });
         });
-        await page.locator("#next").click();
+        await page.locator("#next").tap();
         await Promise.race([
           requested,
           new Promise((_, reject) =>
@@ -537,9 +559,10 @@ try {
         const failed = await page.evaluate(() => window.libraryDebug().scene);
         assert.equal(failed.loadedPage?.index, 0);
         assert.equal(failed.stageVisible, true);
-        assert.match(await page.locator(".reader-meta").innerText(), /2/);
+        assert.match(await page.locator(".reader-meta").innerText(), /Page 1/);
+        assert.match(await page.locator("#notice").innerText(), /Page 2/);
         await page.unroute(route);
-        await page.locator("#notice button").click();
+        await page.locator("#notice button").tap();
         await page.waitForFunction(
           () => window.libraryDebug().scene.loadedPage?.index === 1,
         );
@@ -559,19 +582,20 @@ try {
     "Leaving during a legacy load cannot commit stale actors or artwork",
     async (page) => {
       await enter(page);
-      await page.locator('[data-shelf-key="builtin:eden"]').click();
+      await page.locator('[data-shelf-key="builtin:eden"]').tap();
       await page.waitForFunction(
         () =>
           window.libraryDebug().shelf.inspected === "builtin:eden" &&
           !window.libraryDebug().shelf.busy,
       );
-      await page.locator("#shelf-read").click();
+      await page.locator("#shelf-read").tap();
       await page.waitForFunction(
         () =>
           window.libraryDebug().scene.loadedPage?.index === 0 &&
           !window.libraryDebug().shelf.busy,
       );
-      const route = url + "assets/art/theatre/eden-eve-behind-garden-bush.webp";
+      const route =
+        url + phoneImage("assets/art/theatre/eden-eve-behind-garden-bush.webp");
       let reached;
       let release;
       const requested = new Promise((resolve) => (reached = resolve));
@@ -581,7 +605,7 @@ try {
         await pending;
         await request.continue();
       });
-      await page.locator("#next").click();
+      await page.locator("#next").tap();
       await Promise.race([
         requested,
         new Promise((_, reject) =>
@@ -591,7 +615,7 @@ try {
           ),
         ),
       ]);
-      await page.locator("#shelf").click();
+      await page.locator("#shelf").tap();
       release();
       await page.waitForFunction(
         () =>
@@ -603,7 +627,7 @@ try {
       assert.equal(onShelf.scene.loadedPage?.index, 0);
       assert.equal(onShelf.session.failure, null);
       await page.unroute(route);
-      await page.locator("#shelf").click();
+      await page.locator("#shelf").tap();
       await page.waitForFunction(
         () =>
           !window.libraryDebug().shelf.browsing &&

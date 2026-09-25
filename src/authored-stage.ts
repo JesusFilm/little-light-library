@@ -1,6 +1,8 @@
 import { authoredMotionTransform } from "./book-animation";
 import * as THREE from "three";
 import { installCompactHitMask, visiblePaintHit } from "./room-interaction";
+import { mobileImageUrl } from "./mobile-images";
+import type { PageImages } from "./page-images";
 import type {
   AuthoredBook,
   BookElement,
@@ -246,7 +248,7 @@ export interface CharacterEntrance {
   scale: number;
 }
 
-/** A quiet, short rise used when new paper characters unfold on a spread. */
+/** A quiet settle after the paper unfolds; characters stay readable throughout. */
 export function authoredCharacterEntrance(
   elapsed: number,
   reducedMotion = false,
@@ -255,7 +257,7 @@ export function authoredCharacterEntrance(
   const progress = THREE.MathUtils.clamp(elapsed / 0.32, 0, 1);
   const eased = 1 - (1 - progress) ** 3;
   return {
-    opacity: eased,
+    opacity: 1,
     scale: 0.985 + 0.015 * eased,
   };
 }
@@ -289,6 +291,7 @@ export class AuthoredStage {
   private readonly segmentStarts = new Map<string, number>();
   private decodedDurations?: readonly number[];
   private openedAt: number | undefined;
+  private entranceStartedAt = 0;
 
   private constructor(
     backdropTexture: THREE.Texture,
@@ -318,6 +321,7 @@ export class AuthoredStage {
     spread: BookSpread,
     loader: THREE.TextureLoader,
     stillCurrent: () => boolean,
+    pageImages?: PageImages,
   ) {
     const root = new THREE.Group();
     root.name = `authored-stage-${spread.id}`;
@@ -325,7 +329,10 @@ export class AuthoredStage {
     const textures: THREE.Texture[] = [];
     const elements: RuntimeElement[] = [];
     const load = async (asset: string) => {
-      const texture = await loader.loadAsync(assetPath(book, asset, "image"));
+      const url = mobileImageUrl(assetPath(book, asset, "image"));
+      const texture = pageImages
+        ? await pageImages.texture(url)
+        : await loader.loadAsync(url);
       if (!stillCurrent()) {
         texture.dispose();
         throw new Error("authored-stage-superseded");
@@ -345,11 +352,31 @@ export class AuthoredStage {
     };
 
     try {
-      const backdropTexture = await load(spread.backdrop.asset);
+      // Fetch and decode the small set of current-page images together. The
+      // previous serial loads multiplied network latency on slow connections.
+      // Keep distinct Texture objects for elements because atlas poses mutate
+      // repeat/offset on each instance.
+      const requested = [
+        load(spread.backdrop.asset),
+        ...(book.cover === spread.backdrop.asset ? [] : [load(book.cover)]),
+        ...(spread.ground ? [load(spread.ground.asset)] : []),
+        ...spread.elements.map((definition) => load(definition.asset)),
+      ];
+      const settled = await Promise.allSettled(requested);
+      const failed = settled.find(
+        (result): result is PromiseRejectedResult =>
+          result.status === "rejected",
+      );
+      if (failed) throw failed.reason;
+      const loaded = settled.map(
+        (result) => (result as PromiseFulfilledResult<THREE.Texture>).value,
+      );
+      const backdropTexture = loaded[0];
+      let nextTexture = 1;
       const coverTexture =
         book.cover === spread.backdrop.asset
           ? backdropTexture
-          : await load(book.cover);
+          : loaded[nextTexture++];
       const backdrop = popup(0, 1.22);
       const backdropMesh = new THREE.Mesh(
         new THREE.PlaneGeometry(5.8, 2.7),
@@ -363,7 +390,7 @@ export class AuthoredStage {
       let runtimeGround: RuntimeGround | undefined;
       if (spread.ground) {
         const definition = spread.ground;
-        const texture = await load(definition.asset);
+        const texture = loaded[nextTexture++];
         const material = makeMaterial(texture, definition.opacity ?? 1);
         material.depthWrite = false;
         const ground = new THREE.Mesh(
@@ -381,7 +408,7 @@ export class AuthoredStage {
       }
 
       for (const definition of spread.elements) {
-        const texture = await load(definition.asset);
+        const texture = loaded[nextTexture++];
         if (definition.kind === "actor" || definition.interaction)
           installCompactHitMask(texture);
         if (definition.pose)
@@ -514,6 +541,8 @@ export class AuthoredStage {
 
   begin() {
     this.openedAt = undefined;
+    // Settle actors while the supporting paper rises, before narration is ready.
+    this.entranceStartedAt = performance.now() / 1000;
     this.releaseHolds();
   }
 
@@ -576,9 +605,7 @@ export class AuthoredStage {
       const entrance =
         element.entranceIndex >= 0
           ? authoredCharacterEntrance(
-              folded || this.openedAt === undefined
-                ? 0.32
-                : now - this.openedAt - element.entranceIndex * 0.09,
+              now - this.entranceStartedAt - element.entranceIndex * 0.09,
               reduced,
             )
           : { opacity: 1, scale: 1 };

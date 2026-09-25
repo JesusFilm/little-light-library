@@ -2,6 +2,7 @@ import { validateBook } from "./book-validation";
 import { ShelfToyAudio } from "./shelf-toy-audio";
 import { shelfToys, type ShelfToy } from "./room-toys";
 import { RoomLibrary } from "./room-library";
+import { SelectedBookPrefetch } from "./selected-book-prefetch";
 import { BookNarration } from "./book-reader-audio";
 import {
   productionLanguages,
@@ -82,6 +83,7 @@ function localizedBook() {
   return viewBook!;
 }
 const roomLibrary = new RoomLibrary();
+const selectedBookPrefetch = new SelectedBookPrefetch();
 type RoomBook = Awaited<ReturnType<RoomLibrary["resolve"]>>[number];
 let roomBooks: RoomBook[] = [];
 let readerNeedsReload = false;
@@ -124,15 +126,22 @@ function renderShelf() {
 }
 async function inspectShelfBook(key: string) {
   if (session.snapshot.busy || !entered) return;
+  if (session.snapshot.inspected?.key === key) return;
   if (key === session.snapshot.table) {
     await resumeReading();
     return;
   }
   const entry = roomBooks.find((book) => book.key === key);
   if (!entry) return;
-  if (await session.inspect(entry)) $("#shelf-read")?.focus();
+  if (
+    await selectedBookPrefetch.inspectSelected(entry, locale, manifest, () =>
+      session.inspect(entry),
+    )
+  )
+    $("#shelf-read")?.focus();
 }
 async function returnShelfBook() {
+  selectedBookPrefetch.cancel();
   const key = session.snapshot.inspected?.key;
   if (key && (await session.returnInspected()))
     document
@@ -298,6 +307,7 @@ function settingsDialog() {
   d.showModal();
 }
 async function room() {
+  notice(`${t("library")} · ${t("loading")}`);
   await session.browseLibrary();
 }
 function failure(error?: unknown) {
@@ -313,19 +323,20 @@ function failure(error?: unknown) {
   window.storyLoading.fail(t("error"));
 }
 function updatePageNavigation() {
-  const loading = session.snapshot.loading;
   const previous = document.querySelector<HTMLButtonElement>("#previous");
   const next = document.querySelector<HTMLButtonElement>("#next");
-  if (previous) previous.disabled = loading || state.page === 0;
-  if (next) next.disabled = loading || next.dataset.lastPage === "true";
+  if (previous) previous.disabled = state.page === 0;
+  if (next) next.disabled = state.page >= state.pageCount - 1;
 }
 function renderMediaFailure() {
   const failure = session.snapshot.failure;
   if (failure === shownMediaFailure) return;
   shownMediaFailure = failure;
   if (!failure) return;
+  $("#panel").setAttribute("aria-busy", "false");
+  $("#panel").classList.remove("reader-pending");
   const message = t(failure === "artwork" ? "imageError" : "audioError");
-  notice(message);
+  notice(`${t("page")} ${state.page + 1} · ${message}`);
   $("#notice").append(
     Object.assign(document.createElement("button"), {
       textContent: t("retry"),
@@ -338,7 +349,7 @@ function renderMediaFailure() {
   }
 }
 async function renderPage(
-  autoplay: boolean,
+  shouldAutoplay: () => boolean,
   resume: boolean,
   pageTurn: boolean,
   current: () => boolean,
@@ -354,12 +365,10 @@ async function renderPage(
     if (preserveBookSoundtrack) bookNarration.preparePageTurn();
     else narration.stop();
   }
-  notice();
   document.body.classList.add("reading");
   header();
   const story = currentStory();
   const page = story.pages[state.page];
-  document.body.dataset.readerScene = page.id;
   narration = page.authored ? bookNarration : standardNarration;
   narration.speed(prefs.speed);
   narration.volume(prefs.volume, prefs.audio);
@@ -375,73 +384,102 @@ async function renderPage(
           : "hope",
   );
   const pageCount = `${t("page")} ${state.page + 1} ${t("of")} ${story.pages.length}`;
-  $("#panel").innerHTML =
-    `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><h1>${escaped(page.title)}</h1><div class="story-text">${page.segments.map((s, i) => `<span data-segment="${i}">${escaped(s.text)}</span>`).join(" ")}</div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", "←", t("previous"))}${transportButton("play", "▶", t("play"), "primary")}${transportButton("next", "→", t("next"))}</div></article>`;
-  const next = $<HTMLButtonElement>("#next");
-  next.dataset.lastPage = String(state.page >= story.pages.length - 1);
-  next.disabled = next.dataset.lastPage === "true";
-  if (page.authored) {
-    const { book, spread } = page.authored;
-    $(".reader").setAttribute("lang", book.locale);
-    $(".reader-controls").setAttribute("lang", locale.id);
-    const interactiveElements = spread.elements.filter(
-      (e) => e.kind === "actor" || e.interaction,
-    );
-    if (interactiveElements.length) {
-      const interactions = document.createElement("div");
-      interactions.className = "authored-interactions";
-      interactions.setAttribute("aria-label", "Story interactions");
-      for (const element of interactiveElements) {
-        const b = document.createElement("button");
-        b.type = "button";
-        b.textContent = element.interaction?.label ?? element.label;
-        b.dataset.element = element.id;
-        if (element.interaction?.effect === "hold-rock") {
-          const release = () => scene.releaseAuthoredHolds();
-          b.onpointerdown = (event) => {
-            if (event.button !== 0) return;
-            b.setPointerCapture(event.pointerId);
-            scene.holdAuthored(element.id, true);
-          };
-          b.onpointerup = release;
-          b.onpointercancel = release;
-          b.onlostpointercapture = release;
-          b.onkeydown = (event) => {
-            if (event.key === " " || event.key === "Enter")
-              scene.holdAuthored(element.id, true);
-          };
-          b.onkeyup = (event) => {
-            if (event.key === " " || event.key === "Enter") release();
-          };
-          b.onblur = release;
-        }
-        b.onclick = () => {
-          const result = scene.activateAuthored(element.id);
-          if (result) {
-            notice(result.response, book.locale);
-            if (result.sound) soundscape?.cue(result.sound);
-          }
-        };
-        interactions.append(b);
-      }
-      $(".reader-controls").before(interactions);
-    }
+  const panel = $("#panel");
+  const bindControls = () => {
+    $("#previous").setAttribute("aria-label", t("previous"));
+    $("#next").setAttribute("aria-label", t("next"));
+    $("#previous").onclick = () => void session.turnPage(-1);
+    $("#next").onclick = () => void session.turnPage(1);
+    $("#play").onclick = () => {
+      // Safari requires resume to begin in the tap task, before the scene wait.
+      void narration.unlock().catch(() => {});
+      void session.togglePlayback(current);
+    };
+    updatePageNavigation();
+  };
+  if (!resume || !panel.querySelector(".reader")) {
+    panel.setAttribute("aria-busy", "true");
+    panel.classList.add("reader-pending");
+    notice(`${pageCount} · ${t("loading")}`);
+    if (!pageTurn || !panel.querySelector(".reader"))
+      panel.innerHTML = `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", "←", t("previous"))}${transportButton("play", "▶", t("play"), "primary")}${transportButton("next", "→", t("next"))}</div></article>`;
+    panel.querySelector(".authored-interactions")?.remove();
+    const status = panel.querySelector("#play-status");
+    if (status) status.textContent = t("loading");
+    const playButton = panel.querySelector<HTMLButtonElement>("#play");
+    if (playButton) playButton.disabled = false;
+    bindControls();
+    updatePlayback();
   }
-  $("#previous").setAttribute("aria-label", t("previous"));
-  $("#next").setAttribute("aria-label", t("next"));
-  $<HTMLButtonElement>("#previous").disabled = state.page === 0;
-  $("#previous").onclick = () => {
-    void session.turnPage(-1);
-  };
-  $("#next").onclick = () => {
-    void session.turnPage(1);
-  };
-  $("#play").onclick = () => {
-    // Safari requires resume to begin in the tap task, before the scene wait.
-    void narration.unlock().catch(() => {});
-    void session.togglePlayback(current);
+  const commitReaderPage = (includeInteractions = true) => {
+    document.body.dataset.readerScene = page.id;
+    panel.innerHTML = `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><h1>${escaped(page.title)}</h1><div class="story-text">${page.segments.map((s, i) => `<span data-segment="${i}">${escaped(s.text)}</span>`).join(" ")}</div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", "←", t("previous"))}${transportButton("play", "▶", t("play"), "primary")}${transportButton("next", "→", t("next"))}</div></article>`;
+    const next = $<HTMLButtonElement>("#next");
+    next.dataset.lastPage = String(state.page >= story.pages.length - 1);
+    next.disabled = next.dataset.lastPage === "true";
+    if (page.authored) {
+      const { book, spread } = page.authored;
+      $(".reader").setAttribute("lang", book.locale);
+      $(".reader-controls").setAttribute("lang", locale.id);
+      const interactiveElements = spread.elements.filter(
+        (e) => e.kind === "actor" || e.interaction,
+      );
+      if (includeInteractions && interactiveElements.length) {
+        const interactions = document.createElement("div");
+        interactions.className = "authored-interactions";
+        interactions.setAttribute("aria-label", "Story interactions");
+        for (const element of interactiveElements) {
+          const b = document.createElement("button");
+          b.type = "button";
+          b.textContent = element.interaction?.label ?? element.label;
+          b.dataset.element = element.id;
+          if (element.interaction?.effect === "hold-rock") {
+            const release = () => scene.releaseAuthoredHolds();
+            b.onpointerdown = (event) => {
+              if (event.button !== 0) return;
+              b.setPointerCapture(event.pointerId);
+              scene.holdAuthored(element.id, true);
+            };
+            b.onpointerup = release;
+            b.onpointercancel = release;
+            b.onlostpointercapture = release;
+            b.onkeydown = (event) => {
+              if (event.key === " " || event.key === "Enter")
+                scene.holdAuthored(element.id, true);
+            };
+            b.onkeyup = (event) => {
+              if (event.key === " " || event.key === "Enter") release();
+            };
+            b.onblur = release;
+          }
+          b.onclick = () => {
+            const result = scene.activateAuthored(element.id);
+            if (result) {
+              notice(result.response, book.locale);
+              if (result.sound) soundscape?.cue(result.sound);
+            }
+          };
+          interactions.append(b);
+        }
+        $(".reader-controls").before(interactions);
+      }
+    }
+    bindControls();
+    panel.setAttribute("aria-busy", "false");
+    panel.classList.remove("reader-pending");
+    notice();
+    updatePlayback();
   };
   if (resume) {
+    panel.setAttribute("aria-busy", "true");
+    panel.classList.add("reader-pending");
+    notice(`${pageCount} · ${t("loading")}`);
+    panel.querySelector(".authored-interactions")?.remove();
+    bindControls();
+    updatePlayback();
+    if (!(await scene.waitForVisibleStage(current))) return;
+    if (!current()) return;
+    commitReaderPage();
     session.setReady(previousReady);
     if (
       page.authored &&
@@ -457,49 +495,81 @@ async function renderPage(
     updatePlayback();
     return;
   }
+  const authored = page.authored;
+  const staleNarration = Boolean(
+    authored &&
+      narrationIssues({ ...authored.book, spreads: [authored.spread] }).length,
+  );
+  const audioLoad =
+    staleNarration && !authored?.book.soundtracks?.length
+      ? Promise.resolve({ loaded: false, error: undefined as unknown })
+      : (async () => {
+          try {
+            const loaded = authored
+              ? await bookNarration.loadBook(authored.book, state.page, {
+                  preserveSoundtracks: preserveBookSoundtrack,
+                })
+              : await standardNarration.load(
+                  page.segments.map(
+                    (s) =>
+                      manifest[`${locale.id}/${story.id}/${page.id}/${s.id}`],
+                  ),
+                );
+            return { loaded, error: undefined as unknown };
+          } catch (error) {
+            return { loaded: false, error };
+          }
+        })();
   try {
     await scene.spread(story, page, locale);
     if (!current()) return;
   } catch (error) {
+    if (!current()) return;
+    narration.stop();
+    // A first-page art failure still leaves the retelling readable. During a
+    // turn, preserve the last complete text/art pair behind the error notice.
+    if (!panel.querySelector(".story-text")) commitReaderPage(false);
     session.reportFailure("artwork", current);
     return;
   }
   if (!current()) return;
+  if (!(await scene.waitForVisibleStage(current))) return;
+  if (!current()) return;
+  commitReaderPage();
   try {
-    const authored = page.authored;
-    if (
-      authored &&
-      narrationIssues({ ...authored.book, spreads: [authored.spread] }).length
-    ) {
+    if (staleNarration) {
       notice(
         "Narration is not available for this page. You can still read the story and try its interactions.",
       );
       $("#play-status").textContent = "Narration needs an update";
-      if (!authored.book.soundtracks?.length) {
+      if (!authored?.book.soundtracks?.length) {
         $<HTMLButtonElement>("#play").disabled = true;
         state.hide();
         return;
       }
     }
-    const loaded = authored
-      ? await bookNarration.loadBook(authored.book, state.page, {
-          preserveSoundtracks: preserveBookSoundtrack,
-        })
-      : await standardNarration.load(
-          page.segments.map(
-            (s) => manifest[`${locale.id}/${story.id}/${page.id}/${s.id}`],
-          ),
-        );
-    if (!current() || !loaded) return;
-    const active = narration;
-    if (!(await scene.waitForUnfold(() => current() && narration === active)))
+    const { loaded, error } = await audioLoad;
+    if (!current()) return;
+    if (error) throw error;
+    if (!loaded) {
+      state.hide();
+      session.reportFailure("narration", current);
       return;
-    if (autoplay && !document.hidden) {
+    }
+    const active = narration;
+    session.setReady(true);
+    if (!(await scene.waitForUnfold(() => current() && narration === active))) {
+      if (current()) state.hide();
+      return;
+    }
+    if (shouldAutoplay() && !document.hidden) {
       await active.play();
       if (!current() || narration !== active) return;
-      if (active.clock.playing) state.play();
+      if (!shouldAutoplay() || document.hidden) {
+        active.pause();
+        state.hide();
+      } else if (active.clock.playing) state.play();
     } else state.hide();
-    session.setReady(true);
   } catch (error) {
     if (current()) {
       state.hide();
@@ -520,16 +590,18 @@ async function playToy(id: string) {
 }
 function updatePlayback() {
   if (!state.book) return;
-  const { playing, ready } = session.snapshot.playback;
+  const { playing, ready, requested } = session.snapshot.playback;
+  const preparingToPlay = session.snapshot.loading && requested;
   const b = document.querySelector<HTMLButtonElement>("#play");
   if (b) {
-    const label = t(playing ? "pause" : "play");
+    const active = playing || preparingToPlay;
+    const label = t(active ? "pause" : "play");
     const icon = b.querySelector<HTMLElement>(".transport-icon");
     const text = b.querySelector<HTMLElement>(".transport-label");
-    if (icon) icon.textContent = playing ? "Ⅱ" : "▶";
+    if (icon) icon.textContent = active ? "Ⅱ" : "▶";
     if (text && text.textContent !== label) text.textContent = label;
     b.setAttribute("aria-label", label);
-    b.setAttribute("aria-pressed", String(playing));
+    b.setAttribute("aria-pressed", String(active));
   }
   if (
     playing &&
@@ -719,15 +791,16 @@ async function boot() {
           narration?.pause();
           state.hide();
           scene.browseShelf();
-          await session.waitForPage();
         },
         prepareLibrary: async () => {
           soundscape?.ambience(true);
           soundscape?.scene("room");
           soundscape?.pause(false);
-          notice();
+          $("#panel").setAttribute("aria-busy", "false");
+          $("#panel").classList.remove("reader-pending");
           document.body.classList.remove("reading");
           await refreshRoomBooks();
+          notice();
           scene.browseShelf();
           if (!state.book) session.setReady(true);
           window.storyLoading.ready();
@@ -745,8 +818,8 @@ async function boot() {
           soundscape?.cue("page");
           state.turn(target);
         },
-        render: ({ autoplay, resume, pageTurn, current }) =>
-          renderPage(autoplay, resume, pageTurn, current),
+        render: ({ shouldAutoplay, resume, pageTurn, current }) =>
+          renderPage(shouldAutoplay, resume, pageTurn, current),
       },
       {
         snapshot: () => ({
@@ -809,6 +882,7 @@ async function boot() {
         current: () => state.language,
         fetch: fetchLocale,
         pause: () => {
+          selectedBookPrefetch.cancel();
           narration?.stop();
           toyAudio?.stop();
           readerNeedsReload = Boolean(state.book);

@@ -10,6 +10,7 @@ import {
 } from "./reading-focus";
 import { createPageGround } from "./garden-floor";
 import { RoomOrbitGesture, orbitRoomGoal } from "./room-orbit";
+import { cameraBlendForElapsed } from "./camera-settle";
 import {
   wallPaperUv,
   curtainGeometry,
@@ -42,6 +43,9 @@ import {
   type TurnDirection,
 } from "./turning-leaf";
 import { stageDirections } from "./stage-direction";
+import { legacyStageImageSources, stageAssetUrl } from "./legacy-stage-media";
+import { mobileImageUrl } from "./mobile-images";
+import { PageImages } from "./page-images";
 import { alphaBounds } from "./alpha-bounds";
 import {
   mirroredScaleX,
@@ -61,6 +65,7 @@ import {
   type PaperActorMood,
 } from "./paper-actor";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import type { LocaleData, Page, Story } from "./contracts";
 import {
   RoomShelf,
@@ -233,14 +238,6 @@ function fitCutout(texture: THREE.Texture, cell = 0, cells = 1) {
     (bounds.maxX - bounds.minX + 1) / (bounds.maxY - bounds.minY + 1);
 }
 
-/** Resolve either a retained theatre shorthand or a local path relative to public/. */
-function stageAssetUrl(source: string) {
-  if (source.startsWith("assets/")) return `./${source}`;
-  if (source.startsWith("./")) return source;
-  if (source.startsWith("/")) return `.${source}`;
-  const filename = /\.[a-z0-9]+$/i.test(source) ? source : `${source}.webp`;
-  return `./assets/art/theatre/${filename}`;
-}
 const roomTint = new THREE.Color(0xffdc91);
 const roomGlow = new THREE.Color(0x251600);
 const constrainedPhone = () => {
@@ -348,6 +345,13 @@ export class LibraryScene {
   private touchedCreature = -1;
   private hoveredCreature = -1;
   private creatureTouchUntil = 0;
+  private pageMotionAge(now: number) {
+    if (this.reviewTime !== undefined) return this.reviewAge ?? 5;
+    // Keep the cover, leaf, popup, and visible-stage thresholds on one clock.
+    // The constrained-phone animation remains legible at ~30 rendered fps,
+    // while the next page becomes usable promptly after its art is ready.
+    return ((now - this.turnStarted) / 1000) * this.pageMotionRate;
+  }
   private creatureUsable() {
     if (
       this.mode !== "spread" ||
@@ -358,11 +362,30 @@ export class LibraryScene {
       (this.reviewFoldProgress ?? 0) > 0
     )
       return false;
-    const age =
-      this.reviewTime !== undefined
-        ? (this.reviewAge ?? 5)
-        : (performance.now() - this.turnStarted) / 1000;
+    const age = this.pageMotionAge(performance.now());
     return this.reduced || bookPose(age, this.opening, false).popups === 1;
+  }
+  /** Wait for the destination art to reach the canvas before its text is shown. */
+  async waitForVisibleStage(isCurrent: () => boolean): Promise<boolean> {
+    const generation = this.loadGeneration;
+    while (
+      !this.disposed &&
+      generation === this.loadGeneration &&
+      isCurrent()
+    ) {
+      if (
+        !document.hidden &&
+        this.mode === "spread" &&
+        this.pageRoot.visible &&
+        this.lastRenderedAt >= this.turnStarted &&
+        !this.transitionWaiting
+      )
+        return true;
+      await new Promise<void>((resolve) =>
+        requestAnimationFrame(() => resolve()),
+      );
+    }
+    return false;
   }
   /** Resolve only after an upright frame, or cancel when the reader moves away. */
   async waitForUnfold(isCurrent: () => boolean): Promise<boolean> {
@@ -550,14 +573,21 @@ export class LibraryScene {
   private roomTextures = new Set<THREE.Texture>();
   private roomWallpaper: "loading" | "loaded" | "fallback" = "loading";
   private loadGeneration = 0;
+  private spreadAbort?: AbortController;
   private disposed = false;
   private reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   private resizeObserver: ResizeObserver;
   private raf = 0;
   private lastFrame = 0;
   private slowFrames = 0;
+  private renderedFrames = 0;
+  private lastRenderedAt = 0;
+  private renderFrameIntervalMs = 0;
+  private renderCpuMs = 0;
   private lowQuality = false;
   private turnStarted = 0;
+  private pageMotionRate = 1;
+  private foldOutDuration = 250;
   private opening = false;
   private focusedRoom: Selection | null = null;
   private hoveredRoom: Selection | null = null;
@@ -752,13 +782,11 @@ export class LibraryScene {
     this.lowQuality = constrainedPhone();
     document.documentElement.classList.toggle("low-graphics", this.lowQuality);
     this.renderer = new THREE.WebGLRenderer({
-      antialias: !this.lowQuality,
+      antialias: true,
       alpha: false,
       powerPreference: "low-power",
     });
-    this.renderer.setPixelRatio(
-      this.lowQuality ? 1 : Math.min(devicePixelRatio, 1.5),
-    );
+    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.12;
@@ -805,6 +833,7 @@ export class LibraryScene {
     this.scene.add(fill);
     this.scene.add(this.roomRoot, this.bookRoot);
     this.makeRoom();
+    this.batchStaticRoom();
     this.roomRoot.add(this.roomShelf.root);
     this.makeBook();
     this.resizeObserver = new ResizeObserver(() => this.resize());
@@ -818,6 +847,20 @@ export class LibraryScene {
     const w = Math.max(this.container.clientWidth, 1),
       h = Math.max(this.container.clientHeight, 1);
     this.camera.aspect = w / h;
+    // Keep the illustrated book at its original pixel scale when the reading
+    // canvas extends behind the controls. The taller frustum reveals the same
+    // room below the book instead of stretching or replacing it with a bitmap.
+    const readingViewportHeight = Math.min(h, Math.min(h * 0.52, w * 0.92));
+    this.camera.fov =
+      this.mode === "room"
+        ? 42
+        : THREE.MathUtils.radToDeg(
+            2 *
+              Math.atan(
+                Math.tan(THREE.MathUtils.degToRad(42 / 2)) *
+                  (h / readingViewportHeight),
+              ),
+          );
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(w, h, false);
     if (this.mode === "room") {
@@ -832,16 +875,71 @@ export class LibraryScene {
     } else {
       // Fill portrait reading views with the pop-up scene while the canvas
       // keeps its unscaled DOM bounds for actor hit targets and labels.
+      const effectiveAspect = w / readingViewportHeight;
       const framingSpan = THREE.MathUtils.lerp(
         0.95,
         1.25,
-        THREE.MathUtils.smoothstep(this.camera.aspect, 0.95, 1.25),
+        THREE.MathUtils.smoothstep(effectiveAspect, 0.95, 1.25),
       );
-      const scale = Math.max(1, framingSpan / this.camera.aspect);
+      const scale = Math.max(1, framingSpan / effectiveAspect);
       // Bring the illustrated stage forward, allowing peripheral book edges to crop.
       // Extremely narrow views still retain clearance for wide actor groups.
-      this.lookGoal.set(0, 2.22, 0.4);
+      this.lookGoal.set(0, 0.1, 0.4);
       this.cameraGoal.set(1.1 * scale, 2.45 + 3.4 * scale, 0.4 + 6.05 * scale);
+      // Move the book clear of the desktop text column without jumping at a
+      // tablet/landscape breakpoint, including when reduced motion is active.
+      const desktopShift =
+        2 * THREE.MathUtils.smoothstep(effectiveAspect, 1.6, 2.2);
+      this.cameraGoal.x += desktopShift;
+      this.lookGoal.x += desktopShift;
+    }
+  }
+  private batchStaticRoom() {
+    // Room trim, floor seams, quilt patches and decorative pieces never move.
+    // Combining equal materials cuts driver submissions without changing art,
+    // the interactive shelf, or any book/actor hit target.
+    const groups = new Map<string, THREE.Mesh[]>();
+    this.roomRoot.updateMatrixWorld(true);
+    this.roomRoot.traverse((object) => {
+      if (!(object instanceof THREE.Mesh) || Array.isArray(object.material))
+        return;
+      const geometry = object.geometry as THREE.BufferGeometry;
+      const signature = Object.entries(geometry.attributes)
+        .map(
+          ([name, attribute]) =>
+            `${name}:${attribute.itemSize}:${attribute.normalized}`,
+        )
+        .sort()
+        .join(",");
+      const key = [
+        object.material.uuid,
+        object.castShadow,
+        object.receiveShadow,
+        geometry.index ? "indexed" : "flat",
+        signature,
+      ].join("|");
+      const group = groups.get(key) ?? [];
+      group.push(object);
+      groups.set(key, group);
+    });
+    for (const group of groups.values()) {
+      if (group.length < 2) continue;
+      const transformed = group.map((mesh) =>
+        (mesh.geometry as THREE.BufferGeometry)
+          .clone()
+          .applyMatrix4(mesh.matrixWorld),
+      );
+      const geometry = mergeGeometries(transformed);
+      transformed.forEach((item) => item.dispose());
+      if (!geometry) continue;
+      const merged = new THREE.Mesh(geometry, group[0].material);
+      merged.castShadow = group[0].castShadow;
+      merged.receiveShadow = group[0].receiveShadow;
+      this.roomRoot.add(merged);
+      for (const mesh of group) {
+        mesh.parent?.remove(mesh);
+        mesh.geometry.dispose();
+      }
     }
   }
   private makeRoom() {
@@ -908,17 +1006,9 @@ export class LibraryScene {
     }
     for (let x = -6.5; x < 7; x += 0.65)
       box(this.roomRoot, 0.035, 1.4, 0.05, teal, x, 0.85, -4.2);
+    const floorSeam = new THREE.MeshStandardMaterial({ color: 0x654631 });
     for (let x = -6.5; x < 7; x += 0.8)
-      box(
-        this.roomRoot,
-        0.018,
-        0.006,
-        13,
-        new THREE.MeshStandardMaterial({ color: 0x654631 }),
-        x,
-        0.004,
-        0,
-      );
+      box(this.roomRoot, 0.018, 0.006, 13, floorSeam, x, 0.004, 0);
     // A substantial recessed cabinet, rounded timber rails, panelled lower doors.
     box(this.roomRoot, 5.9, 3.45, 0.16, teal, 0, 2.87, -3.61);
     for (const y of [1.2, 2.92, 4.55])
@@ -1191,6 +1281,7 @@ export class LibraryScene {
     this.coverArt.material.needsUpdate = true;
   }
   async room(locale: LocaleData, books: RoomShelfBook[]) {
+    this.spreadAbort?.abort();
     this.clearCreatureTargets();
     this.clearReadingFocus();
     this.readingWideEnsemble = false;
@@ -1306,13 +1397,15 @@ export class LibraryScene {
       definitions.map((toy) =>
         loader
           .loadAsync(
-            /^(?:data:|blob:|https?:)/.test(toy.asset)
-              ? toy.asset
-              : toy.asset.startsWith("/")
-                ? `.${toy.asset}`
-                : toy.asset.startsWith("./")
-                  ? toy.asset
-                  : `./${toy.asset}`,
+            mobileImageUrl(
+              /^(?:data:|blob:|https?:)/.test(toy.asset)
+                ? toy.asset
+                : toy.asset.startsWith("/")
+                  ? `.${toy.asset}`
+                  : toy.asset.startsWith("./")
+                    ? toy.asset
+                    : `./${toy.asset}`,
+            ),
           )
           .catch(() => undefined),
       ),
@@ -1639,6 +1732,7 @@ export class LibraryScene {
     this.landedShelfBook = true;
   }
   cancelPendingSpread() {
+    this.spreadAbort?.abort();
     this.loadGeneration++;
     this.foldingOut = 0;
   }
@@ -1646,6 +1740,7 @@ export class LibraryScene {
     page: Page,
     locale: LocaleData,
     stillCurrent: () => boolean,
+    pageImages: PageImages,
   ): Promise<PreparedLegacyStage> {
     const draft = {
       root: new THREE.Group(),
@@ -1661,7 +1756,13 @@ export class LibraryScene {
       wideEnsemble: false,
       actorMood: "listen" as PaperActorMood,
     };
-    const loader = new THREE.TextureLoader();
+    const stageImage = (source: string) => {
+      const url = mobileImageUrl(stageAssetUrl(source));
+      return pageImages.image(url);
+    };
+    const loadStageTexture = async (source: string) => {
+      return pageImages.texture(mobileImageUrl(stageAssetUrl(source)));
+    };
     const assertCurrent = () => {
       if (!stillCurrent()) throw Error("legacy-stage-superseded");
     };
@@ -1704,7 +1805,7 @@ export class LibraryScene {
         prop: StageProp,
         options: { name?: string; optional?: boolean } = {},
       ) => {
-        const request = loader.loadAsync(stageAssetUrl(prop.file));
+        const request = loadStageTexture(prop.file);
         const tex = options.optional
           ? await request.catch(() => undefined)
           : await request;
@@ -1752,16 +1853,20 @@ export class LibraryScene {
         return cutout;
       };
       const direction = stageDirections[page.id];
+      // Begin the current spread's unique image transfers together. Each
+      // later use receives its own Texture (atlas offsets may differ), while
+      // the decoded image and network request are shared per URL.
+      legacyStageImageSources(direction).forEach(stageImage);
       draft.wideEnsemble = Boolean(direction.family);
       const backdrop = direction.background;
       draft.actorMood = direction.actors[0]?.mood || "listen";
-      texture = await loader
-        .loadAsync(stageAssetUrl(backdrop))
-        .catch(() =>
-          loader.loadAsync(
+      texture = await loadStageTexture(backdrop).catch(() =>
+        pageImages.texture(
+          mobileImageUrl(
             page.image.startsWith("/") ? `.${page.image}` : `./${page.image}`,
           ),
-        );
+        ),
+      );
       if (!stillCurrent()) {
         texture.dispose();
         throw Error("legacy-stage-superseded");
@@ -1803,12 +1908,14 @@ export class LibraryScene {
         const kind = actorDirection.kind;
         const imageActor = Boolean(actorDirection.image);
         const tex = imageActor
-          ? await loader.loadAsync(stageAssetUrl(actorDirection.image!))
-          : await loader
-              .loadAsync(`./assets/art/theatre/${kind}-poses.webp`)
-              .catch(() =>
-                loader.loadAsync(`./assets/art/${kind}-figurine.webp`),
-              );
+          ? await loadStageTexture(actorDirection.image!)
+          : await loadStageTexture(
+              `assets/art/theatre/${kind}-poses.webp`,
+            ).catch(() =>
+              pageImages.texture(
+                mobileImageUrl(`./assets/art/${kind}-figurine.webp`),
+              ),
+            );
         if (!stillCurrent()) {
           tex.dispose();
           throw Error("legacy-stage-superseded");
@@ -2009,7 +2116,7 @@ export class LibraryScene {
       {
         // Complete the explicitly paired page print before releasing the stage.
         const groundPath = direction.ground;
-        const floorTexture = await loader.loadAsync(stageAssetUrl(groundPath));
+        const floorTexture = await loadStageTexture(groundPath);
         if (!stillCurrent()) {
           floorTexture?.dispose();
           throw Error("legacy-stage-superseded");
@@ -2037,6 +2144,10 @@ export class LibraryScene {
 
   async spread(story: Story, page: Page, locale: LocaleData) {
     this.releaseAuthoredHolds();
+    this.spreadAbort?.abort();
+    const spreadAbort = new AbortController();
+    this.spreadAbort = spreadAbort;
+    const pageImages = new PageImages(spreadAbort.signal);
     const generation = ++this.loadGeneration;
     const authored = page.authored;
     // Build authored artwork off scene. The previous completed spread stays visible
@@ -2050,6 +2161,7 @@ export class LibraryScene {
           authored.spread,
           new THREE.TextureLoader(),
           () => !this.disposed && generation === this.loadGeneration,
+          pageImages,
         );
       } catch (error) {
         if (generation !== this.loadGeneration || this.disposed) return;
@@ -2065,6 +2177,7 @@ export class LibraryScene {
           page,
           locale,
           () => !this.disposed && generation === this.loadGeneration,
+          pageImages,
         );
       } catch (error) {
         if (generation !== this.loadGeneration || this.disposed) return;
@@ -2150,7 +2263,10 @@ export class LibraryScene {
     this.closing = 0;
     if (!wasRoom && !this.reduced && this.popups.length && this.loadedPage) {
       this.foldingOut = performance.now();
-      await new Promise((resolve) => setTimeout(resolve, 260));
+      this.foldOutDuration = this.lowQuality ? 110 : 250;
+      await new Promise((resolve) =>
+        setTimeout(resolve, this.foldOutDuration + 10),
+      );
       if (generation !== this.loadGeneration) {
         preparedAuthored?.dispose();
         if (preparedLegacy) this.disposePreparedLegacy(preparedLegacy);
@@ -2251,6 +2367,7 @@ export class LibraryScene {
     this.turnDirection = turnDirection;
     this.turningLeaf?.update(0, turnDirection);
     this.turningPage.rotation.y = turnDirection === "forward" ? 0 : -Math.PI;
+    this.pageMotionRate = this.lowQuality ? 3.2 : 1;
     this.turnStarted = performance.now();
     this.authoredStage?.begin();
     this.bookRoot.userData.story = story.id;
@@ -2519,6 +2636,11 @@ export class LibraryScene {
           : null,
       drawCalls: this.renderer.info.render.calls,
       triangles: this.renderer.info.render.triangles,
+      gpuGeometries: this.renderer.info.memory.geometries,
+      gpuTextures: this.renderer.info.memory.textures,
+      renderedFrames: this.renderedFrames,
+      renderFrameIntervalMs: this.renderFrameIntervalMs,
+      renderCpuMs: this.renderCpuMs,
     };
   }
   private animate = () => {
@@ -2539,15 +2661,14 @@ export class LibraryScene {
         !document.querySelector("#loading:not([hidden])"),
       this.reduced,
     );
-    const dt = this.lastFrame
-      ? Math.min(0.05, (now - this.lastFrame) / 1000)
-      : 0.016;
+    const elapsed = this.lastFrame ? (now - this.lastFrame) / 1000 : 0.016;
+    const dt = Math.min(0.05, elapsed);
     if (this.lastFrame && now - this.lastFrame > 28) this.slowFrames++;
     else this.slowFrames = Math.max(0, this.slowFrames - 1);
     if (this.slowFrames > 45 && !this.lowQuality) {
       this.lowQuality = true;
       document.documentElement.classList.add("low-graphics");
-      this.renderer.setPixelRatio(1);
+      this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
       this.renderer.shadowMap.enabled = false;
     }
     this.lastFrame = now;
@@ -2567,8 +2688,11 @@ export class LibraryScene {
       goal.x += this.drift.x * 0.32;
       goal.y -= this.drift.y * 0.15;
     }
-    this.camera.position.lerp(goal, this.reduced ? 1 : 1 - Math.exp(-dt * 3.4));
-    this.look.lerp(this.lookGoal, this.reduced ? 1 : 1 - Math.exp(-dt * 3.4));
+    // Camera settling must follow wall time even when software rendering produces
+    // only a few frames per second. The capped dt above is for actor animation.
+    const cameraBlend = cameraBlendForElapsed(elapsed, this.reduced);
+    this.camera.position.lerp(goal, cameraBlend);
+    this.look.lerp(this.lookGoal, cameraBlend);
     this.camera.lookAt(this.look);
     if (this.reviewTime !== undefined) {
       this.camera.position.copy(orbitGoal);
@@ -2590,10 +2714,7 @@ export class LibraryScene {
       this.camera.lookAt(this.look);
     }
     if (this.mode === "spread") {
-      const age =
-        this.reviewTime !== undefined
-          ? (this.reviewAge ?? 5)
-          : (now - this.turnStarted) / 1000;
+      const age = this.pageMotionAge(now);
       const pose = bookPose(age, this.opening, this.reduced);
       const progress = this.opening
         ? 1 - pose.cover / Math.PI
@@ -2632,7 +2753,7 @@ export class LibraryScene {
         this.reviewFoldProgress !== undefined
           ? 1 - this.reviewFoldProgress
           : this.foldingOut
-            ? 1 - ease((now - this.foldingOut) / 250)
+            ? 1 - ease((now - this.foldingOut) / this.foldOutDuration)
             : undefined;
       const foldFrame = (
         this.foldingOut ? this.leafPrint : this.destinationPrint
@@ -2649,7 +2770,8 @@ export class LibraryScene {
       this.popups.forEach((g, i) => {
         popupFoldSurface(g, i, unfold);
         g.rotation.x = popupFoldAngle(unfold);
-        g.visible = unfold > 0.001 && !(this.opening && age < 1.55);
+        g.visible =
+          unfold > 0.001 && !(this.opening && !this.reduced && age < 1.55);
       });
       if (this.transitionWaiting && this.waitingFromRoom)
         this.leftLeaf.rotation.y = Math.PI;
@@ -2891,7 +3013,14 @@ export class LibraryScene {
         }
       });
     }
+    const renderStartedAt = performance.now();
+    this.renderFrameIntervalMs = this.lastRenderedAt
+      ? renderStartedAt - this.lastRenderedAt
+      : 0;
+    this.lastRenderedAt = renderStartedAt;
     this.renderer.render(this.scene, this.camera);
+    this.renderCpuMs = performance.now() - renderStartedAt;
+    this.renderedFrames++;
   };
   private disposePageContents(
     root: THREE.Group,
@@ -2962,6 +3091,7 @@ export class LibraryScene {
     this.destinationPrint.clear();
   }
   dispose() {
+    this.spreadAbort?.abort();
     this.shelfHint.dispose();
     this.clearCreatureTargets();
     this.retainedStage.clear();

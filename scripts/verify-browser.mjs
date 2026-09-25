@@ -1,0 +1,41 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import { spawn } from "node:child_process";
+
+// Fixture suites deliberately add books and damaged assets. Never deploy their
+// mutated build: verify a disposable copy, then exercise the untouched artifact.
+const fixtureRoot = path.resolve(".test-output/browser-fixture-dist");
+await fs.rm(fixtureRoot, { recursive: true, force: true });
+await fs.cp("dist", fixtureRoot, { recursive: true });
+const run = (script, env = {}) =>
+  new Promise((resolve, reject) => {
+    const child = spawn(process.execPath, [script], {
+      stdio: "inherit",
+      env: { ...process.env, ...env },
+    });
+    child.on("error", reject);
+    child.on("exit", (code) =>
+      code === 0 ? resolve() : reject(new Error(`${script} exited ${code}`)),
+    );
+  });
+const failures = [];
+async function check(script, env) {
+  try {
+    await run(script, env);
+  } catch (error) {
+    failures.push(error.message);
+    console.error(error.message);
+  }
+}
+try {
+  // Run the primary phone budget first so slow CI rendering cannot hide its
+  // diagnostics behind the longer fixture suite.
+  await check("scripts/mobile-check.mjs");
+  await check("scripts/response-check.mjs");
+  for (const suite of ["room", "recovery", "failure", "audio-continuity"])
+    await check(`scripts/${suite}-check.mjs`, { READER_DIST: fixtureRoot });
+} finally {
+  await fs.rm(fixtureRoot, { recursive: true, force: true });
+}
+
+if (failures.length) throw new Error(failures.join("\n"));

@@ -107,17 +107,34 @@ async function compressedDuration(buffer: Buffer) {
     const file = path.join(dir, "audio");
     await fs.writeFile(file, buffer);
     const { stdout } = await execute(
-      "ffprobe",
-      ["-v", "error", "-show_entries", "format=duration", "-of", "json", file],
-      { timeout: 30000 },
+      "ffmpeg",
+      [
+        "-nostdin",
+        "-v",
+        "error",
+        "-i",
+        file,
+        "-map",
+        "0:a:0",
+        "-ac",
+        "1",
+        "-ar",
+        "24000",
+        "-f",
+        "s16le",
+        "pipe:1",
+      ],
+      { timeout: 30000, encoding: "buffer", maxBuffer: assetLimit },
     );
-    const duration = Number(JSON.parse(stdout).format?.duration);
+    // Count decoded PCM frames, excluding MP3 encoder delay and end padding.
+    // Container duration differs between ffprobe versions and can include both.
+    const duration = stdout.length / (24000 * 2);
     if (!Number.isFinite(duration) || duration <= 0)
       throw Error("No positive measured audio duration");
     return duration;
   } catch (error) {
     throw Error(
-      `Cannot measure MP3/Ogg; install local ffprobe or supply PCM WAV. ${String(error)}`,
+      `Cannot measure MP3/Ogg; install local ffmpeg or supply PCM WAV. ${String(error)}`,
     );
   } finally {
     await fs.rm(dir, { recursive: true, force: true });

@@ -72,6 +72,202 @@ test("failed shelf inspection restores the shelf and releases the busy state", a
   assert.match(String(failures[0]), /missing cover/);
 });
 
+test("the first page's slow media load does not lock turning or Library", async () => {
+  const firstPage = deferred();
+  const renderStarted = deferred();
+  let book: string | null = null;
+  let page = 0;
+  let renders = 0;
+  let cancellations = 0;
+  let toyLoads = 0;
+  const autoplayChecks: (() => boolean)[] = [];
+  const session: ReadingSession<{ key: string }> = new ReadingSession(
+    {
+      async inspectShelfBook() {},
+      async returnShelfPreview() {},
+    },
+    () => {},
+    () => {},
+    (error) => {
+      throw error;
+    },
+    {
+      reading: () => ({ book, page, pageCount: 3, toys: [] }),
+      validate() {},
+      stop() {},
+      async clearToys() {},
+      async closeBook() {},
+      async landBook() {},
+      activateBook() {
+        book = "jonah-and-the-whale";
+        page = 0;
+      },
+      showFirstPage: (): Promise<void> => session.loadPage(true),
+      async loadToys() {
+        toyLoads++;
+      },
+      async suspendPage() {},
+      async prepareLibrary() {},
+      async resumePage() {},
+    },
+    {
+      cancel() {
+        cancellations++;
+      },
+      commitTurn(target) {
+        page = target;
+      },
+      async render({ shouldAutoplay }) {
+        renders++;
+        autoplayChecks.push(shouldAutoplay);
+        if (renders === 1) {
+          renderStarted.resolve();
+          await firstPage.promise;
+        }
+      },
+    },
+    {
+      snapshot: () => ({
+        playing: false,
+        position: 0,
+        speed: 1,
+        audio: true,
+        volume: 1,
+      }),
+      async play() {
+        return true;
+      },
+      pause() {},
+      setSpeed() {},
+      setAudio() {},
+      setVolume() {},
+      visibility() {},
+    },
+  );
+  await session.inspect({ key: "book:jonah-and-the-whale" });
+  const opening = session.openInspected();
+  await renderStarted.promise;
+  await Promise.resolve();
+  assert.equal(
+    session.snapshot.busy,
+    false,
+    "reader controls unlock while media loads",
+  );
+  assert.equal(session.snapshot.loading, true);
+  assert.equal(toyLoads, 0, "page artwork gets priority over cabinet toys");
+  assert.equal(autoplayChecks[0](), true);
+  assert.equal(await session.togglePlayback(() => true), true);
+  assert.equal(autoplayChecks[0](), false, "Pause cancels queued autoplay");
+  assert.equal(await session.togglePlayback(() => true), true);
+  assert.equal(autoplayChecks[0](), true, "Play restores queued autoplay");
+  assert.equal(
+    await session.turnPage(1),
+    true,
+    "Next accepts the tap immediately",
+  );
+  assert.equal(page, 1);
+  assert.equal(renders, 2);
+  assert.equal(
+    autoplayChecks[0](),
+    false,
+    "superseded pages cannot start audio",
+  );
+  assert.equal(autoplayChecks[1](), true);
+  assert.ok(cancellations > 0);
+  assert.equal(
+    await session.browseLibrary(),
+    true,
+    "Library does not wait on old media",
+  );
+  assert.equal(session.snapshot.browsing, true);
+  assert.equal(autoplayChecks[1](), false, "Library cancels queued autoplay");
+  firstPage.resolve();
+  await opening;
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(toyLoads, 1, "toys load after the first page settles");
+});
+
+test("cabinet toys wait for pending pages and ignore a superseded book", async () => {
+  const gates = {
+    "eden:0": deferred(),
+    "eden:1": deferred(),
+    "noah:0": deferred(),
+  };
+  const started = {
+    "eden:0": deferred(),
+    "eden:1": deferred(),
+    "noah:0": deferred(),
+  };
+  const toyLoads: string[] = [];
+  let book: string | null = null;
+  let page = 0;
+  const session: ReadingSession<{ key: string; id: string }> =
+    new ReadingSession(
+      {
+        async inspectShelfBook() {},
+        async returnShelfPreview() {},
+      },
+      () => {},
+      () => {},
+      (error) => {
+        throw error;
+      },
+      {
+        reading: () => ({ book, page, pageCount: 2, toys: [] }),
+        validate() {},
+        stop() {},
+        async clearToys() {},
+        async closeBook() {},
+        async landBook() {},
+        activateBook(entry) {
+          book = entry.id;
+          page = 0;
+        },
+        showFirstPage: (): Promise<void> => session.loadPage(true),
+        async loadToys() {
+          toyLoads.push(book!);
+        },
+        async suspendPage() {},
+        async prepareLibrary() {},
+        async resumePage() {},
+      },
+      {
+        cancel() {},
+        commitTurn(target) {
+          page = target;
+        },
+        async render() {
+          const key = `${book}:${page}` as keyof typeof gates;
+          started[key].resolve();
+          await gates[key].promise;
+        },
+      },
+    );
+  await session.inspect({ key: "builtin:eden", id: "eden" });
+  const edenOpening = session.openInspected();
+  await started["eden:0"].promise;
+  await edenOpening;
+  assert.deepEqual(toyLoads, []);
+  const edenTurn = session.turnPage(1);
+  await started["eden:1"].promise;
+  gates["eden:0"].resolve();
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.deepEqual(toyLoads, [], "turning art retains priority over toys");
+  await session.browseLibrary();
+  await session.inspect({ key: "builtin:noah", id: "noah" });
+  const noahOpening = session.openInspected();
+  await started["noah:0"].promise;
+  await noahOpening;
+  gates["eden:1"].resolve();
+  await edenTurn;
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.deepEqual(toyLoads, [], "old book completion cannot load new toys");
+  gates["noah:0"].resolve();
+  await session.waitForPage();
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.deepEqual(toyLoads, ["noah"]);
+});
+
 test("opening, switching, Library and Continue keep the session place and toys together", async () => {
   const pending = deferred();
   let book: string | null = null;
@@ -190,10 +386,12 @@ test("opening, switching, Library and Continue keep the session place and toys t
   const turn = session.turnPage(1);
   assert.equal(session.snapshot.reading.page, 1);
   assert.equal(session.snapshot.loading, true);
-  assert.equal(await session.turnPage(1), false);
+  const secondTurn = session.turnPage(1);
+  assert.equal(session.snapshot.reading.page, 2);
   session.invalidatePage();
   turning.resolve();
   assert.equal(await turn, true);
+  assert.equal(await secondTurn, true);
   assert.equal(committedPage, null);
   assert.equal(session.snapshot.loading, false);
   session.setReady(true);
@@ -328,4 +526,108 @@ test("language changes keep the reading place and only apply the latest fetched 
     "recover:shelf",
     "error",
   ]);
+});
+
+test("Play and Pause queue during a busy language refresh while physical transfers stay locked", async () => {
+  let language: LocaleId = "en-US";
+  let pageGate = deferred();
+  const renderStarted = deferred();
+  const transferGate = deferred();
+  let requested!: () => boolean;
+  let pauses = 0;
+  const session: ReadingSession<{ key: string }> = new ReadingSession(
+    {
+      async inspectShelfBook() {},
+      async returnShelfPreview() {},
+    },
+    () => {},
+    () => {},
+    () => {},
+    {
+      reading: () => ({ book: "eden", page: 2, pageCount: 8, toys: [] }),
+      validate() {},
+      stop() {},
+      async clearToys() {},
+      async closeBook() {},
+      async landBook() {},
+      activateBook() {},
+      async showFirstPage() {},
+      async loadToys() {},
+      async suspendPage() {},
+      async prepareLibrary() {},
+      async resumePage() {},
+    },
+    {
+      cancel() {},
+      commitTurn() {},
+      async render({ shouldAutoplay }) {
+        requested = shouldAutoplay;
+        session.setReady(true);
+        renderStarted.resolve();
+        await pageGate.promise;
+      },
+    },
+    {
+      snapshot: () => ({
+        playing: false,
+        position: 0,
+        speed: 1,
+        audio: true,
+        volume: 1,
+      }),
+      async play() {
+        return true;
+      },
+      pause() {
+        pauses++;
+      },
+      setSpeed() {},
+      setAudio() {},
+      setVolume() {},
+      visibility() {},
+    },
+    {
+      current: () => language,
+      async fetch(id) {
+        return {
+          id,
+          name: id,
+          voice: "",
+          ui: {},
+          characters: { adam: "", eve: "", noah: "" },
+          stories: [],
+        } satisfies LocaleData;
+      },
+      pause() {},
+      commit(id) {
+        language = id;
+      },
+      refresh: async () => session.loadPage(false),
+      async recover() {},
+      error() {},
+    },
+  );
+  session.setBrowsing(false);
+  const changing = session.changeLanguage("en-GB");
+  await renderStarted.promise;
+  assert.equal(session.snapshot.busy, true);
+  assert.equal(session.snapshot.loading, true);
+  assert.equal(session.snapshot.playback.ready, true);
+  assert.equal(await session.togglePlayback(() => true), true);
+  assert.equal(requested(), true);
+  assert.equal(await session.togglePlayback(() => true), true);
+  assert.equal(requested(), false);
+  assert.equal(pauses, 1);
+  pageGate.resolve();
+  assert.equal(await changing, true);
+  pageGate = deferred();
+  const pending = session.loadPage(false);
+  const transfer = session.run(async () => transferGate.promise);
+  assert.equal(session.snapshot.busy, true);
+  assert.equal(session.snapshot.loading, true);
+  assert.equal(await session.togglePlayback(() => true), false);
+  transferGate.resolve();
+  pageGate.resolve();
+  assert.equal(await transfer, true);
+  await pending;
 });

@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import type { BookAppearance } from "./authored-book";
+import { shelfCoverUrl } from "./mobile-images";
 import {
   createBookCoverTexture,
   createBookSpineTexture,
@@ -284,7 +285,7 @@ export class RoomShelf {
     for (const definition of definitions) {
       const entry = this.entries.get(definition.key)!;
       void loader
-        .loadAsync(coverUrl(definition.cover))
+        .loadAsync(shelfCoverUrl(coverUrl(definition.cover)))
         .then((texture) => {
           if (
             generation !== this.generation ||
