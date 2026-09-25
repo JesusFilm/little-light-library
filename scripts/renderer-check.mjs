@@ -26,7 +26,28 @@ const variants = [
     name: "new-headless-enable-gpu",
     launch: { channel: "chromium", args: ["--enable-gpu"] },
   },
+  ...(process.platform === "win32"
+    ? [
+        {
+          name: "d3d11",
+          launch: {
+            channel: "chromium",
+            args: ["--use-gl=angle", "--use-angle=d3d11", "--enable-gpu"],
+          },
+        },
+      ]
+    : []),
 ];
+const requested = process.env.RENDERER_VARIANTS?.split(",")
+  .map((name) => name.trim())
+  .filter(Boolean);
+const selected = requested
+  ? requested.map((name) => {
+      const variant = variants.find((item) => item.name === name);
+      if (!variant) throw new Error(`Unknown renderer variant: ${name}`);
+      return variant;
+    })
+  : variants;
 const mime = {
   ".css": "text/css",
   ".html": "text/html",
@@ -86,6 +107,7 @@ const report = {
     cpuSlowdown: 1,
     network: "unthrottled",
   },
+  requestedVariants: selected.map(({ name }) => name),
   method:
     "Same built local site and fixed shelf-to-Eden page. One browser at a time; 100 scene frames sampled after art appears. Headless software timing is not a physical phone GPU measurement.",
   variants: [],
@@ -256,7 +278,7 @@ async function measure(variant) {
 }
 
 try {
-  for (const variant of variants) await measure(variant);
+  for (const variant of selected) await measure(variant);
 } finally {
   await new Promise((resolve) => server.close(resolve));
 }
