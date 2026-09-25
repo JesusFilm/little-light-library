@@ -34,6 +34,18 @@ site artifact.
 
 ## Required visual and device review
 
+### Hosted runner limitation (26 September 2026)
+
+The current PR's local GPU run passes the committed budgets. Hosted renderer
+probes found SwiftShader on standard Linux and Windows runners (roughly
+392–568 ms p95 frames without CPU throttling). The standard hosted Mac's
+paravirtual Metal device reached about 98 ms p95, also above the 50 ms budget.
+These measurements describe the CI machines, not a Samsung A50. The required
+check remains enforced; no performance budget has been relaxed. A suitable GPU
+runner is still needed before this release can pass the merge/deployment gate.
+`scripts/renderer-check.mjs` retains the manual diagnostic for checking a proposed
+runner. Temporary cross-platform diagnostic workflow jobs have been removed.
+
 CPU/network emulation does not emulate Samsung A50 GPU performance, thermal
 throttling, available RAM or storage pressure. Raster resolution is a measurable
 floor, not proof of acceptable artwork or antialiasing. Audio source observations
