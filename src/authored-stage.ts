@@ -2,6 +2,7 @@ import { authoredMotionTransform } from "./book-animation";
 import * as THREE from "three";
 import { installCompactHitMask, visiblePaintHit } from "./room-interaction";
 import { mobileImageUrl } from "./mobile-images";
+import type { PageImages } from "./page-images";
 import type {
   AuthoredBook,
   BookElement,
@@ -319,6 +320,7 @@ export class AuthoredStage {
     spread: BookSpread,
     loader: THREE.TextureLoader,
     stillCurrent: () => boolean,
+    pageImages?: PageImages,
   ) {
     const root = new THREE.Group();
     root.name = `authored-stage-${spread.id}`;
@@ -326,9 +328,10 @@ export class AuthoredStage {
     const textures: THREE.Texture[] = [];
     const elements: RuntimeElement[] = [];
     const load = async (asset: string) => {
-      const texture = await loader.loadAsync(
-        mobileImageUrl(assetPath(book, asset, "image")),
-      );
+      const url = mobileImageUrl(assetPath(book, asset, "image"));
+      const texture = pageImages
+        ? await pageImages.texture(url)
+        : await loader.loadAsync(url);
       if (!stillCurrent()) {
         texture.dispose();
         throw new Error("authored-stage-superseded");

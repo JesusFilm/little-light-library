@@ -685,10 +685,19 @@ test("adjacent audio preparation keeps only bounded encoded bytes", async () => 
     });
     const secondFetches = requests.filter((url) => url.includes("second.wav"));
     assert.equal(secondFetches.length, 1);
+    player.pause();
+    assert.equal(player.cacheFootprint.encodedBytes, 0);
+    await player.play();
+    await new Promise((resolve) => setTimeout(resolve, 1250));
+    assert.equal(
+      requests.filter((url) => url.includes("second.wav")).length,
+      2,
+      "resume retries a complete adjacent page after clearing partial prefetch",
+    );
     assert.equal(await player.loadPage(fixture, 1), true);
     assert.equal(
       requests.filter((url) => url.includes("second.wav")).length,
-      1,
+      2,
       "page turn consumes prefetched bytes without a second transfer",
     );
     assert.equal(player.cacheFootprint.encodedBytes, 0);

@@ -44,6 +44,7 @@ import {
 import { stageDirections } from "./stage-direction";
 import { legacyStageImageSources, stageAssetUrl } from "./legacy-stage-media";
 import { mobileImageUrl } from "./mobile-images";
+import { PageImages } from "./page-images";
 import { alphaBounds } from "./alpha-bounds";
 import {
   mirroredScaleX,
@@ -571,6 +572,7 @@ export class LibraryScene {
   private roomTextures = new Set<THREE.Texture>();
   private roomWallpaper: "loading" | "loaded" | "fallback" = "loading";
   private loadGeneration = 0;
+  private spreadAbort?: AbortController;
   private disposed = false;
   private reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   private resizeObserver: ResizeObserver;
@@ -1278,6 +1280,7 @@ export class LibraryScene {
     this.coverArt.material.needsUpdate = true;
   }
   async room(locale: LocaleData, books: RoomShelfBook[]) {
+    this.spreadAbort?.abort();
     this.clearCreatureTargets();
     this.clearReadingFocus();
     this.readingWideEnsemble = false;
@@ -1728,6 +1731,7 @@ export class LibraryScene {
     this.landedShelfBook = true;
   }
   cancelPendingSpread() {
+    this.spreadAbort?.abort();
     this.loadGeneration++;
     this.foldingOut = 0;
   }
@@ -1735,6 +1739,7 @@ export class LibraryScene {
     page: Page,
     locale: LocaleData,
     stillCurrent: () => boolean,
+    pageImages: PageImages,
   ): Promise<PreparedLegacyStage> {
     const draft = {
       root: new THREE.Group(),
@@ -1750,25 +1755,12 @@ export class LibraryScene {
       wideEnsemble: false,
       actorMood: "listen" as PaperActorMood,
     };
-    const loader = new THREE.TextureLoader();
-    const imageLoader = new THREE.ImageLoader();
-    const images = new Map<string, Promise<HTMLImageElement>>();
     const stageImage = (source: string) => {
       const url = mobileImageUrl(stageAssetUrl(source));
-      let pending = images.get(url);
-      if (!pending) {
-        pending = imageLoader.loadAsync(url);
-        // An optional image can fail before its later fallback is awaited.
-        void pending.catch(() => undefined);
-        images.set(url, pending);
-      }
-      return pending;
+      return pageImages.image(url);
     };
     const loadStageTexture = async (source: string) => {
-      const image = await stageImage(source);
-      const texture = new THREE.Texture(image);
-      texture.needsUpdate = true;
-      return texture;
+      return pageImages.texture(mobileImageUrl(stageAssetUrl(source)));
     };
     const assertCurrent = () => {
       if (!stillCurrent()) throw Error("legacy-stage-superseded");
@@ -1868,7 +1860,7 @@ export class LibraryScene {
       const backdrop = direction.background;
       draft.actorMood = direction.actors[0]?.mood || "listen";
       texture = await loadStageTexture(backdrop).catch(() =>
-        loader.loadAsync(
+        pageImages.texture(
           mobileImageUrl(
             page.image.startsWith("/") ? `.${page.image}` : `./${page.image}`,
           ),
@@ -1919,7 +1911,7 @@ export class LibraryScene {
           : await loadStageTexture(
               `assets/art/theatre/${kind}-poses.webp`,
             ).catch(() =>
-              loader.loadAsync(
+              pageImages.texture(
                 mobileImageUrl(`./assets/art/${kind}-figurine.webp`),
               ),
             );
@@ -2151,6 +2143,10 @@ export class LibraryScene {
 
   async spread(story: Story, page: Page, locale: LocaleData) {
     this.releaseAuthoredHolds();
+    this.spreadAbort?.abort();
+    const spreadAbort = new AbortController();
+    this.spreadAbort = spreadAbort;
+    const pageImages = new PageImages(spreadAbort.signal);
     const generation = ++this.loadGeneration;
     const authored = page.authored;
     // Build authored artwork off scene. The previous completed spread stays visible
@@ -2164,6 +2160,7 @@ export class LibraryScene {
           authored.spread,
           new THREE.TextureLoader(),
           () => !this.disposed && generation === this.loadGeneration,
+          pageImages,
         );
       } catch (error) {
         if (generation !== this.loadGeneration || this.disposed) return;
@@ -2179,6 +2176,7 @@ export class LibraryScene {
           page,
           locale,
           () => !this.disposed && generation === this.loadGeneration,
+          pageImages,
         );
       } catch (error) {
         if (generation !== this.loadGeneration || this.disposed) return;
@@ -3090,6 +3088,7 @@ export class LibraryScene {
     this.destinationPrint.clear();
   }
   dispose() {
+    this.spreadAbort?.abort();
     this.shelfHint.dispose();
     this.clearCreatureTargets();
     this.retainedStage.clear();

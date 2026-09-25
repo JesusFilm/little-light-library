@@ -838,6 +838,9 @@ export class BookAudio {
     this.prefetchTimer = undefined;
     this.prefetchAbort?.abort();
     this.prefetchAbort = undefined;
+    // A paused fetch may leave only some of the adjacent page encoded. Clear
+    // that partial set so play() can queue the complete page again.
+    this.prefetched.clear();
     this.cursor = this.position;
     this.active = false;
     this.unschedule();
