@@ -206,7 +206,11 @@ const check = async (name, run) => {
 
 try {
   browser = await chromium.launch({
-    ...(process.env.CI ? {} : { channel: "chrome" }),
+    ...(process.env.READER_BROWSER_CHANNEL
+      ? { channel: process.env.READER_BROWSER_CHANNEL }
+      : process.env.CI
+        ? {}
+        : { channel: "chrome" }),
     headless: true,
   });
   results.browser = browser.version();

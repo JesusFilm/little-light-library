@@ -89,12 +89,20 @@ const server = http.createServer((request, response) => {
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 const url = `http://127.0.0.1:${server.address().port}${prefix}`;
 const browser = await chromium.launch({
-  ...(process.env.CI ? {} : { channel: "chrome" }),
+  ...(process.env.READER_BROWSER_CHANNEL
+    ? { channel: process.env.READER_BROWSER_CHANNEL }
+    : process.env.CI
+      ? {}
+      : { channel: "chrome" }),
   headless: true,
 });
+const browserSession = await browser.newBrowserCDPSession();
+const { gpu } = await browserSession.send("SystemInfo.getInfo");
+await browserSession.detach();
 const report = {
   generatedAt: new Date().toISOString(),
   browser: browser.version(),
+  renderer: gpu,
   profile,
   limits,
   method:

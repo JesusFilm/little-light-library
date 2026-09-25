@@ -10,8 +10,10 @@ permissions:
 jobs:
   reader:
     name: Reader and mobile acceptance
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, ARM64, lll-reviewed-gpu]
     timeout-minutes: 30
+    env:
+      READER_BROWSER_CHANNEL: chrome
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -19,9 +21,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
-      - name: Install local media validator
-        run: sudo apt-get install -y ffmpeg
+      - name: Check GPU runner prerequisites
+        run: |
+          command -v ffmpeg
+          test -x "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
       - run: npm run verify
       - run: npm run verify:browser
       - name: Save review evidence

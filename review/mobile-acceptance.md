@@ -41,8 +41,9 @@ probes found SwiftShader on standard Linux and Windows runners (roughly
 392–568 ms p95 frames without CPU throttling). The standard hosted Mac's
 paravirtual Metal device reached about 98 ms p95, also above the 50 ms budget.
 These measurements describe the CI machines, not a Samsung A50. The required
-check remains enforced; no performance budget has been relaxed. A suitable GPU
-runner is still needed before this release can pass the merge/deployment gate.
+check remains enforced; no performance budget has been relaxed. Verification
+now targets a reviewed Mac GPU runner and uses installed Chrome. The mobile
+report records the actual GPU backend as well as browser version.
 `scripts/renderer-check.mjs` retains the manual diagnostic for checking a proposed
 runner. Temporary cross-platform diagnostic workflow jobs have been removed.
 
@@ -65,3 +66,24 @@ input, inspect sharp edges, and note browser/device versions and any failures.
 Record automated checks, visual inspection, audible playback and creator/device
 approval separately in the pull request. Do not relax a failing budget merely to
 make CI green; changes require an explained product decision.
+
+## Temporary GPU runner operation
+
+The required job targets `[self-hosted, macOS, ARM64, lll-reviewed-gpu]`.
+This label does not imply that a runner is always available. Without an approved
+runner the job queues and deployment stays blocked. Standard hosted software
+rendering cannot provide representative frame-budget evidence.
+
+For this release the owner authorized an ephemeral runner on their Mac. Start it
+only for a reviewed workflow run, with an external job-start hook that validates
+the exact repository, run ID, event and commit SHA before any workflow steps.
+For a pull request, validate both the tested merge SHA and its reviewed head SHA.
+Register with `--ephemeral`, use a fresh temporary work directory, and remove
+registration credentials after the one job. Never install a persistent service.
+Repeat explicit allowlisting for the resulting main commit's Pages verification.
+Do not start this runner for unknown PRs or automatically trust new commits.
+
+Prerequisites are Node 22 (provisioned by setup-node), local FFmpeg, and installed
+Google Chrome with native GPU access. Future releases need an equivalently
+reviewed ephemeral runner or a dedicated isolated GPU CI service. Retain the same
+mobile budgets and deploy only the verified artifact.

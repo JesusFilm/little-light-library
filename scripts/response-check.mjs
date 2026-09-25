@@ -52,7 +52,11 @@ await new Promise((resolve, reject) => {
   server.listen(0, "127.0.0.1", resolve);
 });
 const browser = await chromium.launch({
-  ...(process.env.CI ? {} : { channel: "chrome" }),
+  ...(process.env.READER_BROWSER_CHANNEL
+    ? { channel: process.env.READER_BROWSER_CHANNEL }
+    : process.env.CI
+      ? {}
+      : { channel: "chrome" }),
   headless: true,
 });
 const context = await browser.newContext({
