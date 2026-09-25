@@ -248,7 +248,7 @@ export interface CharacterEntrance {
   scale: number;
 }
 
-/** A quiet, short rise used when new paper characters unfold on a spread. */
+/** A quiet settle after the paper unfolds; characters stay readable throughout. */
 export function authoredCharacterEntrance(
   elapsed: number,
   reducedMotion = false,
@@ -257,7 +257,7 @@ export function authoredCharacterEntrance(
   const progress = THREE.MathUtils.clamp(elapsed / 0.32, 0, 1);
   const eased = 1 - (1 - progress) ** 3;
   return {
-    opacity: eased,
+    opacity: 1,
     scale: 0.985 + 0.015 * eased,
   };
 }
@@ -291,6 +291,7 @@ export class AuthoredStage {
   private readonly segmentStarts = new Map<string, number>();
   private decodedDurations?: readonly number[];
   private openedAt: number | undefined;
+  private entranceStartedAt = 0;
 
   private constructor(
     backdropTexture: THREE.Texture,
@@ -540,6 +541,8 @@ export class AuthoredStage {
 
   begin() {
     this.openedAt = undefined;
+    // Settle actors while the supporting paper rises, before narration is ready.
+    this.entranceStartedAt = performance.now() / 1000;
     this.releaseHolds();
   }
 
@@ -602,9 +605,7 @@ export class AuthoredStage {
       const entrance =
         element.entranceIndex >= 0
           ? authoredCharacterEntrance(
-              folded || this.openedAt === undefined
-                ? 0.32
-                : now - this.openedAt - element.entranceIndex * 0.09,
+              now - this.entranceStartedAt - element.entranceIndex * 0.09,
               reduced,
             )
           : { opacity: 1, scale: 1 };

@@ -702,7 +702,8 @@ body {
     padding: 78px 14px 12px 0;
   }
   .reading #panel::before {
-    background: linear-gradient(90deg, transparent, #0b2023cb 16%, #0b2023ed);
+    inset: 0 0 0 -64px;
+    background: linear-gradient(90deg, #0b2023c9, #0b2023e8 25%, #0b2023f2);
   }
   .reading .reader {
     max-height: calc(100svh - 90px);
