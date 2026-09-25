@@ -1,0 +1,260 @@
+{
+  "generatedAt": "2026-09-25T20:17:16.951Z",
+  "browser": "154.0.8037.57",
+  "profile": {
+    "viewport": {
+      "width": 360,
+      "height": 660
+    },
+    "deviceScaleFactor": 3,
+    "cpuSlowdown": 4,
+    "latencyMs": 150,
+    "downloadBytesPerSecond": 200000,
+    "uploadBytesPerSecond": 100000,
+    "deviceMemoryGB": 2,
+    "hardwareConcurrency": 2
+  },
+  "limits": {
+    "coldShelfMs": 5000,
+    "feedbackMs": 200,
+    "inspectionMs": 1000,
+    "pageArtMs": 3000,
+    "pageReadyMs": 4000,
+    "warmPageMs": 1000,
+    "controlMs": 250,
+    "languageMs": 3000,
+    "minimumPixelRatio": 1.5,
+    "frameP95Ms": 50,
+    "pageTransferBytes": 650000
+  },
+  "method": "Fresh touch browser contexts, real catalog, nested production path, compressed HTTP and normal browser caching. CPU/network emulation does not simulate the A50 GPU, thermals or actual process RAM.",
+  "scenarios": [
+    {
+      "book": "eden",
+      "measurements": [
+        {
+          "name": "coldShelfMs",
+          "value": 4225,
+          "limit": 5000,
+          "minimum": false
+        },
+        {
+          "name": "inspectionMs",
+          "value": 730,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "readFeedbackMs",
+          "value": 57,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "firstArtMs",
+          "value": 17948,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "firstReadyMs",
+          "value": 21382,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "firstTransferBytes",
+          "value": 4338571,
+          "limit": 650000,
+          "minimum": false
+        }
+      ],
+      "pages": [],
+      "locales": [],
+      "errors": [],
+      "failure": "AssertionError [ERR_ASSERTION]: portrait-first: reading area reveals the actual room, without an unrelated image"
+    },
+    {
+      "book": "noah",
+      "measurements": [
+        {
+          "name": "coldShelfMs",
+          "value": 4117,
+          "limit": 5000,
+          "minimum": false
+        },
+        {
+          "name": "inspectionMs",
+          "value": 742,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "readFeedbackMs",
+          "value": 57,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "firstArtMs",
+          "value": 13517,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "firstReadyMs",
+          "value": 18932,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "firstTransferBytes",
+          "value": 3874931,
+          "limit": 650000,
+          "minimum": false
+        }
+      ],
+      "pages": [],
+      "locales": [],
+      "errors": [],
+      "failure": "AssertionError [ERR_ASSERTION]: portrait-first: reading area reveals the actual room, without an unrelated image"
+    },
+    {
+      "book": "jonah-and-the-whale",
+      "measurements": [
+        {
+          "name": "coldShelfMs",
+          "value": 4098,
+          "limit": 5000,
+          "minimum": false
+        },
+        {
+          "name": "inspectionMs",
+          "value": 733,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "readFeedbackMs",
+          "value": 94,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "firstArtMs",
+          "value": 13699,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "firstReadyMs",
+          "value": 17754,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "firstTransferBytes",
+          "value": 3614540,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "portrait-first.pixelRatio",
+          "value": 1,
+          "limit": 1.5,
+          "minimum": true
+        },
+        {
+          "name": "pauseMs",
+          "value": 62,
+          "limit": 250,
+          "minimum": false
+        },
+        {
+          "name": "playMs",
+          "value": 281,
+          "limit": 250,
+          "minimum": false
+        },
+        {
+          "name": "settingsMs",
+          "value": 66,
+          "limit": 250,
+          "minimum": false
+        },
+        {
+          "name": "page2.feedbackMs",
+          "value": 73,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page2.readyMs",
+          "value": 6262,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page2.transferBytes",
+          "value": 1007865,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page3.feedbackMs",
+          "value": 75,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page3.readyMs",
+          "value": 11648,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page3.transferBytes",
+          "value": 2009561,
+          "limit": 650000,
+          "minimum": false
+        }
+      ],
+      "pages": [
+        {
+          "index": 1,
+          "readyMs": 6262,
+          "transferredBytes": 1007865
+        },
+        {
+          "index": 2,
+          "readyMs": 11648,
+          "transferredBytes": 2009561
+        }
+      ],
+      "locales": [],
+      "errors": [],
+      "failure": "AssertionError [ERR_ASSERTION]: portrait-page-3: reading area reveals the actual room, without an unrelated image"
+    }
+  ],
+  "failures": [
+    "eden: firstArtMs 17948 exceeds 3000",
+    "eden: firstReadyMs 21382 exceeds 4000",
+    "eden: firstTransferBytes 4338571 exceeds 650000",
+    "eden: AssertionError [ERR_ASSERTION]: portrait-first: reading area reveals the actual room, without an unrelated image",
+    "noah: firstArtMs 13517 exceeds 3000",
+    "noah: firstReadyMs 18932 exceeds 4000",
+    "noah: firstTransferBytes 3874931 exceeds 650000",
+    "noah: AssertionError [ERR_ASSERTION]: portrait-first: reading area reveals the actual room, without an unrelated image",
+    "jonah-and-the-whale: firstArtMs 13699 exceeds 3000",
+    "jonah-and-the-whale: firstReadyMs 17754 exceeds 4000",
+    "jonah-and-the-whale: firstTransferBytes 3614540 exceeds 650000",
+    "jonah-and-the-whale: portrait-first.pixelRatio 1 below 1.5",
+    "jonah-and-the-whale: playMs 281 exceeds 250",
+    "jonah-and-the-whale: page2.readyMs 6262 exceeds 4000",
+    "jonah-and-the-whale: page2.transferBytes 1007865 exceeds 650000",
+    "jonah-and-the-whale: page3.readyMs 11648 exceeds 4000",
+    "jonah-and-the-whale: page3.transferBytes 2009561 exceeds 650000",
+    "jonah-and-the-whale: AssertionError [ERR_ASSERTION]: portrait-page-3: reading area reveals the actual room, without an unrelated image"
+  ],
+  "commit": "33589e140ab65848d156960c9bd33cf1eb4aa92a"
+}

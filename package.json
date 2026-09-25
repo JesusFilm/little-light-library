@@ -18,7 +18,7 @@
     "test:audio-continuity": "node scripts/audio-continuity-check.mjs",
     "prebuild": "node scripts/loader-locales.mjs",
     "predev": "node scripts/loader-locales.mjs",
-    "verify:all": "npm run verify && npm run test:room && npm run test:recovery && npm run test:failures && npm run test:audio-continuity",
+    "verify:all": "npm run verify && npm run verify:browser",
     "test:failures": "node scripts/failure-check.mjs",
     "test:timing": "node scripts/timing-check.mjs",
     "test:continuity": "node scripts/continuity-check.mjs",
@@ -35,7 +35,9 @@
     "book:index:check": "node --import tsx scripts/book-index.ts --check",
     "book:create": "node --import tsx scripts/book-cli.ts create",
     "book:register": "node --import tsx scripts/book-cli.ts register",
-    "book:narrate": "node --import tsx scripts/book-narrate.ts"
+    "book:narrate": "node --import tsx scripts/book-narrate.ts",
+    "test:mobile": "node scripts/mobile-check.mjs",
+    "verify:browser": "node scripts/verify-browser.mjs"
   },
   "dependencies": {
     "three": "0.169.0"

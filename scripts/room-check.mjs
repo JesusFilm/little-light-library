@@ -11,7 +11,7 @@ const { sourceTranslation } = await tsImport(
   import.meta.url,
 );
 
-const root = path.resolve("dist");
+const root = path.resolve(process.env.READER_DIST || "dist");
 const prefix = "/acceptance/little-light-library/";
 const output = path.resolve(
   process.env.ROOM_CHECK_OUTPUT || ".test-output/room",
@@ -96,7 +96,10 @@ const server = http.createServer((request, response) => {
 });
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 const url = `http://127.0.0.1:${server.address().port}${prefix}`;
-const browser = await chromium.launch({ channel: "chrome", headless: true });
+const browser = await chromium.launch({
+  ...(process.env.CI ? {} : { channel: "chrome" }),
+  headless: true,
+});
 const results = {
   generatedAt: new Date().toISOString(),
   method:

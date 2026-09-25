@@ -9,7 +9,7 @@ const { readerFixture } = await tsImport(
   import.meta.url,
 );
 
-const root = path.resolve("dist");
+const root = path.resolve(process.env.READER_DIST || "dist");
 const prefix = "/acceptance/little-light-library/";
 const output = path.resolve(".test-output/room/failure-results.json");
 assert.ok(
@@ -193,7 +193,10 @@ const check = async (name, run) => {
 };
 
 try {
-  browser = await chromium.launch({ channel: "chrome", headless: true });
+  browser = await chromium.launch({
+    ...(process.env.CI ? {} : { channel: "chrome" }),
+    headless: true,
+  });
   results.browser = browser.version();
   await check(
     "Cold missing catalog shows loader error and Retry restores committed shelf",

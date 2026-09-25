@@ -6,6 +6,10 @@ import { chromium, devices } from "playwright";
 
 // Run after `npm run build`; MOBILE_PROFILE_DIST can point to an earlier build.
 const root = path.resolve(process.env.MOBILE_PROFILE_DIST || "dist");
+const output = path.resolve(
+  process.env.MOBILE_PROFILE_OUTPUT || ".test-output/mobile",
+);
+fs.mkdirSync(output, { recursive: true });
 const prefix = "/acceptance/little-light-library/";
 const mime = {
   ".css": "text/css",
@@ -36,7 +40,10 @@ const server = http.createServer((request, response) => {
   });
 });
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
-const browser = await chromium.launch({ channel: "chrome", headless: true });
+const browser = await chromium.launch({
+  ...(process.env.CI ? {} : { channel: "chrome" }),
+  headless: true,
+});
 const context = await browser.newContext({ ...devices["Pixel 5"] });
 await context.addInitScript(() => {
   Object.defineProperty(navigator, "deviceMemory", { get: () => 2 });
@@ -107,11 +114,16 @@ try {
     await page.locator("#play").click();
     await page.waitForFunction(() => !window.libraryDebug?.().playing);
   }
+  const playStarted = performance.now();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.libraryDebug?.().playing, null, {
     timeout: 20_000,
   });
+  const playMs = Math.round(performance.now() - playStarted);
+  const pauseStarted = performance.now();
   await page.locator("#play").click();
+  await page.waitForFunction(() => !window.libraryDebug?.().playing);
+  const pauseMs = Math.round(performance.now() - pauseStarted);
   const result = {
     device: "Pixel 5 emulation",
     profile: "4x CPU slowdown, 150 ms latency, 1.6 Mbps download",
@@ -121,6 +133,8 @@ try {
     textMs,
     artMs,
     firstPageMs,
+    playMs,
+    pauseMs,
     firstPageAudioCount: firstPageAudio.length,
     firstPageAudioBytes: firstPageAudio.reduce(
       (sum, entry) => sum + entry.bytes,
@@ -135,7 +149,31 @@ try {
       triangles: window.libraryDebug().scene.triangles,
     })),
   };
+  await page.screenshot({
+    path: path.join(output, "first-page.png"),
+    fullPage: true,
+  });
+  const budgets = {
+    shelfMs: 5000,
+    textMs: 250,
+    artMs: 3000,
+    firstPageMs: 4000,
+    playMs: 250,
+    pauseMs: 250,
+  };
+  const failures = Object.entries(budgets)
+    .filter(([key, limit]) => result[key] > limit)
+    .map(([key, limit]) => `${key}: ${result[key]} ms exceeds ${limit} ms`);
+  fs.writeFileSync(
+    path.join(output, "report.json"),
+    JSON.stringify({ ...result, budgets, failures }, null, 2),
+  );
   console.log(JSON.stringify(result, null, 2));
+  assert.equal(
+    failures.length,
+    0,
+    `Mobile response budgets failed:\n${failures.join("\n")}`,
+  );
 } finally {
   await browser.close();
   await new Promise((resolve) => server.close(resolve));
