@@ -707,13 +707,22 @@ await check(
 
 await check("Busy lock rejects rapid shelf taps", async () => {
   await enter();
-  await page.evaluate(() => {
+  const immediate = await page.evaluate(() => {
     document.querySelector('[data-shelf-key="builtin:eden"]')?.click();
+    const state = window.libraryDebug?.();
+    const locked = {
+      busy: state?.shelf.busy,
+      settingsDisabled: document.querySelector("#settings")?.disabled,
+      languageDisabled: document.querySelector("#language")?.disabled,
+    };
     document.querySelector('[data-shelf-key="builtin:noah"]')?.click();
+    return locked;
   });
-  await page.waitForFunction(() => window.libraryDebug?.().shelf.busy === true);
-  assert.equal(await page.locator("#settings").isDisabled(), true);
-  assert.equal(await page.locator("#language").isDisabled(), true);
+  assert.deepEqual(immediate, {
+    busy: true,
+    settingsDisabled: true,
+    languageDisabled: true,
+  });
   await waitShelf(() => window.libraryDebug?.().shelf.busy === false);
   const state = await debug();
   assert.equal(state.shelf.inspected, "builtin:eden");
@@ -939,11 +948,23 @@ await check(
           );
           await page.keyboard.press("Enter");
           await page.waitForFunction(() => window.libraryDebug?.().playing);
-          assert.equal(
-            await page
-              .locator('.story-text [data-segment="0"]')
-              .evaluate((el) => el.classList.contains("active")),
-            true,
+          await page.waitForFunction(
+            () => {
+              const playback = window.libraryDebug?.();
+              const active = [
+                ...document.querySelectorAll(
+                  ".story-text [data-segment].active",
+                ),
+              ];
+              return (
+                playback?.playing &&
+                playback.segment >= 0 &&
+                active.length === 1 &&
+                Number(active[0].dataset.segment) === playback.segment
+              );
+            },
+            undefined,
+            { timeout: 15_000 },
           );
           await page.locator("#play").click();
           const paused = (await debug()).position;
