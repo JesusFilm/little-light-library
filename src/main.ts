@@ -397,7 +397,7 @@ async function renderPage(
     };
     updatePageNavigation();
   };
-  if (!resume) {
+  if (!resume || !panel.querySelector(".reader")) {
     panel.setAttribute("aria-busy", "true");
     panel.classList.add("reader-pending");
     notice(`${pageCount} · ${t("loading")}`);

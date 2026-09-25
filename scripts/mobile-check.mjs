@@ -667,6 +667,21 @@ try {
       );
     } catch (error) {
       scenario.failure = String(error);
+      scenario.failureStack = error.stack;
+      scenario.failureState = await page
+        .evaluate(() => {
+          const d = window.libraryDebug?.();
+          return {
+            state: d?.state,
+            ready: d?.ready,
+            pending: d?.pagePending,
+            session: d?.session,
+            loadedPage: d?.scene.loadedPage,
+            stageVisible: d?.scene.stageVisible,
+            notice: document.querySelector("#notice")?.textContent,
+          };
+        })
+        .catch(() => null);
       report.failures.push(`${entry.id}: ${error}`);
       await page
         .screenshot({
