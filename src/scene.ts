@@ -862,11 +862,12 @@ export class LibraryScene {
       // Extremely narrow views still retain clearance for wide actor groups.
       this.lookGoal.set(0, 0.1, 0.4);
       this.cameraGoal.set(1.1 * scale, 2.45 + 3.4 * scale, 0.4 + 6.05 * scale);
-      if (effectiveAspect > 1.8) {
-        // Leave the book clear of the desktop text column.
-        this.cameraGoal.x += 2;
-        this.lookGoal.x += 2;
-      }
+      // Move the book clear of the desktop text column without jumping at a
+      // tablet/landscape breakpoint, including when reduced motion is active.
+      const desktopShift =
+        2 * THREE.MathUtils.smoothstep(effectiveAspect, 1.6, 2.2);
+      this.cameraGoal.x += desktopShift;
+      this.lookGoal.x += desktopShift;
     }
   }
   private batchStaticRoom() {
