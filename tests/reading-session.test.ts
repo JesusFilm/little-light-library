@@ -72,6 +72,115 @@ test("failed shelf inspection restores the shelf and releases the busy state", a
   assert.match(String(failures[0]), /missing cover/);
 });
 
+test("the first page's slow media load does not lock turning or Library", async () => {
+  const firstPage = deferred();
+  const renderStarted = deferred();
+  let book: string | null = null;
+  let page = 0;
+  let renders = 0;
+  let cancellations = 0;
+  const autoplayChecks: (() => boolean)[] = [];
+  const session: ReadingSession<{ key: string }> = new ReadingSession(
+    {
+      async inspectShelfBook() {},
+      async returnShelfPreview() {},
+    },
+    () => {},
+    () => {},
+    (error) => {
+      throw error;
+    },
+    {
+      reading: () => ({ book, page, pageCount: 3, toys: [] }),
+      validate() {},
+      stop() {},
+      async clearToys() {},
+      async closeBook() {},
+      async landBook() {},
+      activateBook() {
+        book = "jonah-and-the-whale";
+        page = 0;
+      },
+      showFirstPage: (): Promise<void> => session.loadPage(true),
+      async loadToys() {},
+      async suspendPage() {},
+      async prepareLibrary() {},
+      async resumePage() {},
+    },
+    {
+      cancel() {
+        cancellations++;
+      },
+      commitTurn(target) {
+        page = target;
+      },
+      async render({ shouldAutoplay }) {
+        renders++;
+        autoplayChecks.push(shouldAutoplay);
+        if (renders === 1) {
+          renderStarted.resolve();
+          await firstPage.promise;
+        }
+      },
+    },
+    {
+      snapshot: () => ({
+        playing: false,
+        position: 0,
+        speed: 1,
+        audio: true,
+        volume: 1,
+      }),
+      async play() {
+        return true;
+      },
+      pause() {},
+      setSpeed() {},
+      setAudio() {},
+      setVolume() {},
+      visibility() {},
+    },
+  );
+  await session.inspect({ key: "book:jonah-and-the-whale" });
+  const opening = session.openInspected();
+  await renderStarted.promise;
+  await Promise.resolve();
+  assert.equal(
+    session.snapshot.busy,
+    false,
+    "reader controls unlock while media loads",
+  );
+  assert.equal(session.snapshot.loading, true);
+  assert.equal(autoplayChecks[0](), true);
+  assert.equal(await session.togglePlayback(() => true), true);
+  assert.equal(autoplayChecks[0](), false, "Pause cancels queued autoplay");
+  assert.equal(await session.togglePlayback(() => true), true);
+  assert.equal(autoplayChecks[0](), true, "Play restores queued autoplay");
+  assert.equal(
+    await session.turnPage(1),
+    true,
+    "Next accepts the tap immediately",
+  );
+  assert.equal(page, 1);
+  assert.equal(renders, 2);
+  assert.equal(
+    autoplayChecks[0](),
+    false,
+    "superseded pages cannot start audio",
+  );
+  assert.equal(autoplayChecks[1](), true);
+  assert.ok(cancellations > 0);
+  assert.equal(
+    await session.browseLibrary(),
+    true,
+    "Library does not wait on old media",
+  );
+  assert.equal(session.snapshot.browsing, true);
+  assert.equal(autoplayChecks[1](), false, "Library cancels queued autoplay");
+  firstPage.resolve();
+  await opening;
+});
+
 test("opening, switching, Library and Continue keep the session place and toys together", async () => {
   const pending = deferred();
   let book: string | null = null;
@@ -190,10 +299,12 @@ test("opening, switching, Library and Continue keep the session place and toys t
   const turn = session.turnPage(1);
   assert.equal(session.snapshot.reading.page, 1);
   assert.equal(session.snapshot.loading, true);
-  assert.equal(await session.turnPage(1), false);
+  const secondTurn = session.turnPage(1);
+  assert.equal(session.snapshot.reading.page, 2);
   session.invalidatePage();
   turning.resolve();
   assert.equal(await turn, true);
+  assert.equal(await secondTurn, true);
   assert.equal(committedPage, null);
   assert.equal(session.snapshot.loading, false);
   session.setReady(true);

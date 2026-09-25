@@ -13,6 +13,7 @@ export interface ShelfSnapshot<T extends ShelfEntry> {
   failure: "artwork" | "narration" | null;
   playback: {
     ready: boolean;
+    requested: boolean;
     playing: boolean;
     position: number;
     speed: number;
@@ -51,7 +52,7 @@ export interface PagePort {
   cancel(): void;
   commitTurn(target: number): void;
   render(request: {
-    autoplay: boolean;
+    shouldAutoplay: () => boolean;
     resume: boolean;
     pageTurn: boolean;
     current: () => boolean;
@@ -59,7 +60,10 @@ export interface PagePort {
 }
 
 export interface MediaPort {
-  snapshot(): Omit<ShelfSnapshot<ShelfEntry>["playback"], "ready">;
+  snapshot(): Omit<
+    ShelfSnapshot<ShelfEntry>["playback"],
+    "ready" | "requested"
+  >;
   play(current: () => boolean): Promise<boolean>;
   pause(): void;
   setSpeed(value: number): void;
@@ -89,6 +93,7 @@ export class ReadingSession<T extends ShelfEntry> {
   private pageGeneration = 0;
   private pendingPage?: Promise<void>;
   private mediaReady = false;
+  private autoplayRequested = false;
   private mediaFailure: ShelfSnapshot<T>["failure"] = null;
   private languageGeneration = 0;
   private changingLanguage = false;
@@ -113,6 +118,7 @@ export class ReadingSession<T extends ShelfEntry> {
       failure: this.mediaFailure,
       playback: {
         ready: this.mediaReady,
+        requested: this.autoplayRequested,
         ...(this.media?.snapshot() ?? {
           playing: false,
           position: 0,
@@ -154,22 +160,32 @@ export class ReadingSession<T extends ShelfEntry> {
   }
 
   async togglePlayback(current: () => boolean): Promise<boolean> {
-    if (
-      !this.media ||
-      !this.snapshot.reading.book ||
-      this.current.busy ||
-      this.pendingPage
-    )
+    if (!this.media || !this.snapshot.reading.book || this.current.busy)
       return false;
+    if (this.pendingPage) {
+      this.autoplayRequested = !this.autoplayRequested;
+      if (!this.autoplayRequested) this.media.pause();
+      this.changed();
+      return true;
+    }
     if (!this.mediaReady) {
       await this.loadPage(true);
       return true;
     }
     try {
-      if (this.media.snapshot().playing) this.media.pause();
-      else if (!(await this.media.play(current))) return false;
+      if (this.media.snapshot().playing) {
+        this.autoplayRequested = false;
+        this.media.pause();
+      } else {
+        this.autoplayRequested = true;
+        if (!(await this.media.play(current))) {
+          this.autoplayRequested = false;
+          return false;
+        }
+      }
     } catch {
       if (current()) {
+        this.autoplayRequested = false;
         this.media.pause();
         this.reportFailure("narration", current);
       }
@@ -195,6 +211,7 @@ export class ReadingSession<T extends ShelfEntry> {
   }
 
   visibilityChanged(hidden: boolean) {
+    if (hidden) this.autoplayRequested = false;
     this.media?.visibility(hidden);
     this.changed();
   }
@@ -210,8 +227,6 @@ export class ReadingSession<T extends ShelfEntry> {
     let committed = false;
     try {
       const data = await port.fetch(id);
-      if (!current()) return false;
-      await this.waitForPage();
       if (!current()) return false;
       this.invalidatePage();
       port.pause();
@@ -241,6 +256,7 @@ export class ReadingSession<T extends ShelfEntry> {
 
   invalidatePage() {
     const generation = ++this.pageGeneration;
+    this.autoplayRequested = false;
     this.pages?.cancel();
     return generation;
   }
@@ -252,12 +268,20 @@ export class ReadingSession<T extends ShelfEntry> {
   loadPage(autoplay: boolean, resume = false, pageTurn = false) {
     const pages = this.pages;
     if (!pages) return Promise.resolve();
+    if (this.pendingPage) this.pages?.cancel();
     this.mediaFailure = null;
+    this.autoplayRequested = autoplay;
     const generation = ++this.pageGeneration;
     const current = () => generation === this.pageGeneration;
+    const shouldAutoplay = () => current() && this.autoplayRequested;
     let rendering: Promise<void>;
     try {
-      rendering = pages.render({ autoplay, resume, pageTurn, current });
+      rendering = pages.render({
+        shouldAutoplay,
+        resume,
+        pageTurn,
+        current,
+      });
     } catch (error) {
       rendering = Promise.reject(error);
     }
@@ -276,7 +300,6 @@ export class ReadingSession<T extends ShelfEntry> {
       !this.pages ||
       this.current.busy ||
       this.current.browsing ||
-      this.pendingPage ||
       !this.snapshot.reading.book
     )
       return false;
@@ -376,8 +399,22 @@ export class ReadingSession<T extends ShelfEntry> {
       transfer.activateBook(entry);
       this.clearInspection();
       this.setBrowsing(false);
-      await transfer.showFirstPage();
-      await transfer.loadToys();
+      // The book is on the table. Page media and cabinet toys may continue
+      // loading while navigation is already available.
+      const firstPage = transfer.showFirstPage();
+      const pageGeneration = this.pageGeneration;
+      void firstPage.catch((error) => {
+        if (
+          this.table === entry.key &&
+          pageGeneration === this.pageGeneration &&
+          !this.current.browsing
+        )
+          this.failed(error);
+      });
+      void transfer.loadToys().catch((error) => {
+        if (this.table === entry.key && !this.current.browsing)
+          this.failed(error);
+      });
       this.changed();
     });
   }
@@ -400,7 +437,12 @@ export class ReadingSession<T extends ShelfEntry> {
       await this.scene.returnShelfPreview();
       this.clearInspection();
       this.setBrowsing(false);
-      await transfer.resumePage();
+      const resumed = transfer.resumePage();
+      const pageGeneration = this.pageGeneration;
+      void resumed.catch((error) => {
+        if (!this.current.browsing && pageGeneration === this.pageGeneration)
+          this.failed(error);
+      });
     });
   }
 }
