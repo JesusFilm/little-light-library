@@ -4,6 +4,12 @@ import http from "node:http";
 import path from "node:path";
 import { gzipSync } from "node:zlib";
 import { chromium } from "playwright";
+import { tsImport } from "tsx/esm/api";
+
+const { translationIssues } = await tsImport(
+  "../src/book-localization.ts",
+  import.meta.url,
+);
 
 // These are product budgets, not calibrated measurements of a Samsung GPU.
 // All navigation uses the same touch controls as a reader; debug data observes
@@ -115,11 +121,25 @@ const authored = JSON.parse(
     "utf8",
   ),
 );
+assert.deepEqual(
+  new Set(authored.languages),
+  new Set(locales),
+  "Jonah must publish every supported reader locale",
+);
+for (const locale of locales) {
+  assert.deepEqual(
+    translationIssues(authored, locale),
+    [],
+    `Jonah ${locale} translation must match the source structure and fingerprint`,
+  );
+}
 const titleFor = (book, locale, index) =>
   book === authored.id
-    ? authored.translations?.[locale]?.spreads.find(
-        ({ id }) => id === authored.spreads[index].id,
-      )?.title || authored.spreads[index].title
+    ? locale === authored.locale
+      ? authored.spreads[index].title
+      : authored.translations[locale].spreads.find(
+          ({ id }) => id === authored.spreads[index].id,
+        ).title
     : content.get(locale).stories.find(({ id }) => id === book).pages[index]
         .title;
 const countFor = (book) =>
