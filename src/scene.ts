@@ -350,6 +350,13 @@ export class LibraryScene {
   private touchedCreature = -1;
   private hoveredCreature = -1;
   private creatureTouchUntil = 0;
+  private pageMotionAge(now: number) {
+    if (this.reviewTime !== undefined) return this.reviewAge ?? 5;
+    // Keep the cover, leaf, popup, and visible-stage thresholds on one clock.
+    // The constrained-phone animation remains legible at ~30 rendered fps,
+    // while the next page becomes usable promptly after its art is ready.
+    return ((now - this.turnStarted) / 1000) * this.pageMotionRate;
+  }
   private creatureUsable() {
     if (
       this.mode !== "spread" ||
@@ -360,10 +367,7 @@ export class LibraryScene {
       (this.reviewFoldProgress ?? 0) > 0
     )
       return false;
-    const age =
-      this.reviewTime !== undefined
-        ? (this.reviewAge ?? 5)
-        : (performance.now() - this.turnStarted) / 1000;
+    const age = this.pageMotionAge(performance.now());
     return this.reduced || bookPose(age, this.opening, false).popups === 1;
   }
   /** Resolve only after an upright frame, or cancel when the reader moves away. */
@@ -564,6 +568,8 @@ export class LibraryScene {
   private renderCpuMs = 0;
   private lowQuality = false;
   private turnStarted = 0;
+  private pageMotionRate = 1;
+  private foldOutDuration = 250;
   private opening = false;
   private focusedRoom: Selection | null = null;
   private hoveredRoom: Selection | null = null;
@@ -2279,7 +2285,10 @@ export class LibraryScene {
     this.closing = 0;
     if (!wasRoom && !this.reduced && this.popups.length && this.loadedPage) {
       this.foldingOut = performance.now();
-      await new Promise((resolve) => setTimeout(resolve, 260));
+      this.foldOutDuration = this.lowQuality ? 110 : 250;
+      await new Promise((resolve) =>
+        setTimeout(resolve, this.foldOutDuration + 10),
+      );
       if (generation !== this.loadGeneration) {
         preparedAuthored?.dispose();
         if (preparedLegacy) this.disposePreparedLegacy(preparedLegacy);
@@ -2380,6 +2389,7 @@ export class LibraryScene {
     this.turnDirection = turnDirection;
     this.turningLeaf?.update(0, turnDirection);
     this.turningPage.rotation.y = turnDirection === "forward" ? 0 : -Math.PI;
+    this.pageMotionRate = this.lowQuality ? 3.2 : 1;
     this.turnStarted = performance.now();
     this.authoredStage?.begin();
     this.bookRoot.userData.story = story.id;
@@ -2724,10 +2734,7 @@ export class LibraryScene {
       this.camera.lookAt(this.look);
     }
     if (this.mode === "spread") {
-      const age =
-        this.reviewTime !== undefined
-          ? (this.reviewAge ?? 5)
-          : (now - this.turnStarted) / 1000;
+      const age = this.pageMotionAge(now);
       const pose = bookPose(age, this.opening, this.reduced);
       const progress = this.opening
         ? 1 - pose.cover / Math.PI
@@ -2766,7 +2773,7 @@ export class LibraryScene {
         this.reviewFoldProgress !== undefined
           ? 1 - this.reviewFoldProgress
           : this.foldingOut
-            ? 1 - ease((now - this.foldingOut) / 250)
+            ? 1 - ease((now - this.foldingOut) / this.foldOutDuration)
             : undefined;
       const foldFrame = (
         this.foldingOut ? this.leafPrint : this.destinationPrint
@@ -2783,7 +2790,8 @@ export class LibraryScene {
       this.popups.forEach((g, i) => {
         popupFoldSurface(g, i, unfold);
         g.rotation.x = popupFoldAngle(unfold);
-        g.visible = unfold > 0.001 && !(this.opening && age < 1.55);
+        g.visible =
+          unfold > 0.001 && !(this.opening && !this.reduced && age < 1.55);
       });
       if (this.transitionWaiting && this.waitingFromRoom)
         this.leftLeaf.rotation.y = Math.PI;
