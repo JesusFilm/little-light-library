@@ -1,7 +1,7 @@
 # Mobile media derivatives
 
 The reader serves local static media. `npm run media:optimize` requires local
-`ffmpeg`, `ffprobe`, and Python Pillow with WebP support. It creates reproducible
+`ffmpeg` and Python Pillow with WebP support. It creates reproducible
 phone images and MP3 audio without changing book, spread, segment, or asset IDs.
 
 - The 436 original 24 kHz WAV recordings live under
@@ -12,8 +12,9 @@ phone images and MP3 audio without changing book, spread, segment, or asset IDs.
   Original recordings, prompt/source notes, and attribution remain available.
 - The 114 original runtime images remain under `public/assets/`. The generator
   creates `.mobile.webp` derivatives for narrow screens, at up to 768 px on
-  scenery, 640 px on most cutouts, and 960 px on multi-pose actor atlases (320 px per pose, above their
-  rendered phone size).
+  scenery, 640 px on most cutouts, and 960 px on multi-pose actor atlases
+  (320 px per pose, above their rendered phone size). Eden’s small first-page
+  tree uses a 448 px derivative; the original remains available for desktop.
   Three `.cover.webp` derivatives at up to 256 px serve the shelf. The explicit
   `src/generated-media.ts` list lets new or fixture images use their original
   paths until optimized.
@@ -31,7 +32,7 @@ phone images and MP3 audio without changing book, spread, segment, or asset IDs.
   inspection prefetch. The current catalog's largest first-page encoded set is
   under 650 kB across all nine locales.
 
-The conversion script checks source/MP3 container durations within 3 ms, and
+The conversion script checks source/MP3 decoded durations within 3 ms, and
 the reader uses Web Audio's decoded durations for its segment clock. Run
 `python3 scripts/audio_verify.py`, `npm run book:catalog`, and the browser suites
 after optimization. Listening approval is separate from duration and onset
