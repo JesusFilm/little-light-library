@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render stable, phrase-aligned Kokoro WAV assets from the locale manifests.
+"""Render stable Kokoro WAV sources and gapless MP3 reader cues.
 
 Run with projects/kokoro-voice-lab/.venv/bin/python; Metal access is required.
 The script renders only changed text/voice pairs and writes the public index last.
@@ -12,12 +12,14 @@ from array import array
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 import sys
 import wave
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "public/content"
-AUDIO = ROOT / "public/assets/audio"
+AUDIO = ROOT / "assets/source-recordings/audio"
+RUNTIME_AUDIO = ROOT / "public/assets/audio"
 INDEX = ROOT / "public/audio-manifest.json"
 LOCALES = ("en-US", "en-GB", "es", "fr", "hi", "it", "ja", "pt-BR", "zh-CN")
 DEFAULT_VOICES = {
@@ -134,7 +136,20 @@ def main() -> int:
                     temporary.replace(path)
                 finally:
                     temporary.unlink(missing_ok=True)
-            manifest[key] = {"src": f"assets/audio/{relative.as_posix()}", "duration": round(duration(path), 6)}
+            runtime = RUNTIME_AUDIO / relative.with_suffix(".mp3")
+            if not runtime.exists():
+                runtime.parent.mkdir(parents=True, exist_ok=True)
+                temporary = runtime.with_suffix(".partial.mp3")
+                try:
+                    subprocess.run([
+                        "ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(path),
+                        "-codec:a", "libmp3lame", "-b:a", "48k", "-ar", "24000",
+                        "-ac", "1", "-write_xing", "1", str(temporary),
+                    ], check=True)
+                    temporary.replace(runtime)
+                finally:
+                    temporary.unlink(missing_ok=True)
+            manifest[key] = {"src": f"assets/audio/{relative.with_suffix('.mp3').as_posix()}", "duration": round(duration(path), 6)}
             # Save each completed item so an interrupted render can resume exactly.
             INDEX.parent.mkdir(parents=True, exist_ok=True)
             INDEX.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")

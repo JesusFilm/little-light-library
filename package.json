@@ -37,7 +37,8 @@
     "book:register": "node --import tsx scripts/book-cli.ts register",
     "book:narrate": "node --import tsx scripts/book-narrate.ts",
     "test:mobile": "node scripts/mobile-check.mjs",
-    "verify:browser": "node scripts/verify-browser.mjs"
+    "verify:browser": "node scripts/verify-browser.mjs",
+    "media:optimize": "python3 scripts/optimize-media.py"
   },
   "dependencies": {
     "three": "0.169.0"

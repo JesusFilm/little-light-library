@@ -1,1262 +1,1262 @@
 {
   "en-US/eden/eden-01/s1": {
-    "src": "assets/audio/en-US/eden/eden-01/s1-d8527e49d2451a69a856.wav",
+    "src": "assets/audio/en-US/eden/eden-01/s1-d8527e49d2451a69a856.mp3",
     "duration": 7.88
   },
   "en-US/eden/eden-01/s2": {
-    "src": "assets/audio/en-US/eden/eden-01/s2-51db259a9498f9fc5814.wav",
+    "src": "assets/audio/en-US/eden/eden-01/s2-51db259a9498f9fc5814.mp3",
     "duration": 5.13
   },
   "en-US/eden/eden-02/s1": {
-    "src": "assets/audio/en-US/eden/eden-02/s1-1e6c52c5e1efa3a274bc.wav",
+    "src": "assets/audio/en-US/eden/eden-02/s1-1e6c52c5e1efa3a274bc.mp3",
     "duration": 5.91
   },
   "en-US/eden/eden-02/s2": {
-    "src": "assets/audio/en-US/eden/eden-02/s2-347e3fbf75cbdd3624e9.wav",
+    "src": "assets/audio/en-US/eden/eden-02/s2-347e3fbf75cbdd3624e9.mp3",
     "duration": 7.27
   },
   "en-US/eden/eden-03/s1": {
-    "src": "assets/audio/en-US/eden/eden-03/s1-6c0831baf7bd3a83155c.wav",
+    "src": "assets/audio/en-US/eden/eden-03/s1-6c0831baf7bd3a83155c.mp3",
     "duration": 8.06
   },
   "en-US/eden/eden-03/s2": {
-    "src": "assets/audio/en-US/eden/eden-03/s2-f51fd31abd9cba67bb16.wav",
+    "src": "assets/audio/en-US/eden/eden-03/s2-f51fd31abd9cba67bb16.mp3",
     "duration": 4.91
   },
   "en-US/eden/eden-04/s1": {
-    "src": "assets/audio/en-US/eden/eden-04/s1-e8849f2d28abffced09d.wav",
+    "src": "assets/audio/en-US/eden/eden-04/s1-e8849f2d28abffced09d.mp3",
     "duration": 5.96
   },
   "en-US/eden/eden-04/s2": {
-    "src": "assets/audio/en-US/eden/eden-04/s2-cc3da1e2c0304d1c3b60.wav",
+    "src": "assets/audio/en-US/eden/eden-04/s2-cc3da1e2c0304d1c3b60.mp3",
     "duration": 7.54
   },
   "en-US/eden/eden-05/s1": {
-    "src": "assets/audio/en-US/eden/eden-05/s1-afdf75840462a36253d4.wav",
+    "src": "assets/audio/en-US/eden/eden-05/s1-afdf75840462a36253d4.mp3",
     "duration": 6.81
   },
   "en-US/eden/eden-05/s2": {
-    "src": "assets/audio/en-US/eden/eden-05/s2-b64ee2fc562153b94f4b.wav",
+    "src": "assets/audio/en-US/eden/eden-05/s2-b64ee2fc562153b94f4b.mp3",
     "duration": 8.72
   },
   "en-US/eden/eden-06/s1": {
-    "src": "assets/audio/en-US/eden/eden-06/s1-236c2bd327dccaa1bb64.wav",
+    "src": "assets/audio/en-US/eden/eden-06/s1-236c2bd327dccaa1bb64.mp3",
     "duration": 7.4
   },
   "en-US/eden/eden-06/s2": {
-    "src": "assets/audio/en-US/eden/eden-06/s2-e9c742ba2d827aa1802b.wav",
+    "src": "assets/audio/en-US/eden/eden-06/s2-e9c742ba2d827aa1802b.mp3",
     "duration": 5.64
   },
   "en-US/eden/eden-07/s1": {
-    "src": "assets/audio/en-US/eden/eden-07/s1-9afe9a42e2a31ca43159.wav",
+    "src": "assets/audio/en-US/eden/eden-07/s1-9afe9a42e2a31ca43159.mp3",
     "duration": 7.99
   },
   "en-US/eden/eden-07/s2": {
-    "src": "assets/audio/en-US/eden/eden-07/s2-4079f27bd2b5480ce55e.wav",
+    "src": "assets/audio/en-US/eden/eden-07/s2-4079f27bd2b5480ce55e.mp3",
     "duration": 7.86
   },
   "en-US/eden/eden-08/s1": {
-    "src": "assets/audio/en-US/eden/eden-08/s1-f7c0c85fad264b7e9c85.wav",
+    "src": "assets/audio/en-US/eden/eden-08/s1-f7c0c85fad264b7e9c85.mp3",
     "duration": 8.22
   },
   "en-US/eden/eden-08/s2": {
-    "src": "assets/audio/en-US/eden/eden-08/s2-5c3dd4cae90a5b08d0af.wav",
+    "src": "assets/audio/en-US/eden/eden-08/s2-5c3dd4cae90a5b08d0af.mp3",
     "duration": 8.32
   },
   "en-US/noah/noah-01/s1": {
-    "src": "assets/audio/en-US/noah/noah-01/s1-76b35c45778fd80a4640.wav",
+    "src": "assets/audio/en-US/noah/noah-01/s1-76b35c45778fd80a4640.mp3",
     "duration": 6.69
   },
   "en-US/noah/noah-01/s2": {
-    "src": "assets/audio/en-US/noah/noah-01/s2-4120e5e2601b1d6eec10.wav",
+    "src": "assets/audio/en-US/noah/noah-01/s2-4120e5e2601b1d6eec10.mp3",
     "duration": 7.31
   },
   "en-US/noah/noah-02/s1": {
-    "src": "assets/audio/en-US/noah/noah-02/s1-68dcf17b757e6c5e9f32.wav",
+    "src": "assets/audio/en-US/noah/noah-02/s1-68dcf17b757e6c5e9f32.mp3",
     "duration": 8.14
   },
   "en-US/noah/noah-02/s2": {
-    "src": "assets/audio/en-US/noah/noah-02/s2-37aa5fc5568182fa6ee4.wav",
+    "src": "assets/audio/en-US/noah/noah-02/s2-37aa5fc5568182fa6ee4.mp3",
     "duration": 7.24
   },
   "en-US/noah/noah-03/s1": {
-    "src": "assets/audio/en-US/noah/noah-03/s1-eea33266c600ead59f5b.wav",
+    "src": "assets/audio/en-US/noah/noah-03/s1-eea33266c600ead59f5b.mp3",
     "duration": 7.41
   },
   "en-US/noah/noah-03/s2": {
-    "src": "assets/audio/en-US/noah/noah-03/s2-61ea19e1afc032a46a58.wav",
+    "src": "assets/audio/en-US/noah/noah-03/s2-61ea19e1afc032a46a58.mp3",
     "duration": 5.6
   },
   "en-US/noah/noah-04/s1": {
-    "src": "assets/audio/en-US/noah/noah-04/s1-9aced1eb507ca3f94363.wav",
+    "src": "assets/audio/en-US/noah/noah-04/s1-9aced1eb507ca3f94363.mp3",
     "duration": 7.44
   },
   "en-US/noah/noah-04/s2": {
-    "src": "assets/audio/en-US/noah/noah-04/s2-17059eed2337a3aa21ed.wav",
+    "src": "assets/audio/en-US/noah/noah-04/s2-17059eed2337a3aa21ed.mp3",
     "duration": 7.96
   },
   "en-US/noah/noah-05/s1": {
-    "src": "assets/audio/en-US/noah/noah-05/s1-980ffaa1c16ec61e9fc8.wav",
+    "src": "assets/audio/en-US/noah/noah-05/s1-980ffaa1c16ec61e9fc8.mp3",
     "duration": 6.54
   },
   "en-US/noah/noah-05/s2": {
-    "src": "assets/audio/en-US/noah/noah-05/s2-aaf836dcbdeeb6fc1cac.wav",
+    "src": "assets/audio/en-US/noah/noah-05/s2-aaf836dcbdeeb6fc1cac.mp3",
     "duration": 7.31
   },
   "en-US/noah/noah-06/s1": {
-    "src": "assets/audio/en-US/noah/noah-06/s1-6b906bd51e28dd159e08.wav",
+    "src": "assets/audio/en-US/noah/noah-06/s1-6b906bd51e28dd159e08.mp3",
     "duration": 7.29
   },
   "en-US/noah/noah-06/s2": {
-    "src": "assets/audio/en-US/noah/noah-06/s2-9f05dafce13b3187ed0d.wav",
+    "src": "assets/audio/en-US/noah/noah-06/s2-9f05dafce13b3187ed0d.mp3",
     "duration": 8.86
   },
   "en-US/noah/noah-07/s1": {
-    "src": "assets/audio/en-US/noah/noah-07/s1-b410675d732f17c695c8.wav",
+    "src": "assets/audio/en-US/noah/noah-07/s1-b410675d732f17c695c8.mp3",
     "duration": 6.66
   },
   "en-US/noah/noah-07/s2": {
-    "src": "assets/audio/en-US/noah/noah-07/s2-ee80788244a886386c77.wav",
+    "src": "assets/audio/en-US/noah/noah-07/s2-ee80788244a886386c77.mp3",
     "duration": 7.73
   },
   "en-US/noah/noah-08/s1": {
-    "src": "assets/audio/en-US/noah/noah-08/s1-8fd9aa357c2ef57991a7.wav",
+    "src": "assets/audio/en-US/noah/noah-08/s1-8fd9aa357c2ef57991a7.mp3",
     "duration": 8.86
   },
   "en-US/noah/noah-08/s2": {
-    "src": "assets/audio/en-US/noah/noah-08/s2-541408227c62dd3971ad.wav",
+    "src": "assets/audio/en-US/noah/noah-08/s2-541408227c62dd3971ad.mp3",
     "duration": 8.69
   },
   "en-US/names/adam": {
-    "src": "assets/audio/en-US/names/adam-c2fcee9cb00388e3ce1b.wav",
+    "src": "assets/audio/en-US/names/adam-c2fcee9cb00388e3ce1b.mp3",
     "duration": 0.65
   },
   "en-US/names/eve": {
-    "src": "assets/audio/en-US/names/eve-aad6eb1e166ae5ac69de.wav",
+    "src": "assets/audio/en-US/names/eve-aad6eb1e166ae5ac69de.mp3",
     "duration": 0.59
   },
   "en-US/names/noah": {
-    "src": "assets/audio/en-US/names/noah-9656cdab2e648246b2a2.wav",
+    "src": "assets/audio/en-US/names/noah-9656cdab2e648246b2a2.mp3",
     "duration": 0.66
   },
   "es/eden/eden-01/s1": {
-    "src": "assets/audio/es/eden/eden-01/s1-77549a66ded934b16cb5.wav",
+    "src": "assets/audio/es/eden/eden-01/s1-77549a66ded934b16cb5.mp3",
     "duration": 8.58
   },
   "es/eden/eden-01/s2": {
-    "src": "assets/audio/es/eden/eden-01/s2-39a2f06f1fcb8541306d.wav",
+    "src": "assets/audio/es/eden/eden-01/s2-39a2f06f1fcb8541306d.mp3",
     "duration": 5.44
   },
   "es/eden/eden-02/s1": {
-    "src": "assets/audio/es/eden/eden-02/s1-d1f6ff0104c9ca151190.wav",
+    "src": "assets/audio/es/eden/eden-02/s1-d1f6ff0104c9ca151190.mp3",
     "duration": 5.76
   },
   "es/eden/eden-02/s2": {
-    "src": "assets/audio/es/eden/eden-02/s2-ad48d0b0d33d04922da0.wav",
+    "src": "assets/audio/es/eden/eden-02/s2-ad48d0b0d33d04922da0.mp3",
     "duration": 7.56
   },
   "es/eden/eden-03/s1": {
-    "src": "assets/audio/es/eden/eden-03/s1-71ca6682d35d0addd501.wav",
+    "src": "assets/audio/es/eden/eden-03/s1-71ca6682d35d0addd501.mp3",
     "duration": 7.74
   },
   "es/eden/eden-03/s2": {
-    "src": "assets/audio/es/eden/eden-03/s2-d88414da47517935f236.wav",
+    "src": "assets/audio/es/eden/eden-03/s2-d88414da47517935f236.mp3",
     "duration": 5.57
   },
   "es/eden/eden-04/s1": {
-    "src": "assets/audio/es/eden/eden-04/s1-d52440356290a9e2bd29.wav",
+    "src": "assets/audio/es/eden/eden-04/s1-d52440356290a9e2bd29.mp3",
     "duration": 6.16
   },
   "es/eden/eden-04/s2": {
-    "src": "assets/audio/es/eden/eden-04/s2-9f28811a8da87e776bdd.wav",
+    "src": "assets/audio/es/eden/eden-04/s2-9f28811a8da87e776bdd.mp3",
     "duration": 8.27
   },
   "es/eden/eden-05/s1": {
-    "src": "assets/audio/es/eden/eden-05/s1-4e77cd39b03b800d1d22.wav",
+    "src": "assets/audio/es/eden/eden-05/s1-4e77cd39b03b800d1d22.mp3",
     "duration": 7.32
   },
   "es/eden/eden-05/s2": {
-    "src": "assets/audio/es/eden/eden-05/s2-492355072ace7944eaf3.wav",
+    "src": "assets/audio/es/eden/eden-05/s2-492355072ace7944eaf3.mp3",
     "duration": 8.38
   },
   "es/eden/eden-06/s1": {
-    "src": "assets/audio/es/eden/eden-06/s1-6428674d9d0b2245f145.wav",
+    "src": "assets/audio/es/eden/eden-06/s1-6428674d9d0b2245f145.mp3",
     "duration": 6.8
   },
   "es/eden/eden-06/s2": {
-    "src": "assets/audio/es/eden/eden-06/s2-6d9b09b2effc9aca5ed7.wav",
+    "src": "assets/audio/es/eden/eden-06/s2-6d9b09b2effc9aca5ed7.mp3",
     "duration": 6.61
   },
   "es/eden/eden-07/s1": {
-    "src": "assets/audio/es/eden/eden-07/s1-a8ecba6a2c0ffad8ef89.wav",
+    "src": "assets/audio/es/eden/eden-07/s1-a8ecba6a2c0ffad8ef89.mp3",
     "duration": 8.66
   },
   "es/eden/eden-07/s2": {
-    "src": "assets/audio/es/eden/eden-07/s2-dc00631698a07efae797.wav",
+    "src": "assets/audio/es/eden/eden-07/s2-dc00631698a07efae797.mp3",
     "duration": 9.03
   },
   "es/eden/eden-08/s1": {
-    "src": "assets/audio/es/eden/eden-08/s1-bc85695a17a8dea9ac5c.wav",
+    "src": "assets/audio/es/eden/eden-08/s1-bc85695a17a8dea9ac5c.mp3",
     "duration": 9.2
   },
   "es/eden/eden-08/s2": {
-    "src": "assets/audio/es/eden/eden-08/s2-717c3141eb612df26e85.wav",
+    "src": "assets/audio/es/eden/eden-08/s2-717c3141eb612df26e85.mp3",
     "duration": 8.82
   },
   "es/noah/noah-01/s1": {
-    "src": "assets/audio/es/noah/noah-01/s1-14671746b05cb849a2ad.wav",
+    "src": "assets/audio/es/noah/noah-01/s1-14671746b05cb849a2ad.mp3",
     "duration": 7.98
   },
   "es/noah/noah-01/s2": {
-    "src": "assets/audio/es/noah/noah-01/s2-77998a7e92862a5d3c56.wav",
+    "src": "assets/audio/es/noah/noah-01/s2-77998a7e92862a5d3c56.mp3",
     "duration": 7.13
   },
   "es/noah/noah-02/s1": {
-    "src": "assets/audio/es/noah/noah-02/s1-edee7f4000e08af4ff51.wav",
+    "src": "assets/audio/es/noah/noah-02/s1-edee7f4000e08af4ff51.mp3",
     "duration": 9.2
   },
   "es/noah/noah-02/s2": {
-    "src": "assets/audio/es/noah/noah-02/s2-b606c117efd0081bd690.wav",
+    "src": "assets/audio/es/noah/noah-02/s2-b606c117efd0081bd690.mp3",
     "duration": 7.16
   },
   "es/noah/noah-03/s1": {
-    "src": "assets/audio/es/noah/noah-03/s1-701533fd115f8378c886.wav",
+    "src": "assets/audio/es/noah/noah-03/s1-701533fd115f8378c886.mp3",
     "duration": 7.98
   },
   "es/noah/noah-03/s2": {
-    "src": "assets/audio/es/noah/noah-03/s2-3d4405f6d728ee0e9f49.wav",
+    "src": "assets/audio/es/noah/noah-03/s2-3d4405f6d728ee0e9f49.mp3",
     "duration": 5.78
   },
   "es/noah/noah-04/s1": {
-    "src": "assets/audio/es/noah/noah-04/s1-de9d107ff501c0373c0f.wav",
+    "src": "assets/audio/es/noah/noah-04/s1-de9d107ff501c0373c0f.mp3",
     "duration": 7.45
   },
   "es/noah/noah-04/s2": {
-    "src": "assets/audio/es/noah/noah-04/s2-376e0865f3f0a78e88c1.wav",
+    "src": "assets/audio/es/noah/noah-04/s2-376e0865f3f0a78e88c1.mp3",
     "duration": 8.36
   },
   "es/noah/noah-05/s1": {
-    "src": "assets/audio/es/noah/noah-05/s1-8348ab7db98abe64d203.wav",
+    "src": "assets/audio/es/noah/noah-05/s1-8348ab7db98abe64d203.mp3",
     "duration": 6.21
   },
   "es/noah/noah-05/s2": {
-    "src": "assets/audio/es/noah/noah-05/s2-5dc7e8700c08f903701e.wav",
+    "src": "assets/audio/es/noah/noah-05/s2-5dc7e8700c08f903701e.mp3",
     "duration": 7.96
   },
   "es/noah/noah-06/s1": {
-    "src": "assets/audio/es/noah/noah-06/s1-d22fb6469a0c08081b48.wav",
+    "src": "assets/audio/es/noah/noah-06/s1-d22fb6469a0c08081b48.mp3",
     "duration": 7.74
   },
   "es/noah/noah-06/s2": {
-    "src": "assets/audio/es/noah/noah-06/s2-7239206f92b555d76bec.wav",
+    "src": "assets/audio/es/noah/noah-06/s2-7239206f92b555d76bec.mp3",
     "duration": 9.65
   },
   "es/noah/noah-07/s1": {
-    "src": "assets/audio/es/noah/noah-07/s1-d2c4300d3933b35b95df.wav",
+    "src": "assets/audio/es/noah/noah-07/s1-d2c4300d3933b35b95df.mp3",
     "duration": 5.95
   },
   "es/noah/noah-07/s2": {
-    "src": "assets/audio/es/noah/noah-07/s2-0433decf3abc27b69d9f.wav",
+    "src": "assets/audio/es/noah/noah-07/s2-0433decf3abc27b69d9f.mp3",
     "duration": 7.65
   },
   "es/noah/noah-08/s1": {
-    "src": "assets/audio/es/noah/noah-08/s1-749237823680f35d2408.wav",
+    "src": "assets/audio/es/noah/noah-08/s1-749237823680f35d2408.mp3",
     "duration": 9.72
   },
   "es/noah/noah-08/s2": {
-    "src": "assets/audio/es/noah/noah-08/s2-dce7141093415a1f5837.wav",
+    "src": "assets/audio/es/noah/noah-08/s2-dce7141093415a1f5837.mp3",
     "duration": 9.3
   },
   "es/names/adam": {
-    "src": "assets/audio/es/names/adam-70a89fe3a5f67b3e0815.wav",
+    "src": "assets/audio/es/names/adam-70a89fe3a5f67b3e0815.mp3",
     "duration": 0.545
   },
   "es/names/eve": {
-    "src": "assets/audio/es/names/eve-89d0b15f61d3c168ea66.wav",
+    "src": "assets/audio/es/names/eve-89d0b15f61d3c168ea66.mp3",
     "duration": 0.515
   },
   "es/names/noah": {
-    "src": "assets/audio/es/names/noah-709d814a38c787cb6e3a.wav",
+    "src": "assets/audio/es/names/noah-709d814a38c787cb6e3a.mp3",
     "duration": 0.52
   },
   "fr/eden/eden-01/s1": {
-    "src": "assets/audio/fr/eden/eden-01/s1-c055773500e0f804d5b7.wav",
+    "src": "assets/audio/fr/eden/eden-01/s1-c055773500e0f804d5b7.mp3",
     "duration": 8.08
   },
   "fr/eden/eden-01/s2": {
-    "src": "assets/audio/fr/eden/eden-01/s2-771533c6e893cb50782b.wav",
+    "src": "assets/audio/fr/eden/eden-01/s2-771533c6e893cb50782b.mp3",
     "duration": 5.37
   },
   "fr/eden/eden-02/s1": {
-    "src": "assets/audio/fr/eden/eden-02/s1-78ddf783ed27c02e530b.wav",
+    "src": "assets/audio/fr/eden/eden-02/s1-78ddf783ed27c02e530b.mp3",
     "duration": 6.63
   },
   "fr/eden/eden-02/s2": {
-    "src": "assets/audio/fr/eden/eden-02/s2-2ce472a4b9d90b3894de.wav",
+    "src": "assets/audio/fr/eden/eden-02/s2-2ce472a4b9d90b3894de.mp3",
     "duration": 8.61
   },
   "fr/eden/eden-03/s1": {
-    "src": "assets/audio/fr/eden/eden-03/s1-74e9979c32e5634c0136.wav",
+    "src": "assets/audio/fr/eden/eden-03/s1-74e9979c32e5634c0136.mp3",
     "duration": 8.2
   },
   "fr/eden/eden-03/s2": {
-    "src": "assets/audio/fr/eden/eden-03/s2-290941ae73415e0938c1.wav",
+    "src": "assets/audio/fr/eden/eden-03/s2-290941ae73415e0938c1.mp3",
     "duration": 5.27
   },
   "fr/eden/eden-04/s1": {
-    "src": "assets/audio/fr/eden/eden-04/s1-7934fae7a8bbbc257c57.wav",
+    "src": "assets/audio/fr/eden/eden-04/s1-7934fae7a8bbbc257c57.mp3",
     "duration": 5.76
   },
   "fr/eden/eden-04/s2": {
-    "src": "assets/audio/fr/eden/eden-04/s2-6f32d5da64c023d5d673.wav",
+    "src": "assets/audio/fr/eden/eden-04/s2-6f32d5da64c023d5d673.mp3",
     "duration": 8.41
   },
   "fr/eden/eden-05/s1": {
-    "src": "assets/audio/fr/eden/eden-05/s1-00643d99d7e5b9af8b27.wav",
+    "src": "assets/audio/fr/eden/eden-05/s1-00643d99d7e5b9af8b27.mp3",
     "duration": 7.51
   },
   "fr/eden/eden-05/s2": {
-    "src": "assets/audio/fr/eden/eden-05/s2-858c7cab0ce2a18b5d66.wav",
+    "src": "assets/audio/fr/eden/eden-05/s2-858c7cab0ce2a18b5d66.mp3",
     "duration": 9.01
   },
   "fr/eden/eden-06/s1": {
-    "src": "assets/audio/fr/eden/eden-06/s1-28bd8eb6a9824028a739.wav",
+    "src": "assets/audio/fr/eden/eden-06/s1-28bd8eb6a9824028a739.mp3",
     "duration": 7.43
   },
   "fr/eden/eden-06/s2": {
-    "src": "assets/audio/fr/eden/eden-06/s2-550ad31d35e28f222031.wav",
+    "src": "assets/audio/fr/eden/eden-06/s2-550ad31d35e28f222031.mp3",
     "duration": 6.24
   },
   "fr/eden/eden-07/s1": {
-    "src": "assets/audio/fr/eden/eden-07/s1-a18202a275702ae5d83b.wav",
+    "src": "assets/audio/fr/eden/eden-07/s1-a18202a275702ae5d83b.mp3",
     "duration": 8.39
   },
   "fr/eden/eden-07/s2": {
-    "src": "assets/audio/fr/eden/eden-07/s2-d84962a0aaeecffaaa72.wav",
+    "src": "assets/audio/fr/eden/eden-07/s2-d84962a0aaeecffaaa72.mp3",
     "duration": 9.02
   },
   "fr/eden/eden-08/s1": {
-    "src": "assets/audio/fr/eden/eden-08/s1-2b8efce3de501fe5ff57.wav",
+    "src": "assets/audio/fr/eden/eden-08/s1-2b8efce3de501fe5ff57.mp3",
     "duration": 9.14
   },
   "fr/eden/eden-08/s2": {
-    "src": "assets/audio/fr/eden/eden-08/s2-c864844c370c9ffc4df3.wav",
+    "src": "assets/audio/fr/eden/eden-08/s2-c864844c370c9ffc4df3.mp3",
     "duration": 9.42
   },
   "fr/noah/noah-01/s1": {
-    "src": "assets/audio/fr/noah/noah-01/s1-78820c805caa94da112b.wav",
+    "src": "assets/audio/fr/noah/noah-01/s1-78820c805caa94da112b.mp3",
     "duration": 7.86
   },
   "fr/noah/noah-01/s2": {
-    "src": "assets/audio/fr/noah/noah-01/s2-198fcc54864de488c353.wav",
+    "src": "assets/audio/fr/noah/noah-01/s2-198fcc54864de488c353.mp3",
     "duration": 6.61
   },
   "fr/noah/noah-02/s1": {
-    "src": "assets/audio/fr/noah/noah-02/s1-b92f3fea00e15248cd0d.wav",
+    "src": "assets/audio/fr/noah/noah-02/s1-b92f3fea00e15248cd0d.mp3",
     "duration": 9.13
   },
   "fr/noah/noah-02/s2": {
-    "src": "assets/audio/fr/noah/noah-02/s2-12f3c57dcecd7635f323.wav",
+    "src": "assets/audio/fr/noah/noah-02/s2-12f3c57dcecd7635f323.mp3",
     "duration": 7.75
   },
   "fr/noah/noah-03/s1": {
-    "src": "assets/audio/fr/noah/noah-03/s1-31ef6545bedc5fdb44af.wav",
+    "src": "assets/audio/fr/noah/noah-03/s1-31ef6545bedc5fdb44af.mp3",
     "duration": 7.51
   },
   "fr/noah/noah-03/s2": {
-    "src": "assets/audio/fr/noah/noah-03/s2-f9f91622d8338704419b.wav",
+    "src": "assets/audio/fr/noah/noah-03/s2-f9f91622d8338704419b.mp3",
     "duration": 6.51
   },
   "fr/noah/noah-04/s1": {
-    "src": "assets/audio/fr/noah/noah-04/s1-7bfc51ad076935172cad.wav",
+    "src": "assets/audio/fr/noah/noah-04/s1-7bfc51ad076935172cad.mp3",
     "duration": 7.58
   },
   "fr/noah/noah-04/s2": {
-    "src": "assets/audio/fr/noah/noah-04/s2-115b0e7dcced25881a21.wav",
+    "src": "assets/audio/fr/noah/noah-04/s2-115b0e7dcced25881a21.mp3",
     "duration": 7.83
   },
   "fr/noah/noah-05/s1": {
-    "src": "assets/audio/fr/noah/noah-05/s1-5cea1eb28591b9d43148.wav",
+    "src": "assets/audio/fr/noah/noah-05/s1-5cea1eb28591b9d43148.mp3",
     "duration": 5.95
   },
   "fr/noah/noah-05/s2": {
-    "src": "assets/audio/fr/noah/noah-05/s2-26c2635123e5a50f75ab.wav",
+    "src": "assets/audio/fr/noah/noah-05/s2-26c2635123e5a50f75ab.mp3",
     "duration": 7.52
   },
   "fr/noah/noah-06/s1": {
-    "src": "assets/audio/fr/noah/noah-06/s1-5851884201f015d6e6de.wav",
+    "src": "assets/audio/fr/noah/noah-06/s1-5851884201f015d6e6de.mp3",
     "duration": 7.08
   },
   "fr/noah/noah-06/s2": {
-    "src": "assets/audio/fr/noah/noah-06/s2-bc4c4c584799173774fc.wav",
+    "src": "assets/audio/fr/noah/noah-06/s2-bc4c4c584799173774fc.mp3",
     "duration": 9.22
   },
   "fr/noah/noah-07/s1": {
-    "src": "assets/audio/fr/noah/noah-07/s1-fe7503428b117852b0f4.wav",
+    "src": "assets/audio/fr/noah/noah-07/s1-fe7503428b117852b0f4.mp3",
     "duration": 5.89
   },
   "fr/noah/noah-07/s2": {
-    "src": "assets/audio/fr/noah/noah-07/s2-56bb66251be8f7812a9b.wav",
+    "src": "assets/audio/fr/noah/noah-07/s2-56bb66251be8f7812a9b.mp3",
     "duration": 7.67
   },
   "fr/noah/noah-08/s1": {
-    "src": "assets/audio/fr/noah/noah-08/s1-560aed1af510c45a4c38.wav",
+    "src": "assets/audio/fr/noah/noah-08/s1-560aed1af510c45a4c38.mp3",
     "duration": 9.08
   },
   "fr/noah/noah-08/s2": {
-    "src": "assets/audio/fr/noah/noah-08/s2-6d41d3b70c5aa957ae97.wav",
+    "src": "assets/audio/fr/noah/noah-08/s2-6d41d3b70c5aa957ae97.mp3",
     "duration": 9.48
   },
   "fr/names/adam": {
-    "src": "assets/audio/fr/names/adam-fc6edab6c5f8105470ca.wav",
+    "src": "assets/audio/fr/names/adam-fc6edab6c5f8105470ca.mp3",
     "duration": 0.65
   },
   "fr/names/eve": {
-    "src": "assets/audio/fr/names/eve-7cb775fef2e79efa9521.wav",
+    "src": "assets/audio/fr/names/eve-7cb775fef2e79efa9521.mp3",
     "duration": 0.46
   },
   "fr/names/noah": {
-    "src": "assets/audio/fr/names/noah-dfce8ac7a25614cdb449.wav",
+    "src": "assets/audio/fr/names/noah-dfce8ac7a25614cdb449.mp3",
     "duration": 0.53
   },
   "en-GB/eden/eden-01/s1": {
-    "src": "assets/audio/en-GB/eden/eden-01/s1-fbc211bd93e07b83a777.wav",
+    "src": "assets/audio/en-GB/eden/eden-01/s1-fbc211bd93e07b83a777.mp3",
     "duration": 7.68
   },
   "en-GB/eden/eden-01/s2": {
-    "src": "assets/audio/en-GB/eden/eden-01/s2-48cf9e83f1a7c3026b86.wav",
+    "src": "assets/audio/en-GB/eden/eden-01/s2-48cf9e83f1a7c3026b86.mp3",
     "duration": 4.94
   },
   "en-GB/eden/eden-02/s1": {
-    "src": "assets/audio/en-GB/eden/eden-02/s1-34b6fe6732d11de2e472.wav",
+    "src": "assets/audio/en-GB/eden/eden-02/s1-34b6fe6732d11de2e472.mp3",
     "duration": 5.43
   },
   "en-GB/eden/eden-02/s2": {
-    "src": "assets/audio/en-GB/eden/eden-02/s2-13451a4f3a0a67dcbc46.wav",
+    "src": "assets/audio/en-GB/eden/eden-02/s2-13451a4f3a0a67dcbc46.mp3",
     "duration": 6.76
   },
   "en-GB/eden/eden-03/s1": {
-    "src": "assets/audio/en-GB/eden/eden-03/s1-38ca015e2a6226ae4c5f.wav",
+    "src": "assets/audio/en-GB/eden/eden-03/s1-38ca015e2a6226ae4c5f.mp3",
     "duration": 7.51
   },
   "en-GB/eden/eden-03/s2": {
-    "src": "assets/audio/en-GB/eden/eden-03/s2-28d348779e14537d0f0d.wav",
+    "src": "assets/audio/en-GB/eden/eden-03/s2-28d348779e14537d0f0d.mp3",
     "duration": 4.79
   },
   "en-GB/eden/eden-04/s1": {
-    "src": "assets/audio/en-GB/eden/eden-04/s1-e0126985e05b652834b5.wav",
+    "src": "assets/audio/en-GB/eden/eden-04/s1-e0126985e05b652834b5.mp3",
     "duration": 5.65
   },
   "en-GB/eden/eden-04/s2": {
-    "src": "assets/audio/en-GB/eden/eden-04/s2-f30803f7a17687177fc1.wav",
+    "src": "assets/audio/en-GB/eden/eden-04/s2-f30803f7a17687177fc1.mp3",
     "duration": 7.24
   },
   "en-GB/eden/eden-05/s1": {
-    "src": "assets/audio/en-GB/eden/eden-05/s1-3e80a597b87936371052.wav",
+    "src": "assets/audio/en-GB/eden/eden-05/s1-3e80a597b87936371052.mp3",
     "duration": 6.37
   },
   "en-GB/eden/eden-05/s2": {
-    "src": "assets/audio/en-GB/eden/eden-05/s2-c41f67f3d9c0b4e1f6b1.wav",
+    "src": "assets/audio/en-GB/eden/eden-05/s2-c41f67f3d9c0b4e1f6b1.mp3",
     "duration": 7.96
   },
   "en-GB/eden/eden-06/s1": {
-    "src": "assets/audio/en-GB/eden/eden-06/s1-b036c0f6ac61d7922249.wav",
+    "src": "assets/audio/en-GB/eden/eden-06/s1-b036c0f6ac61d7922249.mp3",
     "duration": 7.01
   },
   "en-GB/eden/eden-06/s2": {
-    "src": "assets/audio/en-GB/eden/eden-06/s2-17bc34408905207788b7.wav",
+    "src": "assets/audio/en-GB/eden/eden-06/s2-17bc34408905207788b7.mp3",
     "duration": 5.37
   },
   "en-GB/eden/eden-07/s1": {
-    "src": "assets/audio/en-GB/eden/eden-07/s1-400e561124a4a1e69fd4.wav",
+    "src": "assets/audio/en-GB/eden/eden-07/s1-400e561124a4a1e69fd4.mp3",
     "duration": 7.58
   },
   "en-GB/eden/eden-07/s2": {
-    "src": "assets/audio/en-GB/eden/eden-07/s2-57105a9cd09012999fd3.wav",
+    "src": "assets/audio/en-GB/eden/eden-07/s2-57105a9cd09012999fd3.mp3",
     "duration": 7.04
   },
   "en-GB/eden/eden-08/s1": {
-    "src": "assets/audio/en-GB/eden/eden-08/s1-a4b55e5732a51c5c1084.wav",
+    "src": "assets/audio/en-GB/eden/eden-08/s1-a4b55e5732a51c5c1084.mp3",
     "duration": 7.6
   },
   "en-GB/eden/eden-08/s2": {
-    "src": "assets/audio/en-GB/eden/eden-08/s2-e486d87baf98a71e8296.wav",
+    "src": "assets/audio/en-GB/eden/eden-08/s2-e486d87baf98a71e8296.mp3",
     "duration": 7.32
   },
   "en-GB/noah/noah-01/s1": {
-    "src": "assets/audio/en-GB/noah/noah-01/s1-89c66d8a6f7c20d3fabd.wav",
+    "src": "assets/audio/en-GB/noah/noah-01/s1-89c66d8a6f7c20d3fabd.mp3",
     "duration": 6.08
   },
   "en-GB/noah/noah-01/s2": {
-    "src": "assets/audio/en-GB/noah/noah-01/s2-c2cdb1e935c0e273680f.wav",
+    "src": "assets/audio/en-GB/noah/noah-01/s2-c2cdb1e935c0e273680f.mp3",
     "duration": 6.77
   },
   "en-GB/noah/noah-02/s1": {
-    "src": "assets/audio/en-GB/noah/noah-02/s1-faaff9d1b668ffd73d6d.wav",
+    "src": "assets/audio/en-GB/noah/noah-02/s1-faaff9d1b668ffd73d6d.mp3",
     "duration": 7.77
   },
   "en-GB/noah/noah-02/s2": {
-    "src": "assets/audio/en-GB/noah/noah-02/s2-890ac9a19b528ee12a11.wav",
+    "src": "assets/audio/en-GB/noah/noah-02/s2-890ac9a19b528ee12a11.mp3",
     "duration": 6.83
   },
   "en-GB/noah/noah-03/s1": {
-    "src": "assets/audio/en-GB/noah/noah-03/s1-b277771711bb053c0e48.wav",
+    "src": "assets/audio/en-GB/noah/noah-03/s1-b277771711bb053c0e48.mp3",
     "duration": 6.84
   },
   "en-GB/noah/noah-03/s2": {
-    "src": "assets/audio/en-GB/noah/noah-03/s2-1196869b45a55ceec26c.wav",
+    "src": "assets/audio/en-GB/noah/noah-03/s2-1196869b45a55ceec26c.mp3",
     "duration": 5.28
   },
   "en-GB/noah/noah-04/s1": {
-    "src": "assets/audio/en-GB/noah/noah-04/s1-c696a409400bba7e7af9.wav",
+    "src": "assets/audio/en-GB/noah/noah-04/s1-c696a409400bba7e7af9.mp3",
     "duration": 6.83
   },
   "en-GB/noah/noah-04/s2": {
-    "src": "assets/audio/en-GB/noah/noah-04/s2-fa022936ea92656dbf45.wav",
+    "src": "assets/audio/en-GB/noah/noah-04/s2-fa022936ea92656dbf45.mp3",
     "duration": 7.35
   },
   "en-GB/noah/noah-05/s1": {
-    "src": "assets/audio/en-GB/noah/noah-05/s1-2e544edb036329ab105b.wav",
+    "src": "assets/audio/en-GB/noah/noah-05/s1-2e544edb036329ab105b.mp3",
     "duration": 6.29
   },
   "en-GB/noah/noah-05/s2": {
-    "src": "assets/audio/en-GB/noah/noah-05/s2-f12995eeb841abf6567b.wav",
+    "src": "assets/audio/en-GB/noah/noah-05/s2-f12995eeb841abf6567b.mp3",
     "duration": 6.88
   },
   "en-GB/noah/noah-06/s1": {
-    "src": "assets/audio/en-GB/noah/noah-06/s1-b70c0b98c71a56638d42.wav",
+    "src": "assets/audio/en-GB/noah/noah-06/s1-b70c0b98c71a56638d42.mp3",
     "duration": 6.88
   },
   "en-GB/noah/noah-06/s2": {
-    "src": "assets/audio/en-GB/noah/noah-06/s2-0581c0250089d929a21f.wav",
+    "src": "assets/audio/en-GB/noah/noah-06/s2-0581c0250089d929a21f.mp3",
     "duration": 7.94
   },
   "en-GB/noah/noah-07/s1": {
-    "src": "assets/audio/en-GB/noah/noah-07/s1-22e15cf9678dd9241953.wav",
+    "src": "assets/audio/en-GB/noah/noah-07/s1-22e15cf9678dd9241953.mp3",
     "duration": 6.14
   },
   "en-GB/noah/noah-07/s2": {
-    "src": "assets/audio/en-GB/noah/noah-07/s2-33df9d630f68ba27e496.wav",
+    "src": "assets/audio/en-GB/noah/noah-07/s2-33df9d630f68ba27e496.mp3",
     "duration": 6.87
   },
   "en-GB/noah/noah-08/s1": {
-    "src": "assets/audio/en-GB/noah/noah-08/s1-b9159aee7803d02e200c.wav",
+    "src": "assets/audio/en-GB/noah/noah-08/s1-b9159aee7803d02e200c.mp3",
     "duration": 7.91
   },
   "en-GB/noah/noah-08/s2": {
-    "src": "assets/audio/en-GB/noah/noah-08/s2-93fed6f19d069516ac6a.wav",
+    "src": "assets/audio/en-GB/noah/noah-08/s2-93fed6f19d069516ac6a.mp3",
     "duration": 8.14
   },
   "en-GB/names/adam": {
-    "src": "assets/audio/en-GB/names/adam-edf4e84198d6f37a169e.wav",
+    "src": "assets/audio/en-GB/names/adam-edf4e84198d6f37a169e.mp3",
     "duration": 0.645
   },
   "en-GB/names/eve": {
-    "src": "assets/audio/en-GB/names/eve-bbda6df1b1f7c292c424.wav",
+    "src": "assets/audio/en-GB/names/eve-bbda6df1b1f7c292c424.mp3",
     "duration": 0.49
   },
   "en-GB/names/noah": {
-    "src": "assets/audio/en-GB/names/noah-63b2e528cc50506597f8.wav",
+    "src": "assets/audio/en-GB/names/noah-63b2e528cc50506597f8.mp3",
     "duration": 0.6
   },
   "it/eden/eden-01/s1": {
-    "src": "assets/audio/it/eden/eden-01/s1-20fa3134d7dbf9d96f8c.wav",
+    "src": "assets/audio/it/eden/eden-01/s1-20fa3134d7dbf9d96f8c.mp3",
     "duration": 8.0
   },
   "it/eden/eden-01/s2": {
-    "src": "assets/audio/it/eden/eden-01/s2-8828bc3d4b7b1b9f86dc.wav",
+    "src": "assets/audio/it/eden/eden-01/s2-8828bc3d4b7b1b9f86dc.mp3",
     "duration": 6.8
   },
   "it/eden/eden-02/s1": {
-    "src": "assets/audio/it/eden/eden-02/s1-deb40551195b16c9cbb9.wav",
+    "src": "assets/audio/it/eden/eden-02/s1-deb40551195b16c9cbb9.mp3",
     "duration": 6.42
   },
   "it/eden/eden-02/s2": {
-    "src": "assets/audio/it/eden/eden-02/s2-9a167d20b6295b7c93fb.wav",
+    "src": "assets/audio/it/eden/eden-02/s2-9a167d20b6295b7c93fb.mp3",
     "duration": 7.65
   },
   "it/eden/eden-03/s1": {
-    "src": "assets/audio/it/eden/eden-03/s1-2749b3da3b2c3650bc8d.wav",
+    "src": "assets/audio/it/eden/eden-03/s1-2749b3da3b2c3650bc8d.mp3",
     "duration": 8.54
   },
   "it/eden/eden-03/s2": {
-    "src": "assets/audio/it/eden/eden-03/s2-82152ec36d5b3cfadd3a.wav",
+    "src": "assets/audio/it/eden/eden-03/s2-82152ec36d5b3cfadd3a.mp3",
     "duration": 5.59
   },
   "it/eden/eden-04/s1": {
-    "src": "assets/audio/it/eden/eden-04/s1-1056f85876392d9c6604.wav",
+    "src": "assets/audio/it/eden/eden-04/s1-1056f85876392d9c6604.mp3",
     "duration": 6.55
   },
   "it/eden/eden-04/s2": {
-    "src": "assets/audio/it/eden/eden-04/s2-7d36b8f596c1021f1022.wav",
+    "src": "assets/audio/it/eden/eden-04/s2-7d36b8f596c1021f1022.mp3",
     "duration": 8.8
   },
   "it/eden/eden-05/s1": {
-    "src": "assets/audio/it/eden/eden-05/s1-24cc12b76bd167f18d69.wav",
+    "src": "assets/audio/it/eden/eden-05/s1-24cc12b76bd167f18d69.mp3",
     "duration": 8.98
   },
   "it/eden/eden-05/s2": {
-    "src": "assets/audio/it/eden/eden-05/s2-ce6b78fdd5331f660f72.wav",
+    "src": "assets/audio/it/eden/eden-05/s2-ce6b78fdd5331f660f72.mp3",
     "duration": 8.91
   },
   "it/eden/eden-06/s1": {
-    "src": "assets/audio/it/eden/eden-06/s1-50d7457a625f837288be.wav",
+    "src": "assets/audio/it/eden/eden-06/s1-50d7457a625f837288be.mp3",
     "duration": 7.52
   },
   "it/eden/eden-06/s2": {
-    "src": "assets/audio/it/eden/eden-06/s2-19d1fca428488bf63118.wav",
+    "src": "assets/audio/it/eden/eden-06/s2-19d1fca428488bf63118.mp3",
     "duration": 7.18
   },
   "it/eden/eden-07/s1": {
-    "src": "assets/audio/it/eden/eden-07/s1-4875575d7bb01ba7d43b.wav",
+    "src": "assets/audio/it/eden/eden-07/s1-4875575d7bb01ba7d43b.mp3",
     "duration": 9.4
   },
   "it/eden/eden-07/s2": {
-    "src": "assets/audio/it/eden/eden-07/s2-0dc6ac725764fff0a2cd.wav",
+    "src": "assets/audio/it/eden/eden-07/s2-0dc6ac725764fff0a2cd.mp3",
     "duration": 9.36
   },
   "it/eden/eden-08/s1": {
-    "src": "assets/audio/it/eden/eden-08/s1-4c25cd059ccf4014072a.wav",
+    "src": "assets/audio/it/eden/eden-08/s1-4c25cd059ccf4014072a.mp3",
     "duration": 9.15
   },
   "it/eden/eden-08/s2": {
-    "src": "assets/audio/it/eden/eden-08/s2-69581b6e2c5bd4086f7b.wav",
+    "src": "assets/audio/it/eden/eden-08/s2-69581b6e2c5bd4086f7b.mp3",
     "duration": 9.75
   },
   "it/noah/noah-01/s1": {
-    "src": "assets/audio/it/noah/noah-01/s1-b1616a0cb62aa9ff04d8.wav",
+    "src": "assets/audio/it/noah/noah-01/s1-b1616a0cb62aa9ff04d8.mp3",
     "duration": 7.85
   },
   "it/noah/noah-01/s2": {
-    "src": "assets/audio/it/noah/noah-01/s2-e366c302947de3db4720.wav",
+    "src": "assets/audio/it/noah/noah-01/s2-e366c302947de3db4720.mp3",
     "duration": 8.11
   },
   "it/noah/noah-02/s1": {
-    "src": "assets/audio/it/noah/noah-02/s1-784b338deeabb70d235e.wav",
+    "src": "assets/audio/it/noah/noah-02/s1-784b338deeabb70d235e.mp3",
     "duration": 8.98
   },
   "it/noah/noah-02/s2": {
-    "src": "assets/audio/it/noah/noah-02/s2-8208b521a826f5537879.wav",
+    "src": "assets/audio/it/noah/noah-02/s2-8208b521a826f5537879.mp3",
     "duration": 6.83
   },
   "it/noah/noah-03/s1": {
-    "src": "assets/audio/it/noah/noah-03/s1-2654504179af9da83eaa.wav",
+    "src": "assets/audio/it/noah/noah-03/s1-2654504179af9da83eaa.mp3",
     "duration": 7.62
   },
   "it/noah/noah-03/s2": {
-    "src": "assets/audio/it/noah/noah-03/s2-ba6a489b30954aa62911.wav",
+    "src": "assets/audio/it/noah/noah-03/s2-ba6a489b30954aa62911.mp3",
     "duration": 5.16
   },
   "it/noah/noah-04/s1": {
-    "src": "assets/audio/it/noah/noah-04/s1-7157fdee11ecbcf82392.wav",
+    "src": "assets/audio/it/noah/noah-04/s1-7157fdee11ecbcf82392.mp3",
     "duration": 7.98
   },
   "it/noah/noah-04/s2": {
-    "src": "assets/audio/it/noah/noah-04/s2-ed87e4307635c139481d.wav",
+    "src": "assets/audio/it/noah/noah-04/s2-ed87e4307635c139481d.mp3",
     "duration": 7.52
   },
   "it/noah/noah-05/s1": {
-    "src": "assets/audio/it/noah/noah-05/s1-83623f76e5d4c9063387.wav",
+    "src": "assets/audio/it/noah/noah-05/s1-83623f76e5d4c9063387.mp3",
     "duration": 6.11
   },
   "it/noah/noah-05/s2": {
-    "src": "assets/audio/it/noah/noah-05/s2-c63b78cdf0d84d178c40.wav",
+    "src": "assets/audio/it/noah/noah-05/s2-c63b78cdf0d84d178c40.mp3",
     "duration": 7.58
   },
   "it/noah/noah-06/s1": {
-    "src": "assets/audio/it/noah/noah-06/s1-5dcb6e690866b2e25b7c.wav",
+    "src": "assets/audio/it/noah/noah-06/s1-5dcb6e690866b2e25b7c.mp3",
     "duration": 7.15
   },
   "it/noah/noah-06/s2": {
-    "src": "assets/audio/it/noah/noah-06/s2-352ad2b7dc74f8dc0996.wav",
+    "src": "assets/audio/it/noah/noah-06/s2-352ad2b7dc74f8dc0996.mp3",
     "duration": 9.3
   },
   "it/noah/noah-07/s1": {
-    "src": "assets/audio/it/noah/noah-07/s1-33add20b81686ad79587.wav",
+    "src": "assets/audio/it/noah/noah-07/s1-33add20b81686ad79587.mp3",
     "duration": 6.06
   },
   "it/noah/noah-07/s2": {
-    "src": "assets/audio/it/noah/noah-07/s2-cfe395a638f0bb3cf142.wav",
+    "src": "assets/audio/it/noah/noah-07/s2-cfe395a638f0bb3cf142.mp3",
     "duration": 8.3
   },
   "it/noah/noah-08/s1": {
-    "src": "assets/audio/it/noah/noah-08/s1-65e9c6f467ed1022b8e0.wav",
+    "src": "assets/audio/it/noah/noah-08/s1-65e9c6f467ed1022b8e0.mp3",
     "duration": 9.23
   },
   "it/noah/noah-08/s2": {
-    "src": "assets/audio/it/noah/noah-08/s2-f3ebb99a2ee97c81bb43.wav",
+    "src": "assets/audio/it/noah/noah-08/s2-f3ebb99a2ee97c81bb43.mp3",
     "duration": 9.19
   },
   "it/names/adam": {
-    "src": "assets/audio/it/names/adam-b2605da027d6591cb93a.wav",
+    "src": "assets/audio/it/names/adam-b2605da027d6591cb93a.mp3",
     "duration": 0.78
   },
   "it/names/eve": {
-    "src": "assets/audio/it/names/eve-7bf5117a1864e389b851.wav",
+    "src": "assets/audio/it/names/eve-7bf5117a1864e389b851.mp3",
     "duration": 0.595
   },
   "it/names/noah": {
-    "src": "assets/audio/it/names/noah-7777d0f041dcb06ff827.wav",
+    "src": "assets/audio/it/names/noah-7777d0f041dcb06ff827.mp3",
     "duration": 0.68
   },
   "hi/eden/eden-01/s1": {
-    "src": "assets/audio/hi/eden/eden-01/s1-7b3930d0974bebe2a87d.wav",
+    "src": "assets/audio/hi/eden/eden-01/s1-7b3930d0974bebe2a87d.mp3",
     "duration": 11.44
   },
   "hi/eden/eden-01/s2": {
-    "src": "assets/audio/hi/eden/eden-01/s2-f9675bee7e732c50cab6.wav",
+    "src": "assets/audio/hi/eden/eden-01/s2-f9675bee7e732c50cab6.mp3",
     "duration": 8.09
   },
   "hi/eden/eden-02/s1": {
-    "src": "assets/audio/hi/eden/eden-02/s1-a6f8f22c6f1c0c14edca.wav",
+    "src": "assets/audio/hi/eden/eden-02/s1-a6f8f22c6f1c0c14edca.mp3",
     "duration": 8.63
   },
   "hi/eden/eden-02/s2": {
-    "src": "assets/audio/hi/eden/eden-02/s2-b1b1cadcd240771fae58.wav",
+    "src": "assets/audio/hi/eden/eden-02/s2-b1b1cadcd240771fae58.mp3",
     "duration": 9.52
   },
   "hi/eden/eden-03/s1": {
-    "src": "assets/audio/hi/eden/eden-03/s1-7bbc791bd31166283e55.wav",
+    "src": "assets/audio/hi/eden/eden-03/s1-7bbc791bd31166283e55.mp3",
     "duration": 11.99
   },
   "hi/eden/eden-03/s2": {
-    "src": "assets/audio/hi/eden/eden-03/s2-d77c3bb46adbe3f2300a.wav",
+    "src": "assets/audio/hi/eden/eden-03/s2-d77c3bb46adbe3f2300a.mp3",
     "duration": 7.35
   },
   "hi/eden/eden-04/s1": {
-    "src": "assets/audio/hi/eden/eden-04/s1-a7ab71254d92ef19e80c.wav",
+    "src": "assets/audio/hi/eden/eden-04/s1-a7ab71254d92ef19e80c.mp3",
     "duration": 7.82
   },
   "hi/eden/eden-04/s2": {
-    "src": "assets/audio/hi/eden/eden-04/s2-d960f1bde903f18b77f6.wav",
+    "src": "assets/audio/hi/eden/eden-04/s2-d960f1bde903f18b77f6.mp3",
     "duration": 9.92
   },
   "hi/eden/eden-05/s1": {
-    "src": "assets/audio/hi/eden/eden-05/s1-27c4292f429d030ff023.wav",
+    "src": "assets/audio/hi/eden/eden-05/s1-27c4292f429d030ff023.mp3",
     "duration": 7.82
   },
   "hi/eden/eden-05/s2": {
-    "src": "assets/audio/hi/eden/eden-05/s2-1044eeb23793a26999dc.wav",
+    "src": "assets/audio/hi/eden/eden-05/s2-1044eeb23793a26999dc.mp3",
     "duration": 11.04
   },
   "hi/eden/eden-06/s1": {
-    "src": "assets/audio/hi/eden/eden-06/s1-d4cdc9576982c5de4011.wav",
+    "src": "assets/audio/hi/eden/eden-06/s1-d4cdc9576982c5de4011.mp3",
     "duration": 10.14
   },
   "hi/eden/eden-06/s2": {
-    "src": "assets/audio/hi/eden/eden-06/s2-854b17179e7417215727.wav",
+    "src": "assets/audio/hi/eden/eden-06/s2-854b17179e7417215727.mp3",
     "duration": 8.62
   },
   "hi/eden/eden-07/s1": {
-    "src": "assets/audio/hi/eden/eden-07/s1-a661f2d448760dfc3f6a.wav",
+    "src": "assets/audio/hi/eden/eden-07/s1-a661f2d448760dfc3f6a.mp3",
     "duration": 10.69
   },
   "hi/eden/eden-07/s2": {
-    "src": "assets/audio/hi/eden/eden-07/s2-3dc9dfc9c13af16aa756.wav",
+    "src": "assets/audio/hi/eden/eden-07/s2-3dc9dfc9c13af16aa756.mp3",
     "duration": 11.97
   },
   "hi/eden/eden-08/s1": {
-    "src": "assets/audio/hi/eden/eden-08/s1-8cffe5aa98ddab6582f4.wav",
+    "src": "assets/audio/hi/eden/eden-08/s1-8cffe5aa98ddab6582f4.mp3",
     "duration": 11.29
   },
   "hi/eden/eden-08/s2": {
-    "src": "assets/audio/hi/eden/eden-08/s2-93de739f6d67f1ab1ed7.wav",
+    "src": "assets/audio/hi/eden/eden-08/s2-93de739f6d67f1ab1ed7.mp3",
     "duration": 12.62
   },
   "hi/noah/noah-01/s1": {
-    "src": "assets/audio/hi/noah/noah-01/s1-0c0a8db2e164a53a7f30.wav",
+    "src": "assets/audio/hi/noah/noah-01/s1-0c0a8db2e164a53a7f30.mp3",
     "duration": 8.79
   },
   "hi/noah/noah-01/s2": {
-    "src": "assets/audio/hi/noah/noah-01/s2-c320a3fab822fd68fd00.wav",
+    "src": "assets/audio/hi/noah/noah-01/s2-c320a3fab822fd68fd00.mp3",
     "duration": 9.93
   },
   "hi/noah/noah-02/s1": {
-    "src": "assets/audio/hi/noah/noah-02/s1-b47eaba5bb09876b9011.wav",
+    "src": "assets/audio/hi/noah/noah-02/s1-b47eaba5bb09876b9011.mp3",
     "duration": 10.14
   },
   "hi/noah/noah-02/s2": {
-    "src": "assets/audio/hi/noah/noah-02/s2-07f475f06c9011ec0697.wav",
+    "src": "assets/audio/hi/noah/noah-02/s2-07f475f06c9011ec0697.mp3",
     "duration": 10.18
   },
   "hi/noah/noah-03/s1": {
-    "src": "assets/audio/hi/noah/noah-03/s1-a350877da14e6e7085f7.wav",
+    "src": "assets/audio/hi/noah/noah-03/s1-a350877da14e6e7085f7.mp3",
     "duration": 9.45
   },
   "hi/noah/noah-03/s2": {
-    "src": "assets/audio/hi/noah/noah-03/s2-6c78bbb9edf51f34fd9e.wav",
+    "src": "assets/audio/hi/noah/noah-03/s2-6c78bbb9edf51f34fd9e.mp3",
     "duration": 8.1
   },
   "hi/noah/noah-04/s1": {
-    "src": "assets/audio/hi/noah/noah-04/s1-8fb6f3d8b32b67a8312a.wav",
+    "src": "assets/audio/hi/noah/noah-04/s1-8fb6f3d8b32b67a8312a.mp3",
     "duration": 7.85
   },
   "hi/noah/noah-04/s2": {
-    "src": "assets/audio/hi/noah/noah-04/s2-c32b6ac931b31ae16098.wav",
+    "src": "assets/audio/hi/noah/noah-04/s2-c32b6ac931b31ae16098.mp3",
     "duration": 10.21
   },
   "hi/noah/noah-05/s1": {
-    "src": "assets/audio/hi/noah/noah-05/s1-14cac37291c6bec5facd.wav",
+    "src": "assets/audio/hi/noah/noah-05/s1-14cac37291c6bec5facd.mp3",
     "duration": 7.33
   },
   "hi/noah/noah-05/s2": {
-    "src": "assets/audio/hi/noah/noah-05/s2-9d3ef0d73e1eb36be53f.wav",
+    "src": "assets/audio/hi/noah/noah-05/s2-9d3ef0d73e1eb36be53f.mp3",
     "duration": 9.67
   },
   "hi/noah/noah-06/s1": {
-    "src": "assets/audio/hi/noah/noah-06/s1-1ff3c3a294dc0d299dba.wav",
+    "src": "assets/audio/hi/noah/noah-06/s1-1ff3c3a294dc0d299dba.mp3",
     "duration": 9.55
   },
   "hi/noah/noah-06/s2": {
-    "src": "assets/audio/hi/noah/noah-06/s2-56ad60dd7a408b0ecf58.wav",
+    "src": "assets/audio/hi/noah/noah-06/s2-56ad60dd7a408b0ecf58.mp3",
     "duration": 10.16
   },
   "hi/noah/noah-07/s1": {
-    "src": "assets/audio/hi/noah/noah-07/s1-a1cce610c8de084fe539.wav",
+    "src": "assets/audio/hi/noah/noah-07/s1-a1cce610c8de084fe539.mp3",
     "duration": 9.24
   },
   "hi/noah/noah-07/s2": {
-    "src": "assets/audio/hi/noah/noah-07/s2-7ab3c49f902c3c58006d.wav",
+    "src": "assets/audio/hi/noah/noah-07/s2-7ab3c49f902c3c58006d.mp3",
     "duration": 10.49
   },
   "hi/noah/noah-08/s1": {
-    "src": "assets/audio/hi/noah/noah-08/s1-3567b82e9ad254af64c6.wav",
+    "src": "assets/audio/hi/noah/noah-08/s1-3567b82e9ad254af64c6.mp3",
     "duration": 11.47
   },
   "hi/noah/noah-08/s2": {
-    "src": "assets/audio/hi/noah/noah-08/s2-566702c53982816f8546.wav",
+    "src": "assets/audio/hi/noah/noah-08/s2-566702c53982816f8546.mp3",
     "duration": 10.42
   },
   "hi/names/adam": {
-    "src": "assets/audio/hi/names/adam-1a2823a2625d3d68cab1.wav",
+    "src": "assets/audio/hi/names/adam-1a2823a2625d3d68cab1.mp3",
     "duration": 0.83
   },
   "hi/names/eve": {
-    "src": "assets/audio/hi/names/eve-f15847c74e09484e5e30.wav",
+    "src": "assets/audio/hi/names/eve-f15847c74e09484e5e30.mp3",
     "duration": 0.86
   },
   "hi/names/noah": {
-    "src": "assets/audio/hi/names/noah-06a8d353f1589ca33b50.wav",
+    "src": "assets/audio/hi/names/noah-06a8d353f1589ca33b50.mp3",
     "duration": 0.76
   },
   "ja/eden/eden-01/s1": {
-    "src": "assets/audio/ja/eden/eden-01/s1-9429155bce71d4623568.wav",
+    "src": "assets/audio/ja/eden/eden-01/s1-9429155bce71d4623568.mp3",
     "duration": 8.86
   },
   "ja/eden/eden-01/s2": {
-    "src": "assets/audio/ja/eden/eden-01/s2-382a0d50f6460c0dea40.wav",
+    "src": "assets/audio/ja/eden/eden-01/s2-382a0d50f6460c0dea40.mp3",
     "duration": 7.88
   },
   "ja/eden/eden-02/s1": {
-    "src": "assets/audio/ja/eden/eden-02/s1-470e6bcd2e7d16f6a422.wav",
+    "src": "assets/audio/ja/eden/eden-02/s1-470e6bcd2e7d16f6a422.mp3",
     "duration": 7.51
   },
   "ja/eden/eden-02/s2": {
-    "src": "assets/audio/ja/eden/eden-02/s2-4d53c2e6d46720e7368c.wav",
+    "src": "assets/audio/ja/eden/eden-02/s2-4d53c2e6d46720e7368c.mp3",
     "duration": 9.19
   },
   "ja/eden/eden-03/s1": {
-    "src": "assets/audio/ja/eden/eden-03/s1-a3ef38e3f4f6a461d746.wav",
+    "src": "assets/audio/ja/eden/eden-03/s1-a3ef38e3f4f6a461d746.mp3",
     "duration": 8.32
   },
   "ja/eden/eden-03/s2": {
-    "src": "assets/audio/ja/eden/eden-03/s2-08f1315c13d23f763bf9.wav",
+    "src": "assets/audio/ja/eden/eden-03/s2-08f1315c13d23f763bf9.mp3",
     "duration": 6.34
   },
   "ja/eden/eden-04/s1": {
-    "src": "assets/audio/ja/eden/eden-04/s1-2118eadbadb6a48a9def.wav",
+    "src": "assets/audio/ja/eden/eden-04/s1-2118eadbadb6a48a9def.mp3",
     "duration": 6.67
   },
   "ja/eden/eden-04/s2": {
-    "src": "assets/audio/ja/eden/eden-04/s2-6b68254de81b28ab391e.wav",
+    "src": "assets/audio/ja/eden/eden-04/s2-6b68254de81b28ab391e.mp3",
     "duration": 7.79
   },
   "ja/eden/eden-05/s1": {
-    "src": "assets/audio/ja/eden/eden-05/s1-7b7e21f633303863a4d6.wav",
+    "src": "assets/audio/ja/eden/eden-05/s1-7b7e21f633303863a4d6.mp3",
     "duration": 8.01
   },
   "ja/eden/eden-05/s2": {
-    "src": "assets/audio/ja/eden/eden-05/s2-e06ad652de76faa8e47d.wav",
+    "src": "assets/audio/ja/eden/eden-05/s2-e06ad652de76faa8e47d.mp3",
     "duration": 10.51
   },
   "ja/eden/eden-06/s1": {
-    "src": "assets/audio/ja/eden/eden-06/s1-95ce15157aee10087695.wav",
+    "src": "assets/audio/ja/eden/eden-06/s1-95ce15157aee10087695.mp3",
     "duration": 9.01
   },
   "ja/eden/eden-06/s2": {
-    "src": "assets/audio/ja/eden/eden-06/s2-d9c65879079d4a8aab5a.wav",
+    "src": "assets/audio/ja/eden/eden-06/s2-d9c65879079d4a8aab5a.mp3",
     "duration": 6.96
   },
   "ja/eden/eden-07/s1": {
-    "src": "assets/audio/ja/eden/eden-07/s1-b5422168aede635ac9bc.wav",
+    "src": "assets/audio/ja/eden/eden-07/s1-b5422168aede635ac9bc.mp3",
     "duration": 9.88
   },
   "ja/eden/eden-07/s2": {
-    "src": "assets/audio/ja/eden/eden-07/s2-77a10677c10c1d2cbd30.wav",
+    "src": "assets/audio/ja/eden/eden-07/s2-77a10677c10c1d2cbd30.mp3",
     "duration": 9.69
   },
   "ja/eden/eden-08/s1": {
-    "src": "assets/audio/ja/eden/eden-08/s1-e2ab56c3cdaaab8b3bc6.wav",
+    "src": "assets/audio/ja/eden/eden-08/s1-e2ab56c3cdaaab8b3bc6.mp3",
     "duration": 10.87
   },
   "ja/eden/eden-08/s2": {
-    "src": "assets/audio/ja/eden/eden-08/s2-04a76576edd2540bc793.wav",
+    "src": "assets/audio/ja/eden/eden-08/s2-04a76576edd2540bc793.mp3",
     "duration": 9.85
   },
   "ja/noah/noah-01/s1": {
-    "src": "assets/audio/ja/noah/noah-01/s1-6cd254220e02506c00f2.wav",
+    "src": "assets/audio/ja/noah/noah-01/s1-6cd254220e02506c00f2.mp3",
     "duration": 7.68
   },
   "ja/noah/noah-01/s2": {
-    "src": "assets/audio/ja/noah/noah-01/s2-510eed0562dc1ce23164.wav",
+    "src": "assets/audio/ja/noah/noah-01/s2-510eed0562dc1ce23164.mp3",
     "duration": 7.96
   },
   "ja/noah/noah-02/s1": {
-    "src": "assets/audio/ja/noah/noah-02/s1-4d10798010c43a356346.wav",
+    "src": "assets/audio/ja/noah/noah-02/s1-4d10798010c43a356346.mp3",
     "duration": 8.81
   },
   "ja/noah/noah-02/s2": {
-    "src": "assets/audio/ja/noah/noah-02/s2-2452c04fbf187bf2b5cb.wav",
+    "src": "assets/audio/ja/noah/noah-02/s2-2452c04fbf187bf2b5cb.mp3",
     "duration": 8.39
   },
   "ja/noah/noah-03/s1": {
-    "src": "assets/audio/ja/noah/noah-03/s1-b9f8f06248d57a4f8e75.wav",
+    "src": "assets/audio/ja/noah/noah-03/s1-b9f8f06248d57a4f8e75.mp3",
     "duration": 9.28
   },
   "ja/noah/noah-03/s2": {
-    "src": "assets/audio/ja/noah/noah-03/s2-91133b8de2e0943571c3.wav",
+    "src": "assets/audio/ja/noah/noah-03/s2-91133b8de2e0943571c3.mp3",
     "duration": 6.73
   },
   "ja/noah/noah-04/s1": {
-    "src": "assets/audio/ja/noah/noah-04/s1-2230f921dd64dfda1a83.wav",
+    "src": "assets/audio/ja/noah/noah-04/s1-2230f921dd64dfda1a83.mp3",
     "duration": 7.67
   },
   "ja/noah/noah-04/s2": {
-    "src": "assets/audio/ja/noah/noah-04/s2-0a1d57cb166906d94e1c.wav",
+    "src": "assets/audio/ja/noah/noah-04/s2-0a1d57cb166906d94e1c.mp3",
     "duration": 9.25
   },
   "ja/noah/noah-05/s1": {
-    "src": "assets/audio/ja/noah/noah-05/s1-15d76e7cafad388268a7.wav",
+    "src": "assets/audio/ja/noah/noah-05/s1-15d76e7cafad388268a7.mp3",
     "duration": 6.94
   },
   "ja/noah/noah-05/s2": {
-    "src": "assets/audio/ja/noah/noah-05/s2-6821e63337c1d474520a.wav",
+    "src": "assets/audio/ja/noah/noah-05/s2-6821e63337c1d474520a.mp3",
     "duration": 8.64
   },
   "ja/noah/noah-06/s1": {
-    "src": "assets/audio/ja/noah/noah-06/s1-b43f8b59952f2a17d98d.wav",
+    "src": "assets/audio/ja/noah/noah-06/s1-b43f8b59952f2a17d98d.mp3",
     "duration": 8.47
   },
   "ja/noah/noah-06/s2": {
-    "src": "assets/audio/ja/noah/noah-06/s2-8be488134fbf63e211ea.wav",
+    "src": "assets/audio/ja/noah/noah-06/s2-8be488134fbf63e211ea.mp3",
     "duration": 11.09
   },
   "ja/noah/noah-07/s1": {
-    "src": "assets/audio/ja/noah/noah-07/s1-e1c07c7561f54be6d78b.wav",
+    "src": "assets/audio/ja/noah/noah-07/s1-e1c07c7561f54be6d78b.mp3",
     "duration": 7.58
   },
   "ja/noah/noah-07/s2": {
-    "src": "assets/audio/ja/noah/noah-07/s2-068e214d5391d1f61cbf.wav",
+    "src": "assets/audio/ja/noah/noah-07/s2-068e214d5391d1f61cbf.mp3",
     "duration": 9.21
   },
   "ja/noah/noah-08/s1": {
-    "src": "assets/audio/ja/noah/noah-08/s1-7f742dcc66fe77e81640.wav",
+    "src": "assets/audio/ja/noah/noah-08/s1-7f742dcc66fe77e81640.mp3",
     "duration": 10.95
   },
   "ja/noah/noah-08/s2": {
-    "src": "assets/audio/ja/noah/noah-08/s2-252dae1bbe71ddd0ec67.wav",
+    "src": "assets/audio/ja/noah/noah-08/s2-252dae1bbe71ddd0ec67.mp3",
     "duration": 9.49
   },
   "ja/names/adam": {
-    "src": "assets/audio/ja/names/adam-2ef7f4e7d63e277fc429.wav",
+    "src": "assets/audio/ja/names/adam-2ef7f4e7d63e277fc429.mp3",
     "duration": 0.74
   },
   "ja/names/eve": {
-    "src": "assets/audio/ja/names/eve-c15931247988bd4990be.wav",
+    "src": "assets/audio/ja/names/eve-c15931247988bd4990be.mp3",
     "duration": 0.53
   },
   "ja/names/noah": {
-    "src": "assets/audio/ja/names/noah-c4df2a798d302e8dfd35.wav",
+    "src": "assets/audio/ja/names/noah-c4df2a798d302e8dfd35.mp3",
     "duration": 0.45
   },
   "pt-BR/eden/eden-01/s1": {
-    "src": "assets/audio/pt-BR/eden/eden-01/s1-9501fbcc8512a5f2c7b3.wav",
+    "src": "assets/audio/pt-BR/eden/eden-01/s1-9501fbcc8512a5f2c7b3.mp3",
     "duration": 8.41
   },
   "pt-BR/eden/eden-01/s2": {
-    "src": "assets/audio/pt-BR/eden/eden-01/s2-7b94a50c67f03cb40e69.wav",
+    "src": "assets/audio/pt-BR/eden/eden-01/s2-7b94a50c67f03cb40e69.mp3",
     "duration": 5.52
   },
   "pt-BR/eden/eden-02/s1": {
-    "src": "assets/audio/pt-BR/eden/eden-02/s1-386092145fa91ff644ae.wav",
+    "src": "assets/audio/pt-BR/eden/eden-02/s1-386092145fa91ff644ae.mp3",
     "duration": 6.1
   },
   "pt-BR/eden/eden-02/s2": {
-    "src": "assets/audio/pt-BR/eden/eden-02/s2-b2d481a895cde78c1069.wav",
+    "src": "assets/audio/pt-BR/eden/eden-02/s2-b2d481a895cde78c1069.mp3",
     "duration": 7.64
   },
   "pt-BR/eden/eden-03/s1": {
-    "src": "assets/audio/pt-BR/eden/eden-03/s1-19e83efc5bf0bea629d3.wav",
+    "src": "assets/audio/pt-BR/eden/eden-03/s1-19e83efc5bf0bea629d3.mp3",
     "duration": 7.74
   },
   "pt-BR/eden/eden-03/s2": {
-    "src": "assets/audio/pt-BR/eden/eden-03/s2-d44e63cdbe559fed25bf.wav",
+    "src": "assets/audio/pt-BR/eden/eden-03/s2-d44e63cdbe559fed25bf.mp3",
     "duration": 5.45
   },
   "pt-BR/eden/eden-04/s1": {
-    "src": "assets/audio/pt-BR/eden/eden-04/s1-59137e746f6d4eca1f13.wav",
+    "src": "assets/audio/pt-BR/eden/eden-04/s1-59137e746f6d4eca1f13.mp3",
     "duration": 6.71
   },
   "pt-BR/eden/eden-04/s2": {
-    "src": "assets/audio/pt-BR/eden/eden-04/s2-a38d70434682e521ea9b.wav",
+    "src": "assets/audio/pt-BR/eden/eden-04/s2-a38d70434682e521ea9b.mp3",
     "duration": 8.06
   },
   "pt-BR/eden/eden-05/s1": {
-    "src": "assets/audio/pt-BR/eden/eden-05/s1-66e9804d5cd29330a807.wav",
+    "src": "assets/audio/pt-BR/eden/eden-05/s1-66e9804d5cd29330a807.mp3",
     "duration": 7.68
   },
   "pt-BR/eden/eden-05/s2": {
-    "src": "assets/audio/pt-BR/eden/eden-05/s2-5aad8a2e6c8496cb72dc.wav",
+    "src": "assets/audio/pt-BR/eden/eden-05/s2-5aad8a2e6c8496cb72dc.mp3",
     "duration": 8.19
   },
   "pt-BR/eden/eden-06/s1": {
-    "src": "assets/audio/pt-BR/eden/eden-06/s1-fb37f3164f72fe1b12d3.wav",
+    "src": "assets/audio/pt-BR/eden/eden-06/s1-fb37f3164f72fe1b12d3.mp3",
     "duration": 7.31
   },
   "pt-BR/eden/eden-06/s2": {
-    "src": "assets/audio/pt-BR/eden/eden-06/s2-29352187a4e6180ad395.wav",
+    "src": "assets/audio/pt-BR/eden/eden-06/s2-29352187a4e6180ad395.mp3",
     "duration": 6.14
   },
   "pt-BR/eden/eden-07/s1": {
-    "src": "assets/audio/pt-BR/eden/eden-07/s1-9f3eab353c58f5d56399.wav",
+    "src": "assets/audio/pt-BR/eden/eden-07/s1-9f3eab353c58f5d56399.mp3",
     "duration": 8.71
   },
   "pt-BR/eden/eden-07/s2": {
-    "src": "assets/audio/pt-BR/eden/eden-07/s2-55852fb583c8d8e09867.wav",
+    "src": "assets/audio/pt-BR/eden/eden-07/s2-55852fb583c8d8e09867.mp3",
     "duration": 8.11
   },
   "pt-BR/eden/eden-08/s1": {
-    "src": "assets/audio/pt-BR/eden/eden-08/s1-bd28138460a26ed304c1.wav",
+    "src": "assets/audio/pt-BR/eden/eden-08/s1-bd28138460a26ed304c1.mp3",
     "duration": 8.91
   },
   "pt-BR/eden/eden-08/s2": {
-    "src": "assets/audio/pt-BR/eden/eden-08/s2-eab6db29ba086a939e77.wav",
+    "src": "assets/audio/pt-BR/eden/eden-08/s2-eab6db29ba086a939e77.mp3",
     "duration": 9.51
   },
   "pt-BR/noah/noah-01/s1": {
-    "src": "assets/audio/pt-BR/noah/noah-01/s1-d8a6611d4a60330749ed.wav",
+    "src": "assets/audio/pt-BR/noah/noah-01/s1-d8a6611d4a60330749ed.mp3",
     "duration": 6.71
   },
   "pt-BR/noah/noah-01/s2": {
-    "src": "assets/audio/pt-BR/noah/noah-01/s2-8adc6f03d5ca8e8c98f4.wav",
+    "src": "assets/audio/pt-BR/noah/noah-01/s2-8adc6f03d5ca8e8c98f4.mp3",
     "duration": 7.14
   },
   "pt-BR/noah/noah-02/s1": {
-    "src": "assets/audio/pt-BR/noah/noah-02/s1-dad5ed53f8b53f736ba9.wav",
+    "src": "assets/audio/pt-BR/noah/noah-02/s1-dad5ed53f8b53f736ba9.mp3",
     "duration": 9.5
   },
   "pt-BR/noah/noah-02/s2": {
-    "src": "assets/audio/pt-BR/noah/noah-02/s2-f74012bec8f6280f9285.wav",
+    "src": "assets/audio/pt-BR/noah/noah-02/s2-f74012bec8f6280f9285.mp3",
     "duration": 7.37
   },
   "pt-BR/noah/noah-03/s1": {
-    "src": "assets/audio/pt-BR/noah/noah-03/s1-c343f93c049b217f1518.wav",
+    "src": "assets/audio/pt-BR/noah/noah-03/s1-c343f93c049b217f1518.mp3",
     "duration": 8.14
   },
   "pt-BR/noah/noah-03/s2": {
-    "src": "assets/audio/pt-BR/noah/noah-03/s2-533e95fcf44fa27bd66a.wav",
+    "src": "assets/audio/pt-BR/noah/noah-03/s2-533e95fcf44fa27bd66a.mp3",
     "duration": 5.61
   },
   "pt-BR/noah/noah-04/s1": {
-    "src": "assets/audio/pt-BR/noah/noah-04/s1-30698330e12a2fb6efd3.wav",
+    "src": "assets/audio/pt-BR/noah/noah-04/s1-30698330e12a2fb6efd3.mp3",
     "duration": 7.13
   },
   "pt-BR/noah/noah-04/s2": {
-    "src": "assets/audio/pt-BR/noah/noah-04/s2-0ff16f82e0ee66418ffe.wav",
+    "src": "assets/audio/pt-BR/noah/noah-04/s2-0ff16f82e0ee66418ffe.mp3",
     "duration": 7.52
   },
   "pt-BR/noah/noah-05/s1": {
-    "src": "assets/audio/pt-BR/noah/noah-05/s1-4611c6fe261b826719c7.wav",
+    "src": "assets/audio/pt-BR/noah/noah-05/s1-4611c6fe261b826719c7.mp3",
     "duration": 5.84
   },
   "pt-BR/noah/noah-05/s2": {
-    "src": "assets/audio/pt-BR/noah/noah-05/s2-8f13ef6055219772360b.wav",
+    "src": "assets/audio/pt-BR/noah/noah-05/s2-8f13ef6055219772360b.mp3",
     "duration": 7.84
   },
   "pt-BR/noah/noah-06/s1": {
-    "src": "assets/audio/pt-BR/noah/noah-06/s1-fd80605c9903262748ed.wav",
+    "src": "assets/audio/pt-BR/noah/noah-06/s1-fd80605c9903262748ed.mp3",
     "duration": 6.83
   },
   "pt-BR/noah/noah-06/s2": {
-    "src": "assets/audio/pt-BR/noah/noah-06/s2-5c6d237e633e46f36a41.wav",
+    "src": "assets/audio/pt-BR/noah/noah-06/s2-5c6d237e633e46f36a41.mp3",
     "duration": 9.87
   },
   "pt-BR/noah/noah-07/s1": {
-    "src": "assets/audio/pt-BR/noah/noah-07/s1-def1d9d7487c7244671f.wav",
+    "src": "assets/audio/pt-BR/noah/noah-07/s1-def1d9d7487c7244671f.mp3",
     "duration": 6.34
   },
   "pt-BR/noah/noah-07/s2": {
-    "src": "assets/audio/pt-BR/noah/noah-07/s2-b68c816a3fdb22d106b1.wav",
+    "src": "assets/audio/pt-BR/noah/noah-07/s2-b68c816a3fdb22d106b1.mp3",
     "duration": 7.26
   },
   "pt-BR/noah/noah-08/s1": {
-    "src": "assets/audio/pt-BR/noah/noah-08/s1-a3c049c3dec483dc87ee.wav",
+    "src": "assets/audio/pt-BR/noah/noah-08/s1-a3c049c3dec483dc87ee.mp3",
     "duration": 9.02
   },
   "pt-BR/noah/noah-08/s2": {
-    "src": "assets/audio/pt-BR/noah/noah-08/s2-e994220b69b1cc86cbe9.wav",
+    "src": "assets/audio/pt-BR/noah/noah-08/s2-e994220b69b1cc86cbe9.mp3",
     "duration": 8.29
   },
   "pt-BR/names/adam": {
-    "src": "assets/audio/pt-BR/names/adam-374ac64f8d41668c0cdc.wav",
+    "src": "assets/audio/pt-BR/names/adam-374ac64f8d41668c0cdc.mp3",
     "duration": 0.75
   },
   "pt-BR/names/eve": {
-    "src": "assets/audio/pt-BR/names/eve-ab86e0af8abaa0298601.wav",
+    "src": "assets/audio/pt-BR/names/eve-ab86e0af8abaa0298601.mp3",
     "duration": 0.57
   },
   "pt-BR/names/noah": {
-    "src": "assets/audio/pt-BR/names/noah-7bbf3da8dd7d602c21aa.wav",
+    "src": "assets/audio/pt-BR/names/noah-7bbf3da8dd7d602c21aa.mp3",
     "duration": 0.595
   },
   "zh-CN/eden/eden-01/s1": {
-    "src": "assets/audio/zh-CN/eden/eden-01/s1-eb1633b9e4ff2e675b0f.wav",
+    "src": "assets/audio/zh-CN/eden/eden-01/s1-eb1633b9e4ff2e675b0f.mp3",
     "duration": 10.96
   },
   "zh-CN/eden/eden-01/s2": {
-    "src": "assets/audio/zh-CN/eden/eden-01/s2-8154781419563db96ebe.wav",
+    "src": "assets/audio/zh-CN/eden/eden-01/s2-8154781419563db96ebe.mp3",
     "duration": 8.0
   },
   "zh-CN/eden/eden-02/s1": {
-    "src": "assets/audio/zh-CN/eden/eden-02/s1-b5a68118a5002e2d9298.wav",
+    "src": "assets/audio/zh-CN/eden/eden-02/s1-b5a68118a5002e2d9298.mp3",
     "duration": 8.96
   },
   "zh-CN/eden/eden-02/s2": {
-    "src": "assets/audio/zh-CN/eden/eden-02/s2-0f7ef76ffcdd33f7aa5c.wav",
+    "src": "assets/audio/zh-CN/eden/eden-02/s2-0f7ef76ffcdd33f7aa5c.mp3",
     "duration": 9.36
   },
   "zh-CN/eden/eden-03/s1": {
-    "src": "assets/audio/zh-CN/eden/eden-03/s1-acea423fdfbb6773a446.wav",
+    "src": "assets/audio/zh-CN/eden/eden-03/s1-acea423fdfbb6773a446.mp3",
     "duration": 8.53
   },
   "zh-CN/eden/eden-03/s2": {
-    "src": "assets/audio/zh-CN/eden/eden-03/s2-e0c1610ac357752b5aed.wav",
+    "src": "assets/audio/zh-CN/eden/eden-03/s2-e0c1610ac357752b5aed.mp3",
     "duration": 6.64
   },
   "zh-CN/eden/eden-04/s1": {
-    "src": "assets/audio/zh-CN/eden/eden-04/s1-667761c3a23d0dc1b636.wav",
+    "src": "assets/audio/zh-CN/eden/eden-04/s1-667761c3a23d0dc1b636.mp3",
     "duration": 8.18
   },
   "zh-CN/eden/eden-04/s2": {
-    "src": "assets/audio/zh-CN/eden/eden-04/s2-ab411abeda4e7148fc29.wav",
+    "src": "assets/audio/zh-CN/eden/eden-04/s2-ab411abeda4e7148fc29.mp3",
     "duration": 9.23
   },
   "zh-CN/eden/eden-05/s1": {
-    "src": "assets/audio/zh-CN/eden/eden-05/s1-48e0308f19310e8c83e1.wav",
+    "src": "assets/audio/zh-CN/eden/eden-05/s1-48e0308f19310e8c83e1.mp3",
     "duration": 6.53
   },
   "zh-CN/eden/eden-05/s2": {
-    "src": "assets/audio/zh-CN/eden/eden-05/s2-60754576d6fcea988c7f.wav",
+    "src": "assets/audio/zh-CN/eden/eden-05/s2-60754576d6fcea988c7f.mp3",
     "duration": 9.55
   },
   "zh-CN/eden/eden-06/s1": {
-    "src": "assets/audio/zh-CN/eden/eden-06/s1-2584568f868ddab3d28e.wav",
+    "src": "assets/audio/zh-CN/eden/eden-06/s1-2584568f868ddab3d28e.mp3",
     "duration": 8.96
   },
   "zh-CN/eden/eden-06/s2": {
-    "src": "assets/audio/zh-CN/eden/eden-06/s2-290d91727cfb7b91fae6.wav",
+    "src": "assets/audio/zh-CN/eden/eden-06/s2-290d91727cfb7b91fae6.mp3",
     "duration": 6.71
   },
   "zh-CN/eden/eden-07/s1": {
-    "src": "assets/audio/zh-CN/eden/eden-07/s1-080667c96530272730b1.wav",
+    "src": "assets/audio/zh-CN/eden/eden-07/s1-080667c96530272730b1.mp3",
     "duration": 10.92
   },
   "zh-CN/eden/eden-07/s2": {
-    "src": "assets/audio/zh-CN/eden/eden-07/s2-f2481847578895ff49f3.wav",
+    "src": "assets/audio/zh-CN/eden/eden-07/s2-f2481847578895ff49f3.mp3",
     "duration": 10.28
   },
   "zh-CN/eden/eden-08/s1": {
-    "src": "assets/audio/zh-CN/eden/eden-08/s1-08a6d2b593eefee9f369.wav",
+    "src": "assets/audio/zh-CN/eden/eden-08/s1-08a6d2b593eefee9f369.mp3",
     "duration": 10.18
   },
   "zh-CN/eden/eden-08/s2": {
-    "src": "assets/audio/zh-CN/eden/eden-08/s2-4116974fee5c581426e3.wav",
+    "src": "assets/audio/zh-CN/eden/eden-08/s2-4116974fee5c581426e3.mp3",
     "duration": 10.24
   },
   "zh-CN/noah/noah-01/s1": {
-    "src": "assets/audio/zh-CN/noah/noah-01/s1-cd05ef555a584d17ae65.wav",
+    "src": "assets/audio/zh-CN/noah/noah-01/s1-cd05ef555a584d17ae65.mp3",
     "duration": 6.63
   },
   "zh-CN/noah/noah-01/s2": {
-    "src": "assets/audio/zh-CN/noah/noah-01/s2-d81633d7ac684425af02.wav",
+    "src": "assets/audio/zh-CN/noah/noah-01/s2-d81633d7ac684425af02.mp3",
     "duration": 7.53
   },
   "zh-CN/noah/noah-02/s1": {
-    "src": "assets/audio/zh-CN/noah/noah-02/s1-122a09889f8b8649c80c.wav",
+    "src": "assets/audio/zh-CN/noah/noah-02/s1-122a09889f8b8649c80c.mp3",
     "duration": 10.4
   },
   "zh-CN/noah/noah-02/s2": {
-    "src": "assets/audio/zh-CN/noah/noah-02/s2-dfe5fa3019c17c7fdccd.wav",
+    "src": "assets/audio/zh-CN/noah/noah-02/s2-dfe5fa3019c17c7fdccd.mp3",
     "duration": 9.54
   },
   "zh-CN/noah/noah-03/s1": {
-    "src": "assets/audio/zh-CN/noah/noah-03/s1-07012fff8c664ec3f9f8.wav",
+    "src": "assets/audio/zh-CN/noah/noah-03/s1-07012fff8c664ec3f9f8.mp3",
     "duration": 8.32
   },
   "zh-CN/noah/noah-03/s2": {
-    "src": "assets/audio/zh-CN/noah/noah-03/s2-34de73247cbc42fc1159.wav",
+    "src": "assets/audio/zh-CN/noah/noah-03/s2-34de73247cbc42fc1159.mp3",
     "duration": 6.44
   },
   "zh-CN/noah/noah-04/s1": {
-    "src": "assets/audio/zh-CN/noah/noah-04/s1-2737c265b0df8db814c1.wav",
+    "src": "assets/audio/zh-CN/noah/noah-04/s1-2737c265b0df8db814c1.mp3",
     "duration": 5.51
   },
   "zh-CN/noah/noah-04/s2": {
-    "src": "assets/audio/zh-CN/noah/noah-04/s2-b42824e9ef9ff43121fb.wav",
+    "src": "assets/audio/zh-CN/noah/noah-04/s2-b42824e9ef9ff43121fb.mp3",
     "duration": 8.75
   },
   "zh-CN/noah/noah-05/s1": {
-    "src": "assets/audio/zh-CN/noah/noah-05/s1-350ec5e26648fde404ea.wav",
+    "src": "assets/audio/zh-CN/noah/noah-05/s1-350ec5e26648fde404ea.mp3",
     "duration": 5.75
   },
   "zh-CN/noah/noah-05/s2": {
-    "src": "assets/audio/zh-CN/noah/noah-05/s2-f8e3e035260d2864a886.wav",
+    "src": "assets/audio/zh-CN/noah/noah-05/s2-f8e3e035260d2864a886.mp3",
     "duration": 9.79
   },
   "zh-CN/noah/noah-06/s1": {
-    "src": "assets/audio/zh-CN/noah/noah-06/s1-bb8f89a46911477ec14f.wav",
+    "src": "assets/audio/zh-CN/noah/noah-06/s1-bb8f89a46911477ec14f.mp3",
     "duration": 8.88
   },
   "zh-CN/noah/noah-06/s2": {
-    "src": "assets/audio/zh-CN/noah/noah-06/s2-64ba5d20047058fcf29e.wav",
+    "src": "assets/audio/zh-CN/noah/noah-06/s2-64ba5d20047058fcf29e.mp3",
     "duration": 8.69
   },
   "zh-CN/noah/noah-07/s1": {
-    "src": "assets/audio/zh-CN/noah/noah-07/s1-6f429fe20d5bf063ac3c.wav",
+    "src": "assets/audio/zh-CN/noah/noah-07/s1-6f429fe20d5bf063ac3c.mp3",
     "duration": 7.26
   },
   "zh-CN/noah/noah-07/s2": {
-    "src": "assets/audio/zh-CN/noah/noah-07/s2-807d950ed76382f47406.wav",
+    "src": "assets/audio/zh-CN/noah/noah-07/s2-807d950ed76382f47406.mp3",
     "duration": 7.68
   },
   "zh-CN/noah/noah-08/s1": {
-    "src": "assets/audio/zh-CN/noah/noah-08/s1-0865768712a3a3b9808c.wav",
+    "src": "assets/audio/zh-CN/noah/noah-08/s1-0865768712a3a3b9808c.mp3",
     "duration": 9.26
   },
   "zh-CN/noah/noah-08/s2": {
-    "src": "assets/audio/zh-CN/noah/noah-08/s2-9d46f4098d756446f43d.wav",
+    "src": "assets/audio/zh-CN/noah/noah-08/s2-9d46f4098d756446f43d.mp3",
     "duration": 9.46
   },
   "zh-CN/names/adam": {
-    "src": "assets/audio/zh-CN/names/adam-28d020961f3803d4eea8.wav",
+    "src": "assets/audio/zh-CN/names/adam-28d020961f3803d4eea8.mp3",
     "duration": 0.96
   },
   "zh-CN/names/eve": {
-    "src": "assets/audio/zh-CN/names/eve-adad40382c64af31f468.wav",
+    "src": "assets/audio/zh-CN/names/eve-adad40382c64af31f468.mp3",
     "duration": 0.88
   },
   "zh-CN/names/noah": {
-    "src": "assets/audio/zh-CN/names/noah-493db29ae2daf6b0e841.wav",
+    "src": "assets/audio/zh-CN/names/noah-493db29ae2daf6b0e841.mp3",
     "duration": 0.7
   }
 }

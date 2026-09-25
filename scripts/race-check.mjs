@@ -87,7 +87,7 @@ try {
     async (page, context) => {
       await enter(page);
       const held = deferred();
-      await page.route("**/*.wav", (route) => held.resolve(route));
+      await page.route(/\.(?:wav|mp3)(?:\?|$)/, (route) => held.resolve(route));
       await page.locator('[data-character="adam"]').click();
       const route = await Promise.race([
         held.promise,

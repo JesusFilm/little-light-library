@@ -22,6 +22,9 @@ produces narration. It operates on the same files the reader loads. This guide e
 
 For new assets, use `public/assets/books/<id>/`, with descriptive subdirectories
 such as `art/river-bank.webp` and `audio/en-US/river-bank-welcome.wav`.
+Run `npm run media:optimize` after adding runtime images or WAV recordings; see
+[mobile media derivatives](mobile-media.md). It preserves WAV source recordings,
+builds smaller runtime media, and registers known phone image variants.
 Existing books retain their established paths. A book's asset
 `src` is relative to `public/`, even though its JSON lives under `public/books/`.
 Shared assets within this prototype are allowed; do not overwrite or remove a

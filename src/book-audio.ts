@@ -205,6 +205,10 @@ export class BookAudio {
   private measuredDurations: Record<string, number> = {};
   private sourceBook?: AuthoredBook;
   private loadAbort?: AbortController;
+  private prefetchAbort?: AbortController;
+  private prefetchTimer?: ReturnType<typeof setTimeout>;
+  private prefetched = new Map<string, ArrayBuffer>();
+  private adjacent?: { book: AuthoredBook; pageIndex: number };
   private scheduled = new Map<string, ScheduledAudio>();
   private retiring = new Set<ScheduledAudio>();
   private master: GainNode;
@@ -240,6 +244,23 @@ export class BookAudio {
           (loopEndAt === undefined || loopEndAt > this.context.currentTime),
       )
     );
+  }
+
+  /** Observable media residency for profiling and low-memory regression tests. */
+  get cacheFootprint() {
+    return {
+      decodedBuffers: this.buffers.size,
+      decodedBytes: [...this.buffers.values()].reduce(
+        (bytes, buffer) =>
+          bytes + (buffer.length || 0) * (buffer.numberOfChannels || 0) * 4,
+        0,
+      ),
+      encodedBuffers: this.prefetched.size,
+      encodedBytes: [...this.prefetched.values()].reduce(
+        (bytes, buffer) => bytes + buffer.byteLength,
+        0,
+      ),
+    };
   }
 
   private disconnect(entry: ScheduledAudio) {
@@ -487,26 +508,40 @@ export class BookAudio {
     this.loadAbort = controller;
     const loaded = new Map<string, AudioBuffer>();
     try {
-      for (const id of ids) {
-        const cached = existing.get(id);
-        if (cached) {
-          loaded.set(id, cached);
-          continue;
-        }
-        const response = await fetch(assetUrl(book.assets[id].src), {
-          signal: controller.signal,
-        });
-        if (!response.ok)
-          throw new Error(`Audio asset '${id}' could not load.`);
-        const buffer = await this.context.decodeAudioData(
-          await response.arrayBuffer(),
-        );
-        if (token !== this.generation) return null;
-        finite(buffer.duration, `Decoded duration for '${id}'`);
-        loaded.set(id, buffer);
-      }
+      // A page commonly has narration and a soundscape. Fetch them together
+      // but cap full-book loads so a weak phone never creates a request storm.
+      let next = 0;
+      const workers = Array.from(
+        { length: Math.min(3, ids.length) },
+        async () => {
+          while (next < ids.length) {
+            const id = ids[next++];
+            const cached = existing.get(id);
+            if (cached) {
+              loaded.set(id, cached);
+              continue;
+            }
+            let encoded = this.prefetched.get(id);
+            this.prefetched.delete(id);
+            if (!encoded) {
+              const response = await fetch(assetUrl(book.assets[id].src), {
+                signal: controller.signal,
+              });
+              if (!response.ok)
+                throw new Error(`Audio asset '${id}' could not load.`);
+              encoded = await response.arrayBuffer();
+            }
+            const buffer = await this.context.decodeAudioData(encoded);
+            if (token !== this.generation) return;
+            finite(buffer.duration, `Decoded duration for '${id}'`);
+            loaded.set(id, buffer);
+          }
+        },
+      );
+      await Promise.all(workers);
       return token === this.generation ? loaded : null;
     } catch (error) {
+      controller.abort();
       if (token !== this.generation) return null;
       throw error;
     } finally {
@@ -514,9 +549,62 @@ export class BookAudio {
     }
   }
 
+  /** Keep at most one adjacent page of encoded cues, never decoded PCM. */
+  private queueAdjacentPage(book: AuthoredBook, pageIndex: number) {
+    if (this.prefetchTimer) clearTimeout(this.prefetchTimer);
+    this.prefetchAbort?.abort();
+    this.prefetchAbort = undefined;
+    this.prefetched.clear();
+    if (typeof window === "undefined" || pageIndex >= book.spreads.length)
+      return;
+    if (
+      typeof navigator !== "undefined" &&
+      (navigator as Navigator & { connection?: { saveData?: boolean } })
+        .connection?.saveData
+    )
+      return;
+    this.prefetchTimer = setTimeout(() => {
+      this.prefetchTimer = undefined;
+      if (this.sourceBook !== book || this.disposed) return;
+      const controller = new AbortController();
+      this.prefetchAbort = controller;
+      const ids = this.pageAudio(book, pageIndex)
+        .filter((id) => !this.buffers.has(id))
+        .slice(0, 2);
+      void (async () => {
+        let bytes = 0;
+        for (const id of ids) {
+          try {
+            const response = await fetch(assetUrl(book.assets[id].src), {
+              signal: controller.signal,
+            });
+            if (!response.ok) break;
+            const statedSize = Number(response.headers?.get("content-length"));
+            if (statedSize > 512_000 - bytes) break;
+            const encoded = await response.arrayBuffer();
+            if (
+              controller.signal.aborted ||
+              bytes + encoded.byteLength > 512_000
+            )
+              break;
+            bytes += encoded.byteLength;
+            this.prefetched.set(id, encoded);
+          } catch {
+            break; // Adjacent preparation is optional; the page retries normally.
+          }
+        }
+        if (this.prefetchAbort === controller) this.prefetchAbort = undefined;
+      })();
+    }, 1200);
+  }
+
   async load(book: AuthoredBook, pageIndex?: number): Promise<boolean> {
     if (this.disposed) throw new Error("Book audio has been disposed.");
     this.loadAbort?.abort();
+    this.prefetchAbort?.abort();
+    if (this.prefetchTimer) clearTimeout(this.prefetchTimer);
+    this.prefetched.clear();
+    this.adjacent = undefined;
     const token = ++this.generation;
     this.playRequest++;
     this.active = false;
@@ -541,6 +629,8 @@ export class BookAudio {
     this.buffers = loaded;
     this.sourceBook = book;
     this.rangeEnd = this.timeline.total;
+    if (pageIndex !== undefined)
+      this.adjacent = { book, pageIndex: pageIndex + 1 };
     return true;
   }
 
@@ -549,6 +639,8 @@ export class BookAudio {
     if (this.disposed || this.sourceBook !== book)
       throw new Error("Load the book before changing audio pages.");
     this.loadAbort?.abort();
+    this.prefetchAbort?.abort();
+    if (this.prefetchTimer) clearTimeout(this.prefetchTimer);
     const token = ++this.generation;
     const ids = this.pageAudio(book, pageIndex);
     const loaded = await this.fetchAudio(book, ids, token, this.buffers);
@@ -557,6 +649,7 @@ export class BookAudio {
       this.measuredDurations[id] = buffer.duration;
     this.timeline = buildBookTimeline(book, this.measuredDurations);
     this.buffers = loaded;
+    this.adjacent = { book, pageIndex: pageIndex + 1 };
     return true;
   }
 
@@ -730,6 +823,13 @@ export class BookAudio {
     this.anchor = this.context.currentTime;
     this.active = true;
     this.schedule();
+    if (
+      this.adjacent &&
+      !this.prefetchTimer &&
+      !this.prefetchAbort &&
+      !this.prefetched.size
+    )
+      this.queueAdjacentPage(this.adjacent.book, this.adjacent.pageIndex);
   }
 
   pause() {
@@ -752,6 +852,10 @@ export class BookAudio {
 
   stop() {
     this.loadAbort?.abort();
+    this.prefetchAbort?.abort();
+    if (this.prefetchTimer) clearTimeout(this.prefetchTimer);
+    this.prefetched.clear();
+    this.adjacent = undefined;
     this.generation++;
     this.playRequest++;
     this.active = false;

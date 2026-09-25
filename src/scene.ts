@@ -42,6 +42,7 @@ import {
   type TurnDirection,
 } from "./turning-leaf";
 import { stageDirections } from "./stage-direction";
+import { mobileImageUrl } from "./mobile-images";
 import { alphaBounds } from "./alpha-bounds";
 import {
   mirroredScaleX,
@@ -1370,13 +1371,15 @@ export class LibraryScene {
       definitions.map((toy) =>
         loader
           .loadAsync(
-            /^(?:data:|blob:|https?:)/.test(toy.asset)
-              ? toy.asset
-              : toy.asset.startsWith("/")
-                ? `.${toy.asset}`
-                : toy.asset.startsWith("./")
-                  ? toy.asset
-                  : `./${toy.asset}`,
+            mobileImageUrl(
+              /^(?:data:|blob:|https?:)/.test(toy.asset)
+                ? toy.asset
+                : toy.asset.startsWith("/")
+                  ? `.${toy.asset}`
+                  : toy.asset.startsWith("./")
+                    ? toy.asset
+                    : `./${toy.asset}`,
+            ),
           )
           .catch(() => undefined),
       ),
@@ -1726,6 +1729,25 @@ export class LibraryScene {
       actorMood: "listen" as PaperActorMood,
     };
     const loader = new THREE.TextureLoader();
+    const imageLoader = new THREE.ImageLoader();
+    const images = new Map<string, Promise<HTMLImageElement>>();
+    const stageImage = (source: string) => {
+      const url = mobileImageUrl(stageAssetUrl(source));
+      let pending = images.get(url);
+      if (!pending) {
+        pending = imageLoader.loadAsync(url);
+        // An optional image can fail before its later fallback is awaited.
+        void pending.catch(() => undefined);
+        images.set(url, pending);
+      }
+      return pending;
+    };
+    const loadStageTexture = async (source: string) => {
+      const image = await stageImage(source);
+      const texture = new THREE.Texture(image);
+      texture.needsUpdate = true;
+      return texture;
+    };
     const assertCurrent = () => {
       if (!stillCurrent()) throw Error("legacy-stage-superseded");
     };
@@ -1768,7 +1790,7 @@ export class LibraryScene {
         prop: StageProp,
         options: { name?: string; optional?: boolean } = {},
       ) => {
-        const request = loader.loadAsync(stageAssetUrl(prop.file));
+        const request = loadStageTexture(prop.file);
         const tex = options.optional
           ? await request.catch(() => undefined)
           : await request;
@@ -1816,16 +1838,56 @@ export class LibraryScene {
         return cutout;
       };
       const direction = stageDirections[page.id];
+      // Begin the current spread's unique image transfers together. Each
+      // later use receives its own Texture (atlas offsets may differ), while
+      // the decoded image and network request are shared per URL.
+      [
+        direction.background,
+        direction.ground,
+        ...direction.actors.map((actor) =>
+          actor.image
+            ? actor.image
+            : `assets/art/theatre/${actor.kind}-poses.webp`,
+        ),
+        ...(direction.props ?? []).map((prop) => prop.file),
+        ...(direction.family
+          ? [
+              typeof direction.family === "object"
+                ? direction.family.file
+                : "family-seven.webp",
+            ]
+          : []),
+        ...(direction.ark
+          ? [
+              typeof direction.ark === "object"
+                ? direction.ark.file
+                : "ark.webp",
+            ]
+          : []),
+        ...(direction.dove
+          ? [
+              typeof direction.dove === "object"
+                ? direction.dove.file
+                : "dove-olive.webp",
+            ]
+          : []),
+        ...(direction.tree !== undefined ? ["assets/art/eden-tree.webp"] : []),
+        ...(Array.isArray(direction.waves)
+          ? direction.waves.map((wave) => wave.file)
+          : direction.waves
+            ? ["assets/books/jonah-and-the-whale/art/storm-wave-layer.webp"]
+            : []),
+      ].forEach(stageImage);
       draft.wideEnsemble = Boolean(direction.family);
       const backdrop = direction.background;
       draft.actorMood = direction.actors[0]?.mood || "listen";
-      texture = await loader
-        .loadAsync(stageAssetUrl(backdrop))
-        .catch(() =>
-          loader.loadAsync(
+      texture = await loadStageTexture(backdrop).catch(() =>
+        loader.loadAsync(
+          mobileImageUrl(
             page.image.startsWith("/") ? `.${page.image}` : `./${page.image}`,
           ),
-        );
+        ),
+      );
       if (!stillCurrent()) {
         texture.dispose();
         throw Error("legacy-stage-superseded");
@@ -1867,12 +1929,14 @@ export class LibraryScene {
         const kind = actorDirection.kind;
         const imageActor = Boolean(actorDirection.image);
         const tex = imageActor
-          ? await loader.loadAsync(stageAssetUrl(actorDirection.image!))
-          : await loader
-              .loadAsync(`./assets/art/theatre/${kind}-poses.webp`)
-              .catch(() =>
-                loader.loadAsync(`./assets/art/${kind}-figurine.webp`),
-              );
+          ? await loadStageTexture(actorDirection.image!)
+          : await loadStageTexture(
+              `assets/art/theatre/${kind}-poses.webp`,
+            ).catch(() =>
+              loader.loadAsync(
+                mobileImageUrl(`./assets/art/${kind}-figurine.webp`),
+              ),
+            );
         if (!stillCurrent()) {
           tex.dispose();
           throw Error("legacy-stage-superseded");
@@ -2073,7 +2137,7 @@ export class LibraryScene {
       {
         // Complete the explicitly paired page print before releasing the stage.
         const groundPath = direction.ground;
-        const floorTexture = await loader.loadAsync(stageAssetUrl(groundPath));
+        const floorTexture = await loadStageTexture(groundPath);
         if (!stillCurrent()) {
           floorTexture?.dispose();
           throw Error("legacy-stage-superseded");
