@@ -16,6 +16,9 @@ jobs:
       READER_BROWSER_CHANNEL: chrome
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 22
