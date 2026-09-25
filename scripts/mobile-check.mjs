@@ -454,14 +454,61 @@ try {
           .first()
           .boundingBox();
         assert.ok(character, "Character has a visible projected target");
-        await page.touchscreen.tap(
-          character.x + character.width / 2,
-          character.y + character.height / 2,
+        const tapX = character.x + character.width / 2;
+        const tapY = character.y + character.height / 2;
+        await page.evaluate(() => {
+          const canvas = document.querySelector("#scene canvas");
+          const armedAt = performance.now();
+          const observation = { armedAt, event: null };
+          const onPointerUp = (event) => {
+            if (event.target !== canvas || observation.event) return;
+            const scene = window.libraryDebug().scene;
+            observation.event = {
+              timeStamp: event.timeStamp,
+              observedAt: performance.now(),
+              x: event.clientX,
+              y: event.clientY,
+              pointerType: event.pointerType,
+              trusted: event.isTrusted,
+              reacting: scene.reacting,
+              touchedActor: scene.touchedActor,
+            };
+          };
+          document.addEventListener("pointerup", onPointerUp);
+          window.mobileCharacterTouch = {
+            observation,
+            cleanup: () =>
+              document.removeEventListener("pointerup", onPointerUp),
+          };
+        });
+        let touch;
+        try {
+          await page.touchscreen.tap(tapX, tapY);
+          touch = await page.evaluate(
+            () => window.mobileCharacterTouch.observation,
+          );
+        } finally {
+          await page.evaluate(() => {
+            window.mobileCharacterTouch?.cleanup();
+            delete window.mobileCharacterTouch;
+          });
+        }
+        assert.ok(touch.event, "Canvas received the character touch");
+        assert.ok(
+          touch.event.timeStamp >= touch.armedAt &&
+            touch.event.observedAt >= touch.armedAt,
+          "Reaction was observed for this touch",
         );
-        await page.waitForFunction(
-          () =>
-            window.libraryDebug().scene.reacting &&
-            window.libraryDebug().scene.touchedActor >= 0,
+        assert.equal(touch.event.pointerType, "touch");
+        assert.equal(touch.event.trusted, true);
+        assert.ok(
+          Math.abs(touch.event.x - tapX) <= 1 &&
+            Math.abs(touch.event.y - tapY) <= 1,
+          "Reaction came from the character tap coordinates",
+        );
+        assert.ok(
+          touch.event.reacting && touch.event.touchedActor >= 0,
+          "Paper character reacted during the touch event",
         );
         scenario.characterFeedback = "paper character reacted to touch";
       }
