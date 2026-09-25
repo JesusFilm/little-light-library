@@ -187,6 +187,87 @@ test("the first page's slow media load does not lock turning or Library", async 
   assert.equal(toyLoads, 1, "toys load after the first page settles");
 });
 
+test("cabinet toys wait for pending pages and ignore a superseded book", async () => {
+  const gates = {
+    "eden:0": deferred(),
+    "eden:1": deferred(),
+    "noah:0": deferred(),
+  };
+  const started = {
+    "eden:0": deferred(),
+    "eden:1": deferred(),
+    "noah:0": deferred(),
+  };
+  const toyLoads: string[] = [];
+  let book: string | null = null;
+  let page = 0;
+  const session: ReadingSession<{ key: string; id: string }> =
+    new ReadingSession(
+      {
+        async inspectShelfBook() {},
+        async returnShelfPreview() {},
+      },
+      () => {},
+      () => {},
+      (error) => {
+        throw error;
+      },
+      {
+        reading: () => ({ book, page, pageCount: 2, toys: [] }),
+        validate() {},
+        stop() {},
+        async clearToys() {},
+        async closeBook() {},
+        async landBook() {},
+        activateBook(entry) {
+          book = entry.id;
+          page = 0;
+        },
+        showFirstPage: (): Promise<void> => session.loadPage(true),
+        async loadToys() {
+          toyLoads.push(book!);
+        },
+        async suspendPage() {},
+        async prepareLibrary() {},
+        async resumePage() {},
+      },
+      {
+        cancel() {},
+        commitTurn(target) {
+          page = target;
+        },
+        async render() {
+          const key = `${book}:${page}` as keyof typeof gates;
+          started[key].resolve();
+          await gates[key].promise;
+        },
+      },
+    );
+  await session.inspect({ key: "builtin:eden", id: "eden" });
+  const edenOpening = session.openInspected();
+  await started["eden:0"].promise;
+  await edenOpening;
+  assert.deepEqual(toyLoads, []);
+  const edenTurn = session.turnPage(1);
+  await started["eden:1"].promise;
+  gates["eden:0"].resolve();
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.deepEqual(toyLoads, [], "turning art retains priority over toys");
+  await session.browseLibrary();
+  await session.inspect({ key: "builtin:noah", id: "noah" });
+  const noahOpening = session.openInspected();
+  await started["noah:0"].promise;
+  await noahOpening;
+  gates["eden:1"].resolve();
+  await edenTurn;
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.deepEqual(toyLoads, [], "old book completion cannot load new toys");
+  gates["noah:0"].resolve();
+  await session.waitForPage();
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.deepEqual(toyLoads, ["noah"]);
+});
+
 test("opening, switching, Library and Continue keep the session place and toys together", async () => {
   const pending = deferred();
   let book: string | null = null;
