@@ -256,43 +256,23 @@ export class RoomShelf {
   async setBooks(books: readonly RoomShelfBook[]) {
     const definitions = books.slice(0, MAX_BOOKS);
     const generation = ++this.generation;
-    const loader = new THREE.TextureLoader();
-    const loaded = await Promise.all(
-      definitions.map(async (definition) => {
-        try {
-          const texture = await loader.loadAsync(coverUrl(definition.cover));
-          texture.colorSpace = THREE.SRGBColorSpace;
-          const cover = createBookCoverTexture(
-            definition.title,
-            texture,
-            definition.appearance,
-          );
-          texture.dispose();
-          return cover;
-        } catch {
-          return createBookCoverTexture(
-            definition.title,
-            undefined,
-            definition.appearance,
-          );
-        }
-      }),
-    );
-    if (generation !== this.generation) {
-      loaded.forEach((texture) => texture.dispose());
-      return;
-    }
     this.cancelMotion();
     this.entries.forEach((entry) => this.disposeEntry(entry));
     this.entries.clear();
     this.previewKey = undefined;
     this.order = definitions.map((book) => book.key);
     definitions.forEach((definition, index) => {
-      const root = this.makeBook(definition, loaded[index], index);
+      // A titled cloth cover is usable before slow art requests complete.
+      const cover = createBookCoverTexture(
+        definition.title,
+        undefined,
+        definition.appearance,
+      );
+      const root = this.makeBook(definition, cover, index);
       const entry = {
         definition,
         root,
-        cover: loaded[index],
+        cover,
         slot: this.slot(index),
       };
       this.entries.set(definition.key, entry);
@@ -300,6 +280,35 @@ export class RoomShelf {
     });
     this.rebuildEndStop(definitions.length);
     this.applyVisibility();
+    const loader = new THREE.TextureLoader();
+    for (const definition of definitions) {
+      const entry = this.entries.get(definition.key)!;
+      void loader
+        .loadAsync(coverUrl(definition.cover))
+        .then((texture) => {
+          if (
+            generation !== this.generation ||
+            this.entries.get(definition.key) !== entry
+          ) {
+            texture.dispose();
+            return;
+          }
+          texture.colorSpace = THREE.SRGBColorSpace;
+          const painted = createBookCoverTexture(
+            definition.title,
+            texture,
+            definition.appearance,
+          );
+          texture.dispose();
+          // Keep the shared texture identity used by shelf and table transfers.
+          entry.cover.image = painted.image;
+          entry.cover.needsUpdate = true;
+          painted.dispose();
+        })
+        .catch(() => {
+          // The titled cover remains readable if artwork is unavailable.
+        });
+    }
   }
 
   books() {

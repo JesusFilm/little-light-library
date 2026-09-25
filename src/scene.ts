@@ -243,6 +243,19 @@ function stageAssetUrl(source: string) {
 }
 const roomTint = new THREE.Color(0xffdc91);
 const roomGlow = new THREE.Color(0x251600);
+const constrainedPhone = () => {
+  const device = navigator as Navigator & {
+    deviceMemory?: number;
+    connection?: { saveData?: boolean };
+  };
+  return (
+    matchMedia("(max-width: 600px)").matches &&
+    (device.connection?.saveData === true ||
+      (device.deviceMemory !== undefined && device.deviceMemory <= 4) ||
+      (device.hardwareConcurrency !== undefined &&
+        device.hardwareConcurrency <= 4))
+  );
+};
 const ease = (x: number) => {
   const t = THREE.MathUtils.clamp(x, 0, 1);
   return t * t * (3 - 2 * t);
@@ -694,16 +707,20 @@ export class LibraryScene {
     private onSelect: (id: Selection) => void,
     private onTouch: () => void = () => {},
   ) {
+    this.lowQuality = constrainedPhone();
+    document.documentElement.classList.toggle("low-graphics", this.lowQuality);
     this.renderer = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: !this.lowQuality,
       alpha: false,
       powerPreference: "low-power",
     });
-    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+    this.renderer.setPixelRatio(
+      this.lowQuality ? 1 : Math.min(devicePixelRatio, 1.5),
+    );
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.12;
-    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.enabled = !this.lowQuality;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.container.append(this.renderer.domElement);
     this.actorLabel.className = "paper-name";
@@ -2446,6 +2463,7 @@ export class LibraryScene {
       return;
     }
     const now = performance.now();
+    if (this.lowQuality && this.lastFrame && now - this.lastFrame < 30) return;
     this.roomShelf.update(now);
     this.shelfHint.update(
       now,
@@ -2462,6 +2480,7 @@ export class LibraryScene {
     else this.slowFrames = Math.max(0, this.slowFrames - 1);
     if (this.slowFrames > 45 && !this.lowQuality) {
       this.lowQuality = true;
+      document.documentElement.classList.add("low-graphics");
       this.renderer.setPixelRatio(1);
       this.renderer.shadowMap.enabled = false;
     }

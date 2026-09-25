@@ -32,7 +32,7 @@ Generated per-book review index. Edit the book JSON and media sources, then rege
 
 **Characters, props, and motion:**
 
-- actor `jonah` (Jonah): [assets/art/jonah/jonah-cutout.png](../../public/assets/art/jonah/jonah-cutout.png); sway motion on open, loops.
+- actor `jonah` (Jonah): [assets/art/jonah/jonah-cutout.webp](../../public/assets/art/jonah/jonah-cutout.webp); sway motion on open, loops.
 
 **Narration:**
 
@@ -1390,13 +1390,13 @@ Each runtime path is public-root-relative in the book JSON. This table includes 
 | `great-fish-open-mouth` | image | [assets/books/jonah-and-the-whale/art/great-fish-open-mouth.webp](../../public/assets/books/jonah-and-the-whale/art/great-fish-open-mouth.webp) | Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/great-fish-open-mouth.txt. |
 | `great-fish-serious-open-mouth` | image | [assets/books/jonah-and-the-whale/art/great-fish-serious-open-mouth.webp](../../public/assets/books/jonah-and-the-whale/art/great-fish-serious-open-mouth.webp) | Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/great-fish-serious-open-mouth.txt. |
 | `harbor-calm-surf` | audio | [assets/books/jonah-and-the-whale/audio/soundtracks/harbor-calm-surf.wav](../../public/assets/books/jonah-and-the-whale/audio/soundtracks/harbor-calm-surf.wav) | Original deterministic algorithmic ambience composed for Little Light Library; no recordings, external services, or third-party audio samples. |
-| `jonah-cutout` | image | [assets/art/jonah/jonah-cutout.png](../../public/assets/art/jonah/jonah-cutout.png) | Creator-supplied character cutout generated for Story Lab. |
+| `jonah-cutout` | image | [assets/art/jonah/jonah-cutout.webp](../../public/assets/art/jonah/jonah-cutout.webp) | Creator-supplied character cutout generated for Story Lab; WebP derivative of assets/art/jonah/jonah-cutout.png. |
 | `jonah-divine-question-sunlight` | image | [assets/books/jonah-and-the-whale/art/jonah-divine-question-sunlight.webp](../../public/assets/books/jonah-and-the-whale/art/jonah-divine-question-sunlight.webp) | Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/jonah-divine-question-sunlight.txt. |
 | `jonah-divine-question-sunlight-outline` | image | [assets/books/jonah-and-the-whale/art/jonah-divine-question-sunlight-outline.webp](../../public/assets/books/jonah-and-the-whale/art/jonah-divine-question-sunlight-outline.webp) | Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/jonah-divine-question-sunlight-outline.txt. |
 | `jonah-floating-fullbody` | image | [assets/books/jonah-and-the-whale/art/jonah-floating-fullbody.webp](../../public/assets/books/jonah-and-the-whale/art/jonah-floating-fullbody.webp) | Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/jonah-floating-fullbody.txt. |
 | `jonah-happy-seated` | image | [assets/books/jonah-and-the-whale/art/jonah-happy-seated.webp](../../public/assets/books/jonah-and-the-whale/art/jonah-happy-seated.webp) | Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/jonah-happy-seated.txt. |
 | `jonah-overboard` | image | [assets/books/jonah-and-the-whale/art/jonah-overboard.webp](../../public/assets/books/jonah-and-the-whale/art/jonah-overboard.webp) | Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/jonah-overboard.txt. |
-| `jonah-shore` | image | [assets/art/jonah/jonah-shore.png](../../public/assets/art/jonah/jonah-shore.png) | Creator-supplied image generated for Story Lab; retained as the cover scene. |
+| `jonah-shore` | image | [assets/art/jonah/jonah-shore.webp](../../public/assets/art/jonah/jonah-shore.webp) | Creator-supplied image generated for Story Lab; WebP derivative of assets/art/jonah/jonah-shore.png retained as the cover scene. |
 | `jonah-speaking` | image | [assets/books/jonah-and-the-whale/art/jonah-speaking.webp](../../public/assets/books/jonah-and-the-whale/art/jonah-speaking.webp) | Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/jonah-speaking.txt. |
 | `jonah-waiting` | image | [assets/books/jonah-and-the-whale/art/jonah-waiting.webp](../../public/assets/books/jonah-and-the-whale/art/jonah-waiting.webp) | Original illustration generated for this book; see the production brief at assets/books/jonah-and-the-whale/prompts/jonah-waiting.txt. |
 | `joppa-harbor` | image | [assets/books/jonah-and-the-whale/art/joppa-harbor.webp](../../public/assets/books/jonah-and-the-whale/art/joppa-harbor.webp) | Generated with OpenAI ImageGen for Story Lab; source prompt is in assets/books/jonah-and-the-whale/prompts/joppa-harbor.txt. |

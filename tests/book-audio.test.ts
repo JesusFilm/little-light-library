@@ -284,6 +284,29 @@ async function withFetch(run: () => Promise<void>) {
   return urls;
 }
 
+test("phone reader fetches only the selected page and its soundtrack", async () => {
+  const fake = fakeContext();
+  const player = new BookAudio(fake.context as unknown as AudioContext);
+  const fixture = book();
+  const first = await withFetch(async () => {
+    assert.equal(await player.load(fixture, 0), true);
+  });
+  assert.deepEqual(first, ["./audio/first.wav", "./audio/music.mp3"]);
+  const second = await withFetch(async () => {
+    assert.equal(await player.loadPage(fixture, 1), true);
+  });
+  assert.deepEqual(second, ["./audio/second.wav"]);
+  const page = player.timeline.pages[1];
+  player.setPageRange(page.start, page.end, true);
+  await player.play();
+  assert.ok(fake.sources.some((source) => source.buffer));
+  player.preparePageTurn();
+  const back = await withFetch(async () => {
+    assert.equal(await player.loadPage(fixture, 0), true);
+  });
+  assert.deepEqual(back, ["./audio/first.wav", "./audio/music.mp3"]);
+});
+
 test("player loads serial assets and schedules bounded clips with fades and master volume", async () => {
   const fake = fakeContext();
   const player = new BookAudio(fake.context as unknown as AudioContext);

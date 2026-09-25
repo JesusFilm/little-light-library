@@ -90,3 +90,25 @@ test("tab-hide pause cancels a pending audio unlock", async () => {
     globalThis.fetch = original;
   }
 });
+
+test("turning away aborts a pending legacy narration download", async () => {
+  const f = fixture();
+  const original = globalThis.fetch;
+  let aborted = false;
+  globalThis.fetch = (_url, options) =>
+    new Promise<Response>((_resolve, reject) => {
+      options?.signal?.addEventListener("abort", () => {
+        aborted = true;
+        reject(new DOMException("Aborted", "AbortError"));
+      });
+    });
+  try {
+    const n = new Narration(f.context as unknown as AudioContext);
+    const pending = n.load([{ src: "a", duration: 2 }]);
+    n.stop();
+    assert.equal(await pending, false);
+    assert.equal(aborted, true);
+  } finally {
+    globalThis.fetch = original;
+  }
+});

@@ -202,6 +202,9 @@ type ScheduledAudio = {
 export class BookAudio {
   timeline: BookTimeline = emptyTimeline();
   private buffers = new Map<string, AudioBuffer>();
+  private measuredDurations: Record<string, number> = {};
+  private sourceBook?: AuthoredBook;
+  private loadAbort?: AbortController;
   private scheduled = new Map<string, ScheduledAudio>();
   private retiring = new Set<ScheduledAudio>();
   private master: GainNode;
@@ -459,42 +462,101 @@ export class BookAudio {
     return ids;
   }
 
-  async load(book: AuthoredBook): Promise<boolean> {
-    if (this.disposed) throw new Error("Book audio has been disposed.");
-    const token = ++this.generation;
-    this.playRequest++;
-    this.active = false;
-    this.unschedule();
-    this.buffers.clear();
-    this.timeline = emptyTimeline();
-    this.cursor = this.rangeStart = this.rangeEnd = 0;
-    const ids = this.referencedAudio(book);
-    // Validate authored timing before performing I/O.
-    buildBookTimeline(book);
+  private pageAudio(
+    book: AuthoredBook,
+    pageIndex: number,
+    timeline = this.timeline,
+  ) {
+    const page = timeline.pages[pageIndex];
+    if (!page) throw new Error(`Page ${pageIndex} is not in this book.`);
+    const needed = new Set(
+      timeline.clips
+        .filter((clip) => clip.start < page.end && clip.end > page.start)
+        .map((clip) => clip.asset),
+    );
+    return this.referencedAudio(book).filter((id) => needed.has(id));
+  }
+
+  private async fetchAudio(
+    book: AuthoredBook,
+    ids: string[],
+    token: number,
+    existing: Map<string, AudioBuffer>,
+  ) {
+    const controller = new AbortController();
+    this.loadAbort = controller;
     const loaded = new Map<string, AudioBuffer>();
     try {
       for (const id of ids) {
-        const response = await fetch(assetUrl(book.assets[id].src));
+        const cached = existing.get(id);
+        if (cached) {
+          loaded.set(id, cached);
+          continue;
+        }
+        const response = await fetch(assetUrl(book.assets[id].src), {
+          signal: controller.signal,
+        });
         if (!response.ok)
           throw new Error(`Audio asset '${id}' could not load.`);
         const buffer = await this.context.decodeAudioData(
           await response.arrayBuffer(),
         );
-        if (token !== this.generation) return false;
+        if (token !== this.generation) return null;
         finite(buffer.duration, `Decoded duration for '${id}'`);
         loaded.set(id, buffer);
       }
+      return token === this.generation ? loaded : null;
     } catch (error) {
-      if (token !== this.generation) return false;
+      if (token !== this.generation) return null;
       throw error;
+    } finally {
+      if (this.loadAbort === controller) this.loadAbort = undefined;
     }
-    if (token !== this.generation) return false;
-    const durations = Object.fromEntries(
+  }
+
+  async load(book: AuthoredBook, pageIndex?: number): Promise<boolean> {
+    if (this.disposed) throw new Error("Book audio has been disposed.");
+    this.loadAbort?.abort();
+    const token = ++this.generation;
+    this.playRequest++;
+    this.active = false;
+    this.unschedule();
+    this.buffers.clear();
+    this.measuredDurations = {};
+    this.sourceBook = undefined;
+    this.timeline = emptyTimeline();
+    this.cursor = this.rangeStart = this.rangeEnd = 0;
+    // Validate authored timing before performing I/O.
+    const authoredTimeline = buildBookTimeline(book);
+    const ids =
+      pageIndex === undefined
+        ? this.referencedAudio(book)
+        : this.pageAudio(book, pageIndex, authoredTimeline);
+    const loaded = await this.fetchAudio(book, ids, token, new Map());
+    if (!loaded) return false;
+    this.measuredDurations = Object.fromEntries(
       [...loaded].map(([id, buffer]) => [id, buffer.duration]),
     );
-    this.timeline = buildBookTimeline(book, durations);
+    this.timeline = buildBookTimeline(book, this.measuredDurations);
     this.buffers = loaded;
+    this.sourceBook = book;
     this.rangeEnd = this.timeline.total;
+    return true;
+  }
+
+  /** Decode only the destination page. Keep soundtrack sources audible across turns. */
+  async loadPage(book: AuthoredBook, pageIndex: number): Promise<boolean> {
+    if (this.disposed || this.sourceBook !== book)
+      throw new Error("Load the book before changing audio pages.");
+    this.loadAbort?.abort();
+    const token = ++this.generation;
+    const ids = this.pageAudio(book, pageIndex);
+    const loaded = await this.fetchAudio(book, ids, token, this.buffers);
+    if (!loaded) return false;
+    for (const [id, buffer] of loaded)
+      this.measuredDurations[id] = buffer.duration;
+    this.timeline = buildBookTimeline(book, this.measuredDurations);
+    this.buffers = loaded;
     return true;
   }
 
@@ -654,6 +716,8 @@ export class BookAudio {
     const generation = this.generation;
     const request = ++this.playRequest;
     await this.context.resume();
+    if (this.context.state && this.context.state !== "running")
+      throw new Error("Audio is blocked. Tap Play again to retry.");
     if (
       this.disposed ||
       generation !== this.generation ||
@@ -687,6 +751,7 @@ export class BookAudio {
   }
 
   stop() {
+    this.loadAbort?.abort();
     this.generation++;
     this.playRequest++;
     this.active = false;
@@ -771,6 +836,8 @@ export class BookAudio {
     this.stop();
     this.disposed = true;
     this.buffers.clear();
+    this.sourceBook = undefined;
+    this.measuredDurations = {};
     this.timeline = emptyTimeline();
     this.rangeStart = this.rangeEnd = this.cursor = 0;
     this.master.disconnect();

@@ -66,9 +66,14 @@ export class BookNarration {
     try {
       if (this.book !== book) {
         this.book = undefined;
-        if (!(await this.player.load(book)) || token !== this.generation)
+        if (!(await this.player.load(book, page)) || token !== this.generation)
           return false;
         this.book = book;
+      } else if (
+        !(await this.player.loadPage(book, page)) ||
+        token !== this.generation
+      ) {
+        return false;
       }
       if (token !== this.generation) return false;
       this.page = page;
@@ -83,8 +88,10 @@ export class BookNarration {
       if (token === this.generation) this.pending = false;
     }
   }
-  unlock() {
-    return this.context.resume();
+  async unlock() {
+    await this.context.resume();
+    if (this.context.state && this.context.state !== "running")
+      throw new Error("Audio is blocked. Tap Play again to retry.");
   }
   play() {
     return this.player.play();

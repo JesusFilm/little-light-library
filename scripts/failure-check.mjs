@@ -274,6 +274,49 @@ try {
     },
   );
 
+  await check(
+    "A failed shelf cover leaves titled books selectable and reload restores the artwork",
+    async (page) => {
+      const cover = url + "assets/art/jonah/jonah-shore.webp";
+      await page.route(cover, (route) =>
+        route.fulfill({ status: 503, body: "Injected cover failure" }),
+      );
+      const failedCover = page.waitForResponse(
+        (response) => response.url() === cover && response.status() === 503,
+      );
+      await enter(page);
+      await failedCover;
+      assert.equal(
+        await page
+          .locator('[data-shelf-key="book:jonah-and-the-whale"]')
+          .count(),
+        1,
+      );
+      await page.locator('[data-shelf-key="book:jonah-and-the-whale"]').click();
+      await page.waitForFunction(
+        () =>
+          window.libraryDebug?.().shelf.inspected ===
+          "book:jonah-and-the-whale",
+      );
+      assert.match(
+        await page.locator(".shelf-preview h1").textContent(),
+        /Jonah/,
+      );
+      await page.unroute(cover);
+      const restored = page.waitForResponse(
+        (response) => response.url() === cover && response.ok(),
+      );
+      await page.reload();
+      await enter(page, false);
+      await restored;
+      return {
+        coverFailed: true,
+        titleAndSelectionUsable: true,
+        reloadRestoredCover: true,
+      };
+    },
+  );
+
   for (const kind of ["artwork", "audio"]) {
     await check(
       `Missing generic ${kind} keeps text readable and visible Retry restores playback`,
@@ -574,7 +617,7 @@ try {
   await browser?.close();
   await new Promise((resolve) => server.close(resolve));
   results.passed =
-    results.checks.length === 9 &&
+    results.checks.length === 10 &&
     results.checks.every(({ passed }) => passed) &&
     !results.pageErrors.length &&
     !results.unexpectedRequests.length;
