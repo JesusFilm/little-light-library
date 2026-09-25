@@ -298,6 +298,7 @@ input[type="checkbox"] {
   transform: translateX(-50%);
   max-width: 90%;
   background: #fff8e9;
+  color: #263d38;
   box-shadow: 0 5px 30px #332b2222;
   border-radius: 12px;
   padding: 12px;
