@@ -1,0 +1,6292 @@
+[
+  {
+    "book": "eden",
+    "spread": "eden-01",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 305.984375,
+      "top": 330,
+      "right": 348,
+      "bottom": 635.984375,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 203.15625,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 561.34375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 203,
+      "full": 203
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 575.34375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 575.34375,
+        "right": 122,
+        "bottom": 625.984375,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 574.34375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 574.34375,
+        "right": 230,
+        "bottom": 624.984375,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 575.34375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 575.34375,
+        "right": 338,
+        "bottom": 625.984375,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 129.671875,
+        "y": 184.21875,
+        "width": 60,
+        "height": 66.296875,
+        "top": 184.21875,
+        "right": 189.671875,
+        "bottom": 250.515625,
+        "left": 129.671875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-0-360x660.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-02",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 258
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 118.296875,
+        "y": 183.78125,
+        "width": 60,
+        "height": 66.21875,
+        "top": 183.78125,
+        "right": 178.296875,
+        "bottom": 250,
+        "left": 118.296875
+      },
+      {
+        "name": "Eve",
+        "x": 184.9375,
+        "y": 180.65625,
+        "width": 60,
+        "height": 65.84375,
+        "top": 180.65625,
+        "right": 244.9375,
+        "bottom": 246.5,
+        "left": 184.9375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-1-360x660.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-03",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 229
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 116.03125,
+        "y": 183.75,
+        "width": 60,
+        "height": 66.140625,
+        "top": 183.75,
+        "right": 176.03125,
+        "bottom": 249.890625,
+        "left": 116.03125
+      },
+      {
+        "name": "Eve",
+        "x": 180.375,
+        "y": 185.171875,
+        "width": 60,
+        "height": 66.359375,
+        "top": 185.171875,
+        "right": 240.375,
+        "bottom": 251.53125,
+        "left": 180.375
+      },
+      {
+        "name": "Serpent",
+        "x": 209.21875,
+        "y": 169.578125,
+        "width": 60,
+        "height": 44,
+        "top": 169.578125,
+        "right": 269.21875,
+        "bottom": 213.578125,
+        "left": 209.21875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-2-360x660.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-04",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 255
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 118.65625,
+        "y": 182.453125,
+        "width": 60,
+        "height": 66.21875,
+        "top": 182.453125,
+        "right": 178.65625,
+        "bottom": 248.671875,
+        "left": 118.65625
+      },
+      {
+        "name": "Eve",
+        "x": 178.046875,
+        "y": 186.265625,
+        "width": 60,
+        "height": 66.5,
+        "top": 186.265625,
+        "right": 238.046875,
+        "bottom": 252.765625,
+        "left": 178.046875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-3-360x660.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-05",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 255
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 114.859375,
+        "y": 187.140625,
+        "width": 60,
+        "height": 66.78125,
+        "top": 187.140625,
+        "right": 174.859375,
+        "bottom": 253.921875,
+        "left": 114.859375
+      },
+      {
+        "name": "Eve",
+        "x": 175.765625,
+        "y": 184.0625,
+        "width": 60,
+        "height": 65.921875,
+        "top": 184.0625,
+        "right": 235.765625,
+        "bottom": 249.984375,
+        "left": 175.765625
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-4-360x660.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-06",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 229
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 110.0625,
+        "y": 181.125,
+        "width": 60,
+        "height": 65.84375,
+        "top": 181.125,
+        "right": 170.0625,
+        "bottom": 246.96875,
+        "left": 110.0625
+      },
+      {
+        "name": "Eve",
+        "x": 184.90625,
+        "y": 180.953125,
+        "width": 60,
+        "height": 65.546875,
+        "top": 180.953125,
+        "right": 244.90625,
+        "bottom": 246.5,
+        "left": 184.90625
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-5-360x660.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-07",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 255
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 112.234375,
+        "y": 197.03125,
+        "width": 60,
+        "height": 59.53125,
+        "top": 197.03125,
+        "right": 172.234375,
+        "bottom": 256.5625,
+        "left": 112.234375
+      },
+      {
+        "name": "Eve",
+        "x": 182.25,
+        "y": 192.78125,
+        "width": 60,
+        "height": 58.859375,
+        "top": 192.78125,
+        "right": 242.25,
+        "bottom": 251.640625,
+        "left": 182.25
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-6-360x660.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-08",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 284
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 114.546875,
+        "y": 181.390625,
+        "width": 60,
+        "height": 65.765625,
+        "top": 181.390625,
+        "right": 174.546875,
+        "bottom": 247.15625,
+        "left": 114.546875
+      },
+      {
+        "name": "Eve",
+        "x": 178.125,
+        "y": 180.640625,
+        "width": 60,
+        "height": 65.546875,
+        "top": 180.640625,
+        "right": 238.125,
+        "bottom": 246.1875,
+        "left": 178.125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-7-360x660.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-01",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 229
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 134.234375,
+        "y": 184.28125,
+        "width": 60,
+        "height": 66.453125,
+        "top": 184.28125,
+        "right": 194.234375,
+        "bottom": 250.734375,
+        "left": 134.234375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-0-360x660.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-02",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 229
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 135.203125,
+        "y": 171.734375,
+        "width": 60,
+        "height": 63.890625,
+        "top": 171.734375,
+        "right": 195.203125,
+        "bottom": 235.625,
+        "left": 135.203125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-1-360x660.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-03",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 305.984375,
+      "top": 330,
+      "right": 348,
+      "bottom": 635.984375,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 203.15625,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 561.34375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 203,
+      "full": 203
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 575.34375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 575.34375,
+        "right": 122,
+        "bottom": 625.984375,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 574.34375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 574.34375,
+        "right": 230,
+        "bottom": 624.984375,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 575.34375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 575.34375,
+        "right": 338,
+        "bottom": 625.984375,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 72.671875,
+        "y": 183,
+        "width": 60,
+        "height": 66.203125,
+        "top": 183,
+        "right": 132.671875,
+        "bottom": 249.203125,
+        "left": 72.671875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-2-360x660.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-04",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 229
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-3-360x660.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-05",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 229
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 100.671875,
+        "y": 181.859375,
+        "width": 60,
+        "height": 65.984375,
+        "top": 181.859375,
+        "right": 160.671875,
+        "bottom": 247.84375,
+        "left": 100.671875
+      },
+      {
+        "name": "Dove",
+        "x": 185.5625,
+        "y": 159.578125,
+        "width": 60,
+        "height": 44,
+        "top": 159.578125,
+        "right": 245.5625,
+        "bottom": 203.578125,
+        "left": 185.5625
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-4-360x660.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-06",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 284
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 68.1875,
+        "y": 182.8125,
+        "width": 60,
+        "height": 66.171875,
+        "top": 182.8125,
+        "right": 128.1875,
+        "bottom": 248.984375,
+        "left": 68.1875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-5-360x660.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-07",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 229
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 104.25,
+        "y": 184.234375,
+        "width": 60,
+        "height": 66.453125,
+        "top": 184.234375,
+        "right": 164.25,
+        "bottom": 250.6875,
+        "left": 104.25
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-6-360x660.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-08",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 318,
+      "top": 330,
+      "right": 348,
+      "bottom": 648,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 215.171875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 573.359375,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 215,
+      "full": 310
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 122,
+        "bottom": 638,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 586.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 586.359375,
+        "right": 230,
+        "bottom": 637,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 587.359375,
+        "width": 100,
+        "height": 50.640625,
+        "top": 587.359375,
+        "right": 338,
+        "bottom": 638,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 72.671875,
+        "y": 183,
+        "width": 60,
+        "height": 66.203125,
+        "top": 183,
+        "right": 132.671875,
+        "bottom": 249.203125,
+        "left": 72.671875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-7-360x660.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-called",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 227.703125,
+      "top": 330,
+      "right": 348,
+      "bottom": 557.703125,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 124.875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 483.0625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 125,
+      "full": 125
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 122,
+        "bottom": 547.703125,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 496.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 496.0625,
+        "right": 230,
+        "bottom": 546.703125,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 338,
+        "bottom": 547.703125,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Jonah",
+        "x": 118.421875,
+        "y": 169.25,
+        "width": 46,
+        "height": 67.046875,
+        "top": 169.25,
+        "right": 164.421875,
+        "bottom": 236.296875,
+        "left": 118.421875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-0-360x660.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-boards-ship",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 227.703125,
+      "top": 330,
+      "right": 348,
+      "bottom": 557.703125,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 124.875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 483.0625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 125,
+      "full": 125
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 122,
+        "bottom": 547.703125,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 496.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 496.0625,
+        "right": 230,
+        "bottom": 546.703125,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 338,
+        "bottom": 547.703125,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Make little fish leap",
+        "x": 66.03125,
+        "y": 222.359375,
+        "width": 46,
+        "height": 44,
+        "top": 222.359375,
+        "right": 112.03125,
+        "bottom": 266.359375,
+        "left": 66.03125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-1-360x660.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-boards-ship",
+    "viewport": [
+      360,
+      560
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 204,
+      "top": 68,
+      "right": 348,
+      "bottom": 272,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 280,
+      "width": 336,
+      "height": 227.703125,
+      "top": 280,
+      "right": 348,
+      "bottom": 507.703125,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 308.1875,
+      "width": 316,
+      "height": 124.875,
+      "top": 308.1875,
+      "right": 338,
+      "bottom": 433.0625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 125,
+      "full": 125
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 447.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 447.0625,
+        "right": 122,
+        "bottom": 497.703125,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 447.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 447.0625,
+        "right": 230,
+        "bottom": 497.703125,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 447.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 447.0625,
+        "right": 338,
+        "bottom": 497.703125,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Make little fish leap",
+        "x": 81.015625,
+        "y": 189.3125,
+        "width": 46,
+        "height": 44,
+        "top": 189.3125,
+        "right": 127.015625,
+        "bottom": 233.3125,
+        "left": 81.015625
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-1-360x560.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-boards-ship",
+    "viewport": [
+      390,
+      844
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 366,
+      "height": 418,
+      "top": 68,
+      "right": 378,
+      "bottom": 486,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 494,
+      "width": 366,
+      "height": 201.609375,
+      "top": 494,
+      "right": 378,
+      "bottom": 695.609375,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 522.1875,
+      "width": 346,
+      "height": 98.78125,
+      "top": 522.1875,
+      "right": 368,
+      "bottom": 620.96875,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 99,
+      "full": 99
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 634.96875,
+        "width": 110,
+        "height": 50.640625,
+        "top": 634.96875,
+        "right": 132,
+        "bottom": 685.609375,
+        "left": 22
+      },
+      {
+        "x": 140,
+        "y": 634.96875,
+        "width": 110,
+        "height": 50.640625,
+        "top": 634.96875,
+        "right": 250,
+        "bottom": 685.609375,
+        "left": 140
+      },
+      {
+        "x": 258,
+        "y": 634.96875,
+        "width": 110,
+        "height": 50.640625,
+        "top": 634.96875,
+        "right": 368,
+        "bottom": 685.609375,
+        "left": 258
+      }
+    ],
+    "targets": [
+      {
+        "name": "Make little fish leap",
+        "x": 70.1875,
+        "y": 310.265625,
+        "width": 46,
+        "height": 44,
+        "top": 310.265625,
+        "right": 116.1875,
+        "bottom": 354.265625,
+        "left": 70.1875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-1-390x844.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-boards-ship",
+    "viewport": [
+      740,
+      360
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 368.1875,
+      "height": 276,
+      "top": 68,
+      "right": 380.1875,
+      "bottom": 344,
+      "left": 12
+    },
+    "reader": {
+      "x": 392.1875,
+      "y": 93.75,
+      "width": 331.8125,
+      "height": 224.5,
+      "top": 93.75,
+      "right": 724,
+      "bottom": 318.25,
+      "left": 392.1875
+    },
+    "text": {
+      "x": 402.1875,
+      "y": 121.9375,
+      "width": 311.8125,
+      "height": 121.671875,
+      "top": 121.9375,
+      "right": 714,
+      "bottom": 243.609375,
+      "left": 402.1875
+    },
+    "textScroll": {
+      "client": 122,
+      "full": 122
+    },
+    "buttons": [
+      {
+        "x": 402.1875,
+        "y": 257.609375,
+        "width": 98.59375,
+        "height": 50.640625,
+        "top": 257.609375,
+        "right": 500.78125,
+        "bottom": 308.25,
+        "left": 402.1875
+      },
+      {
+        "x": 508.78125,
+        "y": 257.609375,
+        "width": 98.609375,
+        "height": 50.640625,
+        "top": 257.609375,
+        "right": 607.390625,
+        "bottom": 308.25,
+        "left": 508.78125
+      },
+      {
+        "x": 615.390625,
+        "y": 257.609375,
+        "width": 98.59375,
+        "height": 50.640625,
+        "top": 257.609375,
+        "right": 713.984375,
+        "bottom": 308.25,
+        "left": 615.390625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Make little fish leap",
+        "x": 73.390625,
+        "y": 238.046875,
+        "width": 46,
+        "height": 44,
+        "top": 238.046875,
+        "right": 119.390625,
+        "bottom": 282.046875,
+        "left": 73.390625
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-1-740x360.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-boards-ship",
+    "viewport": [
+      900,
+      1440
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 876,
+      "height": 944.796875,
+      "top": 84,
+      "right": 888,
+      "bottom": 1028.796875,
+      "left": 12
+    },
+    "reader": {
+      "x": 70,
+      "y": 1036.796875,
+      "width": 760,
+      "height": 197.515625,
+      "top": 1036.796875,
+      "right": 830,
+      "bottom": 1234.3125,
+      "left": 70
+    },
+    "text": {
+      "x": 88,
+      "y": 1072.984375,
+      "width": 724,
+      "height": 78.6875,
+      "top": 1072.984375,
+      "right": 812,
+      "bottom": 1151.671875,
+      "left": 88
+    },
+    "textScroll": {
+      "client": 79,
+      "full": 79
+    },
+    "buttons": [
+      {
+        "x": 88,
+        "y": 1165.671875,
+        "width": 236,
+        "height": 50.640625,
+        "top": 1165.671875,
+        "right": 324,
+        "bottom": 1216.3125,
+        "left": 88
+      },
+      {
+        "x": 332,
+        "y": 1165.671875,
+        "width": 236,
+        "height": 50.640625,
+        "top": 1165.671875,
+        "right": 568,
+        "bottom": 1216.3125,
+        "left": 332
+      },
+      {
+        "x": 576,
+        "y": 1165.671875,
+        "width": 236,
+        "height": 50.640625,
+        "top": 1165.671875,
+        "right": 812,
+        "bottom": 1216.3125,
+        "left": 576
+      }
+    ],
+    "targets": [
+      {
+        "name": "Make little fish leap",
+        "x": 162.515625,
+        "y": 664.859375,
+        "width": 84.3125,
+        "height": 46.8125,
+        "top": 664.859375,
+        "right": 246.828125,
+        "bottom": 711.671875,
+        "left": 162.515625
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-1-900x1440.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "storm-at-sea",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 227.703125,
+      "top": 330,
+      "right": 348,
+      "bottom": 557.703125,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 124.875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 483.0625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 125,
+      "full": 125
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 122,
+        "bottom": 547.703125,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 496.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 496.0625,
+        "right": 230,
+        "bottom": 546.703125,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 338,
+        "bottom": 547.703125,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Hold to rock the ship",
+        "x": 82.40625,
+        "y": 152.46875,
+        "width": 176.53125,
+        "height": 98.71875,
+        "top": 152.46875,
+        "right": 258.9375,
+        "bottom": 251.1875,
+        "left": 82.40625
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-2-360x660.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "storm-at-sea",
+    "viewport": [
+      360,
+      560
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 204,
+      "top": 68,
+      "right": 348,
+      "bottom": 272,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 280,
+      "width": 336,
+      "height": 227.703125,
+      "top": 280,
+      "right": 348,
+      "bottom": 507.703125,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 308.1875,
+      "width": 316,
+      "height": 124.875,
+      "top": 308.1875,
+      "right": 338,
+      "bottom": 433.0625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 125,
+      "full": 125
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 447.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 447.0625,
+        "right": 122,
+        "bottom": 497.703125,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 447.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 447.0625,
+        "right": 230,
+        "bottom": 497.703125,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 447.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 447.0625,
+        "right": 338,
+        "bottom": 497.703125,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Hold to rock the ship",
+        "x": 96.25,
+        "y": 133.515625,
+        "width": 151.640625,
+        "height": 84.28125,
+        "top": 133.515625,
+        "right": 247.890625,
+        "bottom": 217.796875,
+        "left": 96.25
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-2-360x560.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "storm-at-sea",
+    "viewport": [
+      390,
+      844
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 366,
+      "height": 418,
+      "top": 68,
+      "right": 378,
+      "bottom": 486,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 494,
+      "width": 366,
+      "height": 201.609375,
+      "top": 494,
+      "right": 378,
+      "bottom": 695.609375,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 522.1875,
+      "width": 346,
+      "height": 98.78125,
+      "top": 522.1875,
+      "right": 368,
+      "bottom": 620.96875,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 99,
+      "full": 99
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 634.96875,
+        "width": 110,
+        "height": 50.640625,
+        "top": 634.96875,
+        "right": 132,
+        "bottom": 685.609375,
+        "left": 22
+      },
+      {
+        "x": 140,
+        "y": 634.96875,
+        "width": 110,
+        "height": 50.640625,
+        "top": 634.96875,
+        "right": 250,
+        "bottom": 685.609375,
+        "left": 140
+      },
+      {
+        "x": 258,
+        "y": 634.96875,
+        "width": 110,
+        "height": 50.640625,
+        "top": 634.96875,
+        "right": 368,
+        "bottom": 685.609375,
+        "left": 258
+      }
+    ],
+    "targets": [
+      {
+        "name": "Hold to rock the ship",
+        "x": 90.140625,
+        "y": 231.3125,
+        "width": 188.5625,
+        "height": 108.8125,
+        "top": 231.3125,
+        "right": 278.703125,
+        "bottom": 340.125,
+        "left": 90.140625
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-2-390x844.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "storm-at-sea",
+    "viewport": [
+      740,
+      360
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 368.1875,
+      "height": 276,
+      "top": 68,
+      "right": 380.1875,
+      "bottom": 344,
+      "left": 12
+    },
+    "reader": {
+      "x": 392.1875,
+      "y": 93.75,
+      "width": 331.8125,
+      "height": 224.5,
+      "top": 93.75,
+      "right": 724,
+      "bottom": 318.25,
+      "left": 392.1875
+    },
+    "text": {
+      "x": 402.1875,
+      "y": 121.9375,
+      "width": 311.8125,
+      "height": 121.671875,
+      "top": 121.9375,
+      "right": 714,
+      "bottom": 243.609375,
+      "left": 402.1875
+    },
+    "textScroll": {
+      "client": 122,
+      "full": 122
+    },
+    "buttons": [
+      {
+        "x": 402.1875,
+        "y": 257.609375,
+        "width": 98.59375,
+        "height": 50.640625,
+        "top": 257.609375,
+        "right": 500.78125,
+        "bottom": 308.25,
+        "left": 402.1875
+      },
+      {
+        "x": 508.78125,
+        "y": 257.609375,
+        "width": 98.609375,
+        "height": 50.640625,
+        "top": 257.609375,
+        "right": 607.390625,
+        "bottom": 308.25,
+        "left": 508.78125
+      },
+      {
+        "x": 615.390625,
+        "y": 257.609375,
+        "width": 98.59375,
+        "height": 50.640625,
+        "top": 257.609375,
+        "right": 713.984375,
+        "bottom": 308.25,
+        "left": 615.390625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Hold to rock the ship",
+        "x": 89.109375,
+        "y": 159.390625,
+        "width": 193.53125,
+        "height": 108.140625,
+        "top": 159.390625,
+        "right": 282.640625,
+        "bottom": 267.53125,
+        "left": 89.109375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-2-740x360.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "storm-at-sea",
+    "viewport": [
+      900,
+      1440
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 876,
+      "height": 944.796875,
+      "top": 84,
+      "right": 888,
+      "bottom": 1028.796875,
+      "left": 12
+    },
+    "reader": {
+      "x": 70,
+      "y": 1036.796875,
+      "width": 760,
+      "height": 197.515625,
+      "top": 1036.796875,
+      "right": 830,
+      "bottom": 1234.3125,
+      "left": 70
+    },
+    "text": {
+      "x": 88,
+      "y": 1072.984375,
+      "width": 724,
+      "height": 78.6875,
+      "top": 1072.984375,
+      "right": 812,
+      "bottom": 1151.671875,
+      "left": 88
+    },
+    "textScroll": {
+      "client": 79,
+      "full": 79
+    },
+    "buttons": [
+      {
+        "x": 88,
+        "y": 1165.671875,
+        "width": 236,
+        "height": 50.640625,
+        "top": 1165.671875,
+        "right": 324,
+        "bottom": 1216.3125,
+        "left": 88
+      },
+      {
+        "x": 332,
+        "y": 1165.671875,
+        "width": 236,
+        "height": 50.640625,
+        "top": 1165.671875,
+        "right": 568,
+        "bottom": 1216.3125,
+        "left": 332
+      },
+      {
+        "x": 576,
+        "y": 1165.671875,
+        "width": 236,
+        "height": 50.640625,
+        "top": 1165.671875,
+        "right": 812,
+        "bottom": 1216.3125,
+        "left": 576
+      }
+    ],
+    "targets": [
+      {
+        "name": "Hold to rock the ship",
+        "x": 198.65625,
+        "y": 446.890625,
+        "width": 452.34375,
+        "height": 260.078125,
+        "top": 446.890625,
+        "right": 651,
+        "bottom": 706.96875,
+        "left": 198.65625
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-2-900x1440.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-overboard",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 253.796875,
+      "top": 330,
+      "right": 348,
+      "bottom": 583.796875,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 150.96875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 509.15625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 151,
+      "full": 151
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 523.15625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 523.15625,
+        "right": 122,
+        "bottom": 573.796875,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 522.15625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 522.15625,
+        "right": 230,
+        "bottom": 572.796875,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 523.15625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 523.15625,
+        "right": 338,
+        "bottom": 573.796875,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Ship and sailors",
+        "x": 85.359375,
+        "y": 158.890625,
+        "width": 125.359375,
+        "height": 72.828125,
+        "top": 158.890625,
+        "right": 210.71875,
+        "bottom": 231.71875,
+        "left": 85.359375
+      },
+      {
+        "name": "Jonah",
+        "x": 209.1875,
+        "y": 196.296875,
+        "width": 46,
+        "height": 47.4375,
+        "top": 196.296875,
+        "right": 255.1875,
+        "bottom": 243.734375,
+        "left": 209.1875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-3-360x660.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-rescued",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 230.203125,
+      "top": 330,
+      "right": 348,
+      "bottom": 560.203125,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 127.375,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 485.5625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 127,
+      "full": 127
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 499.5625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 499.5625,
+        "right": 122,
+        "bottom": 550.203125,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 498.5625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 498.5625,
+        "right": 230,
+        "bottom": 549.203125,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 499.5625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 499.5625,
+        "right": 338,
+        "bottom": 550.203125,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Great fish",
+        "x": 54.265625,
+        "y": 135.21875,
+        "width": 214.484375,
+        "height": 119.046875,
+        "top": 135.21875,
+        "right": 268.75,
+        "bottom": 254.265625,
+        "left": 54.265625
+      },
+      {
+        "name": "Jonah",
+        "x": 237.484375,
+        "y": 191.0625,
+        "width": 57.546875,
+        "height": 44,
+        "top": 191.0625,
+        "right": 295.03125,
+        "bottom": 235.0625,
+        "left": 237.484375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-4-360x660.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-prays",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 256.296875,
+      "top": 330,
+      "right": 348,
+      "bottom": 586.296875,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 153.46875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 511.65625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 153,
+      "full": 153
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 525.65625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 525.65625,
+        "right": 122,
+        "bottom": 576.296875,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 524.65625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 524.65625,
+        "right": 230,
+        "bottom": 575.296875,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 525.65625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 525.65625,
+        "right": 338,
+        "bottom": 576.296875,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Great fish",
+        "x": 89.296875,
+        "y": 127.125,
+        "width": 196.375,
+        "height": 111.25,
+        "top": 127.125,
+        "right": 285.671875,
+        "bottom": 238.375,
+        "left": 89.296875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-5-360x660.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-ashore",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 227.703125,
+      "top": 330,
+      "right": 348,
+      "bottom": 557.703125,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 124.875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 483.0625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 125,
+      "full": 125
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 122,
+        "bottom": 547.703125,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 496.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 496.0625,
+        "right": 230,
+        "bottom": 546.703125,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 338,
+        "bottom": 547.703125,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Great fish lands Jonah",
+        "x": 61.4375,
+        "y": 147.953125,
+        "width": 242.21875,
+        "height": 103.859375,
+        "top": 147.953125,
+        "right": 303.65625,
+        "bottom": 251.8125,
+        "left": 61.4375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-6-360x660.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "nineveh-warning",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 256.296875,
+      "top": 330,
+      "right": 348,
+      "bottom": 586.296875,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 153.46875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 511.65625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 153,
+      "full": 153
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 525.65625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 525.65625,
+        "right": 122,
+        "bottom": 576.296875,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 524.65625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 524.65625,
+        "right": 230,
+        "bottom": 575.296875,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 525.65625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 525.65625,
+        "right": 338,
+        "bottom": 576.296875,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Jonah",
+        "x": 92.140625,
+        "y": 160.203125,
+        "width": 61.296875,
+        "height": 72.65625,
+        "top": 160.203125,
+        "right": 153.4375,
+        "bottom": 232.859375,
+        "left": 92.140625
+      },
+      {
+        "name": "People of Nineveh",
+        "x": 197.8125,
+        "y": 158.6875,
+        "width": 78.078125,
+        "height": 89.65625,
+        "top": 158.6875,
+        "right": 275.890625,
+        "bottom": 248.34375,
+        "left": 197.8125
+      },
+      {
+        "name": "Children of Nineveh",
+        "x": 149.53125,
+        "y": 198.671875,
+        "width": 54.390625,
+        "height": 50.203125,
+        "top": 198.671875,
+        "right": 203.921875,
+        "bottom": 248.875,
+        "left": 149.53125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-7-360x660.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "nineveh-turns",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 227.703125,
+      "top": 330,
+      "right": 348,
+      "bottom": 557.703125,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 124.875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 483.0625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 125,
+      "full": 125
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 122,
+        "bottom": 547.703125,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 496.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 496.0625,
+        "right": 230,
+        "bottom": 546.703125,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 338,
+        "bottom": 547.703125,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "People of Nineveh",
+        "x": 125.921875,
+        "y": 165.5625,
+        "width": 69.28125,
+        "height": 84.015625,
+        "top": 165.5625,
+        "right": 195.203125,
+        "bottom": 249.578125,
+        "left": 125.921875
+      },
+      {
+        "name": "Children of Nineveh",
+        "x": 153.5,
+        "y": 202.859375,
+        "width": 46.546875,
+        "height": 44,
+        "top": 202.859375,
+        "right": 200.046875,
+        "bottom": 246.859375,
+        "left": 153.5
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-8-360x660.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-angry",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 227.703125,
+      "top": 330,
+      "right": 348,
+      "bottom": 557.703125,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 124.875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 483.0625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 125,
+      "full": 125
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 122,
+        "bottom": 547.703125,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 496.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 496.0625,
+        "right": 230,
+        "bottom": 546.703125,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 338,
+        "bottom": 547.703125,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Jonah",
+        "x": 192.234375,
+        "y": 176.234375,
+        "width": 46,
+        "height": 64.921875,
+        "top": 176.234375,
+        "right": 238.234375,
+        "bottom": 241.15625,
+        "left": 192.234375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-9-360x660.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "shade-for-jonah",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 256.296875,
+      "top": 330,
+      "right": 348,
+      "bottom": 586.296875,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 153.46875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 511.65625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 153,
+      "full": 153
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 525.65625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 525.65625,
+        "right": 122,
+        "bottom": 576.296875,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 524.65625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 524.65625,
+        "right": 230,
+        "bottom": 575.296875,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 525.65625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 525.65625,
+        "right": 338,
+        "bottom": 576.296875,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Jonah",
+        "x": 174.28125,
+        "y": 181.515625,
+        "width": 59.71875,
+        "height": 70.65625,
+        "top": 181.515625,
+        "right": 234,
+        "bottom": 252.171875,
+        "left": 174.28125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-10-360x660.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "plant-withers",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 227.703125,
+      "top": 330,
+      "right": 348,
+      "bottom": 557.703125,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 124.875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 483.0625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 125,
+      "full": 125
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 122,
+        "bottom": 547.703125,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 496.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 496.0625,
+        "right": 230,
+        "bottom": 546.703125,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 497.0625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 497.0625,
+        "right": 338,
+        "bottom": 547.703125,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Jonah",
+        "x": 124.0625,
+        "y": 171.578125,
+        "width": 59,
+        "height": 71.65625,
+        "top": 171.578125,
+        "right": 183.0625,
+        "bottom": 243.234375,
+        "left": 124.0625
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-11-360x660.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-mercy",
+    "viewport": [
+      360,
+      660
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 68,
+      "width": 336,
+      "height": 254,
+      "top": 68,
+      "right": 348,
+      "bottom": 322,
+      "left": 12
+    },
+    "reader": {
+      "x": 12,
+      "y": 330,
+      "width": 336,
+      "height": 253.796875,
+      "top": 330,
+      "right": 348,
+      "bottom": 583.796875,
+      "left": 12
+    },
+    "text": {
+      "x": 22,
+      "y": 358.1875,
+      "width": 316,
+      "height": 150.96875,
+      "top": 358.1875,
+      "right": 338,
+      "bottom": 509.15625,
+      "left": 22
+    },
+    "textScroll": {
+      "client": 151,
+      "full": 151
+    },
+    "buttons": [
+      {
+        "x": 22,
+        "y": 523.15625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 523.15625,
+        "right": 122,
+        "bottom": 573.796875,
+        "left": 22
+      },
+      {
+        "x": 130,
+        "y": 522.15625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 522.15625,
+        "right": 230,
+        "bottom": 572.796875,
+        "left": 130
+      },
+      {
+        "x": 238,
+        "y": 523.15625,
+        "width": 100,
+        "height": 50.640625,
+        "top": 523.15625,
+        "right": 338,
+        "bottom": 573.796875,
+        "left": 238
+      }
+    ],
+    "targets": [
+      {
+        "name": "Jonah",
+        "x": 101.609375,
+        "y": 171.09375,
+        "width": 59.484375,
+        "height": 69.8125,
+        "top": 171.09375,
+        "right": 161.09375,
+        "bottom": 240.90625,
+        "left": 101.609375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-12-360x660.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-01",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 320.09375,
+      "width": 483.203125,
+      "height": 281.34375,
+      "top": 320.09375,
+      "right": 1400,
+      "bottom": 601.4375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 281,
+      "full": 281
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1072.53125,
+        "bottom": 666.078125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 614.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 614.4375,
+        "right": 1236.265625,
+        "bottom": 665.078125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1400,
+        "bottom": 666.078125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 364,
+        "y": 455.90625,
+        "width": 60,
+        "height": 174.359375,
+        "top": 455.90625,
+        "right": 424,
+        "bottom": 630.265625,
+        "left": 364
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-0-1440x900.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-02",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 255.734375,
+      "width": 531.203125,
+      "height": 456.515625,
+      "top": 255.734375,
+      "right": 1424,
+      "bottom": 712.25,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 297.921875,
+      "width": 483.203125,
+      "height": 325.6875,
+      "top": 297.921875,
+      "right": 1400,
+      "bottom": 623.609375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 326,
+      "full": 326
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 637.609375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 637.609375,
+        "right": 1072.53125,
+        "bottom": 688.25,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 636.609375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 636.609375,
+        "right": 1236.265625,
+        "bottom": 687.25,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 637.609375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 637.609375,
+        "right": 1400,
+        "bottom": 688.25,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 334.640625,
+        "y": 454.75,
+        "width": 60,
+        "height": 174.171875,
+        "top": 454.75,
+        "right": 394.640625,
+        "bottom": 628.921875,
+        "left": 334.640625
+      },
+      {
+        "name": "Eve",
+        "x": 506.734375,
+        "y": 447.125,
+        "width": 60,
+        "height": 172.890625,
+        "top": 447.125,
+        "right": 566.734375,
+        "bottom": 620.015625,
+        "left": 506.734375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-1-1440x900.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-03",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 320.09375,
+      "width": 483.203125,
+      "height": 281.34375,
+      "top": 320.09375,
+      "right": 1400,
+      "bottom": 601.4375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 281,
+      "full": 281
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1072.53125,
+        "bottom": 666.078125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 614.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 614.4375,
+        "right": 1236.265625,
+        "bottom": 665.078125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1400,
+        "bottom": 666.078125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 328.78125,
+        "y": 454.515625,
+        "width": 60,
+        "height": 174.140625,
+        "top": 454.515625,
+        "right": 388.78125,
+        "bottom": 628.65625,
+        "left": 328.78125
+      },
+      {
+        "name": "Eve",
+        "x": 494.671875,
+        "y": 458.125,
+        "width": 60,
+        "height": 174.71875,
+        "top": 458.125,
+        "right": 554.671875,
+        "bottom": 632.84375,
+        "left": 494.671875
+      },
+      {
+        "name": "Serpent",
+        "x": 571.28125,
+        "y": 452.984375,
+        "width": 60,
+        "height": 44,
+        "top": 452.984375,
+        "right": 631.28125,
+        "bottom": 496.984375,
+        "left": 571.28125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-2-1440x900.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-04",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 320.09375,
+      "width": 483.203125,
+      "height": 281.34375,
+      "top": 320.09375,
+      "right": 1400,
+      "bottom": 601.4375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 281,
+      "full": 281
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1072.53125,
+        "bottom": 666.078125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 614.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 614.4375,
+        "right": 1236.265625,
+        "bottom": 665.078125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1400,
+        "bottom": 666.078125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 335.5,
+        "y": 451.890625,
+        "width": 60,
+        "height": 173.6875,
+        "top": 451.890625,
+        "right": 395.5,
+        "bottom": 625.578125,
+        "left": 335.5
+      },
+      {
+        "name": "Eve",
+        "x": 488.59375,
+        "y": 460.8125,
+        "width": 60,
+        "height": 175.171875,
+        "top": 460.8125,
+        "right": 548.59375,
+        "bottom": 635.984375,
+        "left": 488.59375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-3-1440x900.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-05",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 260.15625,
+      "width": 531.203125,
+      "height": 447.671875,
+      "top": 260.15625,
+      "right": 1424,
+      "bottom": 707.828125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 302.34375,
+      "width": 483.203125,
+      "height": 316.84375,
+      "top": 302.34375,
+      "right": 1400,
+      "bottom": 619.1875,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 317,
+      "full": 317
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 633.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 633.1875,
+        "right": 1072.53125,
+        "bottom": 683.828125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 632.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 632.1875,
+        "right": 1236.265625,
+        "bottom": 682.828125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 633.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 633.1875,
+        "right": 1400,
+        "bottom": 683.828125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 326.046875,
+        "y": 463.28125,
+        "width": 60,
+        "height": 175.578125,
+        "top": 463.28125,
+        "right": 386.046875,
+        "bottom": 638.859375,
+        "left": 326.046875
+      },
+      {
+        "name": "Eve",
+        "x": 482.921875,
+        "y": 454.734375,
+        "width": 60,
+        "height": 174.1875,
+        "top": 454.734375,
+        "right": 542.921875,
+        "bottom": 628.921875,
+        "left": 482.921875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-4-1440x900.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-06",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 320.09375,
+      "width": 483.203125,
+      "height": 281.34375,
+      "top": 320.09375,
+      "right": 1400,
+      "bottom": 601.4375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 281,
+      "full": 281
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1072.53125,
+        "bottom": 666.078125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 614.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 614.4375,
+        "right": 1236.265625,
+        "bottom": 665.078125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1400,
+        "bottom": 666.078125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 313.15625,
+        "y": 448.125,
+        "width": 60,
+        "height": 173.0625,
+        "top": 448.125,
+        "right": 373.15625,
+        "bottom": 621.1875,
+        "left": 313.15625
+      },
+      {
+        "name": "Eve",
+        "x": 506.734375,
+        "y": 447.140625,
+        "width": 60,
+        "height": 172.875,
+        "top": 447.140625,
+        "right": 566.734375,
+        "bottom": 620.015625,
+        "left": 506.734375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-5-1440x900.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-07",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 260.15625,
+      "width": 531.203125,
+      "height": 447.671875,
+      "top": 260.15625,
+      "right": 1424,
+      "bottom": 707.828125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 302.34375,
+      "width": 483.203125,
+      "height": 316.84375,
+      "top": 302.34375,
+      "right": 1400,
+      "bottom": 619.1875,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 317,
+      "full": 317
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 633.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 633.1875,
+        "right": 1072.53125,
+        "bottom": 683.828125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 632.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 632.1875,
+        "right": 1236.265625,
+        "bottom": 682.828125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 633.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 633.1875,
+        "right": 1400,
+        "bottom": 683.828125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 319.296875,
+        "y": 488.9375,
+        "width": 60,
+        "height": 156.609375,
+        "top": 488.9375,
+        "right": 379.296875,
+        "bottom": 645.546875,
+        "left": 319.296875
+      },
+      {
+        "name": "Eve",
+        "x": 499.703125,
+        "y": 478.03125,
+        "width": 60,
+        "height": 155.078125,
+        "top": 478.03125,
+        "right": 559.703125,
+        "bottom": 633.109375,
+        "left": 499.703125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-6-1440x900.png"
+  },
+  {
+    "book": "eden",
+    "spread": "eden-08",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 237.984375,
+      "width": 531.203125,
+      "height": 492.015625,
+      "top": 237.984375,
+      "right": 1424,
+      "bottom": 730,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 280.171875,
+      "width": 483.203125,
+      "height": 361.1875,
+      "top": 280.171875,
+      "right": 1400,
+      "bottom": 641.359375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 361,
+      "full": 361
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 655.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 655.359375,
+        "right": 1072.53125,
+        "bottom": 706,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 654.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 654.359375,
+        "right": 1236.265625,
+        "bottom": 705,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 655.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 655.359375,
+        "right": 1400,
+        "bottom": 706,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Adam",
+        "x": 324.75,
+        "y": 448.578125,
+        "width": 60,
+        "height": 173.140625,
+        "top": 448.578125,
+        "right": 384.75,
+        "bottom": 621.71875,
+        "left": 324.75
+      },
+      {
+        "name": "Eve",
+        "x": 489.1875,
+        "y": 446.46875,
+        "width": 60,
+        "height": 172.765625,
+        "top": 446.46875,
+        "right": 549.1875,
+        "bottom": 619.234375,
+        "left": 489.1875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "eden-7-1440x900.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-01",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 320.09375,
+      "width": 483.203125,
+      "height": 281.34375,
+      "top": 320.09375,
+      "right": 1400,
+      "bottom": 601.4375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 281,
+      "full": 281
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1072.53125,
+        "bottom": 666.078125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 614.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 614.4375,
+        "right": 1236.265625,
+        "bottom": 665.078125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1400,
+        "bottom": 666.078125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 375.78125,
+        "y": 456.375,
+        "width": 60,
+        "height": 174.4375,
+        "top": 456.375,
+        "right": 435.78125,
+        "bottom": 630.8125,
+        "left": 375.78125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-0-1440x900.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-02",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 260.15625,
+      "width": 531.203125,
+      "height": 447.671875,
+      "top": 260.15625,
+      "right": 1424,
+      "bottom": 707.828125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 302.34375,
+      "width": 483.203125,
+      "height": 316.84375,
+      "top": 302.34375,
+      "right": 1400,
+      "bottom": 619.1875,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 317,
+      "full": 317
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 633.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 633.1875,
+        "right": 1072.53125,
+        "bottom": 683.828125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 632.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 632.1875,
+        "right": 1236.265625,
+        "bottom": 682.828125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 633.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 633.1875,
+        "right": 1400,
+        "bottom": 683.828125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 377.8125,
+        "y": 423.296875,
+        "width": 60,
+        "height": 168.75,
+        "top": 423.296875,
+        "right": 437.8125,
+        "bottom": 592.046875,
+        "left": 377.8125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-1-1440x900.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-03",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 295.65625,
+      "width": 531.203125,
+      "height": 376.671875,
+      "top": 295.65625,
+      "right": 1424,
+      "bottom": 672.328125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 337.84375,
+      "width": 483.203125,
+      "height": 245.84375,
+      "top": 337.84375,
+      "right": 1400,
+      "bottom": 583.6875,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 246,
+      "full": 246
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 597.6875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 597.6875,
+        "right": 1072.53125,
+        "bottom": 648.328125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 596.6875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 596.6875,
+        "right": 1236.265625,
+        "bottom": 647.328125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 597.6875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 597.6875,
+        "right": 1400,
+        "bottom": 648.328125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 216.875,
+        "y": 453.03125,
+        "width": 60,
+        "height": 173.875,
+        "top": 453.03125,
+        "right": 276.875,
+        "bottom": 626.90625,
+        "left": 216.875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-2-1440x900.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-04",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 260.15625,
+      "width": 531.203125,
+      "height": 447.671875,
+      "top": 260.15625,
+      "right": 1424,
+      "bottom": 707.828125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 302.34375,
+      "width": 483.203125,
+      "height": 316.84375,
+      "top": 302.34375,
+      "right": 1400,
+      "bottom": 619.1875,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 317,
+      "full": 317
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 633.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 633.1875,
+        "right": 1072.53125,
+        "bottom": 683.828125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 632.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 632.1875,
+        "right": 1236.265625,
+        "bottom": 682.828125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 633.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 633.1875,
+        "right": 1400,
+        "bottom": 683.828125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-3-1440x900.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-05",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 320.09375,
+      "width": 483.203125,
+      "height": 281.34375,
+      "top": 320.09375,
+      "right": 1400,
+      "bottom": 601.4375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 281,
+      "full": 281
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1072.53125,
+        "bottom": 666.078125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 614.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 614.4375,
+        "right": 1236.265625,
+        "bottom": 665.078125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1400,
+        "bottom": 666.078125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 288.96875,
+        "y": 450.0625,
+        "width": 60,
+        "height": 173.375,
+        "top": 450.0625,
+        "right": 348.96875,
+        "bottom": 623.4375,
+        "left": 288.96875
+      },
+      {
+        "name": "Dove",
+        "x": 508.265625,
+        "y": 427.359375,
+        "width": 60,
+        "height": 44,
+        "top": 427.359375,
+        "right": 568.265625,
+        "bottom": 471.359375,
+        "left": 508.265625
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-4-1440x900.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-06",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 237.984375,
+      "width": 531.203125,
+      "height": 492.015625,
+      "top": 237.984375,
+      "right": 1424,
+      "bottom": 730,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 280.171875,
+      "width": 483.203125,
+      "height": 361.1875,
+      "top": 280.171875,
+      "right": 1400,
+      "bottom": 641.359375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 361,
+      "full": 361
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 655.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 655.359375,
+        "right": 1072.53125,
+        "bottom": 706,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 654.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 654.359375,
+        "right": 1236.265625,
+        "bottom": 705,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 655.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 655.359375,
+        "right": 1400,
+        "bottom": 706,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 205.28125,
+        "y": 452.578125,
+        "width": 60,
+        "height": 173.796875,
+        "top": 452.578125,
+        "right": 265.28125,
+        "bottom": 626.375,
+        "left": 205.28125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-5-1440x900.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-07",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 320.09375,
+      "width": 483.203125,
+      "height": 281.34375,
+      "top": 320.09375,
+      "right": 1400,
+      "bottom": 601.4375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 281,
+      "full": 281
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1072.53125,
+        "bottom": 666.078125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 614.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 614.4375,
+        "right": 1236.265625,
+        "bottom": 665.078125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 615.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 615.4375,
+        "right": 1400,
+        "bottom": 666.078125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 298.5,
+        "y": 456.265625,
+        "width": 60,
+        "height": 174.421875,
+        "top": 456.265625,
+        "right": 358.5,
+        "bottom": 630.6875,
+        "left": 298.5
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-6-1440x900.png"
+  },
+  {
+    "book": "noah",
+    "spread": "noah-08",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 220.234375,
+      "width": 531.203125,
+      "height": 527.515625,
+      "top": 220.234375,
+      "right": 1424,
+      "bottom": 747.75,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 262.421875,
+      "width": 483.203125,
+      "height": 396.6875,
+      "top": 262.421875,
+      "right": 1400,
+      "bottom": 659.109375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 397,
+      "full": 397
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 673.109375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 673.109375,
+        "right": 1072.53125,
+        "bottom": 723.75,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 672.109375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 672.109375,
+        "right": 1236.265625,
+        "bottom": 722.75,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 673.109375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 673.109375,
+        "right": 1400,
+        "bottom": 723.75,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Noah",
+        "x": 216.875,
+        "y": 453.03125,
+        "width": 60,
+        "height": 173.875,
+        "top": 453.03125,
+        "right": 276.875,
+        "bottom": 626.90625,
+        "left": 216.875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "noah-7-1440x900.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-called",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 331.15625,
+      "width": 531.203125,
+      "height": 305.671875,
+      "top": 331.15625,
+      "right": 1424,
+      "bottom": 636.828125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 373.34375,
+      "width": 483.203125,
+      "height": 174.84375,
+      "top": 373.34375,
+      "right": 1400,
+      "bottom": 548.1875,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 175,
+      "full": 175
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 562.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 562.1875,
+        "right": 1072.53125,
+        "bottom": 612.828125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 561.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 561.1875,
+        "right": 1236.265625,
+        "bottom": 611.828125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 562.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 562.1875,
+        "right": 1400,
+        "bottom": 612.828125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Jonah",
+        "x": 289.78125,
+        "y": 416.9375,
+        "width": 105.953125,
+        "height": 176.8125,
+        "top": 416.9375,
+        "right": 395.734375,
+        "bottom": 593.75,
+        "left": 289.78125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-0-1440x900.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-boards-ship",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 348.90625,
+      "width": 531.203125,
+      "height": 270.171875,
+      "top": 348.90625,
+      "right": 1424,
+      "bottom": 619.078125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 391.09375,
+      "width": 483.203125,
+      "height": 139.34375,
+      "top": 391.09375,
+      "right": 1400,
+      "bottom": 530.4375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 139,
+      "full": 139
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 544.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 544.4375,
+        "right": 1072.53125,
+        "bottom": 595.078125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 543.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 543.4375,
+        "right": 1236.265625,
+        "bottom": 594.078125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 544.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 544.4375,
+        "right": 1400,
+        "bottom": 595.078125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Make little fish leap",
+        "x": 163.59375,
+        "y": 590.734375,
+        "width": 83.515625,
+        "height": 45.609375,
+        "top": 590.734375,
+        "right": 247.109375,
+        "bottom": 636.34375,
+        "left": 163.59375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-1-1440x900.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "storm-at-sea",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 348.90625,
+      "width": 531.203125,
+      "height": 270.171875,
+      "top": 348.90625,
+      "right": 1424,
+      "bottom": 619.078125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 391.09375,
+      "width": 483.203125,
+      "height": 139.34375,
+      "top": 391.09375,
+      "right": 1400,
+      "bottom": 530.4375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 139,
+      "full": 139
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 544.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 544.4375,
+        "right": 1072.53125,
+        "bottom": 595.078125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 543.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 543.4375,
+        "right": 1236.265625,
+        "bottom": 594.078125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 544.4375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 544.4375,
+        "right": 1400,
+        "bottom": 595.078125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Hold to rock the ship",
+        "x": 195.890625,
+        "y": 374.9375,
+        "width": 451.734375,
+        "height": 256.828125,
+        "top": 374.9375,
+        "right": 647.625,
+        "bottom": 631.765625,
+        "left": 195.890625
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-2-1440x900.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-overboard",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 313.40625,
+      "width": 531.203125,
+      "height": 341.171875,
+      "top": 313.40625,
+      "right": 1424,
+      "bottom": 654.578125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 355.59375,
+      "width": 483.203125,
+      "height": 210.34375,
+      "top": 355.59375,
+      "right": 1400,
+      "bottom": 565.9375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 210,
+      "full": 210
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 579.9375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 579.9375,
+        "right": 1072.53125,
+        "bottom": 630.578125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 578.9375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 578.9375,
+        "right": 1236.265625,
+        "bottom": 629.578125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 579.9375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 579.9375,
+        "right": 1400,
+        "bottom": 630.578125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Ship and sailors",
+        "x": 195.515625,
+        "y": 388.359375,
+        "width": 332,
+        "height": 194.53125,
+        "top": 388.359375,
+        "right": 527.515625,
+        "bottom": 582.890625,
+        "left": 195.515625
+      },
+      {
+        "name": "Jonah",
+        "x": 527.234375,
+        "y": 487.515625,
+        "width": 109.203125,
+        "height": 126.734375,
+        "top": 487.515625,
+        "right": 636.4375,
+        "bottom": 614.25,
+        "left": 527.234375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-3-1440x900.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-rescued",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 326.734375,
+      "width": 531.203125,
+      "height": 314.515625,
+      "top": 326.734375,
+      "right": 1424,
+      "bottom": 641.25,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 368.921875,
+      "width": 483.203125,
+      "height": 183.6875,
+      "top": 368.921875,
+      "right": 1400,
+      "bottom": 552.609375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 184,
+      "full": 184
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 566.609375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 566.609375,
+        "right": 1072.53125,
+        "bottom": 617.25,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 565.609375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 565.609375,
+        "right": 1236.265625,
+        "bottom": 616.25,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 566.609375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 566.609375,
+        "right": 1400,
+        "bottom": 617.25,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Great fish",
+        "x": 120.90625,
+        "y": 329.25,
+        "width": 553.421875,
+        "height": 312.375,
+        "top": 329.25,
+        "right": 674.328125,
+        "bottom": 641.625,
+        "left": 120.90625
+      },
+      {
+        "name": "Jonah",
+        "x": 596.953125,
+        "y": 490.40625,
+        "width": 147.359375,
+        "height": 81.5625,
+        "top": 490.40625,
+        "right": 744.3125,
+        "bottom": 571.96875,
+        "left": 596.953125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-4-1440x900.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-prays",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 308.984375,
+      "width": 531.203125,
+      "height": 350.015625,
+      "top": 308.984375,
+      "right": 1424,
+      "bottom": 659,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 351.171875,
+      "width": 483.203125,
+      "height": 219.1875,
+      "top": 351.171875,
+      "right": 1400,
+      "bottom": 570.359375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 219,
+      "full": 219
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 584.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 584.359375,
+        "right": 1072.53125,
+        "bottom": 635,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 583.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 583.359375,
+        "right": 1236.265625,
+        "bottom": 634,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 584.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 584.359375,
+        "right": 1400,
+        "bottom": 635,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Great fish",
+        "x": 205.9375,
+        "y": 304.09375,
+        "width": 518.765625,
+        "height": 297.515625,
+        "top": 304.09375,
+        "right": 724.703125,
+        "bottom": 601.609375,
+        "left": 205.9375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-5-1440x900.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-ashore",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 331.15625,
+      "width": 531.203125,
+      "height": 305.671875,
+      "top": 331.15625,
+      "right": 1424,
+      "bottom": 636.828125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 373.34375,
+      "width": 483.203125,
+      "height": 174.84375,
+      "top": 373.34375,
+      "right": 1400,
+      "bottom": 548.1875,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 175,
+      "full": 175
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 562.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 562.1875,
+        "right": 1072.53125,
+        "bottom": 612.828125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 561.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 561.1875,
+        "right": 1236.265625,
+        "bottom": 611.828125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 562.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 562.1875,
+        "right": 1400,
+        "bottom": 612.828125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Great fish lands Jonah",
+        "x": 139.734375,
+        "y": 362.421875,
+        "width": 623.640625,
+        "height": 271.875,
+        "top": 362.421875,
+        "right": 763.375,
+        "bottom": 634.296875,
+        "left": 139.734375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-6-1440x900.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "nineveh-warning",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 326.734375,
+      "width": 531.203125,
+      "height": 314.515625,
+      "top": 326.734375,
+      "right": 1424,
+      "bottom": 641.25,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 368.921875,
+      "width": 483.203125,
+      "height": 183.6875,
+      "top": 368.921875,
+      "right": 1400,
+      "bottom": 552.609375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 184,
+      "full": 184
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 566.609375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 566.609375,
+        "right": 1072.53125,
+        "bottom": 617.25,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 565.609375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 565.609375,
+        "right": 1236.265625,
+        "bottom": 616.25,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 566.609375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 566.609375,
+        "right": 1400,
+        "bottom": 617.25,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Jonah",
+        "x": 217.1875,
+        "y": 393.171875,
+        "width": 158.59375,
+        "height": 191.46875,
+        "top": 393.171875,
+        "right": 375.78125,
+        "bottom": 584.640625,
+        "left": 217.1875
+      },
+      {
+        "name": "People of Nineveh",
+        "x": 493.6875,
+        "y": 390.171875,
+        "width": 199.9375,
+        "height": 235.234375,
+        "top": 390.171875,
+        "right": 693.625,
+        "bottom": 625.40625,
+        "left": 493.6875
+      },
+      {
+        "name": "Children of Nineveh",
+        "x": 367.125,
+        "y": 493.578125,
+        "width": 141.421875,
+        "height": 132.53125,
+        "top": 493.578125,
+        "right": 508.546875,
+        "bottom": 626.109375,
+        "left": 367.125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-7-1440x900.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "nineveh-turns",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 308.984375,
+      "width": 531.203125,
+      "height": 350.015625,
+      "top": 308.984375,
+      "right": 1424,
+      "bottom": 659,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 351.171875,
+      "width": 483.203125,
+      "height": 219.1875,
+      "top": 351.171875,
+      "right": 1400,
+      "bottom": 570.359375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 219,
+      "full": 219
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 584.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 584.359375,
+        "right": 1072.53125,
+        "bottom": 635,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 583.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 583.359375,
+        "right": 1236.265625,
+        "bottom": 634,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 584.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 584.359375,
+        "right": 1400,
+        "bottom": 635,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "People of Nineveh",
+        "x": 305.5,
+        "y": 407.390625,
+        "width": 180.453125,
+        "height": 222.140625,
+        "top": 407.390625,
+        "right": 485.953125,
+        "bottom": 629.53125,
+        "left": 305.5
+      },
+      {
+        "name": "Children of Nineveh",
+        "x": 377.15625,
+        "y": 515.34375,
+        "width": 121.609375,
+        "height": 94.46875,
+        "top": 515.34375,
+        "right": 498.765625,
+        "bottom": 609.8125,
+        "left": 377.15625
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-8-1440x900.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-angry",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 331.15625,
+      "width": 531.203125,
+      "height": 305.671875,
+      "top": 331.15625,
+      "right": 1424,
+      "bottom": 636.828125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 373.34375,
+      "width": 483.203125,
+      "height": 174.84375,
+      "top": 373.34375,
+      "right": 1400,
+      "bottom": 548.1875,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 175,
+      "full": 175
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 562.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 562.1875,
+        "right": 1072.53125,
+        "bottom": 612.828125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 561.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 561.1875,
+        "right": 1236.265625,
+        "bottom": 611.828125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 562.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 562.1875,
+        "right": 1400,
+        "bottom": 612.828125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Jonah",
+        "x": 480.296875,
+        "y": 435.03125,
+        "width": 111.140625,
+        "height": 171.453125,
+        "top": 435.03125,
+        "right": 591.4375,
+        "bottom": 606.484375,
+        "left": 480.296875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-9-1440x900.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "shade-for-jonah",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 308.984375,
+      "width": 531.203125,
+      "height": 350.015625,
+      "top": 308.984375,
+      "right": 1424,
+      "bottom": 659,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 351.171875,
+      "width": 483.203125,
+      "height": 219.1875,
+      "top": 351.171875,
+      "right": 1400,
+      "bottom": 570.359375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 219,
+      "full": 219
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 584.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 584.359375,
+        "right": 1072.53125,
+        "bottom": 635,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 583.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 583.359375,
+        "right": 1236.265625,
+        "bottom": 634,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 584.359375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 584.359375,
+        "right": 1400,
+        "bottom": 635,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Jonah",
+        "x": 431.53125,
+        "y": 448.984375,
+        "width": 154.953125,
+        "height": 186.625,
+        "top": 448.984375,
+        "right": 586.484375,
+        "bottom": 635.609375,
+        "left": 431.53125
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-10-1440x900.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "plant-withers",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 331.15625,
+      "width": 531.203125,
+      "height": 305.671875,
+      "top": 331.15625,
+      "right": 1424,
+      "bottom": 636.828125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 373.34375,
+      "width": 483.203125,
+      "height": 174.84375,
+      "top": 373.34375,
+      "right": 1400,
+      "bottom": 548.1875,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 175,
+      "full": 175
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 562.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 562.1875,
+        "right": 1072.53125,
+        "bottom": 612.828125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 561.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 561.1875,
+        "right": 1236.265625,
+        "bottom": 611.828125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 562.1875,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 562.1875,
+        "right": 1400,
+        "bottom": 612.828125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Jonah",
+        "x": 300.921875,
+        "y": 423,
+        "width": 153.421875,
+        "height": 188.828125,
+        "top": 423,
+        "right": 454.34375,
+        "bottom": 611.828125,
+        "left": 300.921875
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-11-1440x900.png"
+  },
+  {
+    "book": "jonah-and-the-whale",
+    "spread": "jonah-mercy",
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "art": {
+      "x": 12,
+      "y": 84,
+      "width": 868.796875,
+      "height": 800,
+      "top": 84,
+      "right": 880.796875,
+      "bottom": 884,
+      "left": 12
+    },
+    "reader": {
+      "x": 892.796875,
+      "y": 313.40625,
+      "width": 531.203125,
+      "height": 341.171875,
+      "top": 313.40625,
+      "right": 1424,
+      "bottom": 654.578125,
+      "left": 892.796875
+    },
+    "text": {
+      "x": 916.796875,
+      "y": 355.59375,
+      "width": 483.203125,
+      "height": 210.34375,
+      "top": 355.59375,
+      "right": 1400,
+      "bottom": 565.9375,
+      "left": 916.796875
+    },
+    "textScroll": {
+      "client": 210,
+      "full": 210
+    },
+    "buttons": [
+      {
+        "x": 916.796875,
+        "y": 579.9375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 579.9375,
+        "right": 1072.53125,
+        "bottom": 630.578125,
+        "left": 916.796875
+      },
+      {
+        "x": 1080.53125,
+        "y": 578.9375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 578.9375,
+        "right": 1236.265625,
+        "bottom": 629.578125,
+        "left": 1080.53125
+      },
+      {
+        "x": 1244.265625,
+        "y": 579.9375,
+        "width": 155.734375,
+        "height": 50.640625,
+        "top": 579.9375,
+        "right": 1400,
+        "bottom": 630.578125,
+        "left": 1244.265625
+      }
+    ],
+    "targets": [
+      {
+        "name": "Jonah",
+        "x": 241.484375,
+        "y": 421.546875,
+        "width": 154.578125,
+        "height": 184.734375,
+        "top": 421.546875,
+        "right": 396.0625,
+        "bottom": 606.28125,
+        "left": 241.484375
+      }
+    ],
+    "overlay": "none",
+    "overflow": false,
+    "file": "jonah-and-the-whale-12-1440x900.png"
+  }
+]

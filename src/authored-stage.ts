@@ -30,6 +30,7 @@ export interface AuthoredStageDebug {
     meshPosition: number[];
     rotation: number;
     rocking: number;
+    held: boolean;
     scale: number[];
     flipX: boolean;
     flipY: boolean;
@@ -661,7 +662,7 @@ export class AuthoredStage {
             opacity: ground.material.opacity,
           }
         : null,
-      elements: this.elements.map(({ definition, popup, pivot }) => ({
+      elements: this.elements.map(({ definition, popup, pivot, held }) => ({
         id: definition.id,
         kind: definition.kind,
         position: popup.position.toArray(),
@@ -671,10 +672,25 @@ export class AuthoredStage {
         ).toArray(),
         rotation: pivot.rotation.z,
         rocking: Number(pivot.userData.authoredRocking ?? 0),
+        held,
         scale: pivot.scale.toArray(),
         flipX: definition.flipX ?? false,
         flipY: definition.flipY ?? false,
       })),
     };
+  }
+
+  interactionTargets() {
+    return this.elements
+      .filter(
+        ({ definition }) =>
+          definition.kind === "actor" || definition.interaction,
+      )
+      .map(({ definition, mesh }) => ({
+        id: definition.id,
+        label: definition.label,
+        interaction: definition.interaction,
+        mesh,
+      }));
   }
 }

@@ -1,0 +1,107 @@
+{
+  "phone-before": {
+    "file": "before-jonah-and-the-whale-2-360x660.png",
+    "polygon": [
+      [
+        0,
+        75
+      ],
+      [
+        360,
+        92
+      ],
+      [
+        360,
+        367
+      ],
+      [
+        0,
+        347
+      ]
+    ],
+    "shipWidth": 263,
+    "areaPx": 98477,
+    "obscuredPercent": 50.63
+  },
+  "phone-after": {
+    "file": "after-jonah-and-the-whale-2-360x660.png",
+    "polygon": [
+      [
+        35,
+        285
+      ],
+      [
+        71,
+        118
+      ],
+      [
+        299,
+        125
+      ],
+      [
+        317,
+        304
+      ]
+    ],
+    "shipWidth": 151,
+    "areaPx": 44419,
+    "obscuredPercent": 0.0
+  },
+  "desktop-before": {
+    "file": "before-jonah-and-the-whale-2-1440x900.png",
+    "polygon": [
+      [
+        200,
+        463
+      ],
+      [
+        291,
+        84
+      ],
+      [
+        824,
+        103
+      ],
+      [
+        794,
+        549
+      ]
+    ],
+    "shipWidth": 350,
+    "areaPx": 236086,
+    "obscuredPercent": 0.0,
+    "occupancyPercent": 33.97
+  },
+  "desktop-after": {
+    "file": "after-jonah-and-the-whale-2-1440x900.png",
+    "polygon": [
+      [
+        67,
+        724
+      ],
+      [
+        154,
+        279
+      ],
+      [
+        761,
+        295
+      ],
+      [
+        798,
+        766
+      ]
+    ],
+    "shipWidth": 405,
+    "areaPx": 307614,
+    "obscuredPercent": 0.0,
+    "occupancyPercent": 44.26
+  },
+  "method": {
+    "baselineScrimAlphaThreshold": 0.1,
+    "baselineScrimBoundaryY": 218.70335195530726,
+    "outlineTolerancePx": 3,
+    "shipWidthTolerancePx": 5,
+    "scope": "Manual outer book outlines, including standing illustration and base; clipped to viewport. Desktop denominator identical in both captures. Not full critical-subject/animation acceptance."
+  }
+}

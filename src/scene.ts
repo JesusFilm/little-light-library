@@ -1,3 +1,4 @@
+import { fitReadingComposition } from "./reading-composition";
 import {
   createPaperCreature,
   type PaperCreature,
@@ -440,8 +441,12 @@ export class LibraryScene {
     return -1;
   }
   private actorButtons: HTMLButtonElement[] = [];
+  private authoredButtons: HTMLButtonElement[] = [];
   private actorLabel = document.createElement("span");
+  private onWindowBlur = () => this.releaseAuthoredHolds();
   private onLeave = (event: PointerEvent) => {
+    if (event.pointerId === this.heldAuthoredPointer)
+      this.releaseAuthoredHolds();
     if (!this.renderer.domElement.hasPointerCapture(event.pointerId))
       this.roomOrbit.cancel(event.pointerId);
     this.hoveredActor = this.hoveredCreature = -1;
@@ -467,32 +472,24 @@ export class LibraryScene {
           this.readingWideEnsemble,
         );
         this.readingFocusScale = 1;
-        if (this.readingWideEnsemble) {
-          const roots: THREE.Object3D[] = this.actors.map(
-            (actor) => actor.root,
-          );
-          const family = this.pageRoot.getObjectByName("family-ensemble");
-          if (family) roots.push(family);
-          const points: THREE.Vector3[] = [];
-          roots.forEach((root) => {
-            const bounds = new THREE.Box3().setFromObject(root);
-            if (bounds.isEmpty()) return;
-            for (const x of [bounds.min.x, bounds.max.x])
-              for (const y of [bounds.min.y, bounds.max.y])
-                for (const z of [bounds.min.z, bounds.max.z])
-                  points.push(new THREE.Vector3(x, y, z));
-          });
-          const base = this.camera.clone();
-          base.position.copy(this.cameraGoal);
-          const guarded = constrainReadingFocus(
-            base,
-            this.lookGoal,
-            response,
-            points,
-          );
-          response = guarded;
-          this.readingFocusScale = guarded.scale;
-        }
+        const base = this.camera.clone();
+        base.position.copy(this.cameraGoal);
+        const art = this.readingRegion.getBoundingClientRect();
+        const canvas = this.renderer.domElement.getBoundingClientRect();
+        const guarded = constrainReadingFocus(
+          base,
+          this.lookGoal,
+          response,
+          this.readingPoints,
+          {
+            left: ((art.left - canvas.left + 4) / canvas.width) * 2 - 1,
+            right: ((art.right - canvas.left - 4) / canvas.width) * 2 - 1,
+            top: 1 - ((art.top - canvas.top + 4) / canvas.height) * 2,
+            bottom: 1 - ((art.bottom - canvas.top - 4) / canvas.height) * 2,
+          },
+        );
+        response = guarded;
+        this.readingFocusScale = guarded.scale;
         this.readingFocus.start(performance.now() / 1000, response);
       }
     }
@@ -575,8 +572,20 @@ export class LibraryScene {
   private loadGeneration = 0;
   private spreadAbort?: AbortController;
   private disposed = false;
-  private reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  private motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+  private reduced = this.motionPreference.matches;
+  private onMotionPreference = (event: MediaQueryListEvent) => {
+    this.reduced = event.matches;
+    this.clearReadingFocus();
+    this.releaseAuthoredHolds();
+  };
   private resizeObserver: ResizeObserver;
+  private readingRegion = document.createElement("div");
+  private readingPoints: THREE.Vector3[] = [];
+  private readingBounds = new THREE.Box3(
+    new THREE.Vector3(-3.2, 1.45, -0.5),
+    new THREE.Vector3(3.2, 4.5, 2.8),
+  );
   private raf = 0;
   private lastFrame = 0;
   private slowFrames = 0;
@@ -630,6 +639,12 @@ export class LibraryScene {
   }
   private onDown = (event: PointerEvent) => {
     if (this.mode === "spread" && event.button === 0) {
+      this.roomOrbit.down(
+        event.pointerId,
+        event.clientX,
+        event.clientY,
+        event.isPrimary,
+      );
       const id = this.hitAuthored(event);
       if (id && this.authoredStage?.hold(id, true)) {
         this.heldAuthoredPointer = event.pointerId;
@@ -662,6 +677,13 @@ export class LibraryScene {
         e.clientY,
         this.renderer.domElement.clientWidth,
       );
+      if (
+        this.mode === "spread" &&
+        (intent === "drag" || intent === "scroll" || intent === "none")
+      ) {
+        this.releaseAuthoredHolds();
+        return;
+      }
       if (intent === "drag" && this.mode === "room") {
         if (!this.renderer.domElement.hasPointerCapture(e.pointerId))
           this.renderer.domElement.setPointerCapture(e.pointerId);
@@ -702,7 +724,7 @@ export class LibraryScene {
     const tap = tracked ? this.roomOrbit.up(event.pointerId) : false;
     if (this.renderer.domElement.hasPointerCapture(event.pointerId))
       this.renderer.domElement.releasePointerCapture(event.pointerId);
-    if (tracked && (this.mode !== "room" || !tap)) {
+    if (tracked && !tap) {
       this.renderer.domElement.style.cursor = "";
       return;
     }
@@ -808,6 +830,8 @@ export class LibraryScene {
     this.renderer.domElement.addEventListener("pointerup", this.onPointer);
     this.renderer.domElement.addEventListener("pointermove", this.onMove);
     this.renderer.domElement.addEventListener("pointerleave", this.onLeave);
+    window.addEventListener("blur", this.onWindowBlur);
+    this.motionPreference.addEventListener("change", this.onMotionPreference);
     this.scene.background = new THREE.Color(0x273b3a);
     this.scene.add(this.shelfHint.root);
     this.scene.fog = new THREE.Fog(0x334240, 18, 38);
@@ -836,31 +860,35 @@ export class LibraryScene {
     this.batchStaticRoom();
     this.roomRoot.add(this.roomShelf.root);
     this.makeBook();
+    this.readingRegion.className = "reading-art-region";
+    this.readingRegion.setAttribute("aria-hidden", "true");
+    this.container.append(this.readingRegion);
     this.resizeObserver = new ResizeObserver(() => this.resize());
+    this.resizeObserver.observe(this.readingRegion);
     this.resizeObserver.observe(container);
+    const readingPanel = document.querySelector("#panel");
+    if (readingPanel) this.resizeObserver.observe(readingPanel);
     this.resize();
     this.camera.position.copy(this.cameraGoal);
     this.look.copy(this.lookGoal);
     this.animate();
   }
   private resize() {
+    // Portrait copy is content-sized and bottom docked. Its actual height,
+    // including status and safe-area padding, determines the remaining art space.
+    const panelHeight = document
+      .querySelector("#panel")
+      ?.getBoundingClientRect().height;
+    if (panelHeight !== undefined)
+      this.readingRegion.style.setProperty(
+        "--reading-panel-height",
+        `${panelHeight}px`,
+      );
     const w = Math.max(this.container.clientWidth, 1),
       h = Math.max(this.container.clientHeight, 1);
     this.camera.aspect = w / h;
-    // Keep the illustrated book at its original pixel scale when the reading
-    // canvas extends behind the controls. The taller frustum reveals the same
-    // room below the book instead of stretching or replacing it with a bitmap.
-    const readingViewportHeight = Math.min(h, Math.min(h * 0.52, w * 0.92));
-    this.camera.fov =
-      this.mode === "room"
-        ? 42
-        : THREE.MathUtils.radToDeg(
-            2 *
-              Math.atan(
-                Math.tan(THREE.MathUtils.degToRad(42 / 2)) *
-                  (h / readingViewportHeight),
-              ),
-          );
+    this.camera.clearViewOffset();
+    this.camera.fov = 42;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(w, h, false);
     if (this.mode === "room") {
@@ -873,25 +901,27 @@ export class LibraryScene {
       );
       this.lookGoal.set(0, narrow ? 3.05 : 3.15, -1.7);
     } else {
-      // Fill portrait reading views with the pop-up scene while the canvas
-      // keeps its unscaled DOM bounds for actor hit targets and labels.
-      const effectiveAspect = w / readingViewportHeight;
-      const framingSpan = THREE.MathUtils.lerp(
-        0.95,
-        1.25,
-        THREE.MathUtils.smoothstep(effectiveAspect, 0.95, 1.25),
+      const region = this.readingRegion.getBoundingClientRect();
+      const canvas = this.container.getBoundingClientRect();
+      const width = Math.max(1, region.width),
+        height = Math.max(1, region.height);
+      const composition = fitReadingComposition(
+        this.readingBounds,
+        width / height,
+        this.readingPoints,
       );
-      const scale = Math.max(1, framingSpan / effectiveAspect);
-      // Bring the illustrated stage forward, allowing peripheral book edges to crop.
-      // Extremely narrow views still retain clearance for wide actor groups.
-      this.lookGoal.set(0, 0.1, 0.4);
-      this.cameraGoal.set(1.1 * scale, 2.45 + 3.4 * scale, 0.4 + 6.05 * scale);
-      // Move the book clear of the desktop text column without jumping at a
-      // tablet/landscape breakpoint, including when reduced motion is active.
-      const desktopShift =
-        2 * THREE.MathUtils.smoothstep(effectiveAspect, 1.6, 2.2);
-      this.cameraGoal.x += desktopShift;
-      this.lookGoal.x += desktopShift;
+      this.cameraGoal.copy(composition.camera);
+      this.lookGoal.copy(composition.look);
+      // Render the same room across the full canvas, with the fitted art frustum
+      // occupying exactly the rectangle reserved by the reading layout.
+      this.camera.setViewOffset(
+        width,
+        height,
+        canvas.left - region.left,
+        canvas.top - region.top,
+        w,
+        h,
+      );
     }
   }
   private batchStaticRoom() {
@@ -1297,6 +1327,8 @@ export class LibraryScene {
     this.actorLabel.hidden = true;
     this.actorButtons.forEach((b) => b.remove());
     this.actorButtons = [];
+    this.authoredButtons.forEach((b) => b.remove());
+    this.authoredButtons = [];
     this.hoveredActor = this.touchedActor = -1;
     const generation = ++this.loadGeneration;
     this.mode = "room";
@@ -1580,6 +1612,7 @@ export class LibraryScene {
       if (this.stationarySource) this.stationarySource.visible = false;
       if (this.destinationPaper) this.destinationPaper.visible = false;
       this.actorButtons.forEach((button) => (button.hidden = true));
+      this.authoredButtons.forEach((button) => (button.hidden = true));
       this.creatures.forEach(({ button }) => (button.hidden = true));
       this.shelfCoverMotion = {
         kind: "close",
@@ -2144,6 +2177,7 @@ export class LibraryScene {
 
   async spread(story: Story, page: Page, locale: LocaleData) {
     this.releaseAuthoredHolds();
+    this.roomOrbit.reset();
     this.spreadAbort?.abort();
     const spreadAbort = new AbortController();
     this.spreadAbort = spreadAbort;
@@ -2303,6 +2337,8 @@ export class LibraryScene {
     this.pageMaps = [];
     this.actorButtons.forEach((b) => b.remove());
     this.actorButtons = [];
+    this.authoredButtons.forEach((b) => b.remove());
+    this.authoredButtons = [];
     this.actorNames = [];
     this.propNames = [];
     this.actorLabel.hidden = true;
@@ -2318,6 +2354,40 @@ export class LibraryScene {
       const stage = preparedAuthored!;
       this.pageRoot.add(stage.root);
       this.authoredStage = stage;
+      this.authoredButtons = stage.interactionTargets().map((element) => {
+        const button = document.createElement("button");
+        button.className = "paper-target authored-target";
+        button.type = "button";
+        button.dataset.element = element.id;
+        button.lang = authored.book.locale;
+        button.setAttribute(
+          "aria-label",
+          element.interaction?.label ?? element.label,
+        );
+        button.onblur = () => this.releaseAuthoredHolds();
+        button.onclick = () => {
+          const result = this.activateAuthored(element.id);
+          if (result) this.onAuthoredInteraction(result);
+        };
+        if (element.interaction?.effect === "hold-rock") {
+          button.onkeydown = (event) => {
+            if (event.key === " " || event.key === "Enter") {
+              event.preventDefault();
+              if (!event.repeat) {
+                const result = this.activateAuthored(element.id);
+                if (result) this.onAuthoredInteraction(result);
+                this.holdAuthored(element.id, true);
+              }
+            }
+          };
+          button.onkeyup = (event) => {
+            if (event.key === " " || event.key === "Enter")
+              this.releaseAuthoredHolds();
+          };
+        }
+        this.container.append(button);
+        return button;
+      });
       this.pageMaps.push(...stage.textures);
       this.popups.push(...stage.popups);
       this.propNames.push(
@@ -2405,6 +2475,52 @@ export class LibraryScene {
         (g.rotation.x = this.reduced ? Math.PI / 2 : g.userData.foldStart || 0),
     );
     this.resetBookToTable();
+    // Measure a detached, upright copy once per spread. Geometry/materials are
+    // shared; no GPU resources are allocated or disposed by this measurement.
+    const stage = this.pageRoot.clone(true);
+    stage.position.set(0, 0, 0);
+    stage.scale.setScalar(1);
+    stage.traverse((object) => {
+      if (object.userData.foldStart !== undefined)
+        object.rotation.x = Math.PI / 2;
+    });
+    const table = new THREE.Group();
+    table.position.copy(this.bookRoot.position);
+    table.rotation.copy(this.bookRoot.rotation);
+    table.add(stage);
+    table.updateMatrixWorld(true);
+    this.readingBounds.setFromObject(stage);
+    this.readingPoints = [];
+    stage.traverse((object) => {
+      if (!(object instanceof THREE.Mesh)) return;
+      // A turned-off alternate pose must not make the frame wider.
+      for (
+        let node: THREE.Object3D | null = object;
+        node && node !== stage;
+        node = node.parent
+      )
+        if (!node.visible) return;
+      const position = object.geometry.getAttribute("position");
+      if (!position) return;
+      for (let index = 0; index < position.count; index++)
+        this.readingPoints.push(
+          new THREE.Vector3()
+            .fromBufferAttribute(position, index)
+            .applyMatrix4(object.matrixWorld),
+        );
+    });
+    for (const x of [-3.2, 3.2])
+      for (const z of [-0.5, 2.8])
+        this.readingPoints.push(new THREE.Vector3(x, 1.5, z));
+    // Include the physical page base and the fish's 0.36-unit leap/ship rocking.
+    this.readingBounds.union(
+      new THREE.Box3(
+        new THREE.Vector3(-3.2, 1.45, -0.5),
+        new THREE.Vector3(3.2, 1.7, 2.8),
+      ),
+    );
+    this.readingBounds.expandByScalar(0.22);
+    this.resize();
   }
   review(
     time?: number,
@@ -2521,6 +2637,10 @@ export class LibraryScene {
       roomWallpaper: this.roomWallpaper,
       camera: this.camera.position.toArray(),
       cameraGoal: this.cameraGoal.toArray(),
+      compositionBounds: {
+        min: this.readingBounds.min.toArray(),
+        max: this.readingBounds.max.toArray(),
+      },
       readingFocus: {
         index: this.readingFocusIndex,
         wideEnsemble: this.readingWideEnsemble,
@@ -2859,6 +2979,7 @@ export class LibraryScene {
       if (this.stationarySource) this.stationarySource.visible = false;
       if (this.destinationPaper) this.destinationPaper.visible = false;
       this.actorButtons.forEach((button) => (button.hidden = true));
+      this.authoredButtons.forEach((button) => (button.hidden = true));
       this.creatures.forEach(({ button }) => (button.hidden = true));
       if (amount >= 1) {
         this.leftLeaf.rotation.y = target;
@@ -2978,6 +3099,26 @@ export class LibraryScene {
           this.actorLabel.style.left = `${Math.max(40, Math.min(rect.width - 40, x))}px`;
           this.actorLabel.style.top = `${Math.max(65, y - 34)}px`;
         }
+      });
+      const authoredElements = this.authoredStage?.interactionTargets() ?? [];
+      this.authoredButtons.forEach((button, index) => {
+        const element = authoredElements[index];
+        if (!element) {
+          button.hidden = true;
+          return;
+        }
+        const bounds = this.projectedBounds(element.mesh);
+        button.hidden =
+          !this.pageRoot.visible ||
+          this.transitionWaiting ||
+          this.foldingOut > 0 ||
+          this.closing > 0;
+        const width = Math.max(44, bounds.right - bounds.left);
+        const height = Math.max(44, bounds.bottom - bounds.top);
+        button.style.left = `${(bounds.left + bounds.right - width) / 2}px`;
+        button.style.top = `${(bounds.top + bounds.bottom - height) / 2}px`;
+        button.style.width = `${width}px`;
+        button.style.height = `${height}px`;
       });
     }
     if (this.mode === "spread") {
@@ -3100,6 +3241,7 @@ export class LibraryScene {
     this.loadGeneration++;
     cancelAnimationFrame(this.raf);
     this.resizeObserver.disconnect();
+    this.readingRegion.remove();
     this.renderer.domElement.removeEventListener("pointerdown", this.onDown);
     this.renderer.domElement.removeEventListener(
       "pointercancel",
@@ -3112,10 +3254,16 @@ export class LibraryScene {
     this.renderer.domElement.removeEventListener("pointerup", this.onPointer);
     this.renderer.domElement.removeEventListener("pointermove", this.onMove);
     this.renderer.domElement.removeEventListener("pointerleave", this.onLeave);
+    window.removeEventListener("blur", this.onWindowBlur);
+    this.motionPreference.removeEventListener(
+      "change",
+      this.onMotionPreference,
+    );
     this.actorLabel.remove();
     this.clearShelfButtons();
     this.clearToyButtons();
     this.actorButtons.forEach((b) => b.remove());
+    this.authoredButtons.forEach((b) => b.remove());
     this.actors.forEach((a) => a.dispose());
     this.pageMaps.forEach((t) => t.dispose());
     this.roomTextures.forEach((t) => t.dispose());

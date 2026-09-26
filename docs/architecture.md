@@ -262,3 +262,35 @@ modified file byte; changing bytes at the same path requires fresh review.
 There is no author account, collaboration, live translation, publishing service
 or arbitrary scripting. These limits keep cleanup bounded. Genuine feature
 blockers and optional improvements belong in the project plans.
+
+## Reading composition
+
+The wide reading layout reserves `.reading-art-region` beside the reading panel.
+In portrait, the panel docks to the viewport bottom and sizes to its content,
+capped at 38% of viewport height (240px on phones). `LibraryScene` observes both
+the panel and art region; the panel's measured height plus its 48px upward fade
+defines the space available for art. The camera fits that measured rectangle.
+The gradient belongs to the dock, with transparency above and solid color below;
+it cannot expand independently into a viewport-sized reader overlay.
+The room still renders across the full canvas;
+a view offset positions the art frustum without scaling or replacing the scene.
+
+Once a spread is prepared, a detached upright copy supplies geometry points for
+`fitReadingComposition`. It shares existing geometry/materials and does not
+allocate GPU resources. The fit includes the physical page and movement clearance;
+interaction focus is constrained to the same art region. Revisiting or resizing
+recomputes the fit from the stored spread points, so zoom cannot accumulate.
+
+The title and complete story share a keyboard-focusable scroll region. Transport
+stays outside that region, and status/retry messages live in the reading footer.
+Phone body/title sizes are 16px/22px. Inline transport labels and icons retain
+44px touch targets while avoiding the taller stacked controls.
+Authored actors and interactive props have named spatial keyboard targets; the
+canvas handles pointer/touch picking. Both paths share activation and hold cleanup.
+A movement gesture cancels a scene discovery, and reduced-motion changes release
+holds and clear camera focus immediately.
+
+The room browser journey includes all 29 spreads at phone and desktop sizes,
+harbor/storm captures at six sizes, nine-locale first-spread captures per book,
+and enlarged-copy checks. These are functional/layout checks; physical-device,
+listening and creator review remain separate evidence.

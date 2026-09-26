@@ -221,6 +221,15 @@ async function inspectLayout(page, scenario, name) {
     const appStyle = getComputedStyle(document.querySelector("#app"));
     const sceneStyle = getComputedStyle(document.querySelector("#scene"));
     return {
+      readerBackground: (() => {
+        const reader = document.querySelector(".reader");
+        const overlay = getComputedStyle(reader, "::before");
+        return {
+          content: overlay.content,
+          height: parseFloat(overlay.height),
+          readerHeight: reader.getBoundingClientRect().height,
+        };
+      })(),
       width: innerWidth,
       height: innerHeight,
       canvas: {
@@ -242,6 +251,12 @@ async function inspectLayout(page, scenario, name) {
       ),
     };
   });
+  assert.ok(
+    layout.readerBackground.content === "none" ||
+      layout.readerBackground.height <=
+        layout.readerBackground.readerHeight + 30,
+    `${name}: reader background stays within the text card`,
+  );
   assert.ok(
     layout.scrollWidth <= layout.width + 1,
     `${name}: no horizontal overflow`,
@@ -446,14 +461,22 @@ try {
       });
 
       if (entry.id === "jonah-and-the-whale") {
-        await page
-          .locator(".authored-interactions [data-element]")
-          .first()
-          .tap();
+        assert.equal(
+          await page.locator(".authored-interactions").count(),
+          0,
+          "Optional story interactions stay out of the reading toolbar",
+        );
+        const target = page.locator(".authored-target");
+        assert.ok(
+          (await target.count()) > 0,
+          "Interactive prop has a spatial keyboard target",
+        );
+        await target.first().focus();
+        await page.keyboard.press("Enter");
         await page.waitForFunction(() =>
           Boolean(document.querySelector("#notice")?.textContent?.trim()),
         );
-        scenario.characterFeedback = "authored response shown after touch";
+        scenario.characterFeedback = "spatial prop target responds to keyboard";
       } else {
         // Paper-target buttons supply keyboard access; the canvas owns touch
         // raycasting. Tap the rendered character position through the canvas.
@@ -611,6 +634,80 @@ try {
           await page.locator(".reader h1").textContent(),
           titleFor(entry.id, "en-US", index),
         );
+        if (entry.id === "jonah-and-the-whale" && [1, 2].includes(index)) {
+          // Readiness budgets above include the actual page transfer. Discovery
+          // coordinates must come from the settled camera, not a moving target
+          // whose position becomes stale during the throttled input round trip.
+          await page.waitForFunction(() => {
+            const scene = window.libraryDebug().scene;
+            return (
+              scene.camera.every(
+                (value, index) =>
+                  Math.abs(value - scene.cameraGoal[index]) < 0.002,
+              ) &&
+              scene.look.every(
+                (value, index) =>
+                  Math.abs(value - scene.lookGoal[index]) < 0.002,
+              )
+            );
+          });
+          const target = page.locator(
+            `[data-element="${index === 1 ? "small-fish" : "ship"}"]`,
+          );
+          const box = await target.boundingBox();
+          assert.ok(box, "Discovery has a projected scene position");
+          const x = box.x + box.width / 2,
+            // The ship image contains transparent space between its sail and hull.
+            // Touch the painted hull, as a reader would, rather than that hole.
+            y = box.y + box.height * (index === 2 ? 0.75 : 0.5);
+          if (index === 1) {
+            await page.touchscreen.tap(x, y);
+            await page.waitForFunction(() =>
+              document.querySelector("#notice")?.textContent.includes("leap"),
+            );
+          } else {
+            await cdp.send("Input.dispatchTouchEvent", {
+              type: "touchStart",
+              touchPoints: [{ x, y }],
+            });
+            await page.waitForFunction(
+              () =>
+                window
+                  .libraryDebug()
+                  .scene.authored.elements.find((e) => e.id === "ship").held,
+            );
+            await cdp.send("Input.dispatchTouchEvent", {
+              type: "touchEnd",
+              touchPoints: [],
+            });
+            await page.waitForFunction(
+              () =>
+                !window
+                  .libraryDebug()
+                  .scene.authored.elements.find((e) => e.id === "ship").held,
+            );
+            await cdp.send("Input.dispatchTouchEvent", {
+              type: "touchStart",
+              touchPoints: [{ x, y }],
+            });
+            await page.waitForFunction(
+              () =>
+                window
+                  .libraryDebug()
+                  .scene.authored.elements.find((e) => e.id === "ship").held,
+            );
+            await cdp.send("Input.dispatchTouchEvent", {
+              type: "touchCancel",
+              touchPoints: [],
+            });
+            await page.waitForFunction(
+              () =>
+                !window
+                  .libraryDebug()
+                  .scene.authored.elements.find((e) => e.id === "ship").held,
+            );
+          }
+        }
         if (index === 2 || index === countFor(entry.id) - 1)
           await inspectLayout(page, scenario, `portrait-page-${index + 1}`);
       }

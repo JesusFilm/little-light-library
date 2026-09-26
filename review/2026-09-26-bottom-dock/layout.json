@@ -1,0 +1,1322 @@
+[
+  {
+    "file": "eden-0-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-1-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-2-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-3-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-4-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-5-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-6-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-7-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-0-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-1-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-2-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 437.453125,
+      "width": 360,
+      "height": 222.546875,
+      "top": 437.453125,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-3-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-4-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-5-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-6-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-7-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 420,
+      "width": 360,
+      "height": 240,
+      "top": 420,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-0-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 480.640625,
+      "width": 360,
+      "height": 179.359375,
+      "top": 480.640625,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-1-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 502.234375,
+      "width": 360,
+      "height": 157.765625,
+      "top": 502.234375,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-1-360x560.png",
+    "viewport": [
+      360,
+      560
+    ],
+    "reader": {
+      "x": 0,
+      "y": 402.234375,
+      "width": 360,
+      "height": 157.765625,
+      "top": 402.234375,
+      "right": 360,
+      "bottom": 560,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-1-390x844.png",
+    "viewport": [
+      390,
+      844
+    ],
+    "reader": {
+      "x": 0,
+      "y": 686.234375,
+      "width": 390,
+      "height": 157.765625,
+      "top": 686.234375,
+      "right": 390,
+      "bottom": 844,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-1-740x360.png",
+    "viewport": [
+      740,
+      360
+    ],
+    "reader": {
+      "x": 392.1875,
+      "y": 93.75,
+      "width": 331.8125,
+      "height": 224.5,
+      "top": 93.75,
+      "right": 724,
+      "bottom": 318.25,
+      "left": 392.1875
+    },
+    "bodyFont": 18,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-1-900x1440.png",
+    "viewport": [
+      900,
+      1440
+    ],
+    "reader": {
+      "x": 70,
+      "y": 1268.484375,
+      "width": 760,
+      "height": 171.515625,
+      "top": 1268.484375,
+      "right": 830,
+      "bottom": 1440,
+      "left": 70
+    },
+    "bodyFont": 18,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-2-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 502.234375,
+      "width": 360,
+      "height": 157.765625,
+      "top": 502.234375,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-2-360x560.png",
+    "viewport": [
+      360,
+      560
+    ],
+    "reader": {
+      "x": 0,
+      "y": 402.234375,
+      "width": 360,
+      "height": 157.765625,
+      "top": 402.234375,
+      "right": 360,
+      "bottom": 560,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-2-390x844.png",
+    "viewport": [
+      390,
+      844
+    ],
+    "reader": {
+      "x": 0,
+      "y": 686.234375,
+      "width": 390,
+      "height": 157.765625,
+      "top": 686.234375,
+      "right": 390,
+      "bottom": 844,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-2-740x360.png",
+    "viewport": [
+      740,
+      360
+    ],
+    "reader": {
+      "x": 392.1875,
+      "y": 93.75,
+      "width": 331.8125,
+      "height": 224.5,
+      "top": 93.75,
+      "right": 724,
+      "bottom": 318.25,
+      "left": 392.1875
+    },
+    "bodyFont": 18,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-2-900x1440.png",
+    "viewport": [
+      900,
+      1440
+    ],
+    "reader": {
+      "x": 70,
+      "y": 1268.484375,
+      "width": 760,
+      "height": 171.515625,
+      "top": 1268.484375,
+      "right": 830,
+      "bottom": 1440,
+      "left": 70
+    },
+    "bodyFont": 18,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-3-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 480.640625,
+      "width": 360,
+      "height": 179.359375,
+      "top": 480.640625,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-4-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 502.234375,
+      "width": 360,
+      "height": 157.765625,
+      "top": 502.234375,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-5-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 480.640625,
+      "width": 360,
+      "height": 179.359375,
+      "top": 480.640625,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-6-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 480.640625,
+      "width": 360,
+      "height": 179.359375,
+      "top": 480.640625,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-7-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 502.234375,
+      "width": 360,
+      "height": 157.765625,
+      "top": 502.234375,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-8-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 480.640625,
+      "width": 360,
+      "height": 179.359375,
+      "top": 480.640625,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-9-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 502.234375,
+      "width": 360,
+      "height": 157.765625,
+      "top": 502.234375,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-10-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 480.640625,
+      "width": 360,
+      "height": 179.359375,
+      "top": 480.640625,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-11-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 480.640625,
+      "width": 360,
+      "height": 179.359375,
+      "top": 480.640625,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-12-360x660.png",
+    "viewport": [
+      360,
+      660
+    ],
+    "reader": {
+      "x": 0,
+      "y": 480.640625,
+      "width": 360,
+      "height": 179.359375,
+      "top": 480.640625,
+      "right": 360,
+      "bottom": 660,
+      "left": 0
+    },
+    "bodyFont": 16,
+    "dockGradient": "linear-gradient(rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45) 100%)",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-0-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-1-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 255.734375,
+      "width": 531.203125,
+      "height": 456.515625,
+      "top": 255.734375,
+      "right": 1424,
+      "bottom": 712.25,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-2-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-3-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-4-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 260.15625,
+      "width": 531.203125,
+      "height": 447.671875,
+      "top": 260.15625,
+      "right": 1424,
+      "bottom": 707.828125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-5-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-6-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 260.15625,
+      "width": 531.203125,
+      "height": 447.671875,
+      "top": 260.15625,
+      "right": 1424,
+      "bottom": 707.828125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "eden-7-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 237.984375,
+      "width": 531.203125,
+      "height": 492.015625,
+      "top": 237.984375,
+      "right": 1424,
+      "bottom": 730,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-0-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-1-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 260.15625,
+      "width": 531.203125,
+      "height": 447.671875,
+      "top": 260.15625,
+      "right": 1424,
+      "bottom": 707.828125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-2-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 295.65625,
+      "width": 531.203125,
+      "height": 376.671875,
+      "top": 295.65625,
+      "right": 1424,
+      "bottom": 672.328125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-3-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 260.15625,
+      "width": 531.203125,
+      "height": 447.671875,
+      "top": 260.15625,
+      "right": 1424,
+      "bottom": 707.828125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-4-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-5-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 237.984375,
+      "width": 531.203125,
+      "height": 492.015625,
+      "top": 237.984375,
+      "right": 1424,
+      "bottom": 730,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-6-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 277.90625,
+      "width": 531.203125,
+      "height": 412.171875,
+      "top": 277.90625,
+      "right": 1424,
+      "bottom": 690.078125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "noah-7-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 220.234375,
+      "width": 531.203125,
+      "height": 527.515625,
+      "top": 220.234375,
+      "right": 1424,
+      "bottom": 747.75,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-0-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 331.15625,
+      "width": 531.203125,
+      "height": 305.671875,
+      "top": 331.15625,
+      "right": 1424,
+      "bottom": 636.828125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-1-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 348.90625,
+      "width": 531.203125,
+      "height": 270.171875,
+      "top": 348.90625,
+      "right": 1424,
+      "bottom": 619.078125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-2-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 348.90625,
+      "width": 531.203125,
+      "height": 270.171875,
+      "top": 348.90625,
+      "right": 1424,
+      "bottom": 619.078125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-3-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 313.40625,
+      "width": 531.203125,
+      "height": 341.171875,
+      "top": 313.40625,
+      "right": 1424,
+      "bottom": 654.578125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-4-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 326.734375,
+      "width": 531.203125,
+      "height": 314.515625,
+      "top": 326.734375,
+      "right": 1424,
+      "bottom": 641.25,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-5-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 308.984375,
+      "width": 531.203125,
+      "height": 350.015625,
+      "top": 308.984375,
+      "right": 1424,
+      "bottom": 659,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-6-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 331.15625,
+      "width": 531.203125,
+      "height": 305.671875,
+      "top": 331.15625,
+      "right": 1424,
+      "bottom": 636.828125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-7-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 326.734375,
+      "width": 531.203125,
+      "height": 314.515625,
+      "top": 326.734375,
+      "right": 1424,
+      "bottom": 641.25,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-8-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 308.984375,
+      "width": 531.203125,
+      "height": 350.015625,
+      "top": 308.984375,
+      "right": 1424,
+      "bottom": 659,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-9-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 331.15625,
+      "width": 531.203125,
+      "height": 305.671875,
+      "top": 331.15625,
+      "right": 1424,
+      "bottom": 636.828125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-10-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 308.984375,
+      "width": 531.203125,
+      "height": 350.015625,
+      "top": 308.984375,
+      "right": 1424,
+      "bottom": 659,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-11-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 331.15625,
+      "width": 531.203125,
+      "height": 305.671875,
+      "top": 331.15625,
+      "right": 1424,
+      "bottom": 636.828125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "file": "jonah-and-the-whale-12-1440x900.png",
+    "viewport": [
+      1440,
+      900
+    ],
+    "reader": {
+      "x": 892.796875,
+      "y": 313.40625,
+      "width": 531.203125,
+      "height": 341.171875,
+      "top": 313.40625,
+      "right": 1424,
+      "bottom": 654.578125,
+      "left": 892.796875
+    },
+    "bodyFont": 24.48,
+    "dockGradient": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(16, 43, 45, 0.91) 48px, rgb(16, 43, 45))",
+    "readerBackground": "rgba(0, 0, 0, 0)"
+  }
+]

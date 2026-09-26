@@ -1,0 +1,16 @@
+{
+  "command": "npm run verify:all",
+  "exitCode": 0,
+  "unitTests": 209,
+  "browserSuites": [
+    "mobile",
+    "response",
+    "room",
+    "recovery",
+    "failure",
+    "audio-continuity"
+  ],
+  "logSha256": "fc0b6ecd2bd596d8a42bc78e63cec24a26f165d4f5ef9c6044f8d11c733c92ff",
+  "logLocalPath": ".test-output/composition-audit/verified-final.log",
+  "scope": "Local complete verification of the committed runtime and test changes. No physical-device, audible, creator or CI approval."
+}

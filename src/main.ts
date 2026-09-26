@@ -212,9 +212,13 @@ const transportButton = (
 ) =>
   `<button id="${id}" class="reader-transport ${cls}" aria-label="${escaped(label)}"><span class="transport-icon" aria-hidden="true">${icon}</span><span class="transport-label">${escaped(label)}</span></button>`;
 const persist = () => savePreferences(localStorage, prefs);
+let noticeElement: HTMLElement | undefined;
 function notice(message = "", language: string = locale?.id) {
-  $("#notice").lang = language;
-  $("#notice").textContent = message;
+  noticeElement ??= $("#notice");
+  const host = document.querySelector(".reading .reader-footer") ?? $("#app");
+  if (noticeElement.parentElement !== host) host.append(noticeElement);
+  noticeElement.lang = language;
+  noticeElement.textContent = message;
 }
 async function fetchLocale(id: LocaleId) {
   const r = await fetch(`./content/${id}.json`);
@@ -411,58 +415,16 @@ async function renderPage(
     bindControls();
     updatePlayback();
   }
-  const commitReaderPage = (includeInteractions = true) => {
+  const commitReaderPage = () => {
     document.body.dataset.readerScene = page.id;
-    panel.innerHTML = `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><h1>${escaped(page.title)}</h1><div class="story-text">${page.segments.map((s, i) => `<span data-segment="${i}">${escaped(s.text)}</span>`).join(" ")}</div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", "←", t("previous"))}${transportButton("play", "▶", t("play"), "primary")}${transportButton("next", "→", t("next"))}</div></article>`;
+    panel.innerHTML = `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><div class="reader-copy" tabindex="0" role="region" aria-labelledby="reader-title"><h1 id="reader-title">${escaped(page.title)}</h1><div class="story-text">${page.segments.map((s, i) => `<span data-segment="${i}">${escaped(s.text)}</span>`).join(" ")}</div></div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", "←", t("previous"))}${transportButton("play", "▶", t("play"), "primary")}${transportButton("next", "→", t("next"))}</div></article>`;
     const next = $<HTMLButtonElement>("#next");
     next.dataset.lastPage = String(state.page >= story.pages.length - 1);
     next.disabled = next.dataset.lastPage === "true";
     if (page.authored) {
-      const { book, spread } = page.authored;
+      const { book } = page.authored;
       $(".reader").setAttribute("lang", book.locale);
       $(".reader-controls").setAttribute("lang", locale.id);
-      const interactiveElements = spread.elements.filter(
-        (e) => e.kind === "actor" || e.interaction,
-      );
-      if (includeInteractions && interactiveElements.length) {
-        const interactions = document.createElement("div");
-        interactions.className = "authored-interactions";
-        interactions.setAttribute("aria-label", "Story interactions");
-        for (const element of interactiveElements) {
-          const b = document.createElement("button");
-          b.type = "button";
-          b.textContent = element.interaction?.label ?? element.label;
-          b.dataset.element = element.id;
-          if (element.interaction?.effect === "hold-rock") {
-            const release = () => scene.releaseAuthoredHolds();
-            b.onpointerdown = (event) => {
-              if (event.button !== 0) return;
-              b.setPointerCapture(event.pointerId);
-              scene.holdAuthored(element.id, true);
-            };
-            b.onpointerup = release;
-            b.onpointercancel = release;
-            b.onlostpointercapture = release;
-            b.onkeydown = (event) => {
-              if (event.key === " " || event.key === "Enter")
-                scene.holdAuthored(element.id, true);
-            };
-            b.onkeyup = (event) => {
-              if (event.key === " " || event.key === "Enter") release();
-            };
-            b.onblur = release;
-          }
-          b.onclick = () => {
-            const result = scene.activateAuthored(element.id);
-            if (result) {
-              notice(result.response, book.locale);
-              if (result.sound) soundscape?.cue(result.sound);
-            }
-          };
-          interactions.append(b);
-        }
-        $(".reader-controls").before(interactions);
-      }
     }
     bindControls();
     panel.setAttribute("aria-busy", "false");
@@ -528,7 +490,7 @@ async function renderPage(
     narration.stop();
     // A first-page art failure still leaves the retelling readable. During a
     // turn, preserve the last complete text/art pair behind the error notice.
-    if (!panel.querySelector(".story-text")) commitReaderPage(false);
+    if (!panel.querySelector(".story-text")) commitReaderPage();
     session.reportFailure("artwork", current);
     return;
   }

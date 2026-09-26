@@ -1,3 +1,4 @@
+import { checkReadingComposition } from "./reading-composition-check.mjs";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import http from "node:http";
@@ -485,6 +486,14 @@ const assertToyTargetsInView = async () => {
 };
 
 await check(
+  "All committed spreads keep art and reading controls separate",
+  async () =>
+    checkReadingComposition(page, url, path.join(output, "composition")),
+);
+await page.emulateMedia({ reducedMotion: "no-preference" });
+await page.setViewportSize({ width: 1366, height: 768 });
+
+await check(
   "Physical shelf selection, reading, returning and toy lifecycle",
   async () => {
     await enter();
@@ -925,7 +934,8 @@ await check(
         for (const element of spread.elements.filter(
           ({ interaction }) => interaction,
         )) {
-          await page.locator(`[data-element="${element.id}"]`).click();
+          await page.locator(`[data-element="${element.id}"]`).focus();
+          await page.keyboard.press("Enter");
           assert.equal(
             await page.locator("#notice").textContent(),
             element.interaction.response,

@@ -1,0 +1,22 @@
+{
+  "results": [
+    {
+      "file": "bottom-dock-final-verify.log",
+      "exitCode": 0,
+      "sha256": "20b41aa1cfa1c588c7d1f824849b17908b4d3fbc548dbf3c818869d22ae07506"
+    },
+    {
+      "file": "bottom-dock-mobile-settled.log",
+      "exitCode": 0,
+      "sha256": "7936dd49c0d87a394cce143b18c00125a13efb7849c2e440751b523bcd7ce52b"
+    },
+    {
+      "file": "bottom-dock-lint.log",
+      "exitCode": 0,
+      "sha256": "0d7633c39e05caa0e17664a0687869ef62283a9e6c79ea34f369a1ffa4f56d44"
+    }
+  ],
+  "physicalDevice": false,
+  "audibleListening": false,
+  "creatorApproval": false
+}
