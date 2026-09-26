@@ -866,12 +866,24 @@ export class LibraryScene {
     this.resizeObserver = new ResizeObserver(() => this.resize());
     this.resizeObserver.observe(this.readingRegion);
     this.resizeObserver.observe(container);
+    const readingPanel = document.querySelector("#panel");
+    if (readingPanel) this.resizeObserver.observe(readingPanel);
     this.resize();
     this.camera.position.copy(this.cameraGoal);
     this.look.copy(this.lookGoal);
     this.animate();
   }
   private resize() {
+    // Portrait copy is content-sized and bottom docked. Its actual height,
+    // including status and safe-area padding, determines the remaining art space.
+    const panelHeight = document
+      .querySelector("#panel")
+      ?.getBoundingClientRect().height;
+    if (panelHeight !== undefined)
+      this.readingRegion.style.setProperty(
+        "--reading-panel-height",
+        `${panelHeight}px`,
+      );
     const w = Math.max(this.container.clientWidth, 1),
       h = Math.max(this.container.clientHeight, 1);
     this.camera.aspect = w / h;

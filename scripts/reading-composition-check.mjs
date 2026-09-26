@@ -110,6 +110,17 @@ export async function checkReadingComposition(
                 document.querySelector(".reader"),
                 "::before",
               ).content,
+              bodyFont: parseFloat(
+                getComputedStyle(document.querySelector(".story-text"))
+                  .fontSize,
+              ),
+              dockGradient: getComputedStyle(
+                document.querySelector("#panel"),
+                "::before",
+              ).backgroundImage,
+              readerBackground: getComputedStyle(
+                document.querySelector(".reader"),
+              ).backgroundColor,
               overflow: document.documentElement.scrollWidth > innerWidth + 1,
             };
           });
@@ -123,6 +134,29 @@ export async function checkReadingComposition(
           if (!baseline) {
             assert.equal(row.overlay, "none", "No reader pseudo-element scrim");
             assert.equal(row.overflow, false, "No horizontal overflow");
+            if (w <= 480 && h > w) {
+              assert.ok(
+                Math.abs(row.reader.bottom - h) <= 1,
+                "Mobile reader docks to the viewport bottom",
+              );
+              assert.ok(
+                row.reader.height <= h * 0.4,
+                "Mobile reading chrome uses at most 40% of the viewport",
+              );
+              assert.ok(
+                row.bodyFont <= 16,
+                "Default mobile story type is compact",
+              );
+              assert.ok(
+                row.dockGradient.includes("linear-gradient"),
+                "Mobile dock fades into the scene",
+              );
+              assert.equal(
+                row.readerBackground,
+                "rgba(0, 0, 0, 0)",
+                "No solid reader card replaces the gradient",
+              );
+            }
             assert.ok(
               row.art &&
                 (row.art.bottom <= row.reader.top + 1 ||
@@ -207,7 +241,7 @@ export async function checkReadingComposition(
         await page.setViewportSize({ width: 360, height: 560 });
         const enlarged = await page.addStyleTag({
           content:
-            ".reading .reader h1{font-size:52px!important}.reading .story-text{font-size:36px!important}.reading .reader-meta{font-size:26px!important}",
+            ".reading .reader h1{font-size:44px!important}.reading .story-text{font-size:32px!important}.reading .reader-meta{font-size:22px!important}",
         });
         const accessible = await page.evaluate(() => {
           const copy = document.querySelector(".reader-copy"),

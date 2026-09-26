@@ -1,0 +1,1358 @@
+{
+  "generatedAt": "2026-09-26T01:40:49.691Z",
+  "browser": "154.0.8037.57",
+  "renderer": {
+    "devices": [
+      {
+        "vendorId": 4203,
+        "deviceId": 0,
+        "vendorString": "Google Inc. (Apple)",
+        "deviceString": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Version 26.6.2 (Build 25G83))",
+        "driverVendor": "Apple",
+        "driverVersion": "26.6.2"
+      }
+    ],
+    "auxAttributes": {
+      "amdSwitchable": false,
+      "canSupportThreadedTextureMailbox": false,
+      "directRenderingVersion": "",
+      "displayType": "ANGLE_METAL",
+      "glExtensions": "GL_AMD_performance_monitor GL_ANGLE_base_vertex_base_instance_shader_builtin GL_ANGLE_blob_cache GL_ANGLE_client_arrays GL_ANGLE_clip_cull_distance GL_ANGLE_compressed_texture_etc GL_ANGLE_depth_texture GL_ANGLE_framebuffer_blit GL_ANGLE_framebuffer_multisample GL_ANGLE_get_serialized_context_string GL_ANGLE_get_tex_level_parameter GL_ANGLE_instanced_arrays GL_ANGLE_memory_size GL_ANGLE_pack_reverse_row_order GL_ANGLE_polygon_mode GL_ANGLE_program_binary_readiness_query GL_ANGLE_program_cache_control GL_ANGLE_provoking_vertex GL_ANGLE_renderability_validation GL_ANGLE_request_extension GL_ANGLE_rgbx_internal_format GL_ANGLE_robust_client_memory GL_ANGLE_shader_pixel_local_storage GL_ANGLE_shader_pixel_local_storage_coherent GL_ANGLE_stencil_texturing GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ANGLE_texture_multisample GL_ANGLE_translated_shader_source GL_APPLE_clip_distance GL_ARM_rgba8 GL_CHROMIUM_bind_generates_resource GL_CHROMIUM_bind_uniform_location GL_CHROMIUM_copy_texture GL_CHROMIUM_lose_context GL_EXT_base_instance GL_EXT_blend_func_extended GL_EXT_blend_minmax GL_EXT_clip_control GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_compressed_ETC1_RGB8_sub_texture GL_EXT_conservative_depth GL_EXT_debug_label GL_EXT_debug_marker GL_EXT_depth_clamp GL_EXT_discard_framebuffer GL_EXT_disjoint_timer_query GL_EXT_draw_buffers GL_EXT_draw_buffers_indexed GL_EXT_draw_elements_base_vertex GL_EXT_float_blend GL_EXT_frag_depth GL_EXT_instanced_arrays GL_EXT_map_buffer_range GL_EXT_multisampled_render_to_texture GL_EXT_occlusion_query_boolean GL_EXT_polygon_offset_clamp GL_EXT_pvrtc_sRGB GL_EXT_read_format_bgra GL_EXT_render_snorm GL_EXT_robustness GL_EXT_sRGB GL_EXT_shader_texture_lod GL_EXT_texture_compression_bptc GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc_srgb GL_EXT_texture_filter_anisotropic GL_EXT_texture_format_BGRA8888 GL_EXT_texture_mirror_clamp_to_edge GL_EXT_texture_norm16 GL_EXT_texture_rg GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_shadow_lod GL_EXT_texture_storage GL_IMG_texture_compression_pvrtc GL_KHR_debug GL_KHR_parallel_shader_compile GL_KHR_robustness GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_sliced_3d GL_MESA_framebuffer_flip_y GL_NV_fence GL_NV_framebuffer_blit GL_NV_pixel_buffer_object GL_NV_shader_noperspective_interpolation GL_OES_EGL_image GL_OES_EGL_sync GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth24 GL_OES_depth32 GL_OES_depth_texture GL_OES_draw_buffers_indexed GL_OES_draw_elements_base_vertex GL_OES_element_index_uint GL_OES_fbo_render_mipmap GL_OES_get_program_binary GL_OES_mapbuffer GL_OES_packed_depth_stencil GL_OES_required_internalformat GL_OES_rgb8_rgba8 GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_standard_derivatives GL_OES_surfaceless_context GL_OES_texture_3D GL_OES_texture_float GL_OES_texture_float_linear GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_texture_npot GL_OES_texture_stencil8 GL_OES_vertex_array_object GL_QCOM_render_shared_exponent ",
+      "glImplementationParts": "(gl=egl-angle,angle=metal)",
+      "glRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Version 26.6.2 (Build 25G83))",
+      "glResetNotificationStrategy": 33362,
+      "glVendor": "Google Inc. (Apple)",
+      "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.28731 git hash: 1ff8799c596d)",
+      "glWsExtensions": "",
+      "glWsVendor": "",
+      "glWsVersion": "",
+      "inProcessGpu": false,
+      "initializationTime": 0.046084,
+      "isAsan": false,
+      "isClangCoverage": false,
+      "jpegDecodeAcceleratorSupported": false,
+      "maxMsaaSamples": "4",
+      "optimus": false,
+      "passthroughCmdDecoder": true,
+      "pixelShaderVersion": "3.00",
+      "processCrashCount": 0,
+      "sandboxed": false,
+      "skiaBackendType": "GraphiteDawnMetal",
+      "subpixelFontRendering": true,
+      "targetCpuBits": 64,
+      "vertexShaderVersion": "3.00",
+      "visibilityCallbackCallCount": 0
+    },
+    "featureStatus": {
+      "2d_canvas": "enabled",
+      "direct_rendering_display_compositor": "disabled_off_ok",
+      "gpu_compositing": "enabled",
+      "multiple_raster_threads": "enabled_on",
+      "opengl": "enabled_on",
+      "rasterization": "enabled",
+      "raw_draw": "disabled_off_ok",
+      "skia_graphite": "enabled_on",
+      "trees_in_viz": "disabled_off",
+      "video_decode": "enabled",
+      "video_encode": "enabled",
+      "webgl": "enabled",
+      "webgpu": "enabled",
+      "webnn": "disabled_off"
+    },
+    "driverBugWorkarounds": [
+      "disable_2d_canvas_auto_flush",
+      "enable_webgl_timer_query_extensions",
+      "disabled_extension_GL_KHR_blend_equation_advanced",
+      "disabled_extension_GL_KHR_blend_equation_advanced_coherent"
+    ],
+    "videoDecoding": [],
+    "videoEncoding": []
+  },
+  "profile": {
+    "viewport": {
+      "width": 360,
+      "height": 660
+    },
+    "deviceScaleFactor": 3,
+    "cpuSlowdown": 4,
+    "latencyMs": 150,
+    "downloadBytesPerSecond": 200000,
+    "uploadBytesPerSecond": 100000,
+    "deviceMemoryGB": 2,
+    "hardwareConcurrency": 2
+  },
+  "limits": {
+    "coldShelfMs": 5000,
+    "feedbackMs": 200,
+    "inspectionMs": 1000,
+    "pageArtMs": 3000,
+    "pageReadyMs": 4000,
+    "warmPageMs": 1000,
+    "controlMs": 250,
+    "languageMs": 3000,
+    "minimumPixelRatio": 1.5,
+    "frameP95Ms": 50,
+    "pageTransferBytes": 650000,
+    "textureGrowth": 8,
+    "geometryGrowth": 16
+  },
+  "method": "Fresh touch browser contexts, real catalog, nested production path, compressed HTTP and normal browser caching. CPU/network emulation does not simulate the A50 GPU, thermals or actual process RAM.",
+  "scenarios": [
+    {
+      "book": "eden",
+      "measurements": [
+        {
+          "name": "coldShelfMs",
+          "value": 3940,
+          "limit": 5000,
+          "minimum": false
+        },
+        {
+          "name": "inspectionMs",
+          "value": 701,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "readFeedbackMs",
+          "value": 14,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "firstArtMs",
+          "value": 2397,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "firstReadyMs",
+          "value": 2444,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "firstTransferBytes",
+          "value": 460737,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "portrait-first.pixelRatio",
+          "value": 1.5,
+          "limit": 1.5,
+          "minimum": true
+        },
+        {
+          "name": "pauseMs",
+          "value": 10,
+          "limit": 250,
+          "minimum": false
+        },
+        {
+          "name": "playMs",
+          "value": 18,
+          "limit": 250,
+          "minimum": false
+        },
+        {
+          "name": "settingsMs",
+          "value": 24,
+          "limit": 250,
+          "minimum": false
+        },
+        {
+          "name": "page2.feedbackMs",
+          "value": 63,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page2.readyMs",
+          "value": 1605,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page2.transferBytes",
+          "value": 177940,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page3.feedbackMs",
+          "value": 27,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page3.readyMs",
+          "value": 2235,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page3.transferBytes",
+          "value": 298732,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "portrait-page-3.pixelRatio",
+          "value": 1.5,
+          "limit": 1.5,
+          "minimum": true
+        },
+        {
+          "name": "page4.feedbackMs",
+          "value": 23,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page4.readyMs",
+          "value": 1370,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page4.transferBytes",
+          "value": 144782,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page5.feedbackMs",
+          "value": 24,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page5.readyMs",
+          "value": 1384,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page5.transferBytes",
+          "value": 161086,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page6.feedbackMs",
+          "value": 23,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page6.readyMs",
+          "value": 2286,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page6.transferBytes",
+          "value": 315873,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page7.feedbackMs",
+          "value": 22,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page7.readyMs",
+          "value": 2182,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page7.transferBytes",
+          "value": 298224,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page8.feedbackMs",
+          "value": 19,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page8.readyMs",
+          "value": 1534,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page8.transferBytes",
+          "value": 184934,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "portrait-page-8.pixelRatio",
+          "value": 1.5,
+          "limit": 1.5,
+          "minimum": true
+        },
+        {
+          "name": "back7.readyMs",
+          "value": 576,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back6.readyMs",
+          "value": 554,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back5.readyMs",
+          "value": 587,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back4.readyMs",
+          "value": 580,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back3.readyMs",
+          "value": 600,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back2.readyMs",
+          "value": 600,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back1.readyMs",
+          "value": 587,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "locale.en-GB.readyMs",
+          "value": 838,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.es.readyMs",
+          "value": 875,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.fr.readyMs",
+          "value": 855,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.hi.readyMs",
+          "value": 1056,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.it.readyMs",
+          "value": 921,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.ja.readyMs",
+          "value": 972,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.pt-BR.readyMs",
+          "value": 908,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.zh-CN.readyMs",
+          "value": 1036,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "landscape.pixelRatio",
+          "value": 1.5,
+          "limit": 1.5,
+          "minimum": true
+        },
+        {
+          "name": "callbacks.frameP95Ms",
+          "value": 17,
+          "limit": 50,
+          "minimum": false
+        },
+        {
+          "name": "renders.frameP95Ms",
+          "value": 35,
+          "limit": 50,
+          "minimum": false
+        }
+      ],
+      "pages": [
+        {
+          "index": 1,
+          "readyMs": 1605,
+          "transferredBytes": 177940
+        },
+        {
+          "index": 2,
+          "readyMs": 2235,
+          "transferredBytes": 298732
+        },
+        {
+          "index": 3,
+          "readyMs": 1370,
+          "transferredBytes": 144782
+        },
+        {
+          "index": 4,
+          "readyMs": 1384,
+          "transferredBytes": 161086
+        },
+        {
+          "index": 5,
+          "readyMs": 2286,
+          "transferredBytes": 315873
+        },
+        {
+          "index": 6,
+          "readyMs": 2182,
+          "transferredBytes": 298224
+        },
+        {
+          "index": 7,
+          "readyMs": 1534,
+          "transferredBytes": 184934
+        }
+      ],
+      "locales": [
+        "en-GB",
+        "es",
+        "fr",
+        "hi",
+        "it",
+        "ja",
+        "pt-BR",
+        "zh-CN"
+      ],
+      "errors": [],
+      "characterFeedback": "paper character reacted to touch",
+      "gpuResources": {
+        "initial": {
+          "textures": 21,
+          "geometries": 70
+        },
+        "final": {
+          "textures": 24,
+          "geometries": 73
+        }
+      }
+    },
+    {
+      "book": "noah",
+      "measurements": [
+        {
+          "name": "coldShelfMs",
+          "value": 3823,
+          "limit": 5000,
+          "minimum": false
+        },
+        {
+          "name": "inspectionMs",
+          "value": 686,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "readFeedbackMs",
+          "value": 12,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "firstArtMs",
+          "value": 1649,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "firstReadyMs",
+          "value": 1695,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "firstTransferBytes",
+          "value": 313140,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "portrait-first.pixelRatio",
+          "value": 1.5,
+          "limit": 1.5,
+          "minimum": true
+        },
+        {
+          "name": "pauseMs",
+          "value": 14,
+          "limit": 250,
+          "minimum": false
+        },
+        {
+          "name": "playMs",
+          "value": 24,
+          "limit": 250,
+          "minimum": false
+        },
+        {
+          "name": "settingsMs",
+          "value": 23,
+          "limit": 250,
+          "minimum": false
+        },
+        {
+          "name": "page2.feedbackMs",
+          "value": 70,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page2.readyMs",
+          "value": 1523,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page2.transferBytes",
+          "value": 161756,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page3.feedbackMs",
+          "value": 20,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page3.readyMs",
+          "value": 2379,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page3.transferBytes",
+          "value": 333175,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "portrait-page-3.pixelRatio",
+          "value": 1.5,
+          "limit": 1.5,
+          "minimum": true
+        },
+        {
+          "name": "page4.feedbackMs",
+          "value": 20,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page4.readyMs",
+          "value": 1899,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page4.transferBytes",
+          "value": 236832,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page5.feedbackMs",
+          "value": 26,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page5.readyMs",
+          "value": 1584,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page5.transferBytes",
+          "value": 183332,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page6.feedbackMs",
+          "value": 20,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page6.readyMs",
+          "value": 2544,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page6.transferBytes",
+          "value": 364270,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page7.feedbackMs",
+          "value": 28,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page7.readyMs",
+          "value": 1988,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page7.transferBytes",
+          "value": 245898,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page8.feedbackMs",
+          "value": 105,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page8.readyMs",
+          "value": 733,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page8.transferBytes",
+          "value": 106976,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "portrait-page-8.pixelRatio",
+          "value": 1.5,
+          "limit": 1.5,
+          "minimum": true
+        },
+        {
+          "name": "back7.readyMs",
+          "value": 619,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back6.readyMs",
+          "value": 601,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back5.readyMs",
+          "value": 575,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back4.readyMs",
+          "value": 564,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back3.readyMs",
+          "value": 598,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back2.readyMs",
+          "value": 586,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back1.readyMs",
+          "value": 554,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "locale.en-GB.readyMs",
+          "value": 859,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.es.readyMs",
+          "value": 926,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.fr.readyMs",
+          "value": 892,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.hi.readyMs",
+          "value": 1039,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.it.readyMs",
+          "value": 957,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.ja.readyMs",
+          "value": 959,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.pt-BR.readyMs",
+          "value": 911,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.zh-CN.readyMs",
+          "value": 907,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "landscape.pixelRatio",
+          "value": 1.5,
+          "limit": 1.5,
+          "minimum": true
+        },
+        {
+          "name": "callbacks.frameP95Ms",
+          "value": 17,
+          "limit": 50,
+          "minimum": false
+        },
+        {
+          "name": "renders.frameP95Ms",
+          "value": 35,
+          "limit": 50,
+          "minimum": false
+        }
+      ],
+      "pages": [
+        {
+          "index": 1,
+          "readyMs": 1523,
+          "transferredBytes": 161756
+        },
+        {
+          "index": 2,
+          "readyMs": 2379,
+          "transferredBytes": 333175
+        },
+        {
+          "index": 3,
+          "readyMs": 1899,
+          "transferredBytes": 236832
+        },
+        {
+          "index": 4,
+          "readyMs": 1584,
+          "transferredBytes": 183332
+        },
+        {
+          "index": 5,
+          "readyMs": 2544,
+          "transferredBytes": 364270
+        },
+        {
+          "index": 6,
+          "readyMs": 1988,
+          "transferredBytes": 245898
+        },
+        {
+          "index": 7,
+          "readyMs": 733,
+          "transferredBytes": 106976
+        }
+      ],
+      "locales": [
+        "en-GB",
+        "es",
+        "fr",
+        "hi",
+        "it",
+        "ja",
+        "pt-BR",
+        "zh-CN"
+      ],
+      "errors": [],
+      "characterFeedback": "paper character reacted to touch",
+      "gpuResources": {
+        "initial": {
+          "textures": 20,
+          "geometries": 69
+        },
+        "final": {
+          "textures": 23,
+          "geometries": 72
+        }
+      }
+    },
+    {
+      "book": "jonah-and-the-whale",
+      "measurements": [
+        {
+          "name": "coldShelfMs",
+          "value": 3842,
+          "limit": 5000,
+          "minimum": false
+        },
+        {
+          "name": "inspectionMs",
+          "value": 686,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "readFeedbackMs",
+          "value": 52,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "firstArtMs",
+          "value": 1747,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "firstReadyMs",
+          "value": 1823,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "firstTransferBytes",
+          "value": 438197,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "portrait-first.pixelRatio",
+          "value": 1.5,
+          "limit": 1.5,
+          "minimum": true
+        },
+        {
+          "name": "pauseMs",
+          "value": 19,
+          "limit": 250,
+          "minimum": false
+        },
+        {
+          "name": "playMs",
+          "value": 17,
+          "limit": 250,
+          "minimum": false
+        },
+        {
+          "name": "settingsMs",
+          "value": 21,
+          "limit": 250,
+          "minimum": false
+        },
+        {
+          "name": "page2.feedbackMs",
+          "value": 24,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page2.readyMs",
+          "value": 2066,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page2.transferBytes",
+          "value": 265844,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page3.feedbackMs",
+          "value": 21,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page3.readyMs",
+          "value": 2720,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page3.transferBytes",
+          "value": 443246,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "portrait-page-3.pixelRatio",
+          "value": 1.5,
+          "limit": 1.5,
+          "minimum": true
+        },
+        {
+          "name": "page4.feedbackMs",
+          "value": 24,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page4.readyMs",
+          "value": 1817,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page4.transferBytes",
+          "value": 214365,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page5.feedbackMs",
+          "value": 23,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page5.readyMs",
+          "value": 2039,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page5.transferBytes",
+          "value": 363133,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page6.feedbackMs",
+          "value": 34,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page6.readyMs",
+          "value": 1180,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page6.transferBytes",
+          "value": 97882,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page7.feedbackMs",
+          "value": 23,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page7.readyMs",
+          "value": 1738,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page7.transferBytes",
+          "value": 204808,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page8.feedbackMs",
+          "value": 21,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page8.readyMs",
+          "value": 2814,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page8.transferBytes",
+          "value": 477793,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page9.feedbackMs",
+          "value": 23,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page9.readyMs",
+          "value": 1837,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page9.transferBytes",
+          "value": 220092,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page10.feedbackMs",
+          "value": 23,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page10.readyMs",
+          "value": 1372,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page10.transferBytes",
+          "value": 135734,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page11.feedbackMs",
+          "value": 26,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page11.readyMs",
+          "value": 1568,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page11.transferBytes",
+          "value": 170074,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page12.feedbackMs",
+          "value": 16,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page12.readyMs",
+          "value": 1255,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page12.transferBytes",
+          "value": 107854,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "page13.feedbackMs",
+          "value": 33,
+          "limit": 200,
+          "minimum": false
+        },
+        {
+          "name": "page13.readyMs",
+          "value": 1151,
+          "limit": 4000,
+          "minimum": false
+        },
+        {
+          "name": "page13.transferBytes",
+          "value": 93266,
+          "limit": 650000,
+          "minimum": false
+        },
+        {
+          "name": "portrait-page-13.pixelRatio",
+          "value": 1.5,
+          "limit": 1.5,
+          "minimum": true
+        },
+        {
+          "name": "back12.readyMs",
+          "value": 567,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back11.readyMs",
+          "value": 551,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back10.readyMs",
+          "value": 553,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back9.readyMs",
+          "value": 582,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back8.readyMs",
+          "value": 638,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back7.readyMs",
+          "value": 550,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back6.readyMs",
+          "value": 561,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back5.readyMs",
+          "value": 555,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back4.readyMs",
+          "value": 619,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back3.readyMs",
+          "value": 573,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back2.readyMs",
+          "value": 585,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "back1.readyMs",
+          "value": 536,
+          "limit": 1000,
+          "minimum": false
+        },
+        {
+          "name": "locale.en-GB.readyMs",
+          "value": 825,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.es.readyMs",
+          "value": 789,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.fr.readyMs",
+          "value": 806,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.hi.readyMs",
+          "value": 809,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.it.readyMs",
+          "value": 808,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.ja.readyMs",
+          "value": 824,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.pt-BR.readyMs",
+          "value": 807,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "locale.zh-CN.readyMs",
+          "value": 808,
+          "limit": 3000,
+          "minimum": false
+        },
+        {
+          "name": "landscape.pixelRatio",
+          "value": 1.5,
+          "limit": 1.5,
+          "minimum": true
+        },
+        {
+          "name": "callbacks.frameP95Ms",
+          "value": 17,
+          "limit": 50,
+          "minimum": false
+        },
+        {
+          "name": "renders.frameP95Ms",
+          "value": 34,
+          "limit": 50,
+          "minimum": false
+        }
+      ],
+      "pages": [
+        {
+          "index": 1,
+          "readyMs": 2066,
+          "transferredBytes": 265844
+        },
+        {
+          "index": 2,
+          "readyMs": 2720,
+          "transferredBytes": 443246
+        },
+        {
+          "index": 3,
+          "readyMs": 1817,
+          "transferredBytes": 214365
+        },
+        {
+          "index": 4,
+          "readyMs": 2039,
+          "transferredBytes": 363133
+        },
+        {
+          "index": 5,
+          "readyMs": 1180,
+          "transferredBytes": 97882
+        },
+        {
+          "index": 6,
+          "readyMs": 1738,
+          "transferredBytes": 204808
+        },
+        {
+          "index": 7,
+          "readyMs": 2814,
+          "transferredBytes": 477793
+        },
+        {
+          "index": 8,
+          "readyMs": 1837,
+          "transferredBytes": 220092
+        },
+        {
+          "index": 9,
+          "readyMs": 1372,
+          "transferredBytes": 135734
+        },
+        {
+          "index": 10,
+          "readyMs": 1568,
+          "transferredBytes": 170074
+        },
+        {
+          "index": 11,
+          "readyMs": 1255,
+          "transferredBytes": 107854
+        },
+        {
+          "index": 12,
+          "readyMs": 1151,
+          "transferredBytes": 93266
+        }
+      ],
+      "locales": [
+        "en-GB",
+        "es",
+        "fr",
+        "hi",
+        "it",
+        "ja",
+        "pt-BR",
+        "zh-CN"
+      ],
+      "errors": [],
+      "characterFeedback": "spatial prop target responds to keyboard",
+      "gpuResources": {
+        "initial": {
+          "textures": 20,
+          "geometries": 66
+        },
+        "final": {
+          "textures": 20,
+          "geometries": 63
+        }
+      }
+    }
+  ],
+  "failures": []
+}

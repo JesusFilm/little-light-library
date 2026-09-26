@@ -635,6 +635,22 @@ try {
           titleFor(entry.id, "en-US", index),
         );
         if (entry.id === "jonah-and-the-whale" && [1, 2].includes(index)) {
+          // Readiness budgets above include the actual page transfer. Discovery
+          // coordinates must come from the settled camera, not a moving target
+          // whose position becomes stale during the throttled input round trip.
+          await page.waitForFunction(() => {
+            const scene = window.libraryDebug().scene;
+            return (
+              scene.camera.every(
+                (value, index) =>
+                  Math.abs(value - scene.cameraGoal[index]) < 0.002,
+              ) &&
+              scene.look.every(
+                (value, index) =>
+                  Math.abs(value - scene.lookGoal[index]) < 0.002,
+              )
+            );
+          });
           const target = page.locator(
             `[data-element="${index === 1 ? "small-fish" : "ship"}"]`,
           );

@@ -1,6 +1,6 @@
 # Reader composition corrective review — 26 September 2026
 
-Status: draft for visual/device review; **not release approval**.
+Status: historical candidate, superseded by the [bottom-docked revision](../2026-09-26-bottom-dock/README.md). **Not release approval**.
 
 The reported full-page darkening was a real regression. An absolutely positioned
 reader pseudo-element measured 1344px high around a 225.9px reader at 854×1316.

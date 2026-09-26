@@ -265,9 +265,14 @@ blockers and optional improvements belong in the project plans.
 
 ## Reading composition
 
-The reading layout reserves `.reading-art-region` using the same CSS divider
-that places the reading panel. `LibraryScene` observes that region and fits its
-camera to the measured rectangle. The room still renders across the full canvas;
+The wide reading layout reserves `.reading-art-region` beside the reading panel.
+In portrait, the panel docks to the viewport bottom and sizes to its content,
+capped at 38% of viewport height (240px on phones). `LibraryScene` observes both
+the panel and art region; the panel's measured height plus its 48px upward fade
+defines the space available for art. The camera fits that measured rectangle.
+The gradient belongs to the dock, with transparency above and solid color below;
+it cannot expand independently into a viewport-sized reader overlay.
+The room still renders across the full canvas;
 a view offset positions the art frustum without scaling or replacing the scene.
 
 Once a spread is prepared, a detached upright copy supplies geometry points for
@@ -278,6 +283,8 @@ recomputes the fit from the stored spread points, so zoom cannot accumulate.
 
 The title and complete story share a keyboard-focusable scroll region. Transport
 stays outside that region, and status/retry messages live in the reading footer.
+Phone body/title sizes are 16px/22px. Inline transport labels and icons retain
+44px touch targets while avoiding the taller stacked controls.
 Authored actors and interactive props have named spatial keyboard targets; the
 canvas handles pointer/touch picking. Both paths share activation and hold cleanup.
 A movement gesture cancels a scene discovery, and reduced-motion changes release
