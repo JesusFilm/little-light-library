@@ -81,6 +81,7 @@ export function constrainReadingFocus(
   look: THREE.Vector3,
   target: FocusTarget,
   points: THREE.Vector3[],
+  region = { left: -0.94, right: 0.94, bottom: -0.94, top: 0.94 },
 ) {
   if (!points.length) return { ...target, scale: 1 };
   const view = camera.clone();
@@ -89,10 +90,10 @@ export function constrainReadingFocus(
   const limits = points.map((point) => {
     const p = point.clone().project(view);
     return {
-      left: Math.min(-0.94, p.x),
-      right: Math.max(0.94, p.x),
-      bottom: Math.min(-0.94, p.y),
-      top: Math.max(0.94, p.y),
+      left: Math.min(region.left, p.x),
+      right: Math.max(region.right, p.x),
+      bottom: Math.min(region.bottom, p.y),
+      top: Math.max(region.top, p.y),
     };
   });
   const fits = (scale: number) => {

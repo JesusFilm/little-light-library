@@ -1,0 +1,38 @@
+[
+  {
+    "locale": "en-US",
+    "height": 229
+  },
+  {
+    "locale": "en-GB",
+    "height": 229
+  },
+  {
+    "locale": "es",
+    "height": 284
+  },
+  {
+    "locale": "fr",
+    "height": 284
+  },
+  {
+    "locale": "hi",
+    "height": 203
+  },
+  {
+    "locale": "it",
+    "height": 229
+  },
+  {
+    "locale": "ja",
+    "height": 203
+  },
+  {
+    "locale": "pt-BR",
+    "height": 258
+  },
+  {
+    "locale": "zh-CN",
+    "height": 151
+  }
+]
