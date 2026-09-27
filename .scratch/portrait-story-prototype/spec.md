@@ -10,8 +10,8 @@ This branch is disposable. The requested single direction supersedes the prototy
 ## Experience
 
 - Three dimensional CSS covers with local artwork, cloth palettes, readable localized titles, a gentle cover animation, swipe and arrow navigation. Tap the centered cover to open it directly.
-- A room-free paper stage, close establishing view, first subject, second subject, and return to the establishing composition. Camera time follows narration, including pause and playback speed.
-- Whole-page toggle; reduced motion uses the stable complete composition. Text remains independently scrollable above touch-sized transport controls.
+- A paper stage on a softly lit surface with a blurred reading-nook backdrop. Each spread has distinct timed holds, close push-ins, subject reveals, vertical moves or small arcs. Camera time follows narration, including pause and playback speed; shots stay close instead of automatically ending on an overview.
+- No whole-page toggle. Reduced motion uses the stable complete composition. Mouse position and touch drag orbit around the active camera subject, including on constrained phones. Drag release eases back; story copy remains independently scrollable.
 - Preserve the three books, nine locales, existing audio controls and failure recovery.
 
 ## Performance choices
@@ -22,7 +22,7 @@ This branch is disposable. The requested single direction supersedes the prototy
 - Constrained phones: 1× device pixel ratio, no multisample antialiasing, no shadow maps, existing approximately 30 fps cap. Other devices remain capped at 1.5×.
 - This intentionally differs from the original mobile acceptance suite's 1.5× minimum; judge legibility against actual performance before promotion.
 
-## Review
+## First iteration review
 
 Automated: 209 existing unit tests passed; typecheck, Prettier, book indexes, catalog/media validation and production build passed. The production build was served under `/preview/little-light-library/` and walked through all 29 pages, all nine locale selections, four book openings including a return to Eden, desktop/portrait resizing, reduced motion, keyboard opening, mute and volume. No browser page errors were recorded. A separate touch walkthrough verified swipe selection, direct opening, forced artwork failure and retry, pause freezing camera time, and overview switching.
 
@@ -37,3 +37,18 @@ Audible playback: not reviewed. Creator approval: pending. Physical slow-phone p
 Verdict: the experiment is ready to compare with main; whether it is a better reading experience remains a creator decision. Automated checks are not audible listening or editorial approval. Browser phone emulation does not establish performance on physical low-end hardware.
 
 Run with `npm run dev` on this branch.
+
+
+## Second iteration: creator feedback
+
+Creator liked the closer view but rejected the solid background, repetitive left/right/zoom-out pattern, excessive wide framing, whole-page button and missing mobile parallax.
+
+Changes: removed the button; reduced portrait shot distances and camera elevation; replaced shared two-target choreography with per-spread timed keyframes; added a table, blurred reading-nook plane and soft contact shadow (two 512×256 textures and one 128×128 texture, no external media or postprocessing); bound mouse and touch movement to the current story subject. Canvas pointer capture and `touch-action: none` prevent document dragging. Movement beyond the tap threshold cancels character taps/holds. Touch release, pointer cancellation, blur and page changes clear the gesture. Reduced motion suppresses camera movement.
+
+Verification: 209 existing tests, typecheck, formatting and production build passed. The nested static-build walkthrough opened all 29 pages, returned to Eden, switched through all nine locales, and exercised keyboard opening, mute/volume, reduced motion, touch cancellation and independently scrollable story text. Direct touch testing confirmed that dragging changes the camera without scrolling the document or activating a character; release returns parallax to zero. Mouse movement changed the camera around the current shot, including with constrained-phone graphics enabled. Narration time stayed frozen during paused drag inspection. No browser page errors were recorded.
+
+Visual inspection: 390×844 close views of Eden, Eve, touch-dragged perspective; 360×660 Noah and Jonah ending scenes; desktop and reduced-motion composition. Cropped scene edges are intentional in close shots; this is still sampled review, not every-frame approval.
+
+Performance sample: 4× Chrome CPU throttling with 2 GB / 2-core hints gave a 34 ms sampled p95 frame interval (30 samples), 31 draw calls and 11 textures at 1× render resolution for Eden. This remains a desktop emulation sample, not physical-handset evidence.
+
+Audible and physical-handset review remain outstanding; this feedback does not constitute approval of the revised implementation.

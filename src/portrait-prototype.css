@@ -132,25 +132,11 @@ body:not(.reading) #scene {
 .shelf-toy-target {
   display: none !important;
 }
-.shot-toggle {
-  position: fixed;
-  top: 76px;
-  left: 16px;
-  z-index: 4;
-  background: #102b2dd9;
-  color: #fff1cf;
-  border: 1px solid #d8bd8566;
-  font: 12px system-ui;
-  min-height: 44px;
-}
-body:not(.reading) .shot-toggle {
-  display: none;
-}
 .reading #panel::before {
   background: #102b2d;
 }
 .reading .reading-art-region {
-  top: 122px;
+  top: max(70px, calc(env(safe-area-inset-top) + 60px));
 }
 @media (max-aspect-ratio: 6/5) {
   .reading .reading-art-region {
@@ -193,4 +179,26 @@ body:not(.reading) .shot-toggle {
   .carousel-book.selected img {
     animation: none;
   }
+}
+
+/* Drag the stage, never the document; copy retains its own vertical scroll. */
+body.reading {
+  height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+.reading #scene canvas {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.reading .reader-copy {
+  touch-action: pan-y;
+}
+.carousel-book {
+  user-select: none;
+  -webkit-user-select: none;
+}
+.carousel-book img {
+  -webkit-user-drag: none;
 }

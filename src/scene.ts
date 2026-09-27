@@ -1,3 +1,4 @@
+import { createPortraitBackdrop } from "./portrait-backdrop-prototype";
 import { portraitShots, type PortraitShot } from "./portrait-camera-prototype";
 import { fitReadingComposition } from "./reading-composition";
 import {
@@ -288,7 +289,8 @@ type PreparedLegacyStage = {
 export class LibraryScene {
   private prototypePosition = 0;
   private prototypeDuration = 20;
-  private prototypeOverview = false;
+  private prototypeBackdrop = createPortraitBackdrop();
+  private readingDrag?: { id: number; x: number; y: number; moved: boolean };
   private prototypeShots: PortraitShot[] = [];
   prototypePlayback(position: number, durations: number[]) {
     this.prototypePosition = position;
@@ -455,8 +457,20 @@ export class LibraryScene {
   private actorButtons: HTMLButtonElement[] = [];
   private authoredButtons: HTMLButtonElement[] = [];
   private actorLabel = document.createElement("span");
-  private onWindowBlur = () => this.releaseAuthoredHolds();
+  private clearReadingDrag() {
+    const id = this.readingDrag?.id;
+    this.readingDrag = undefined;
+    this.drift.set(0, 0);
+    if (id !== undefined && this.renderer.domElement.hasPointerCapture(id))
+      this.renderer.domElement.releasePointerCapture(id);
+  }
+  private onWindowBlur = () => {
+    this.clearReadingDrag();
+    this.releaseAuthoredHolds();
+  };
   private onLeave = (event: PointerEvent) => {
+    if (!this.renderer.domElement.hasPointerCapture(event.pointerId))
+      this.drift.set(0, 0);
     if (event.pointerId === this.heldAuthoredPointer)
       this.releaseAuthoredHolds();
     if (!this.renderer.domElement.hasPointerCapture(event.pointerId))
@@ -588,6 +602,7 @@ export class LibraryScene {
   private reduced = this.motionPreference.matches;
   private onMotionPreference = (event: MediaQueryListEvent) => {
     this.reduced = event.matches;
+    this.clearReadingDrag();
     this.clearReadingFocus();
     this.releaseAuthoredHolds();
   };
@@ -651,6 +666,16 @@ export class LibraryScene {
   }
   private onDown = (event: PointerEvent) => {
     if (this.mode === "spread" && event.button === 0) {
+      if (event.isPrimary) {
+        this.readingDrag = {
+          id: event.pointerId,
+          x: event.clientX,
+          y: event.clientY,
+          moved: false,
+        };
+        this.renderer.domElement.setPointerCapture(event.pointerId);
+      } else this.clearReadingDrag();
+      event.preventDefault();
       this.roomOrbit.down(
         event.pointerId,
         event.clientX,
@@ -674,6 +699,7 @@ export class LibraryScene {
     );
   };
   private onCancel = (event: PointerEvent) => {
+    if (this.readingDrag?.id === event.pointerId) this.clearReadingDrag();
     if (event.pointerId === this.heldAuthoredPointer)
       this.releaseAuthoredHolds();
     this.roomOrbit.cancel(event.pointerId);
@@ -681,6 +707,27 @@ export class LibraryScene {
     this.renderer.domElement.style.cursor = "";
   };
   private onMove = (e: PointerEvent) => {
+    const drag = this.readingDrag;
+    if (this.mode === "spread" && drag?.id === e.pointerId) {
+      const dx = e.clientX - drag.x,
+        dy = e.clientY - drag.y;
+      drag.moved ||= Math.hypot(dx, dy) > 7;
+      if (drag.moved) {
+        this.roomOrbit.cancel(e.pointerId);
+        // A camera drag must never become a character tap or held gesture.
+        this.authoredStage?.releaseHolds();
+        this.heldAuthoredPointer = undefined;
+        this.heldAuthoredId = undefined;
+        this.drift.set(
+          THREE.MathUtils.clamp(dx / 180, -0.85, 0.85),
+          THREE.MathUtils.clamp(dy / 180, -0.65, 0.65),
+        );
+        this.renderer.domElement.style.cursor = "grabbing";
+        e.preventDefault();
+        return;
+      }
+      return;
+    }
     // Keep canceled ids for late-release safety, but let an unpressed mouse hover again.
     if (this.roomOrbit.has(e.pointerId) && e.buttons !== 0) {
       const intent = this.roomOrbit.move(
@@ -727,6 +774,18 @@ export class LibraryScene {
     );
   };
   private onPointer = (event: PointerEvent) => {
+    const dragged =
+      this.readingDrag?.id === event.pointerId && this.readingDrag.moved;
+    this.readingDrag = undefined;
+    if (event.pointerType !== "mouse") this.drift.set(0, 0);
+    if (dragged) {
+      this.roomOrbit.up(event.pointerId);
+      this.releaseAuthoredHolds();
+      if (this.renderer.domElement.hasPointerCapture(event.pointerId))
+        this.renderer.domElement.releasePointerCapture(event.pointerId);
+      this.renderer.domElement.style.cursor = "";
+      return;
+    }
     const heldId =
       event.pointerId === this.heldAuthoredPointer
         ? this.heldAuthoredId
@@ -869,7 +928,7 @@ export class LibraryScene {
     const fill = new THREE.DirectionalLight(0x9dc4ec, 0.85);
     fill.position.set(-6, 4, -2);
     this.scene.add(fill);
-    this.scene.add(this.roomRoot, this.bookRoot);
+    this.scene.add(this.roomRoot, this.bookRoot, this.prototypeBackdrop.root);
     // Portrait prototype: skip room geometry and wallpaper entirely.
     this.roomRoot.add(this.roomShelf.root);
     this.makeBook();
@@ -881,18 +940,6 @@ export class LibraryScene {
     this.resizeObserver.observe(container);
     const readingPanel = document.querySelector("#panel");
     if (readingPanel) this.resizeObserver.observe(readingPanel);
-    const shotToggle = document.createElement("button");
-    shotToggle.className = "shot-toggle";
-    shotToggle.textContent = "Show whole page";
-    shotToggle.setAttribute("aria-pressed", "false");
-    shotToggle.onclick = () => {
-      this.prototypeOverview = !this.prototypeOverview;
-      shotToggle.textContent = this.prototypeOverview
-        ? "Follow the story"
-        : "Show whole page";
-      shotToggle.setAttribute("aria-pressed", String(this.prototypeOverview));
-    };
-    this.container.append(shotToggle);
     this.resize();
     this.camera.position.copy(this.cameraGoal);
     this.look.copy(this.lookGoal);
@@ -1340,6 +1387,7 @@ export class LibraryScene {
     this.clearCreatureTargets();
     this.clearReadingFocus();
     this.readingWideEnsemble = false;
+    this.clearReadingDrag();
     this.roomOrbit.reset();
     this.drift.set(0, 0);
     this.focusedRoom = this.hoveredRoom = null;
@@ -2204,6 +2252,7 @@ export class LibraryScene {
 
   async spread(story: Story, page: Page, locale: LocaleData) {
     this.releaseAuthoredHolds();
+    this.clearReadingDrag();
     this.roomOrbit.reset();
     this.spreadAbort?.abort();
     const spreadAbort = new AbortController();
@@ -2252,6 +2301,7 @@ export class LibraryScene {
     this.shelfCoverMotion = undefined;
     this.clearCreatureTargets();
     this.clearReadingFocus();
+    this.clearReadingDrag();
     this.roomOrbit.reset();
     this.drift.set(0, 0);
     const wasRoom = this.mode === "room";
@@ -2663,7 +2713,8 @@ export class LibraryScene {
       shelfHint: this.shelfHint.debug(),
       mode: this.mode,
       prototype: {
-        overview: this.prototypeOverview,
+        drag: this.readingDrag ? { ...this.readingDrag } : null,
+        parallax: this.drift.toArray(),
         position: this.prototypePosition,
         duration: this.prototypeDuration,
         shots: this.prototypeShots,
@@ -2845,31 +2896,21 @@ export class LibraryScene {
         : this.cameraGoal;
     const goal = orbitGoal.clone();
     const storyLook = this.lookGoal.clone();
-    if (this.mode === "spread" && !this.prototypeOverview && !this.reduced) {
-      // Scripted establishing → first subject → second subject → reunion.
-      // The narration clock freezes shots on pause and follows playback speed.
+    if (this.mode === "spread" && !this.reduced) {
       const phase = THREE.MathUtils.clamp(
         this.prototypePosition / this.prototypeDuration,
         0,
         1,
       );
-      const [first, second] = this.prototypeShots.length
+      const beats = this.prototypeShots.length
         ? this.prototypeShots
         : portraitShots("");
-      const beats = [
-        { at: 0, x: 0, zoom: 0.74, lift: 0.25 },
-        { at: 0.16, ...first, lift: first.lift ?? 0.25 },
-        { at: 0.42, ...first, lift: first.lift ?? 0.25 },
-        { at: 0.58, ...second, lift: second.lift ?? 0.25 },
-        { at: 0.78, ...second, lift: second.lift ?? 0.25 },
-        { at: 1, x: 0, zoom: 0.74, lift: 0.25 },
-      ];
       const index = Math.min(
         beats.length - 2,
         Math.max(
           0,
           beats.findIndex(
-            (b, i) => i < beats.length - 1 && phase <= beats[i + 1].at,
+            (_, i) => i < beats.length - 1 && phase <= beats[i + 1].at,
           ),
         ),
       );
@@ -2877,20 +2918,35 @@ export class LibraryScene {
         b = beats[index + 1];
       const t = THREE.MathUtils.smoothstep(phase, a.at, b.at);
       const portrait = this.container.clientWidth < this.container.clientHeight;
+      const closeZoom = THREE.MathUtils.lerp(a.zoom, b.zoom, t);
       const zoom = portrait
-        ? THREE.MathUtils.lerp(a.zoom, b.zoom, t)
-        : THREE.MathUtils.lerp(0.92, 0.72, Math.sin(phase * Math.PI));
+        ? closeZoom *
+          THREE.MathUtils.mapLinear(
+            THREE.MathUtils.clamp(closeZoom, 0.46, 0.55),
+            0.46,
+            0.55,
+            0.88,
+            1,
+          )
+        : 0.64 + closeZoom * 0.32;
       storyLook.x = THREE.MathUtils.lerp(a.x, b.x, t);
       storyLook.y += THREE.MathUtils.lerp(a.lift, b.lift, t);
-      goal
-        .copy(this.cameraGoal)
-        .sub(this.lookGoal)
-        .multiplyScalar(zoom)
-        .add(storyLook);
+      goal.copy(this.cameraGoal).sub(this.lookGoal).multiplyScalar(zoom);
+      goal.y *= 0.82;
+      goal.applyAxisAngle(
+        THREE.Object3D.DEFAULT_UP,
+        THREE.MathUtils.lerp(a.yaw, b.yaw, t),
+      );
+      goal.add(storyLook);
     }
-    if (!this.reduced && !this.lowQuality && !this.roomOrbit.dragging) {
-      goal.x += this.drift.x * 0.32;
-      goal.y -= this.drift.y * 0.15;
+    if (!this.reduced && this.mode === "spread") {
+      // Orbit around the CURRENT story subject, including on constrained phones.
+      // Moving the eye more than the target reveals real foreground parallax.
+      goal
+        .sub(storyLook)
+        .applyAxisAngle(THREE.Object3D.DEFAULT_UP, this.drift.x * 0.24);
+      goal.y -= this.drift.y * 0.85;
+      goal.add(storyLook);
     }
     // Camera settling must follow wall time even when software rendering produces
     // only a few frames per second. The capped dt above is for actor animation.
@@ -3318,6 +3374,7 @@ export class LibraryScene {
   dispose() {
     this.spreadAbort?.abort();
     this.shelfHint.dispose();
+    this.prototypeBackdrop.dispose();
     this.clearCreatureTargets();
     this.retainedStage.clear();
     this.clearSpreadPrints();

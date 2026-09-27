@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Open the URL Vite prints. Choose a language and enter the library. Swipe or use the arrows to choose a cover, tap the centered cover to read, and use Previous/Next to turn pages. **Show whole page** switches from the narration-driven camera to the complete spread. The globe changes language. Settings control speed, mute, and volume. **Library** and **Continue reading** preserve the current book and page. Keyboard, touch, and reduced-motion input are supported.
+Open the URL Vite prints. Choose a language and enter the library. Swipe or use the arrows to choose a cover, tap the centered cover to read, and use Previous/Next to turn pages. Each spread has its own close camera sequence. Move the mouse or drag the artwork to look around the current story subject; touch release gently returns to the scripted view. The globe changes language. Settings control speed, mute, and volume. **Library** and **Continue reading** preserve the current book and page. Keyboard, touch, and reduced-motion input are supported.
 
 ## Validate and build
 
