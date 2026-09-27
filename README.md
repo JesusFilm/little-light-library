@@ -1,6 +1,8 @@
 # Little Light Library
 
-A standalone, static picture-book reader in a child's dimensional bedroom. The shelf has **Adam, Eve, and the Garden**, **Noah and the Great Flood**, and **Jonah and the Whale**. The reader supports nine languages. Eden and Noah have eight spreads each; Jonah has thirteen. The bundled artwork, narration, models, fonts, and loading screen live in this repository.
+**Throwaway portrait prototype — `codex/portrait-story-prototype`.** This branch experiments with a dimensional cover carousel and close, scripted story cameras instead of the bedroom. See the [prototype brief and review notes](.scratch/portrait-story-prototype/spec.md).
+
+A standalone, static picture-book reader. The shelf has **Adam, Eve, and the Garden**, **Noah and the Great Flood**, and **Jonah and the Whale**. The reader supports nine languages. Eden and Noah have eight spreads each; Jonah has thirteen. The bundled artwork, narration, models, fonts, and loading screen live in this repository.
 
 ## Run
 
@@ -9,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Open the URL Vite prints. Choose a language and enter the library. Select a book spine, choose **Read**, and use Previous/Next to turn pages. The globe changes language. Settings control speed, mute, and volume. **Library** and **Continue reading** preserve the current book and page. Keyboard, touch, and reduced-motion input are supported.
+Open the URL Vite prints. Choose a language and enter the library. Swipe or use the arrows to choose a cover, tap the centered cover to read, and use Previous/Next to turn pages. **Show whole page** switches from the narration-driven camera to the complete spread. The globe changes language. Settings control speed, mute, and volume. **Library** and **Continue reading** preserve the current book and page. Keyboard, touch, and reduced-motion input are supported.
 
 ## Validate and build
 

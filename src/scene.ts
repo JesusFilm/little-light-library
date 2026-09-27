@@ -1,3 +1,4 @@
+import { portraitShots, type PortraitShot } from "./portrait-camera-prototype";
 import { fitReadingComposition } from "./reading-composition";
 import {
   createPaperCreature,
@@ -285,6 +286,17 @@ type PreparedLegacyStage = {
 };
 
 export class LibraryScene {
+  private prototypePosition = 0;
+  private prototypeDuration = 20;
+  private prototypeOverview = false;
+  private prototypeShots: PortraitShot[] = [];
+  prototypePlayback(position: number, durations: number[]) {
+    this.prototypePosition = position;
+    this.prototypeDuration = Math.max(
+      8,
+      durations.reduce((a, b) => a + b, 0),
+    );
+  }
   private renderer: THREE.WebGLRenderer;
   private scene = new THREE.Scene();
   private camera = new THREE.PerspectiveCamera(42, 1, 0.1, 70);
@@ -804,11 +816,13 @@ export class LibraryScene {
     this.lowQuality = constrainedPhone();
     document.documentElement.classList.toggle("low-graphics", this.lowQuality);
     this.renderer = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: !this.lowQuality,
       alpha: false,
       powerPreference: "low-power",
     });
-    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+    this.renderer.setPixelRatio(
+      Math.min(devicePixelRatio, this.lowQuality ? 1 : 1.5),
+    );
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.12;
@@ -834,7 +848,7 @@ export class LibraryScene {
     this.motionPreference.addEventListener("change", this.onMotionPreference);
     this.scene.background = new THREE.Color(0x273b3a);
     this.scene.add(this.shelfHint.root);
-    this.scene.fog = new THREE.Fog(0x334240, 18, 38);
+    this.scene.background = new THREE.Color(0x102b2d);
     this.scene.add(new THREE.HemisphereLight(0xe3edf2, 0x6f4930, 1.65));
     const sun = new THREE.DirectionalLight(0xffdfad, 2.5);
     sun.position.set(-4, 7, 4);
@@ -856,8 +870,7 @@ export class LibraryScene {
     fill.position.set(-6, 4, -2);
     this.scene.add(fill);
     this.scene.add(this.roomRoot, this.bookRoot);
-    this.makeRoom();
-    this.batchStaticRoom();
+    // Portrait prototype: skip room geometry and wallpaper entirely.
     this.roomRoot.add(this.roomShelf.root);
     this.makeBook();
     this.readingRegion.className = "reading-art-region";
@@ -868,6 +881,18 @@ export class LibraryScene {
     this.resizeObserver.observe(container);
     const readingPanel = document.querySelector("#panel");
     if (readingPanel) this.resizeObserver.observe(readingPanel);
+    const shotToggle = document.createElement("button");
+    shotToggle.className = "shot-toggle";
+    shotToggle.textContent = "Show whole page";
+    shotToggle.setAttribute("aria-pressed", "false");
+    shotToggle.onclick = () => {
+      this.prototypeOverview = !this.prototypeOverview;
+      shotToggle.textContent = this.prototypeOverview
+        ? "Follow the story"
+        : "Show whole page";
+      shotToggle.setAttribute("aria-pressed", String(this.prototypeOverview));
+    };
+    this.container.append(shotToggle);
     this.resize();
     this.camera.position.copy(this.cameraGoal);
     this.look.copy(this.lookGoal);
@@ -1332,7 +1357,7 @@ export class LibraryScene {
     this.hoveredActor = this.touchedActor = -1;
     const generation = ++this.loadGeneration;
     this.mode = "room";
-    this.roomRoot.visible = true;
+    this.roomRoot.visible = false;
     this.bookRoot.visible = false;
     this.tableShelfKey = undefined;
     this.landedShelfBook = false;
@@ -1421,6 +1446,8 @@ export class LibraryScene {
     } while (!this.disposed);
   }
   async setShelfToys(toys: RoomToy[]) {
+    // No cabinet in this prototype; avoid loading invisible toy textures.
+    toys = [];
     const definitions = toys.slice(0, 4);
     const generation = ++this.toyGeneration;
     this.toyResponseTokens.clear();
@@ -1621,7 +1648,7 @@ export class LibraryScene {
       };
     }
     this.mode = "room";
-    this.roomRoot.visible = true;
+    this.roomRoot.visible = false;
     this.resize();
   }
   resumeTable() {
@@ -1641,11 +1668,11 @@ export class LibraryScene {
   async inspectShelfBook(key: string) {
     this.shelfHint.complete();
     this.browseShelf();
-    if (!(await this.roomShelf.inspect(key, this.reduced)))
+    if (!(await this.roomShelf.inspect(key, true)))
       throw new Error(`Shelf book ${key} is unavailable`);
   }
   async returnShelfPreview() {
-    await this.roomShelf.returnPreview(this.reduced);
+    await this.roomShelf.returnPreview(true);
   }
   private async animateBookTo(
     position: THREE.Vector3,
@@ -1750,8 +1777,8 @@ export class LibraryScene {
     if (this.tableShelfKey && this.tableShelfKey !== key)
       await this.returnTableBook();
     if (this.roomShelf.previewKey !== key)
-      await this.roomShelf.inspect(key, this.reduced);
-    const definition = await this.roomShelf.landPreview(this.reduced);
+      await this.roomShelf.inspect(key, true);
+    const definition = await this.roomShelf.landPreview(true);
     if (!definition) throw new Error(`Shelf book ${key} is unavailable`);
     this.tableShelfKey = key;
     this.setTableBookAppearance(definition.appearance);
@@ -2310,7 +2337,7 @@ export class LibraryScene {
     this.foldingOut = 0;
     this.mode = "spread";
     this.resize();
-    this.roomRoot.visible = true;
+    this.roomRoot.visible = false;
     this.bookRoot.visible = true;
     this.transitionWaiting = true;
     this.waitingFromRoom = wasRoom && !landedShelfBook;
@@ -2434,6 +2461,9 @@ export class LibraryScene {
     this.opening = wasRoom;
     this.presentedPage = presentedPage;
     this.loadedPage = { ...presentedPage };
+    this.prototypePosition = 0;
+    this.prototypeShots = portraitShots(page.id);
+
     this.turnDirection = turnDirection;
     this.turningLeaf?.update(0, turnDirection);
     this.turningPage.rotation.y = turnDirection === "forward" ? 0 : -Math.PI;
@@ -2632,6 +2662,13 @@ export class LibraryScene {
     return {
       shelfHint: this.shelfHint.debug(),
       mode: this.mode,
+      prototype: {
+        overview: this.prototypeOverview,
+        position: this.prototypePosition,
+        duration: this.prototypeDuration,
+        shots: this.prototypeShots,
+        pixelRatio: this.renderer.getPixelRatio(),
+      },
       roomOrbitYaw: this.roomOrbit.yaw,
       roomDragging: this.roomOrbit.dragging,
       roomWallpaper: this.roomWallpaper,
@@ -2772,11 +2809,12 @@ export class LibraryScene {
     }
     const now = performance.now();
     if (this.lowQuality && this.lastFrame && now - this.lastFrame < 30) return;
+    if (this.mode === "room" && !this.roomShelf.previewKey) return;
     this.roomShelf.update(now);
     this.shelfHint.update(
       now,
       this.roomShelf.pickables()[0],
-      this.mode === "room" &&
+      false &&
         !document.querySelector("dialog[open]") &&
         !document.querySelector("#loading:not([hidden])"),
       this.reduced,
@@ -2788,7 +2826,9 @@ export class LibraryScene {
     if (this.slowFrames > 45 && !this.lowQuality) {
       this.lowQuality = true;
       document.documentElement.classList.add("low-graphics");
-      this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+      this.renderer.setPixelRatio(
+        Math.min(devicePixelRatio, this.lowQuality ? 1 : 1.5),
+      );
       this.renderer.shadowMap.enabled = false;
     }
     this.lastFrame = now;
@@ -2804,6 +2844,50 @@ export class LibraryScene {
         ? orbitRoomGoal(this.cameraGoal, this.lookGoal, this.roomOrbit.yaw)
         : this.cameraGoal;
     const goal = orbitGoal.clone();
+    const storyLook = this.lookGoal.clone();
+    if (this.mode === "spread" && !this.prototypeOverview && !this.reduced) {
+      // Scripted establishing → first subject → second subject → reunion.
+      // The narration clock freezes shots on pause and follows playback speed.
+      const phase = THREE.MathUtils.clamp(
+        this.prototypePosition / this.prototypeDuration,
+        0,
+        1,
+      );
+      const [first, second] = this.prototypeShots.length
+        ? this.prototypeShots
+        : portraitShots("");
+      const beats = [
+        { at: 0, x: 0, zoom: 0.74, lift: 0.25 },
+        { at: 0.16, ...first, lift: first.lift ?? 0.25 },
+        { at: 0.42, ...first, lift: first.lift ?? 0.25 },
+        { at: 0.58, ...second, lift: second.lift ?? 0.25 },
+        { at: 0.78, ...second, lift: second.lift ?? 0.25 },
+        { at: 1, x: 0, zoom: 0.74, lift: 0.25 },
+      ];
+      const index = Math.min(
+        beats.length - 2,
+        Math.max(
+          0,
+          beats.findIndex(
+            (b, i) => i < beats.length - 1 && phase <= beats[i + 1].at,
+          ),
+        ),
+      );
+      const a = beats[index],
+        b = beats[index + 1];
+      const t = THREE.MathUtils.smoothstep(phase, a.at, b.at);
+      const portrait = this.container.clientWidth < this.container.clientHeight;
+      const zoom = portrait
+        ? THREE.MathUtils.lerp(a.zoom, b.zoom, t)
+        : THREE.MathUtils.lerp(0.92, 0.72, Math.sin(phase * Math.PI));
+      storyLook.x = THREE.MathUtils.lerp(a.x, b.x, t);
+      storyLook.y += THREE.MathUtils.lerp(a.lift, b.lift, t);
+      goal
+        .copy(this.cameraGoal)
+        .sub(this.lookGoal)
+        .multiplyScalar(zoom)
+        .add(storyLook);
+    }
     if (!this.reduced && !this.lowQuality && !this.roomOrbit.dragging) {
       goal.x += this.drift.x * 0.32;
       goal.y -= this.drift.y * 0.15;
@@ -2812,7 +2896,7 @@ export class LibraryScene {
     // only a few frames per second. The capped dt above is for actor animation.
     const cameraBlend = cameraBlendForElapsed(elapsed, this.reduced);
     this.camera.position.lerp(goal, cameraBlend);
-    this.look.lerp(this.lookGoal, cameraBlend);
+    this.look.lerp(storyLook, cameraBlend);
     this.camera.lookAt(this.look);
     if (this.reviewTime !== undefined) {
       this.camera.position.copy(orbitGoal);

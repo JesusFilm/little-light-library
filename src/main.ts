@@ -1,3 +1,4 @@
+import { renderPortraitShelf } from "./portrait-prototype";
 import { validateBook } from "./book-validation";
 import { ShelfToyAudio } from "./shelf-toy-audio";
 import { shelfToys, type ShelfToy } from "./room-toys";
@@ -11,6 +12,7 @@ import {
 } from "./book-localization";
 import { narrationIssues, type AuthoredBook } from "./authored-book";
 import "./style.css";
+import "./portrait-prototype.css";
 import {
   localeIds,
   type LocaleId,
@@ -108,21 +110,11 @@ async function refreshRoomBooks() {
   await scene.setShelfBooks(books);
 }
 function renderShelf() {
-  const { inspected, busy, status } = session.snapshot;
-  $("#panel").replaceChildren();
-  if (inspected) {
-    const entry = inspected;
-    $("#panel").innerHTML =
-      `<section class="shelf-preview" aria-label="Selected book"><p class="eyebrow">${entry.book ? escaped(entry.book.locale) : escaped(locale.name)}</p><h1>${escaped(entry.title)}</h1><div><button id="shelf-read" class="primary" ${busy ? "disabled" : ""}>Read</button><button id="shelf-return" ${busy ? "disabled" : ""}>Return</button></div><p role="status">${escaped(status)}</p></section>`;
-    $("#shelf-read").onclick = () => void readShelfBook();
-    $("#shelf-return").onclick = () => void returnShelfBook();
-  } else if (status) {
-    const message = document.createElement("p");
-    message.className = "shelf-status";
-    message.role = "status";
-    message.textContent = status;
-    $("#panel").append(message);
-  }
+  const { busy, status } = session.snapshot;
+  renderPortraitShelf($("#panel"), roomBooks, busy, status, async (key) => {
+    await inspectShelfBook(key);
+    if (session.snapshot.inspected?.key === key) await readShelfBook();
+  });
 }
 async function inspectShelfBook(key: string) {
   if (session.snapshot.busy || !entered) return;
@@ -612,6 +604,10 @@ document.addEventListener("visibilitychange", () => {
   session?.visibilityChanged(document.hidden);
 });
 function frame() {
+  scene?.prototypePlayback(
+    narration?.clock.position || 0,
+    narration?.clock.durations || [],
+  );
   scene?.playback(Boolean(narration?.clock.playing));
   scene?.authoredPlayback(
     narration?.clock.position || 0,
