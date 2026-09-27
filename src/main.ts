@@ -299,6 +299,32 @@ function settingsDialog() {
     d.close();
     languageDialog(false);
   };
+  if (matchMedia("(pointer: coarse)").matches) {
+    const tilt = document.createElement("button");
+    tilt.className = "wide";
+    tilt.id = "phone-tilt";
+    const label = () => {
+      tilt.textContent = scene.phoneTilt.enabled
+        ? `${scene.phoneTilt.status} · turn off`
+        : scene.phoneTilt.status;
+    };
+    label();
+    tilt.onclick = async () => {
+      if (scene.phoneTilt.enabled) scene.phoneTilt.disable();
+      else {
+        tilt.disabled = true;
+        await scene.phoneTilt.enable(label);
+        tilt.disabled = false;
+      }
+      label();
+    };
+    const hint = document.createElement("p");
+    hint.className = "help";
+    hint.textContent =
+      "Drag the artwork to explore the page. Enable tilt while holding your phone comfortably to add depth.";
+    d.insertBefore(tilt, $("#settings-close"));
+    d.insertBefore(hint, $("#settings-close"));
+  }
   $("#settings-close").onclick = () => d.close();
   d.showModal();
 }

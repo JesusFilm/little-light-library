@@ -1,3 +1,4 @@
+import { PhoneTilt } from "./phone-tilt-prototype";
 import { createPortraitBackdrop } from "./portrait-backdrop-prototype";
 import { portraitShots, type PortraitShot } from "./portrait-camera-prototype";
 import { fitReadingComposition } from "./reading-composition";
@@ -290,7 +291,42 @@ export class LibraryScene {
   private prototypePosition = 0;
   private prototypeDuration = 20;
   private prototypeBackdrop = createPortraitBackdrop();
-  private readingDrag?: { id: number; x: number; y: number; moved: boolean };
+  readonly phoneTilt = new PhoneTilt();
+  private readingDrag?: {
+    id: number;
+    x: number;
+    y: number;
+    moved: boolean;
+    focusX: number;
+    focusY: number;
+  };
+  private manualPan?: { x: number; y: number; eye: THREE.Vector3 };
+  private storyEye = new THREE.Vector3();
+  private storyTarget = new THREE.Vector3();
+  private portraitTouch() {
+    return (
+      matchMedia("(pointer: coarse)").matches &&
+      this.container.clientWidth < this.container.clientHeight
+    );
+  }
+  private panLimits() {
+    const region = this.readingRegion.getBoundingClientRect();
+    const size = this.readingBounds.getSize(new THREE.Vector3());
+    const eye = this.manualPan?.eye ?? this.storyEye;
+    const halfHeight = eye.length() * Math.tan(THREE.MathUtils.degToRad(21));
+    const insetX = Math.min(
+      size.x / 2,
+      ((halfHeight * region.width) / Math.max(1, region.height)) * 0.8,
+    );
+    const insetY = Math.min(size.y / 2, halfHeight * 0.4);
+    return {
+      left: this.readingBounds.min.x + insetX,
+      right: this.readingBounds.max.x - insetX,
+      bottom: this.readingBounds.min.y + insetY,
+      top: this.readingBounds.max.y - insetY,
+    };
+  }
+
   private prototypeShots: PortraitShot[] = [];
   prototypePlayback(position: number, durations: number[]) {
     this.prototypePosition = position;
@@ -672,6 +708,8 @@ export class LibraryScene {
           x: event.clientX,
           y: event.clientY,
           moved: false,
+          focusX: this.manualPan?.x ?? this.storyTarget.x,
+          focusY: this.manualPan?.y ?? this.storyTarget.y,
         };
         this.renderer.domElement.setPointerCapture(event.pointerId);
       } else this.clearReadingDrag();
@@ -718,10 +756,32 @@ export class LibraryScene {
         this.authoredStage?.releaseHolds();
         this.heldAuthoredPointer = undefined;
         this.heldAuthoredId = undefined;
-        this.drift.set(
-          THREE.MathUtils.clamp(dx / 180, -0.85, 0.85),
-          THREE.MathUtils.clamp(dy / 180, -0.65, 0.65),
-        );
+        if (this.portraitTouch()) {
+          const scale =
+            (this.readingBounds.getSize(new THREE.Vector3()).x * 0.6) /
+            this.container.clientWidth;
+          this.manualPan ??= {
+            x: drag.focusX,
+            y: drag.focusY,
+            eye: this.storyEye.clone(),
+          };
+          const limits = this.panLimits();
+          this.manualPan.x = THREE.MathUtils.clamp(
+            drag.focusX - dx * scale,
+            limits.left,
+            limits.right,
+          );
+          this.manualPan.y = THREE.MathUtils.clamp(
+            drag.focusY + dy * scale,
+            limits.bottom,
+            limits.top,
+          );
+        } else {
+          this.drift.set(
+            THREE.MathUtils.clamp(dx / 180, -0.85, 0.85),
+            THREE.MathUtils.clamp(dy / 180, -0.65, 0.65),
+          );
+        }
         this.renderer.domElement.style.cursor = "grabbing";
         e.preventDefault();
         return;
@@ -1388,6 +1448,7 @@ export class LibraryScene {
     this.clearReadingFocus();
     this.readingWideEnsemble = false;
     this.clearReadingDrag();
+    this.manualPan = undefined;
     this.roomOrbit.reset();
     this.drift.set(0, 0);
     this.focusedRoom = this.hoveredRoom = null;
@@ -2253,6 +2314,7 @@ export class LibraryScene {
   async spread(story: Story, page: Page, locale: LocaleData) {
     this.releaseAuthoredHolds();
     this.clearReadingDrag();
+    this.manualPan = undefined;
     this.roomOrbit.reset();
     this.spreadAbort?.abort();
     const spreadAbort = new AbortController();
@@ -2302,6 +2364,7 @@ export class LibraryScene {
     this.clearCreatureTargets();
     this.clearReadingFocus();
     this.clearReadingDrag();
+    this.manualPan = undefined;
     this.roomOrbit.reset();
     this.drift.set(0, 0);
     const wasRoom = this.mode === "room";
@@ -2715,6 +2778,10 @@ export class LibraryScene {
       prototype: {
         drag: this.readingDrag ? { ...this.readingDrag } : null,
         parallax: this.drift.toArray(),
+        pan: this.manualPan ? [this.manualPan.x, this.manualPan.y] : null,
+        panLimits: this.panLimits(),
+        tilt: this.phoneTilt.offset.toArray(),
+        tiltStatus: this.phoneTilt.status,
         position: this.prototypePosition,
         duration: this.prototypeDuration,
         shots: this.prototypeShots,
@@ -2939,13 +3006,21 @@ export class LibraryScene {
       );
       goal.add(storyLook);
     }
+    this.storyEye.copy(goal).sub(storyLook);
+    this.storyTarget.copy(storyLook);
+    if (this.mode === "spread" && this.manualPan && this.portraitTouch()) {
+      storyLook.x = this.manualPan.x;
+      storyLook.y = this.manualPan.y;
+      goal.copy(storyLook).add(this.manualPan.eye);
+    }
     if (!this.reduced && this.mode === "spread") {
-      // Orbit around the CURRENT story subject, including on constrained phones.
-      // Moving the eye more than the target reveals real foreground parallax.
+      const tilt = matchMedia("(pointer: coarse)").matches
+        ? this.phoneTilt.offset
+        : this.drift;
       goal
         .sub(storyLook)
-        .applyAxisAngle(THREE.Object3D.DEFAULT_UP, this.drift.x * 0.24);
-      goal.y -= this.drift.y * 0.85;
+        .applyAxisAngle(THREE.Object3D.DEFAULT_UP, tilt.x * 0.24);
+      goal.y -= tilt.y * 0.85;
       goal.add(storyLook);
     }
     // Camera settling must follow wall time even when software rendering produces
@@ -3375,6 +3450,7 @@ export class LibraryScene {
     this.spreadAbort?.abort();
     this.shelfHint.dispose();
     this.prototypeBackdrop.dispose();
+    this.phoneTilt.dispose();
     this.clearCreatureTargets();
     this.retainedStage.clear();
     this.clearSpreadPrints();

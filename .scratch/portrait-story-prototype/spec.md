@@ -52,3 +52,12 @@ Visual inspection: 390×844 close views of Eden, Eve, touch-dragged perspective;
 Performance sample: 4× Chrome CPU throttling with 2 GB / 2-core hints gave a 34 ms sampled p95 frame interval (30 samples), 31 draw calls and 11 textures at 1× render resolution for Eden. This remains a desktop emulation sample, not physical-handset evidence.
 
 Audible and physical-handset review remain outstanding; this feedback does not constitute approval of the revised implementation.
+
+
+## Third iteration: pan, sensors and rigid artwork
+
+Mobile portrait drag now pans the close view within bounds derived from the page and current view size. Position holds for inspection, resets on page change, and is ignored in desktop/landscape views. Phone tilt is a separate Settings opt-in, requests iOS permission from the button gesture, calibrates from the first valid reading and re-calibrates after orientation/visibility changes. Sensor values stay in memory. Denied permission or unavailable readings retain drag access. Reduced motion suppresses tilt and scripted camera motion. Desktop retains mouse parallax and has no manual pan.
+
+Confirmed the stretching in the actual creature update with a deterministic repro: maximum serpent vertex movement was 0.167 page units without any camera. This isolated vertex deformation as the cause, so broader camera/shader hypotheses were unnecessary. Replaced masked vertex deformation in serpent/dove with small whole-cutout rotation and uniform tap scale, preserving mirrored art, placement, reduced-motion feedback and texture ownership. The same repro now reports zero distortion. Updated the two creature tests to check rigid geometry throughout full animation/touch cycles.
+
+Publication requested by the creator: use the existing GitHub Pages URL for this branch. `prototype-pages.yml` runs standard validation plus the branch-specific nested-path browser acceptance test before uploading/deploying the site. This deliberately uses carousel/mobile assertions instead of main's room-oriented acceptance selectors. Main's workflow remains intact.
