@@ -220,15 +220,25 @@ try {
       type: "touchStart",
       touchPoints: [{ x: x1, y: y1 }],
     });
+    await page.waitForFunction(
+      () => window.libraryDebug().scene.prototype.drag !== null,
+    );
     await cdp.send("Input.dispatchTouchEvent", {
       type: "touchMove",
       touchPoints: [{ x: x2, y: y2 }],
     });
-    await page.waitForTimeout(200);
+    await page.waitForFunction(
+      () => window.libraryDebug().scene.prototype.drag?.moved === true,
+    );
     await cdp.send("Input.dispatchTouchEvent", {
       type: "touchEnd",
       touchPoints: [],
     });
+    await page.waitForFunction(
+      () =>
+        window.libraryDebug().scene.prototype.drag === null &&
+        window.libraryDebug().scene.prototype.touchIds.length === 0,
+    );
     await page.waitForTimeout(600);
   };
   const touchPair = (cx, cy, gap) => [
@@ -236,15 +246,26 @@ try {
     { id: 2, x: cx + gap / 2, y: cy },
   ];
   const pinch = async (cx, cy, from, to, handoff = false) => {
+    const startZoom = await page.evaluate(
+      () => window.libraryDebug().scene.prototype.zoom,
+    );
+    const expectedZoom = Math.max(1, Math.min(2.5, (startZoom * to) / from));
     await cdp.send("Input.dispatchTouchEvent", {
       type: "touchStart",
       touchPoints: touchPair(cx, cy, from),
     });
+    await page.waitForFunction(
+      () => window.libraryDebug().scene.prototype.pinching,
+    );
     await cdp.send("Input.dispatchTouchEvent", {
       type: "touchMove",
       touchPoints: touchPair(cx, cy, to),
     });
-    await page.waitForTimeout(300);
+    await page.waitForFunction(
+      (expected) =>
+        Math.abs(window.libraryDebug().scene.prototype.zoom - expected) < 0.001,
+      expectedZoom,
+    );
     if (handoff) {
       const first = touchPair(cx, cy, to)[0];
       // CDP touchEnd ends every touch. Release one DOM pointer through the
@@ -272,7 +293,12 @@ try {
         type: "touchMove",
         touchPoints: [{ ...first, x: first.x + 45 }],
       });
-      await page.waitForTimeout(300);
+      await page.waitForFunction(
+        (before) =>
+          Math.abs(window.libraryDebug().scene.prototype.pan[0] - before[0]) >
+          0.05,
+        beforePan,
+      );
       const afterPan = await page.evaluate(
         () => window.libraryDebug().scene.prototype.pan,
       );
@@ -285,6 +311,9 @@ try {
       type: "touchEnd",
       touchPoints: [],
     });
+    await page.waitForFunction(
+      () => window.libraryDebug().scene.prototype.touchIds.length === 0,
+    );
     await page.waitForTimeout(700);
   };
   const initial = await page.evaluate(() => window.libraryDebug());
@@ -336,10 +365,16 @@ try {
     type: "touchStart",
     touchPoints: touchPair(190, 300, 100),
   });
+  await page.waitForFunction(
+    () => window.libraryDebug().scene.prototype.pinching,
+  );
   await cdp.send("Input.dispatchTouchEvent", {
     type: "touchCancel",
     touchPoints: [],
   });
+  await page.waitForFunction(
+    () => window.libraryDebug().scene.prototype.touchIds.length === 0,
+  );
   assert.equal(
     (await page.evaluate(() => window.libraryDebug())).scene.prototype.pinching,
     false,
@@ -395,7 +430,6 @@ try {
       1.8,
     "Explicit pinch remains available with reduced motion",
   );
-  await pinch(190, 300, 240, 40);
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.locator("#next").click();
   await ready();
