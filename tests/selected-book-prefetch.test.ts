@@ -60,7 +60,7 @@ test("one selected first page resolves local right-sized art and locale audio fo
         assert.ok(media.audio.length > 0, `${localeId}/${book.key} audio`);
         assert.ok(media.images.length <= 8, `${book.key} bounded art`);
         assert.ok(media.audio.length <= 3, `${book.key} bounded audio`);
-        assert.ok(media.images.every((url) => url.endsWith(".mobile.webp")));
+        assert.ok(media.images.every((url) => url.endsWith(".reader.webp")));
         assert.ok(media.audio.every((url) => url.endsWith(".mp3")));
         for (const url of [...media.images, ...media.audio]) {
           assert.ok(url.startsWith("./assets/"), url);

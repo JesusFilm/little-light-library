@@ -29,7 +29,13 @@ const server = http.createServer((req, res) => {
       "Content-Type",
       mime[path.extname(file)] || "application/octet-stream",
     );
-    res.end(fs.readFileSync(file));
+    const bytes = fs.readFileSync(file);
+    res.setHeader("Content-Length", bytes.length);
+    res.setHeader(
+      "Cache-Control",
+      /\.(html|json)$/.test(file) ? "no-cache" : "public, max-age=600",
+    );
+    res.end(bytes);
   } catch {
     res.writeHead(404).end();
   }
@@ -41,12 +47,21 @@ const browser = await chromium.launch(
 try {
   const page = await browser.newPage({
     viewport: { width: 390, height: 844 },
-    deviceScaleFactor: 1,
+    deviceScaleFactor: 3,
     isMobile: true,
     hasTouch: true,
   });
   const errors = [];
+  const requestedArt = new Set();
+  page.on("request", (request) => {
+    if (/\.(reader|mobile)\.webp$/.test(request.url()))
+      requestedArt.add(request.url());
+  });
   page.on("pageerror", (e) => errors.push(e.message));
+  page.on("response", (response) => {
+    if (response.status() >= 400)
+      errors.push(`${response.status()} ${response.url()}`);
+  });
   await page.addInitScript(() => {
     Object.defineProperty(navigator, "deviceMemory", { value: 2 });
     Object.defineProperty(navigator, "hardwareConcurrency", { value: 2 });
@@ -90,18 +105,116 @@ try {
       Math.abs(restingCover.y - hoveredCover.y) < 1,
     "Hover must preserve the 3D cover transform",
   );
+  const cdp = await page.context().newCDPSession(page);
+  await cdp.send("Emulation.setCPUThrottlingRate", {
+    rate: process.env.CI ? 1 : 4,
+  });
+  await cdp.send("Network.enable");
+  await cdp.send("Network.emulateNetworkConditions", {
+    offline: false,
+    latency: process.env.CI ? 0 : 150,
+    downloadThroughput: process.env.CI ? -1 : 200000,
+    uploadThroughput: process.env.CI ? -1 : 100000,
+  });
+  const qualityStarted = Date.now();
   await page.locator(".carousel-book.selected").click();
-  const ready = () =>
-    page.waitForFunction(() => {
-      const d = window.libraryDebug();
-      return (
-        d.ready && !d.pagePending && !d.session.busy && d.scene.stageVisible
+  const ready = async () => {
+    try {
+      await page.waitForFunction(() => {
+        const d = window.libraryDebug();
+        return (
+          d.ready && !d.pagePending && !d.session.busy && d.scene.stageVisible
+        );
+      });
+    } catch (error) {
+      console.error(
+        "Reader readiness failure",
+        JSON.stringify(await page.evaluate(() => window.libraryDebug())),
+        errors,
       );
-    });
+      throw error;
+    }
+  };
   await ready();
+  const qualityReadyMs = Date.now() - qualityStarted;
+  if (!process.env.CI)
+    assert.ok(
+      qualityReadyMs <= 4000,
+      `Detailed first page took ${qualityReadyMs}ms (budget 4000ms)`,
+    );
+  const renderP95Ms = process.env.CI
+    ? null
+    : await page.evaluate(
+        () =>
+          new Promise((resolve) => {
+            const samples = [];
+            let count = -1,
+              callbacks = 0;
+            function frame() {
+              const scene = window.libraryDebug().scene;
+              if (
+                scene.renderedFrames !== count &&
+                scene.renderFrameIntervalMs > 0
+              ) {
+                samples.push(scene.renderFrameIntervalMs);
+                count = scene.renderedFrames;
+              }
+              if (++callbacks < 120) requestAnimationFrame(frame);
+              else {
+                const values = samples.slice(3).sort((a, b) => a - b);
+                resolve(values[Math.floor(values.length * 0.95)]);
+              }
+            }
+            requestAnimationFrame(frame);
+          }),
+      );
+  if (!process.env.CI)
+    assert.ok(
+      renderP95Ms <= 50,
+      `Detailed reader p95 ${renderP95Ms}ms exceeds 50ms`,
+    );
+  fs.mkdirSync(".test-output/portrait-prototype", { recursive: true });
+  fs.writeFileSync(
+    ".test-output/portrait-prototype/quality-performance.json",
+    JSON.stringify(
+      {
+        qualityReadyMs,
+        renderP95Ms,
+        cpuSlowdown: process.env.CI ? 1 : 4,
+        deviceScaleFactor: 3,
+        constrainedPixelRatio: 1.5,
+        hostedSoftwareRenderer: !!process.env.CI,
+      },
+      null,
+      2,
+    ),
+  );
+  await cdp.send("Emulation.setCPUThrottlingRate", { rate: 1 });
+  await cdp.send("Network.emulateNetworkConditions", {
+    offline: false,
+    latency: 0,
+    downloadThroughput: -1,
+    uploadThroughput: -1,
+  });
+  assert.equal(
+    (await page.evaluate(() => window.libraryDebug())).scene.prototype
+      .pixelRatio,
+    1.5,
+  );
+  assert.ok(
+    [...requestedArt].some((url) => url.endsWith("garden.reader.webp")),
+    "Active story loads detailed reader artwork",
+  );
+  assert.ok(
+    [...requestedArt].some((url) => url.endsWith("eden-01.mobile.webp")),
+    "Carousel keeps lightweight previews",
+  );
+  fs.mkdirSync(".test-output/portrait-prototype", { recursive: true });
+  await page.screenshot({
+    path: ".test-output/portrait-prototype/reader-quality.png",
+  });
   await page.locator("#play").click();
   await page.waitForTimeout(700);
-  const cdp = await page.context().newCDPSession(page);
   const drag = async (x1, y1, x2, y2) => {
     await cdp.send("Input.dispatchTouchEvent", {
       type: "touchStart",

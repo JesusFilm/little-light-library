@@ -2,7 +2,7 @@ import type { AudioManifest, LocaleData } from "./contracts";
 import type { ResolvedRoomEntry } from "./room-library";
 import { stageDirections } from "./stage-direction";
 import { legacyStageImageSources, stageAssetUrl } from "./legacy-stage-media";
-import { mobileImageUrl } from "./mobile-images";
+import { readerImageUrl } from "./mobile-images";
 import {
   productionLanguages,
   resolveBook,
@@ -41,7 +41,7 @@ export function firstPageMedia(
       .map((clip) => clip.asset);
     return {
       images: unique(
-        imageIds.map((id) => mobileImageUrl(bookAssetUrl(book.assets[id].src))),
+        imageIds.map((id) => readerImageUrl(bookAssetUrl(book.assets[id].src))),
       ),
       audio: unique(audioIds.map((id) => bookAssetUrl(book.assets[id].src))),
     };
@@ -55,10 +55,10 @@ export function firstPageMedia(
     images: direction
       ? unique(
           legacyStageImageSources(direction).map((source) =>
-            mobileImageUrl(stageAssetUrl(source)),
+            readerImageUrl(stageAssetUrl(source)),
           ),
         )
-      : [mobileImageUrl(bookAssetUrl(first.image))],
+      : [readerImageUrl(bookAssetUrl(first.image))],
     audio: unique(
       first.segments
         .map(
@@ -123,7 +123,7 @@ export class SelectedBookPrefetch {
     // readable. Only known right-sized derivatives and compressed cues are
     // speculatively transferred on constrained connections.
     const images = media.images
-      .filter((src) => src.endsWith(".mobile.webp"))
+      .filter((src) => src.endsWith(".reader.webp"))
       .slice(0, 8);
     const audio = media.audio.filter((src) => src.endsWith(".mp3")).slice(0, 3);
     const controller = new AbortController();

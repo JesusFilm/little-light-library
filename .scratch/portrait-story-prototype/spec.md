@@ -77,3 +77,13 @@ The prototype browser acceptance now checks a real side-cover tap, disabled side
 - Local SVG linework replaces platform emoji for library, language, settings, transport and carousel navigation. A shared brass-and-green embossed treatment also covers dialogs and text buttons, with accessible labels retained.
 - Automated verification: 208 tests, typecheck, lint, book validation and production build passed. Browser regression reproduced the landscape pan failure before the fix and passed afterward, including all 29 pages.
 - Visual inspection: landscape reader and shelf screenshots reviewed. Physical phone feel, audible playback and creator approval remain separate from automated checks.
+
+## Sixth iteration: detail tier for close mobile reading
+
+- Retain lightweight `.mobile.webp` carousel previews; active legacy and authored stories use local `.reader.webp` derivatives rebuilt from original artwork. Prefetch resolves the same detail URLs as the reader.
+- Backgrounds cap at 1024px; character cutouts at 1024px; pose atlases at 1536px. Peripheral tree/floor prints retain smaller bounds. Never upscale originals. Compression is tuned by layer to retain detail within the existing first-page transfer budget.
+- Constrained-phone canvas rises from 1x to 1.5x; other devices cap at 2x. Resource-constrained phone detection now works in either orientation. Reduced effects, shadow limits and the 30fps ceiling remain.
+- Regenerate without touching recordings: `python3 scripts/optimize-media.py --reader-only`. The general media generator excludes generated detail files from its original input inventory.
+- Automated: 208 tests, typecheck, lint, book catalog validation and build passed. First-page media stays within 650kB for all books and all nine locales. The browser suite passes all 29 pages at DPR 3, verifies detail/previews use separate URLs, phone pan/tilt/rotation, reduced motion and desktop controls.
+- Local performance observation: fourfold CPU slowdown, 150ms latency and 1.6Mbps download; first-page readiness 3792ms (4000ms budget), render p95 34.2ms (50ms budget). Hosted software rendering performs functional checks; it does not establish phone GPU performance.
+- Visual: phone-density portrait and landscape captures inspected. Actual phone quality/thermal responsiveness, audible playback and creator approval remain separate and pending user testing.

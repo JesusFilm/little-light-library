@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build small local reader media while retaining the original recordings.
+"""Build preview and detailed reader media while retaining original recordings.
 
 Requires ffmpeg and Pillow with WebP support. Re-running is safe: newly
 authored WAVs are moved to assets/source-recordings and converted; the existing
@@ -9,6 +9,7 @@ source recordings remain available for lossless regeneration.
 from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor
+import argparse
 import json
 from pathlib import Path
 import shutil
@@ -69,18 +70,16 @@ def optimize_audio(source: Path) -> tuple[int, int]:
     return source.stat().st_size, destination.stat().st_size
 
 
-def optimize_images() -> tuple[int, int, int]:
+def optimize_images(reader_only: bool = False) -> tuple[int, int, int]:
     originals = [p for p in ASSETS.rglob("*") if p.suffix.lower() in {".webp", ".png"}
-                 and not p.stem.endswith((".mobile", ".cover"))]
-    before = after = 0
-    for source in originals:
+                 and not p.stem.endswith((".mobile", ".cover", ".reader"))]
+    def optimize_one(source: Path) -> tuple[int, int]:
         relative = source.relative_to(ASSETS).as_posix()
         mobile = source.with_suffix(".mobile.webp")
         with Image.open(source) as image:
-            before += source.stat().st_size
-            # Three-pose actor atlases need a little more width per cell. Most
-            # cutouts occupy less than half the 360 px phone canvas; 640 px
-            # retains ample detail at the renderer's bounded 1.5x pixel ratio.
+            before = source.stat().st_size
+            # Preserve the small preview tier; detailed reading uses a separate
+            # derivative so the carousel does not download close-up textures.
             alpha = "A" in image.getbands()
             max_side = (
                 # Eden's tree spans about 100 CSS pixels on a 360 px phone;
@@ -92,14 +91,40 @@ def optimize_images() -> tuple[int, int, int]:
             )
             resized = image.copy()
             resized.thumbnail((max_side, max_side), Image.Resampling.LANCZOS)
-            resized.save(mobile, "WEBP", quality=80, method=6, exact=True)
-            after += mobile.stat().st_size
+            if not reader_only or not mobile.exists():
+                resized.save(mobile, "WEBP", quality=80, method=6, exact=True)
+            after = mobile.stat().st_size
+            # Close story-camera shots need more detail than shelf previews.
+            # Keep alpha cutouts bounded; preserve detail across atlas cells.
+            peripheral = relative == "art/eden-tree.webp" or any(
+                word in source.stem for word in ("ground", "floor")
+            )
+            reader_max_side = (
+                max_side if peripheral
+                else 1536 if "-poses" in source.stem
+                else 1024
+            )
+            reader = image.copy()
+            reader.thumbnail(
+                (reader_max_side, reader_max_side), Image.Resampling.LANCZOS
+            )
+            reader.save(
+                source.with_suffix(".reader.webp"), "WEBP",
+                quality=80 if alpha or peripheral else 75,
+                alpha_quality=100 if peripheral else 80,
+                method=6, exact=True,
+            )
             if relative in SHELF_COVERS:
                 cover = source.with_suffix(".cover.webp")
                 if not cover.exists():
                     resized = image.copy()
                     resized.thumbnail((256, 256), Image.Resampling.LANCZOS)
                     resized.save(cover, "WEBP", quality=82, method=6)
+        return before, after
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        sizes = list(pool.map(optimize_one, originals))
+    before = sum(a for a, _ in sizes)
+    after = sum(b for _, b in sizes)
     known = sorted(f"assets/{p.relative_to(ASSETS).as_posix()}" for p in originals)
     covers = sorted(f"assets/{p}" for p in SHELF_COVERS)
     (ROOT / "src/generated-media.ts").write_text(
@@ -121,6 +146,14 @@ def rewrite_references() -> None:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--images-only", action="store_true", help="Rebuild image derivatives without touching recordings or manifests")
+    parser.add_argument("--reader-only", action="store_true", help="Rebuild detailed reader art while retaining existing previews")
+    args = parser.parse_args()
+    if args.images_only or args.reader_only:
+        count, before, after = optimize_images(reader_only=args.reader_only)
+        print(f"Rebuilt {count} preview and reader derivatives; previews {before:,} -> {after:,} bytes")
+        return
     moved = 0
     for wav in list(ASSETS.rglob("*.wav")):
         source = SOURCE_AUDIO / wav.relative_to(ASSETS)

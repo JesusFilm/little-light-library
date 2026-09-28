@@ -21,3 +21,11 @@ export function shelfCoverUrl(src: string): string {
   if (!narrowScreen() || !shelfCovers.has(assetKey(src))) return src;
   return src.replace(/\.(?:png|webp)$/i, ".cover.webp");
 }
+
+/** Detail tier for the active story; previews retain their smaller derivative. */
+export function readerImageUrl(src: string): string {
+  const preview = mobileImageUrl(src);
+  return preview === src
+    ? src
+    : preview.replace(/\.mobile\.webp$/i, ".reader.webp");
+}

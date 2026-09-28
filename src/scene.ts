@@ -48,7 +48,7 @@ import {
 } from "./turning-leaf";
 import { stageDirections } from "./stage-direction";
 import { legacyStageImageSources, stageAssetUrl } from "./legacy-stage-media";
-import { mobileImageUrl } from "./mobile-images";
+import { mobileImageUrl, readerImageUrl } from "./mobile-images";
 import { PageImages } from "./page-images";
 import { alphaBounds } from "./alpha-bounds";
 import {
@@ -250,7 +250,8 @@ const constrainedPhone = () => {
     connection?: { saveData?: boolean };
   };
   return (
-    matchMedia("(max-width: 600px)").matches &&
+    (matchMedia("(pointer: coarse)").matches ||
+      matchMedia("(max-width: 600px)").matches) &&
     (device.connection?.saveData === true ||
       (device.deviceMemory !== undefined && device.deviceMemory <= 4) ||
       (device.hardwareConcurrency !== undefined &&
@@ -937,7 +938,7 @@ export class LibraryScene {
       powerPreference: "low-power",
     });
     this.renderer.setPixelRatio(
-      Math.min(devicePixelRatio, this.lowQuality ? 1 : 1.5),
+      Math.min(devicePixelRatio, this.lowQuality ? 1.5 : 2),
     );
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -1923,11 +1924,11 @@ export class LibraryScene {
       actorMood: "listen" as PaperActorMood,
     };
     const stageImage = (source: string) => {
-      const url = mobileImageUrl(stageAssetUrl(source));
+      const url = readerImageUrl(stageAssetUrl(source));
       return pageImages.image(url);
     };
     const loadStageTexture = async (source: string) => {
-      return pageImages.texture(mobileImageUrl(stageAssetUrl(source)));
+      return pageImages.texture(readerImageUrl(stageAssetUrl(source)));
     };
     const assertCurrent = () => {
       if (!stillCurrent()) throw Error("legacy-stage-superseded");
@@ -2028,7 +2029,7 @@ export class LibraryScene {
       draft.actorMood = direction.actors[0]?.mood || "listen";
       texture = await loadStageTexture(backdrop).catch(() =>
         pageImages.texture(
-          mobileImageUrl(
+          readerImageUrl(
             page.image.startsWith("/") ? `.${page.image}` : `./${page.image}`,
           ),
         ),
@@ -2079,7 +2080,7 @@ export class LibraryScene {
               `assets/art/theatre/${kind}-poses.webp`,
             ).catch(() =>
               pageImages.texture(
-                mobileImageUrl(`./assets/art/${kind}-figurine.webp`),
+                readerImageUrl(`./assets/art/${kind}-figurine.webp`),
               ),
             );
         if (!stillCurrent()) {
@@ -2942,7 +2943,7 @@ export class LibraryScene {
       this.lowQuality = true;
       document.documentElement.classList.add("low-graphics");
       this.renderer.setPixelRatio(
-        Math.min(devicePixelRatio, this.lowQuality ? 1 : 1.5),
+        Math.min(devicePixelRatio, this.lowQuality ? 1.5 : 2),
       );
       this.renderer.shadowMap.enabled = false;
     }

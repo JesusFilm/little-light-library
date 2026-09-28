@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { mobileImageUrl, shelfCoverUrl } from "../src/mobile-images";
+import {
+  mobileImageUrl,
+  readerImageUrl,
+  shelfCoverUrl,
+} from "../src/mobile-images";
 
 test("known phone media use derivatives; new book and fixture art retain their paths", () => {
   const previous = globalThis.window;
@@ -16,6 +20,14 @@ test("known phone media use derivatives; new book and fixture art retain their p
     assert.equal(
       mobileImageUrl("./assets/art/jonah/whale-cutout.png"),
       "./assets/art/jonah/whale-cutout.mobile.webp",
+    );
+    assert.equal(
+      readerImageUrl("./assets/art/theatre/garden.webp"),
+      "./assets/art/theatre/garden.reader.webp",
+    );
+    assert.equal(
+      readerImageUrl("./assets/books/new-story/art/cover.webp"),
+      "./assets/books/new-story/art/cover.webp",
     );
     assert.equal(
       shelfCoverUrl("./assets/art/eden-01.webp"),
@@ -48,6 +60,10 @@ test("wide screens keep full-size artwork and covers", () => {
     });
     assert.equal(
       mobileImageUrl("./assets/art/theatre/garden.webp"),
+      "./assets/art/theatre/garden.webp",
+    );
+    assert.equal(
+      readerImageUrl("./assets/art/theatre/garden.webp"),
       "./assets/art/theatre/garden.webp",
     );
     assert.equal(
