@@ -87,3 +87,13 @@ The prototype browser acceptance now checks a real side-cover tap, disabled side
 - Automated: 208 tests, typecheck, lint, book catalog validation and build passed. First-page media stays within 650kB for all books and all nine locales. The browser suite passes all 29 pages at DPR 3, verifies detail/previews use separate URLs, phone pan/tilt/rotation, reduced motion and desktop controls.
 - Local performance observation: fourfold CPU slowdown, 150ms latency and 1.6Mbps download; first-page readiness 3792ms (4000ms budget), render p95 34.2ms (50ms budget). Hosted software rendering performs functional checks; it does not establish phone GPU performance.
 - Visual: phone-density portrait and landscape captures inspected. Actual phone quality/thermal responsiveness, audible playback and creator approval remain separate and pending user testing.
+
+## Seventh iteration: bounded mobile pinch zoom
+
+- Two fingers zoom the active 3D page from its current story framing (1x) to 2.5x in both phone orientations. The focal point between the fingers stays anchored, and the camera follows active pinches directly. Zooming out stops at the original framing.
+- Zoom and pan persist for inspection until page changes; pan bounds expand with zoom and constrain the view to page content. The surviving finger can continue panning. Reversing at a zoom bound responds immediately.
+- Pinches cancel character holds/focus and consume releases, preventing accidental character taps. Third fingers suspend scaling until two remain; cancellation, blur, rotation and page transitions clear touch tracking. Loading pages reject camera gestures. Explicit pinch works with reduced motion.
+- Text/buttons retain their screen size. Existing canvas resolution/media tiers stay unchanged; zoom changes the camera without extra artwork requests.
+- Automated: repository verification passed with 213 tests. Five gesture tests cover focal anchoring, min/max reversal, release ownership, third fingers and coincident points. Chrome two-touch input checks portrait/landscape zoom, actual camera magnification, fixed HTML viewport, cancellation, reduced motion, bounds and all 29 pages. The single-finger handoff uses a DOM pointer release plus native subsequent movement because CDP touchEnd releases all touches.
+- Local performance: first-page readiness 3819ms under 4x CPU slowdown, 150ms latency and 1.6Mbps download; render p95 34.3ms. Existing budgets pass.
+- Visual: maximum-zoom portrait and landscape captures reviewed. Physical phone gesture feel, audible playback and creator approval remain separate from automated checks.

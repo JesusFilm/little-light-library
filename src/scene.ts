@@ -1,3 +1,4 @@
+import { ReadingPinch, READING_ZOOM, type PinchView } from "./reading-pinch";
 import { PhoneTilt } from "./phone-tilt-prototype";
 import { createPortraitBackdrop } from "./portrait-backdrop-prototype";
 import { portraitShots, type PortraitShot } from "./portrait-camera-prototype";
@@ -301,7 +302,76 @@ export class LibraryScene {
     focusX: number;
     focusY: number;
   };
-  private manualPan?: { x: number; y: number; eye: THREE.Vector3 };
+  private manualPan?: {
+    x: number;
+    y: number;
+    eye: THREE.Vector3;
+    zoom: number;
+  };
+  private readingPinch = new ReadingPinch();
+  private readingViewport?: { width: number; height: number };
+  private touchView(): PinchView {
+    const region = this.readingRegion.getBoundingClientRect();
+    const zoom = this.manualPan?.zoom ?? 1;
+    const eye = this.manualPan?.eye ?? this.storyEye;
+    return {
+      x: this.manualPan?.x ?? this.storyTarget.x,
+      y: this.manualPan?.y ?? this.storyTarget.y,
+      zoom,
+      worldPerPixel:
+        (2 * eye.length() * Math.tan(THREE.MathUtils.degToRad(21))) /
+        (zoom * Math.max(1, region.height)),
+      centerX: region.left + region.width / 2,
+      centerY: region.top + region.height / 2,
+    };
+  }
+  private beginManualView() {
+    this.manualPan ??= {
+      x: this.storyTarget.x,
+      y: this.storyTarget.y,
+      eye: this.storyEye.clone(),
+      zoom: 1,
+    };
+    return this.manualPan;
+  }
+  private constrainManualView() {
+    if (!this.manualPan) return;
+    const limits = this.panLimits();
+    this.manualPan.x = THREE.MathUtils.clamp(
+      this.manualPan.x,
+      limits.left,
+      limits.right,
+    );
+    this.manualPan.y = THREE.MathUtils.clamp(
+      this.manualPan.y,
+      limits.bottom,
+      limits.top,
+    );
+  }
+  private finishReadingTouch(event: PointerEvent) {
+    if (!this.readingPinch.has(event.pointerId)) return false;
+    const { consumed, remaining } = this.readingPinch.up(
+      event.pointerId,
+      this.touchView(),
+    );
+    if (!consumed) return false;
+    this.readingDrag = remaining
+      ? {
+          id: remaining.id,
+          x: remaining.x,
+          y: remaining.y,
+          moved: true,
+          focusX: this.manualPan?.x ?? this.storyTarget.x,
+          focusY: this.manualPan?.y ?? this.storyTarget.y,
+        }
+      : undefined;
+    this.roomOrbit.up(event.pointerId);
+    this.releaseAuthoredHolds();
+    if (this.renderer.domElement.hasPointerCapture(event.pointerId))
+      this.renderer.domElement.releasePointerCapture(event.pointerId);
+    this.renderer.domElement.style.cursor = "";
+    return true;
+  }
   private storyEye = new THREE.Vector3();
   private storyTarget = new THREE.Vector3();
   private mobileTouch() {
@@ -311,7 +381,9 @@ export class LibraryScene {
     const region = this.readingRegion.getBoundingClientRect();
     const size = this.readingBounds.getSize(new THREE.Vector3());
     const eye = this.manualPan?.eye ?? this.storyEye;
-    const halfHeight = eye.length() * Math.tan(THREE.MathUtils.degToRad(21));
+    const halfHeight =
+      (eye.length() / (this.manualPan?.zoom ?? 1)) *
+      Math.tan(THREE.MathUtils.degToRad(21));
     const insetX = Math.min(
       size.x / 2,
       ((halfHeight * region.width) / Math.max(1, region.height)) * 0.8,
@@ -494,6 +566,13 @@ export class LibraryScene {
   private clearReadingDrag() {
     const id = this.readingDrag?.id;
     this.readingDrag = undefined;
+    const ids = this.readingPinch.ids;
+    this.readingPinch.clear();
+    for (const pointerId of ids) {
+      this.roomOrbit.cancel(pointerId);
+      if (this.renderer.domElement.hasPointerCapture(pointerId))
+        this.renderer.domElement.releasePointerCapture(pointerId);
+    }
     this.drift.set(0, 0);
     if (id !== undefined && this.renderer.domElement.hasPointerCapture(id))
       this.renderer.domElement.releasePointerCapture(id);
@@ -700,6 +779,41 @@ export class LibraryScene {
   }
   private onDown = (event: PointerEvent) => {
     if (this.mode === "spread" && event.button === 0) {
+      if (this.transitionWaiting || !this.pageRoot.visible) {
+        this.roomOrbit.down(
+          event.pointerId,
+          event.clientX,
+          event.clientY,
+          false,
+        );
+        this.roomOrbit.cancel(event.pointerId);
+        event.preventDefault();
+        return;
+      }
+      if (event.pointerType === "touch" && this.mobileTouch()) {
+        const pinching = this.readingPinch.down(
+          event.pointerId,
+          event.clientX,
+          event.clientY,
+          this.touchView(),
+        );
+        this.renderer.domElement.setPointerCapture(event.pointerId);
+        if (pinching) {
+          this.readingDrag = undefined;
+          this.roomOrbit.down(
+            event.pointerId,
+            event.clientX,
+            event.clientY,
+            false,
+          );
+          for (const id of this.readingPinch.ids) this.roomOrbit.cancel(id);
+          this.releaseAuthoredHolds();
+          this.clearReadingFocus();
+          this.beginManualView();
+          event.preventDefault();
+          return;
+        }
+      }
       if (event.isPrimary) {
         this.readingDrag = {
           id: event.pointerId,
@@ -735,6 +849,7 @@ export class LibraryScene {
     );
   };
   private onCancel = (event: PointerEvent) => {
+    if (this.finishReadingTouch(event)) return;
     if (this.readingDrag?.id === event.pointerId) this.clearReadingDrag();
     if (event.pointerId === this.heldAuthoredPointer)
       this.releaseAuthoredHolds();
@@ -743,6 +858,20 @@ export class LibraryScene {
     this.renderer.domElement.style.cursor = "";
   };
   private onMove = (e: PointerEvent) => {
+    if (this.mode === "spread" && this.readingPinch.has(e.pointerId)) {
+      const view = this.readingPinch.move(e.pointerId, e.clientX, e.clientY);
+      if (this.readingPinch.active) {
+        if (view) {
+          const manual = this.beginManualView();
+          manual.zoom = view.zoom;
+          manual.x = view.x;
+          manual.y = view.y;
+          this.constrainManualView();
+        }
+        e.preventDefault();
+        return;
+      }
+    }
     const drag = this.readingDrag;
     if (this.mode === "spread" && drag?.id === e.pointerId) {
       const dx = e.clientX - drag.x,
@@ -755,14 +884,8 @@ export class LibraryScene {
         this.heldAuthoredPointer = undefined;
         this.heldAuthoredId = undefined;
         if (this.mobileTouch()) {
-          const scale =
-            (this.readingBounds.getSize(new THREE.Vector3()).x * 0.6) /
-            this.container.clientWidth;
-          this.manualPan ??= {
-            x: drag.focusX,
-            y: drag.focusY,
-            eye: this.storyEye.clone(),
-          };
+          const scale = this.touchView().worldPerPixel;
+          this.manualPan = this.beginManualView();
           const limits = this.panLimits();
           this.manualPan.x = THREE.MathUtils.clamp(
             drag.focusX - dx * scale,
@@ -832,6 +955,7 @@ export class LibraryScene {
     );
   };
   private onPointer = (event: PointerEvent) => {
+    if (this.finishReadingTouch(event)) return;
     const dragged =
       this.readingDrag?.id === event.pointerId && this.readingDrag.moved;
     this.readingDrag = undefined;
@@ -857,7 +981,8 @@ export class LibraryScene {
       this.renderer.domElement.style.cursor = "";
       return;
     }
-    if (this.mode === "room" && !tap) return;
+    if ((this.mode === "room" && !tap) || (this.mode === "spread" && !tracked))
+      return;
     const b = this.renderer.domElement.getBoundingClientRect();
     this.pointer.set(
       ((event.clientX - b.left) / b.width) * 2 - 1,
@@ -1016,6 +1141,12 @@ export class LibraryScene {
       );
     const w = Math.max(this.container.clientWidth, 1),
       h = Math.max(this.container.clientHeight, 1);
+    if (
+      this.readingViewport &&
+      (this.readingViewport.width !== w || this.readingViewport.height !== h)
+    )
+      this.clearReadingDrag();
+    this.readingViewport = { width: w, height: h };
     this.camera.aspect = w / h;
     this.camera.clearViewOffset();
     this.camera.fov = 42;
@@ -2718,6 +2849,7 @@ export class LibraryScene {
     this.authoredStage?.releaseHolds();
     if (
       pointer !== undefined &&
+      !this.readingPinch.has(pointer) &&
       this.renderer.domElement.hasPointerCapture(pointer)
     )
       this.renderer.domElement.releasePointerCapture(pointer);
@@ -2777,6 +2909,10 @@ export class LibraryScene {
         drag: this.readingDrag ? { ...this.readingDrag } : null,
         parallax: this.drift.toArray(),
         pan: this.manualPan ? [this.manualPan.x, this.manualPan.y] : null,
+        zoom: this.manualPan?.zoom ?? 1,
+        zoomBounds: READING_ZOOM,
+        pinching: this.readingPinch.active,
+        touchIds: this.readingPinch.ids,
         panLimits: this.panLimits(),
         tilt: this.phoneTilt.offset.toArray(),
         tiltStatus: this.phoneTilt.status,
@@ -3009,9 +3145,13 @@ export class LibraryScene {
     this.storyEye.copy(goal).sub(storyLook);
     this.storyTarget.copy(storyLook);
     if (this.mode === "spread" && this.manualPan && this.mobileTouch()) {
+      this.constrainManualView();
       storyLook.x = this.manualPan.x;
       storyLook.y = this.manualPan.y;
-      goal.copy(storyLook).add(this.manualPan.eye);
+      goal
+        .copy(this.manualPan.eye)
+        .divideScalar(this.manualPan.zoom)
+        .add(storyLook);
     }
     if (!this.reduced && this.mode === "spread") {
       const tilt = matchMedia("(pointer: coarse)").matches
@@ -3020,12 +3160,14 @@ export class LibraryScene {
       goal
         .sub(storyLook)
         .applyAxisAngle(THREE.Object3D.DEFAULT_UP, tilt.x * 0.24);
-      goal.y -= tilt.y * 0.85;
+      goal.y -= (tilt.y * 0.85) / (this.manualPan?.zoom ?? 1);
       goal.add(storyLook);
     }
     // Camera settling must follow wall time even when software rendering produces
     // only a few frames per second. The capped dt above is for actor animation.
-    const cameraBlend = cameraBlendForElapsed(elapsed, this.reduced);
+    const cameraBlend = this.readingPinch.active
+      ? 1
+      : cameraBlendForElapsed(elapsed, this.reduced);
     this.camera.position.lerp(goal, cameraBlend);
     this.look.lerp(storyLook, cameraBlend);
     this.camera.lookAt(this.look);
@@ -3448,6 +3590,7 @@ export class LibraryScene {
   }
   dispose() {
     this.spreadAbort?.abort();
+    this.clearReadingDrag();
     this.shelfHint.dispose();
     this.prototypeBackdrop.dispose();
     this.phoneTilt.dispose();

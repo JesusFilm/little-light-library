@@ -231,6 +231,62 @@ try {
     });
     await page.waitForTimeout(600);
   };
+  const touchPair = (cx, cy, gap) => [
+    { id: 1, x: cx - gap / 2, y: cy },
+    { id: 2, x: cx + gap / 2, y: cy },
+  ];
+  const pinch = async (cx, cy, from, to, handoff = false) => {
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchStart",
+      touchPoints: touchPair(cx, cy, from),
+    });
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchMove",
+      touchPoints: touchPair(cx, cy, to),
+    });
+    await page.waitForTimeout(300);
+    if (handoff) {
+      const first = touchPair(cx, cy, to)[0];
+      // CDP touchEnd ends every touch. Release one DOM pointer through the
+      // reader's actual handler, then use native CDP movement for the survivor.
+      const ids = await page.evaluate(
+        () => window.libraryDebug().scene.prototype.touchIds,
+      );
+      await page.locator("#scene canvas").dispatchEvent("pointerup", {
+        pointerId: ids[1],
+        pointerType: "touch",
+        button: 0,
+        clientX: cx + to / 2,
+        clientY: cy,
+        isPrimary: false,
+      });
+      assert.equal(
+        (await page.evaluate(() => window.libraryDebug())).scene.prototype
+          .pinching,
+        false,
+      );
+      const beforePan = await page.evaluate(
+        () => window.libraryDebug().scene.prototype.pan,
+      );
+      await cdp.send("Input.dispatchTouchEvent", {
+        type: "touchMove",
+        touchPoints: [{ ...first, x: first.x + 45 }],
+      });
+      await page.waitForTimeout(300);
+      const afterPan = await page.evaluate(
+        () => window.libraryDebug().scene.prototype.pan,
+      );
+      assert.ok(
+        Math.abs(afterPan[0] - beforePan[0]) > 0.05,
+        `Remaining finger continues panning after a pinch: ${JSON.stringify({ beforePan, afterPan, state: await page.evaluate(() => window.libraryDebug().scene.prototype) })}`,
+      );
+    }
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchEnd",
+      touchPoints: [],
+    });
+    await page.waitForTimeout(700);
+  };
   const initial = await page.evaluate(() => window.libraryDebug());
   await drag(280, 300, 80, 330);
   const panned = await page.evaluate(() => window.libraryDebug());
@@ -238,6 +294,57 @@ try {
   assert.equal(panned.position, initial.position);
   assert.equal(await page.evaluate(() => scrollY), 0);
   assert.deepEqual(panned.scene.prototype.tilt, [0, 0]);
+  const baseDistance = Math.hypot(
+    ...panned.scene.camera.map((v, i) => v - panned.scene.look[i]),
+  );
+  const tappedBefore = panned.scene.touchedActor;
+  await pinch(190, 300, 90, 270, true);
+  const zoomed = await page.evaluate(() => window.libraryDebug());
+  assert.equal(zoomed.scene.prototype.zoom, 2.5);
+  assert.equal(zoomed.scene.prototype.pinching, false);
+  assert.equal(
+    zoomed.scene.touchedActor,
+    tappedBefore,
+    "Pinch release cannot tap a character",
+  );
+  assert.equal(
+    zoomed.position,
+    panned.position,
+    "Pinch does not advance narration",
+  );
+  const zoomDistance = Math.hypot(
+    ...zoomed.scene.camera.map((v, i) => v - zoomed.scene.look[i]),
+  );
+  assert.ok(
+    zoomDistance < baseDistance * 0.45,
+    "Pinch magnifies the 3D content",
+  );
+  assert.equal(
+    await page.evaluate(() => visualViewport.scale),
+    1,
+    "Pinch never magnifies the HTML controls",
+  );
+  await page.screenshot({
+    path: ".test-output/portrait-prototype/pinch-portrait.png",
+  });
+  await pinch(190, 300, 200, 40);
+  assert.equal(
+    (await page.evaluate(() => window.libraryDebug())).scene.prototype.zoom,
+    1,
+  );
+  await cdp.send("Input.dispatchTouchEvent", {
+    type: "touchStart",
+    touchPoints: touchPair(190, 300, 100),
+  });
+  await cdp.send("Input.dispatchTouchEvent", {
+    type: "touchCancel",
+    touchPoints: [],
+  });
+  assert.equal(
+    (await page.evaluate(() => window.libraryDebug())).scene.prototype.pinching,
+    false,
+  );
+
   for (let i = 0; i < 3; i++) await drag(320, 300, 40, 300);
   let d = await page.evaluate(() => window.libraryDebug());
   assert.ok(
@@ -282,12 +389,24 @@ try {
     await page.evaluate(() => window.libraryDebug().scene.camera),
     fixed,
   );
+  await pinch(190, 300, 120, 240);
+  assert.ok(
+    (await page.evaluate(() => window.libraryDebug())).scene.prototype.zoom >
+      1.8,
+    "Explicit pinch remains available with reduced motion",
+  );
+  await pinch(190, 300, 240, 40);
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.locator("#next").click();
   await ready();
   assert.equal(
     (await page.evaluate(() => window.libraryDebug())).scene.prototype.pan,
     null,
+  );
+  assert.equal(
+    (await page.evaluate(() => window.libraryDebug())).scene.prototype.zoom,
+    1,
+    "New pages reset zoom",
   );
   await page.locator("#next").click();
   await ready();
@@ -359,6 +478,20 @@ try {
     (await page.evaluate(() => window.libraryDebug())).scene.prototype.pan,
     "Landscape touch drag must pan the book",
   );
+  await pinch(200, 190, 120, 350);
+  assert.equal(
+    (await page.evaluate(() => window.libraryDebug())).scene.prototype.zoom,
+    2.5,
+    "Landscape phone supports bounded pinch zoom",
+  );
+  await page.screenshot({
+    path: ".test-output/portrait-prototype/pinch-landscape.png",
+  });
+  await pinch(200, 190, 300, 40);
+  assert.equal(
+    (await page.evaluate(() => window.libraryDebug())).scene.prototype.zoom,
+    1,
+  );
   await page.locator("#shelf").click();
   await page.waitForTimeout(800);
   const fits = await page.locator(".carousel-book.selected").evaluate((e) => {
@@ -403,7 +536,7 @@ try {
   );
   assert.deepEqual(errors, []);
   console.log(
-    "Prototype accepted: 29 pages, mobile pan boundaries, independent permission-gated tilt, reduced motion, page reset, rigid serpent and desktop without pan.",
+    "Prototype accepted: 29 pages, bounded portrait/landscape pinch zoom and pan, independent permission-gated tilt, reduced motion, page reset, rigid serpent and desktop without pan.",
   );
 } finally {
   await browser.close();
