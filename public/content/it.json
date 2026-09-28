@@ -3,6 +3,8 @@
   "name": "Italiano",
   "voice": "if_sara",
   "ui": {
+    "hideText": "Nascondi testo",
+    "showText": "Mostra testo",
     "appTitle": "Biblioteca della Piccola Luce",
     "welcome": "Benvenuti nella Biblioteca della Piccola Luce",
     "chooseLanguage": "Scegli una lingua",

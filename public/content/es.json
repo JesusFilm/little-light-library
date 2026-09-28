@@ -3,6 +3,8 @@
   "name": "Español",
   "voice": "ef_dora",
   "ui": {
+    "hideText": "Ocultar texto",
+    "showText": "Mostrar texto",
     "appTitle": "Biblioteca de la Pequeña Luz",
     "welcome": "Bienvenidos a la Biblioteca de la Pequeña Luz",
     "chooseLanguage": "Elige un idioma",

@@ -1,5 +1,7 @@
 /** Local, resolution-independent brass linework for the library controls. */
 const drawings: Record<string, string> = {
+  menu: '<path d="M6 9h20M6 16h20M6 23h20"/>',
+  text: '<path d="M5 6h22v20H5zM10 11h12M10 16h12M10 21h7"/>',
   play: '<path d="m10 6 13 10-13 10Z" fill="currentColor" stroke="none"/>',
   pause: '<path d="M11 7v18M21 7v18" stroke-width="5"/>',
   previous: '<path d="M25 16H7m8-8-8 8 8 8"/><path d="m24 12 3 4-3 4"/>',

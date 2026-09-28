@@ -1,4 +1,4 @@
-export const READING_ZOOM = { min: 1, max: 2.5 } as const;
+export const READING_ZOOM = { min: 0.3, max: 2.5 } as const;
 type Point = { id: number; x: number; y: number; pinched: boolean };
 export type PinchView = {
   x: number;

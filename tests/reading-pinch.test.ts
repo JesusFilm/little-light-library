@@ -29,8 +29,8 @@ test("zoom bounds respond immediately when the gesture reverses", () => {
   pinch.down(2, 200, 200, view);
   assert.equal(pinch.move(2, 1000, 200)!.zoom, 2.5);
   near(pinch.move(2, 820, 200)!.zoom, 2);
-  assert.equal(pinch.move(2, 110, 200)!.zoom, 1);
-  near(pinch.move(2, 120, 200)!.zoom, 2);
+  assert.equal(pinch.move(2, 110, 200)!.zoom, 0.3);
+  near(pinch.move(2, 120, 200)!.zoom, 0.6);
 });
 
 test("pinch releases are consumed and retain the surviving finger for pan", () => {

@@ -3,6 +3,8 @@
   "name": "日本語",
   "voice": "jf_alpha",
   "ui": {
+    "hideText": "テキストを隠す",
+    "showText": "テキストを表示",
     "appTitle": "小さな光の図書館",
     "welcome": "小さな光の図書館へようこそ",
     "chooseLanguage": "言語を選ぶ",

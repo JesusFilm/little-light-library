@@ -3,6 +3,8 @@
   "name": "English (US)",
   "voice": "af_heart",
   "ui": {
+    "hideText": "Hide text",
+    "showText": "Show text",
     "appTitle": "Little Light Library",
     "welcome": "Welcome to the Little Light Library",
     "chooseLanguage": "Choose a language",

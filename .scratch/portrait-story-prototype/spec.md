@@ -97,3 +97,12 @@ The prototype browser acceptance now checks a real side-cover tap, disabled side
 - Automated: repository verification passed with 213 tests. Five gesture tests cover focal anchoring, min/max reversal, release ownership, third fingers and coincident points. Chrome two-touch input checks portrait/landscape zoom, actual camera magnification, fixed HTML viewport, cancellation, reduced motion, bounds and all 29 pages. The single-finger handoff uses a DOM pointer release plus native subsequent movement because CDP touchEnd releases all touches.
 - Local performance: first-page readiness 3819ms under 4x CPU slowdown, 150ms latency and 1.6Mbps download; render p95 34.3ms. Existing budgets pass.
 - Visual: maximum-zoom portrait and landscape captures reviewed. Physical phone gesture feel, audible playback and creator approval remain separate from automated checks.
+
+## Eighth iteration: artwork space and listen mode
+
+- Pinch spans 0.3x–2.5x of the current story framing, allowing the entire open spread to be viewed. Close automatic story framing remains the initial view; page changes reset manual zoom.
+- Previous/play/next and the scripture toggle stay at the top beside one hamburger containing library, language and settings. Remove the header star. Native disclosure supports keyboard activation and Escape dismissal.
+- Scripture has a transparent background with text shadow for contrast. The text button hides/restores scripture and expands the artwork region without changing playback. Mode remains selected across pages and books during this visit. Retry notices remain accessible.
+- Localized text-toggle labels cover all nine reader locales. Existing local SVG/brass controls remain resolution independent.
+- Automated: 213 tests, typecheck, lint, catalog validation and build passed. Browser acceptance passed all 29 pages, portrait/landscape pan and bounded pinch, reduced motion, page reset, top toolbar placement, text hide/restore, expanded art region and Escape dismissal.
+- Visual: portrait transparent text, listen mode, full-spread minimum zoom and landscape reader screenshots inspected. Physical phone usability, audible playback and creator approval remain separate from these checks.

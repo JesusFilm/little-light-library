@@ -3,6 +3,8 @@
   "name": "Français",
   "voice": "ff_siwis",
   "ui": {
+    "hideText": "Masquer le texte",
+    "showText": "Afficher le texte",
     "appTitle": "La Bibliothèque de la Petite Lumière",
     "welcome": "Bienvenue dans la Bibliothèque de la Petite Lumière",
     "chooseLanguage": "Choisissez une langue",

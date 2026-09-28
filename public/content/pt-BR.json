@@ -3,6 +3,8 @@
   "name": "Português (Brasil)",
   "voice": "pf_dora",
   "ui": {
+    "hideText": "Ocultar texto",
+    "showText": "Mostrar texto",
     "appTitle": "Biblioteca da Pequena Luz",
     "welcome": "Bem-vindos à Biblioteca da Pequena Luz",
     "chooseLanguage": "Escolha um idioma",

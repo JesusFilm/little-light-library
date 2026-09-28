@@ -3,6 +3,8 @@
   "name": "简体中文",
   "voice": "zf_xiaobei",
   "ui": {
+    "hideText": "隐藏文字",
+    "showText": "显示文字",
     "appTitle": "小小光明图书馆",
     "welcome": "欢迎来到小小光明图书馆",
     "chooseLanguage": "选择语言",

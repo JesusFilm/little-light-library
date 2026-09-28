@@ -215,6 +215,29 @@ try {
   });
   await page.locator("#play").click();
   await page.waitForTimeout(700);
+  const artBefore = await page.locator(".reading-art-region").boundingBox();
+  const narrationBefore = (await page.evaluate(() => window.libraryDebug()))
+    .position;
+  await page.locator("#toggle-text").click();
+  await page.waitForTimeout(400);
+  assert.equal(await page.locator(".reader-copy").isVisible(), false);
+  assert.ok(
+    (await page.locator(".reading-art-region").boundingBox()).height >
+      artBefore.height,
+  );
+  assert.equal(
+    (await page.evaluate(() => window.libraryDebug())).position,
+    narrationBefore,
+  );
+  assert.ok((await page.locator("#next").boundingBox()).y < 70);
+  await page.screenshot({
+    path: ".test-output/portrait-prototype/listen-mode.png",
+  });
+  await page.locator("#toggle-text").click();
+  assert.equal(await page.locator(".reader-copy").isVisible(), true);
+  await page.locator(".library-menu summary").click();
+  await page.keyboard.press("Escape");
+  assert.equal(await page.locator(".library-menu").getAttribute("open"), null);
   const drag = async (x1, y1, x2, y2) => {
     await cdp.send("Input.dispatchTouchEvent", {
       type: "touchStart",
@@ -249,7 +272,7 @@ try {
     const startZoom = await page.evaluate(
       () => window.libraryDebug().scene.prototype.zoom,
     );
-    const expectedZoom = Math.max(1, Math.min(2.5, (startZoom * to) / from));
+    const expectedZoom = Math.max(0.3, Math.min(2.5, (startZoom * to) / from));
     await cdp.send("Input.dispatchTouchEvent", {
       type: "touchStart",
       touchPoints: touchPair(cx, cy, from),
@@ -356,11 +379,14 @@ try {
   await page.screenshot({
     path: ".test-output/portrait-prototype/pinch-portrait.png",
   });
-  await pinch(190, 300, 200, 40);
+  await pinch(190, 300, 200, 20);
   assert.equal(
     (await page.evaluate(() => window.libraryDebug())).scene.prototype.zoom,
-    1,
+    0.3,
   );
+  await page.screenshot({
+    path: ".test-output/portrait-prototype/full-spread.png",
+  });
   await cdp.send("Input.dispatchTouchEvent", {
     type: "touchStart",
     touchPoints: touchPair(190, 300, 100),
@@ -392,6 +418,7 @@ try {
     Math.abs(d.scene.prototype.pan[0] - d.scene.prototype.panLimits.left) <
       0.001,
   );
+  await page.locator(".library-menu summary").click();
   await page.locator("#settings").click();
   await page.locator("#phone-tilt").click();
   assert.equal(await page.evaluate(() => window.tiltRequests), 1);
@@ -424,10 +451,12 @@ try {
     await page.evaluate(() => window.libraryDebug().scene.camera),
     fixed,
   );
+  const reducedZoom = (await page.evaluate(() => window.libraryDebug())).scene
+    .prototype.zoom;
   await pinch(190, 300, 120, 240);
   assert.ok(
     (await page.evaluate(() => window.libraryDebug())).scene.prototype.zoom >
-      1.8,
+      reducedZoom * 1.8,
     "Explicit pinch remains available with reduced motion",
   );
   await page.emulateMedia({ reducedMotion: "no-preference" });
@@ -460,6 +489,7 @@ try {
     ["jonah-and-the-whale", 13],
   ]) {
     if (id !== "eden") {
+      await page.locator(".library-menu summary").click();
       await page.locator("#shelf").click();
       await page.waitForFunction(
         () =>
@@ -489,6 +519,7 @@ try {
       path: `.test-output/portrait-prototype/${id}.png`,
     });
   }
+  await page.locator(".library-menu summary").click();
   await page.locator("#settings").click();
   await page.locator("#phone-tilt").click();
   await page.locator("#settings-close").click();
@@ -521,11 +552,12 @@ try {
   await page.screenshot({
     path: ".test-output/portrait-prototype/pinch-landscape.png",
   });
-  await pinch(200, 190, 300, 40);
+  await pinch(200, 190, 300, 20);
   assert.equal(
     (await page.evaluate(() => window.libraryDebug())).scene.prototype.zoom,
-    1,
+    0.3,
   );
+  await page.locator(".library-menu summary").click();
   await page.locator("#shelf").click();
   await page.waitForTimeout(800);
   const fits = await page.locator(".carousel-book.selected").evaluate((e) => {

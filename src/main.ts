@@ -219,7 +219,20 @@ async function fetchLocale(id: LocaleId) {
 }
 function header() {
   $("#header").innerHTML =
-    `<a class="brand" href="./" aria-label="${escaped(t("back"))}"><span class="brand-star">✦</span><span class="brand-title">${escaped(t("appTitle"))}</span></a><nav>${state.book ? `<button id="shelf" class="header-action" aria-label="${escaped(session.snapshot.browsing ? "Continue reading" : t("library"))}"><span aria-hidden="true">${libraryIcon("library")}</span><span class="header-action-label">${escaped(session.snapshot.browsing ? "Continue reading" : t("library"))}</span></button>` : ""}${button("language", libraryIcon("language"), "icon")}${button("settings", libraryIcon("settings"), "icon")}</nav>`;
+    `<a class="brand" href="./" aria-label="${escaped(t("back"))}"><span class="brand-title">${escaped(t("appTitle"))}</span></a><nav><details class="library-menu"><summary aria-label="Menu">${libraryIcon("menu")}</summary><div class="library-menu-items">${state.book ? `<button id="shelf" class="header-action" aria-label="${escaped(session.snapshot.browsing ? "Continue reading" : t("library"))}"><span aria-hidden="true">${libraryIcon("library")}</span><span class="header-action-label">${escaped(session.snapshot.browsing ? "Continue reading" : t("library"))}</span></button>` : ""}${button("language", libraryIcon("language"), "icon")}${button("settings", libraryIcon("settings"), "icon")}</div></details></nav>`;
+  $("#header")
+    .querySelectorAll(".library-menu-items button")
+    .forEach((item) => {
+      item.addEventListener("click", () => {
+        $("#header").querySelector("details")?.removeAttribute("open");
+      });
+    });
+  $("#header").onkeydown = (event) => {
+    if (event.key === "Escape") {
+      $("#header").querySelector("details")?.removeAttribute("open");
+      $("#header").querySelector<HTMLElement>("summary")?.focus();
+    }
+  };
   $("#language").setAttribute("aria-label", t("language"));
   $("#settings").setAttribute("aria-label", t("settings"));
   $("#language").onclick = () => languageDialog(false);
@@ -417,6 +430,18 @@ async function renderPage(
       void narration.unlock().catch(() => {});
       void session.togglePlayback(current);
     };
+    const toggle = $("#toggle-text");
+    const syncText = () => {
+      const hidden = document.body.classList.contains("listen-mode");
+      toggle.setAttribute("aria-expanded", String(!hidden));
+      toggle.setAttribute("aria-label", t(hidden ? "showText" : "hideText"));
+    };
+    toggle.onclick = () => {
+      document.body.classList.toggle("listen-mode");
+      syncText();
+      window.dispatchEvent(new Event("resize"));
+    };
+    syncText();
     updatePageNavigation();
   };
   if (!resume || !panel.querySelector(".reader")) {
@@ -424,7 +449,7 @@ async function renderPage(
     panel.classList.add("reader-pending");
     notice(`${pageCount} · ${t("loading")}`);
     if (!pageTurn || !panel.querySelector(".reader"))
-      panel.innerHTML = `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", t("previous"))}${transportButton("play", t("play"), "primary")}${transportButton("next", t("next"))}</div></article>`;
+      panel.innerHTML = `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", t("previous"))}${transportButton("play", t("play"), "primary")}${transportButton("next", t("next"))}<button id="toggle-text" aria-label="${escaped(t("hideText"))}" aria-controls="reader-title" aria-expanded="true">${libraryIcon("text")}</button></div></article>`;
     panel.querySelector(".authored-interactions")?.remove();
     const status = panel.querySelector("#play-status");
     if (status) status.textContent = t("loading");
@@ -435,7 +460,7 @@ async function renderPage(
   }
   const commitReaderPage = () => {
     document.body.dataset.readerScene = page.id;
-    panel.innerHTML = `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><div class="reader-copy" tabindex="0" role="region" aria-labelledby="reader-title"><h1 id="reader-title">${escaped(page.title)}</h1><div class="story-text">${page.segments.map((s, i) => `<span data-segment="${i}">${escaped(s.text)}</span>`).join(" ")}</div></div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", t("previous"))}${transportButton("play", t("play"), "primary")}${transportButton("next", t("next"))}</div></article>`;
+    panel.innerHTML = `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><div class="reader-copy" tabindex="0" role="region" aria-labelledby="reader-title"><h1 id="reader-title">${escaped(page.title)}</h1><div class="story-text">${page.segments.map((s, i) => `<span data-segment="${i}">${escaped(s.text)}</span>`).join(" ")}</div></div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", t("previous"))}${transportButton("play", t("play"), "primary")}${transportButton("next", t("next"))}<button id="toggle-text" aria-label="${escaped(t("hideText"))}" aria-controls="reader-title" aria-expanded="true">${libraryIcon("text")}</button></div></article>`;
     const next = $<HTMLButtonElement>("#next");
     next.dataset.lastPage = String(state.page >= story.pages.length - 1);
     next.disabled = next.dataset.lastPage === "true";

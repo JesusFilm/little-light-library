@@ -335,3 +335,111 @@ button.wide .library-icon {
     margin: 0;
   }
 }
+
+/* A compact toolbar leaves the book available for touch exploration. */
+.library-menu {
+  position: relative;
+}
+.library-menu summary {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  list-style: none;
+  border: 1px solid #a48a54;
+  border-radius: 16px;
+  color: #f2dda2;
+  background: #163c3d;
+}
+.library-menu summary::-webkit-details-marker {
+  display: none;
+}
+.library-menu summary:focus-visible {
+  outline: 3px solid #f2dda2;
+  outline-offset: 3px;
+}
+.library-menu-items {
+  position: absolute;
+  right: 0;
+  top: 56px;
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  background: #102b2d;
+  border: 1px solid #a48a54;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px #0005;
+}
+.reading #header {
+  justify-content: flex-end;
+  padding: max(10px, env(safe-area-inset-top))
+    max(12px, env(safe-area-inset-right));
+}
+.reading .brand {
+  display: none;
+}
+.reading .reader-controls {
+  position: fixed;
+  z-index: 5;
+  top: max(10px, env(safe-area-inset-top));
+  right: calc(max(12px, env(safe-area-inset-right)) + 58px);
+  display: flex;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+  width: auto;
+}
+.reading .reader-controls button {
+  flex: none;
+  width: 48px;
+  min-width: 0;
+  height: 48px;
+  min-height: 48px;
+  padding: 8px;
+}
+.reading .reader-controls .transport-label {
+  display: none;
+}
+.reading #panel::before {
+  display: none;
+}
+.reading .reader {
+  background: transparent;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  text-shadow:
+    0 1px 3px #000,
+    0 0 12px #102b2d;
+}
+.reading.listen-mode #panel {
+  top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+.reading.listen-mode .reader {
+  padding: 0;
+  max-height: none;
+}
+.reading.listen-mode .reader-copy,
+.reading.listen-mode .reader-meta,
+.reading.listen-mode #play-status {
+  display: none;
+}
+.reading.listen-mode .reader-footer {
+  pointer-events: auto;
+}
+.reading.listen-mode .reader-controls {
+  pointer-events: auto;
+}
+.reading.listen-mode .reading-art-region {
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  width: auto;
+  bottom: max(16px, env(safe-area-inset-bottom));
+}
+.reading #toggle-text[aria-expanded="false"] {
+  border-color: #f6d789;
+  background: #355957;
+}
