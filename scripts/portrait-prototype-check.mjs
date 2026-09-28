@@ -241,6 +241,35 @@ try {
   await page.screenshot({
     path: ".test-output/portrait-prototype/mobile-landscape.png",
   });
+  await drag(300, 190, 90, 200);
+  assert.ok(
+    (await page.evaluate(() => window.libraryDebug())).scene.prototype.pan,
+    "Landscape touch drag must pan the book",
+  );
+  await page.locator("#shelf").click();
+  await page.waitForTimeout(800);
+  const fits = await page.locator(".carousel-book.selected").evaluate((e) => {
+    const r = e.getBoundingClientRect();
+    return (
+      r.top >= 0 && r.bottom <= innerHeight && e.scrollHeight <= e.clientHeight
+    );
+  });
+  assert.ok(fits, "Landscape cover and title must fit the viewport");
+  await page.screenshot({
+    path: ".test-output/portrait-prototype/landscape-carousel.png",
+  });
+  for (const viewport of [
+    { width: 667, height: 320 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.waitForTimeout(700);
+    const rect = await page.locator(".carousel-book.selected").boundingBox();
+    assert.ok(rect.y >= 0 && rect.y + rect.height <= viewport.height);
+    await page.screenshot({
+      path: `.test-output/portrait-prototype/carousel-${viewport.width}.png`,
+    });
+  }
   // Desktop is a separate fine-pointer context: dragging changes tilt, never pan.
   const desktop = await browser.newPage({
     viewport: { width: 1440, height: 900 },

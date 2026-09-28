@@ -1,3 +1,4 @@
+import { libraryIcon } from "./library-icons";
 import { renderPortraitShelf } from "./portrait-prototype";
 import { validateBook } from "./book-validation";
 import { ShelfToyAudio } from "./shelf-toy-audio";
@@ -195,14 +196,13 @@ const escaped = (s: string) =>
   );
 const t = (key: string) => locale?.ui[key] || window.lightBootUi?.[key] || key;
 const button = (id: string, label: string, cls = "") =>
-  `<button id="${id}" class="${cls}">${label}</button>`;
+  `<button id="${id}" class="${cls}"${id === "language" || id === "settings" ? ` aria-label="${escaped(t(id))}"` : ""}>${id === "enter" ? libraryIcon("enter") : id.endsWith("close") ? libraryIcon("close") : ""}${label}</button>`;
 const transportButton = (
   id: "previous" | "play" | "next",
-  icon: string,
   label: string,
   cls = "",
 ) =>
-  `<button id="${id}" class="reader-transport ${cls}" aria-label="${escaped(label)}"><span class="transport-icon" aria-hidden="true">${icon}</span><span class="transport-label">${escaped(label)}</span></button>`;
+  `<button id="${id}" class="reader-transport ${cls}" aria-label="${escaped(label)}"><span class="transport-icon" aria-hidden="true">${libraryIcon(id)}</span><span class="transport-label">${escaped(label)}</span></button>`;
 const persist = () => savePreferences(localStorage, prefs);
 let noticeElement: HTMLElement | undefined;
 function notice(message = "", language: string = locale?.id) {
@@ -219,7 +219,7 @@ async function fetchLocale(id: LocaleId) {
 }
 function header() {
   $("#header").innerHTML =
-    `<a class="brand" href="./" aria-label="${escaped(t("back"))}"><span class="brand-star">✦</span><span class="brand-title">${escaped(t("appTitle"))}</span></a><nav>${state.book ? `<button id="shelf" class="header-action" aria-label="${escaped(session.snapshot.browsing ? "Continue reading" : t("library"))}"><span aria-hidden="true">📚</span><span class="header-action-label">${escaped(session.snapshot.browsing ? "Continue reading" : t("library"))}</span></button>` : ""}${button("language", "🌐", "icon")}${button("settings", "⚙", "icon")}</nav>`;
+    `<a class="brand" href="./" aria-label="${escaped(t("back"))}"><span class="brand-star">✦</span><span class="brand-title">${escaped(t("appTitle"))}</span></a><nav>${state.book ? `<button id="shelf" class="header-action" aria-label="${escaped(session.snapshot.browsing ? "Continue reading" : t("library"))}"><span aria-hidden="true">${libraryIcon("library")}</span><span class="header-action-label">${escaped(session.snapshot.browsing ? "Continue reading" : t("library"))}</span></button>` : ""}${button("language", libraryIcon("language"), "icon")}${button("settings", libraryIcon("settings"), "icon")}</nav>`;
   $("#language").setAttribute("aria-label", t("language"));
   $("#settings").setAttribute("aria-label", t("settings"));
   $("#language").onclick = () => languageDialog(false);
@@ -285,7 +285,7 @@ function languageDialog(startup: boolean) {
 }
 function settingsDialog() {
   const d = $<HTMLDialogElement>("#settings-dialog");
-  d.innerHTML = `<h2>${escaped(t("settings"))}</h2><label>${escaped(t("speed"))}<select id="speed">${[0.75, 1, 1.25, 1.5].map((v) => `<option ${prefs.speed === v ? "selected" : ""}>${v}</option>`).join("")}</select></label><label class="check">${escaped(t("audio"))}<input id="audio" type="checkbox" ${prefs.audio ? "checked" : ""}></label><label>${escaped(t("volume"))}<input id="volume" type="range" min="0" max="1" step=".05" value="${prefs.volume}"></label>${button("settings-language", "🌐 " + escaped(t("language")), "wide")}<p class="help">${escaped(t("helpText"))}</p>${button("settings-close", escaped(t("close")), "primary wide")}`;
+  d.innerHTML = `<h2>${escaped(t("settings"))}</h2><label>${escaped(t("speed"))}<select id="speed">${[0.75, 1, 1.25, 1.5].map((v) => `<option ${prefs.speed === v ? "selected" : ""}>${v}</option>`).join("")}</select></label><label class="check">${escaped(t("audio"))}<input id="audio" type="checkbox" ${prefs.audio ? "checked" : ""}></label><label>${escaped(t("volume"))}<input id="volume" type="range" min="0" max="1" step=".05" value="${prefs.volume}"></label>${button("settings-language", libraryIcon("language") + escaped(t("language")), "wide")}<p class="help">${escaped(t("helpText"))}</p>${button("settings-close", escaped(t("close")), "primary wide")}`;
   $<HTMLSelectElement>("#speed").onchange = (e) => {
     session.setSpeed(Number((e.target as HTMLSelectElement).value));
   };
@@ -424,7 +424,7 @@ async function renderPage(
     panel.classList.add("reader-pending");
     notice(`${pageCount} · ${t("loading")}`);
     if (!pageTurn || !panel.querySelector(".reader"))
-      panel.innerHTML = `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", "←", t("previous"))}${transportButton("play", "▶", t("play"), "primary")}${transportButton("next", "→", t("next"))}</div></article>`;
+      panel.innerHTML = `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", t("previous"))}${transportButton("play", t("play"), "primary")}${transportButton("next", t("next"))}</div></article>`;
     panel.querySelector(".authored-interactions")?.remove();
     const status = panel.querySelector("#play-status");
     if (status) status.textContent = t("loading");
@@ -435,7 +435,7 @@ async function renderPage(
   }
   const commitReaderPage = () => {
     document.body.dataset.readerScene = page.id;
-    panel.innerHTML = `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><div class="reader-copy" tabindex="0" role="region" aria-labelledby="reader-title"><h1 id="reader-title">${escaped(page.title)}</h1><div class="story-text">${page.segments.map((s, i) => `<span data-segment="${i}">${escaped(s.text)}</span>`).join(" ")}</div></div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", "←", t("previous"))}${transportButton("play", "▶", t("play"), "primary")}${transportButton("next", "→", t("next"))}</div></article>`;
+    panel.innerHTML = `<article class="reader"><div class="reader-meta"><span>${escaped(pageCount)}</span></div><div class="reader-copy" tabindex="0" role="region" aria-labelledby="reader-title"><h1 id="reader-title">${escaped(page.title)}</h1><div class="story-text">${page.segments.map((s, i) => `<span data-segment="${i}">${escaped(s.text)}</span>`).join(" ")}</div></div><div class="reader-footer"><span id="play-status" role="status">${escaped(t("loading"))}</span></div><div class="reader-controls">${transportButton("previous", t("previous"))}${transportButton("play", t("play"), "primary")}${transportButton("next", t("next"))}</div></article>`;
     const next = $<HTMLButtonElement>("#next");
     next.dataset.lastPage = String(state.page >= story.pages.length - 1);
     next.disabled = next.dataset.lastPage === "true";
@@ -578,7 +578,10 @@ function updatePlayback() {
     const label = t(active ? "pause" : "play");
     const icon = b.querySelector<HTMLElement>(".transport-icon");
     const text = b.querySelector<HTMLElement>(".transport-label");
-    if (icon) icon.textContent = active ? "Ⅱ" : "▶";
+    if (icon && icon.dataset.state !== String(active)) {
+      icon.innerHTML = libraryIcon(active ? "pause" : "play");
+      icon.dataset.state = String(active);
+    }
     if (text && text.textContent !== label) text.textContent = label;
     b.setAttribute("aria-label", label);
     b.setAttribute("aria-pressed", String(active));

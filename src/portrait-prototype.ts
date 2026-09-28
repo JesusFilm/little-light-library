@@ -1,3 +1,4 @@
+import { libraryIcon } from "./library-icons";
 /** Throwaway portrait experiment: a CSS 3D shelf, using the real book catalog. */
 import type { ResolvedRoomEntry } from "./room-library";
 import { mobileImageUrl } from "./mobile-images";
@@ -50,10 +51,10 @@ export function renderPortraitShelf(
   const controls = document.createElement("div");
   controls.className = "carousel-controls";
   const previous = document.createElement("button");
-  previous.textContent = "←";
+  previous.innerHTML = libraryIcon("previous");
   previous.setAttribute("aria-label", "Previous book");
   const next = document.createElement("button");
-  next.textContent = "→";
+  next.innerHTML = libraryIcon("next");
   next.setAttribute("aria-label", "Next book");
   const label = document.createElement("span");
   label.setAttribute("aria-live", "polite");

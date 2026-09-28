@@ -303,11 +303,8 @@ export class LibraryScene {
   private manualPan?: { x: number; y: number; eye: THREE.Vector3 };
   private storyEye = new THREE.Vector3();
   private storyTarget = new THREE.Vector3();
-  private portraitTouch() {
-    return (
-      matchMedia("(pointer: coarse)").matches &&
-      this.container.clientWidth < this.container.clientHeight
-    );
+  private mobileTouch() {
+    return matchMedia("(pointer: coarse)").matches;
   }
   private panLimits() {
     const region = this.readingRegion.getBoundingClientRect();
@@ -756,7 +753,7 @@ export class LibraryScene {
         this.authoredStage?.releaseHolds();
         this.heldAuthoredPointer = undefined;
         this.heldAuthoredId = undefined;
-        if (this.portraitTouch()) {
+        if (this.mobileTouch()) {
           const scale =
             (this.readingBounds.getSize(new THREE.Vector3()).x * 0.6) /
             this.container.clientWidth;
@@ -3010,7 +3007,7 @@ export class LibraryScene {
     }
     this.storyEye.copy(goal).sub(storyLook);
     this.storyTarget.copy(storyLook);
-    if (this.mode === "spread" && this.manualPan && this.portraitTouch()) {
+    if (this.mode === "spread" && this.manualPan && this.mobileTouch()) {
       storyLook.x = this.manualPan.x;
       storyLook.y = this.manualPan.y;
       goal.copy(storyLook).add(this.manualPan.eye);

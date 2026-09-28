@@ -69,3 +69,11 @@ Creator screenshots exposed side-cover activation and a transform override: the 
 Close framing now applies to coarse-pointer phones in either orientation; a landscape phone no longer receives the wider desktop camera. Desktop fine-pointer framing and portrait-only pan behavior remain unchanged.
 
 The prototype browser acceptance now checks a real side-cover tap, disabled side controls, stable cover geometry during hover, absence of the intro block, and close framing after rotating a phone viewport to 844×390, alongside the existing 29-page checks.
+
+## Fifth iteration: landscape interaction and library controls
+
+- Coarse-pointer devices can pan in both orientations; fine-pointer desktop keeps its mouse depth interaction.
+- Short landscape shelves use height-driven, proportionate covers and side navigation, with header and title space preserved.
+- Local SVG linework replaces platform emoji for library, language, settings, transport and carousel navigation. A shared brass-and-green embossed treatment also covers dialogs and text buttons, with accessible labels retained.
+- Automated verification: 208 tests, typecheck, lint, book validation and production build passed. Browser regression reproduced the landscape pan failure before the fix and passed afterward, including all 29 pages.
+- Visual inspection: landscape reader and shelf screenshots reviewed. Physical phone feel, audible playback and creator approval remain separate from automated checks.
