@@ -14,10 +14,6 @@ export function renderPortraitShelf(
   const shelf = document.createElement("section");
   shelf.className = "prototype-carousel";
   shelf.setAttribute("aria-label", "Choose a story");
-  const intro = document.createElement("div");
-  intro.className = "carousel-intro";
-  intro.innerHTML =
-    '<p class="eyebrow">LITTLE STORIES · BIG WONDER</p><h1>A little light.<br>A whole new world.</h1>';
   const track = document.createElement("div");
   track.className = "carousel-track";
   track.setAttribute("aria-roledescription", "carousel");
@@ -45,11 +41,7 @@ export function renderPortraitShelf(
         suppressClick = false;
         return;
       }
-      if (selected !== index) {
-        selected = index;
-        arrange();
-        return;
-      }
+      if (busy || selected !== index) return;
       await open(book.key);
     };
     track.append(card);
@@ -72,6 +64,7 @@ export function renderPortraitShelf(
       card.style.setProperty("--offset", String(offset));
       card.classList.toggle("selected", offset === 0);
       card.tabIndex = offset === 0 ? 0 : -1;
+      card.disabled = busy || offset !== 0;
       card.setAttribute("aria-current", String(offset === 0));
     });
     label.textContent = `${selected + 1} / ${books.length} · Tap the cover to read`;
@@ -109,7 +102,7 @@ export function renderPortraitShelf(
   message.className = "carousel-status";
   message.role = "status";
   message.textContent = busy ? "Opening your story…" : status;
-  shelf.append(intro, track, controls, message);
+  shelf.append(track, controls, message);
   host.append(shelf);
   arrange();
 }

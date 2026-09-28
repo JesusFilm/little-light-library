@@ -2984,9 +2984,11 @@ export class LibraryScene {
       const a = beats[index],
         b = beats[index + 1];
       const t = THREE.MathUtils.smoothstep(phase, a.at, b.at);
-      const portrait = this.container.clientWidth < this.container.clientHeight;
+      const mobileFraming =
+        matchMedia("(pointer: coarse)").matches ||
+        this.container.clientWidth < this.container.clientHeight;
       const closeZoom = THREE.MathUtils.lerp(a.zoom, b.zoom, t);
-      const zoom = portrait
+      const zoom = mobileFraming
         ? closeZoom *
           THREE.MathUtils.mapLinear(
             THREE.MathUtils.clamp(closeZoom, 0.46, 0.55),

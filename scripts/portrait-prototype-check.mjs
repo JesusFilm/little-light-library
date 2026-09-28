@@ -58,6 +58,38 @@ try {
   });
   await page.goto(`http://127.0.0.1:${server.address().port}${prefix}`);
   await page.locator("#enter").click();
+  assert.equal(await page.locator(".carousel-intro").count(), 0);
+  assert.equal(
+    await page.locator(".carousel-book:not(.selected):disabled").count(),
+    2,
+  );
+  const selectedKey = await page
+    .locator(".carousel-book.selected")
+    .getAttribute("data-shelf-key");
+  const trackBounds = await page.locator(".carousel-track").boundingBox();
+  await page.touchscreen.tap(380, trackBounds.y + trackBounds.height / 2);
+  assert.equal(
+    await page
+      .locator(".carousel-book.selected")
+      .getAttribute("data-shelf-key"),
+    selectedKey,
+  );
+  const restingCover = await page
+    .locator(".carousel-book.selected")
+    .boundingBox();
+  await page.mouse.move(
+    restingCover.x + restingCover.width / 2,
+    restingCover.y + restingCover.height / 2,
+  );
+  await page.waitForTimeout(750);
+  const hoveredCover = await page
+    .locator(".carousel-book.selected")
+    .boundingBox();
+  assert.ok(
+    Math.abs(restingCover.x - hoveredCover.x) < 1 &&
+      Math.abs(restingCover.y - hoveredCover.y) < 1,
+    "Hover must preserve the 3D cover transform",
+  );
   await page.locator(".carousel-book.selected").click();
   const ready = () =>
     page.waitForFunction(() => {
@@ -170,8 +202,10 @@ try {
       const card = page.locator(
         `.carousel-book[data-shelf-key="${id === "noah" ? "builtin:" : "book:"}${id}"]`,
       );
-      if (!(await card.evaluate((e) => e.classList.contains("selected"))))
-        await card.click();
+      while (!(await card.evaluate((e) => e.classList.contains("selected"))))
+        await page
+          .getByRole("button", { name: "Next book", exact: true })
+          .click();
       await card.click();
       await ready();
     }
@@ -189,6 +223,24 @@ try {
       path: `.test-output/portrait-prototype/${id}.png`,
     });
   }
+  await page.locator("#settings").click();
+  await page.locator("#phone-tilt").click();
+  await page.locator("#settings-close").click();
+  if ((await page.evaluate(() => window.libraryDebug())).playing)
+    await page.locator("#play").click();
+  await page.setViewportSize({ width: 844, height: 390 });
+  await page.waitForTimeout(1400);
+  const landscape = await page.evaluate(() => window.libraryDebug().scene);
+  const distance = (a, b) => Math.hypot(...a.map((v, i) => v - b[i]));
+  assert.ok(
+    distance(landscape.camera, landscape.look) /
+      distance(landscape.cameraGoal, landscape.lookGoal) <
+      0.62,
+    "Touch landscape must retain the close mobile camera",
+  );
+  await page.screenshot({
+    path: ".test-output/portrait-prototype/mobile-landscape.png",
+  });
   // Desktop is a separate fine-pointer context: dragging changes tilt, never pan.
   const desktop = await browser.newPage({
     viewport: { width: 1440, height: 900 },

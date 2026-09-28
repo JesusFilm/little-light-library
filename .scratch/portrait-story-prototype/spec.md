@@ -61,3 +61,11 @@ Mobile portrait drag now pans the close view within bounds derived from the page
 Confirmed the stretching in the actual creature update with a deterministic repro: maximum serpent vertex movement was 0.167 page units without any camera. This isolated vertex deformation as the cause, so broader camera/shader hypotheses were unnecessary. Replaced masked vertex deformation in serpent/dove with small whole-cutout rotation and uniform tap scale, preserving mirrored art, placement, reduced-motion feedback and texture ownership. The same repro now reports zero distortion. Updated the two creature tests to check rigid geometry throughout full animation/touch cycles.
 
 Publication requested by the creator: use the existing GitHub Pages URL for this branch. `prototype-pages.yml` runs standard validation plus the branch-specific nested-path browser acceptance test before uploading/deploying the site. This deliberately uses carousel/mobile assertions instead of main's room-oriented acceptance selectors. Main's workflow remains intact.
+
+## Fourth iteration: carousel activation and phone landscape
+
+Creator screenshots exposed side-cover activation and a transform override: the global `button:hover` translation replaced the cover's positioning transform. Side covers are now disabled and ignore pointer events; only the centered cover opens. Arrows, swipes and keyboard arrows still change focus. The explicit cover hover transform preserves its placement. Removed both marketing slogans and gave the covers the released space.
+
+Close framing now applies to coarse-pointer phones in either orientation; a landscape phone no longer receives the wider desktop camera. Desktop fine-pointer framing and portrait-only pan behavior remain unchanged.
+
+The prototype browser acceptance now checks a real side-cover tap, disabled side controls, stable cover geometry during hover, absence of the intro block, and close framing after rotating a phone viewport to 844×390, alongside the existing 29-page checks.

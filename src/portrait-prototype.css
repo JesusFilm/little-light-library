@@ -30,23 +30,9 @@ body:not(.reading) #scene {
     #102b2d 72%
   );
 }
-.carousel-intro {
-  padding: 16px 20px 0;
-}
-.carousel-intro .eyebrow {
-  color: #d8bd85;
-  letter-spacing: 0.19em;
-  font-size: 10px;
-}
-.carousel-intro h1 {
-  font-size: clamp(28px, 4vw, 46px);
-  line-height: 1.12;
-  font-weight: 400;
-  margin: 12px 0 0;
-}
 .carousel-track {
   position: relative;
-  height: clamp(310px, 52dvh, 480px);
+  height: clamp(310px, 65dvh, 540px);
   perspective: 1100px;
   touch-action: pan-y;
 }
@@ -71,9 +57,10 @@ body:not(.reading) #scene {
     7px 5px 0 #d9d1b4,
     11px 9px 0 var(--cloth),
     12px 28px 35px #0005;
-  transform: translate(calc(-50% + var(--offset) * 95%), -50%)
+  --cover-transform: translate(calc(-50% + var(--offset) * 95%), -50%)
     translateZ(calc(var(--offset) * var(--offset) * -190px))
     rotateY(calc(var(--offset) * -28deg));
+  transform: var(--cover-transform);
   transition:
     transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1),
     opacity 650ms;
@@ -86,6 +73,13 @@ body:not(.reading) #scene {
 }
 .carousel-book:hover {
   background: var(--cloth);
+  transform: var(--cover-transform);
+}
+.carousel-book:not(.selected) {
+  pointer-events: none;
+}
+.carousel-book:disabled {
+  cursor: default;
 }
 .carousel-book img {
   width: 100%;
@@ -156,9 +150,6 @@ body:not(.reading) #scene {
   }
 }
 @media (max-height: 680px) {
-  .carousel-intro h1 {
-    font-size: 25px;
-  }
   .carousel-track {
     height: 48dvh;
     min-height: 260px;
